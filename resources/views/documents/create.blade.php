@@ -1,126 +1,111 @@
 @extends('layouts.app')
 
 @section('content')
-<div class="row">
-    <div class="section">
-        <div class="col hide-on-med-and-down">
-            @include('inc.sidebar')
+
+    @include('inc.sidebar')
+
+    <div class="mt-20 ml-14 mb-10 md:ml-64" style="width: 660px;max-wodth:100%;">
+        <div class="flex flex-col w-full p-4">
+            <h1 class="sm:text-4xl text-3xl font-medium title-font text-gray-900">Ajouter le document</h1>
         </div>
-        <div class="col m11 s12">
-            <div class="row">
-                <h3 class="flow-text"><i class="material-icons">folder</i> Upload Document
-                    <a href="/documents/create" class="btn waves-effect waves-light right tooltipped"
-                        data-position="left" data-delay="50" data-tooltip="Upload New Document"><i
-                            class="material-icons">file_upload</i> New</a>
-                </h3>
-                <div class="divider"></div>
+        <div class="grid grid-cols-1 sm:grid-cols-1 lg:grid-cols-1 p-4 gap-4">
+
+            {!! Form::open(['action' => 'DocumentsController@store', 'method' => 'POST', 'enctype' => 'multipart/form-data', 'class' => 'col s12']) !!}
+
+            {{ csrf_field() }}
+
+
+            <div class="mb-5 relative">
+                <label for="name" class="leading-7 text-sm text-gray-600">Nom de fichier</label>
+                {{ Form::text('name', '', ['id' => 'name', 'class' => 'w-full bg-gray-100 bg-opacity-50 border border-gray-300 focus:border-indigo-500 focus:bg-white focus:ring-2 focus:ring-indigo-200 text-base outline-none text-gray-700 py-1 px-3 leading-8 transition-colors duration-200 ease-in-out']) }}
+                @if ($errors->has('name'))
+                    <span class="red-text"><strong>{{ $errors->first('name') }}</strong></span>
+                @endif
             </div>
-            <div class="row">
-                <div class="col m8 s12">
-                    {!! Form::open(['action' => 'DocumentsController@store', 'method' => 'POST', 'enctype' =>
-                    'multipart/form-data', 'class' => 'col s12']) !!}
-                    {{ csrf_field() }}
-                    <div class="card hoverable">
-                        <div class="card-content">
-                            <div class="input-field">
-                                <i class="material-icons prefix">folder</i>
-                                {{ Form::text('name','',['class' => 'validate', 'id' => 'name']) }}
-                                <label for="name">File Name</label>
-                                @if ($errors->has('name'))
-                                <span class="red-text"><strong>{{ $errors->first('name') }}</strong></span>
-                                @endif
-                            </div>
-                            <br>
-                            <div class="input-field">
-                                <i class="material-icons prefix">description</i>
-                                {{ Form::text('description','',['class' => 'validate', 'id' => 'description']) }}
-                                <label for="description">Description</label>
-                                @if ($errors->has('description'))
-                                <span class="red-text"><strong>{{ $errors->first('description') }}</strong></span>
-                                @endif
-                            </div>
-                            <br>
-                            <div class="input-field">
-                                <!-- <input type="checkbox" id="isExpire" name="isExpire" checked/> -->
-                                {{ Form::checkbox('isExpire',1,true,['id' => 'isExpire']) }}
-                                <label for="isExpire">Does Not Expire</label>
-                            </div>
-                            <br>
-                            <div class="input-field">
-                                <!-- <input type="text" class="datepicker" name="expires_at" id="expirePicker" disabled> -->
-                                {{ Form::text('expires_at', '',['class' => 'datepicker', 'id' => 'expirePicker', 'disabled']) }}
-                                <label for="expirePicker">Expires At</label>
-                            </div>
-                            <br>
-                            <div class="input-field">
-                                <i class="material-icons prefix">class</i>
-                                {{ Form::select('category_id[]',$categories,null,['multiple' => 'multiple', 'id' => 'category', 'placeholder' => 'Choose Category']) }}
 
-                                <label for="category">Category (Optional)</label>
-                                @if ($errors->has('category'))
-                                <span class="red-text"><strong>{{ $errors->first('category') }}</strong></span>
-                                @endif
-                            </div>
+            <div class="mb-5 relative">
+                <label for="name" class="leading-7 text-sm text-gray-600">Description</label>
+                {{ Form::textarea('description', '', ['id' => 'description', 'class' => 'w-full bg-gray-100 bg-opacity-50 border border-gray-300 focus:border-indigo-500 focus:bg-white focus:ring-2 focus:ring-indigo-200 text-base outline-none text-gray-700 py-1 px-3 leading-8 transition-colors duration-200 ease-in-out']) }}
+                @if ($errors->has('description'))
+                    <span class="red-text"><strong>{{ $errors->first('description') }}</strong></span>
+                @endif
+            </div>
 
+            <div class="mb-5 relative hidden">
+                {{ Form::checkbox('isExpire', 1, true, ['id' => 'isExpire']) }}
+                <label for="name" class="leading-7 text-sm text-gray-600">Does Not Expire</label>
+            </div>
 
-                            <br>
-                            <div class="input-field">
-                                <i class="material-icons prefix">class</i>
-                                {{ Form::select('folder_id[]',$folders,null,['multiple' => 'multiple', 'id' => 'folder', 'placeholder' => 'Choose folder']) }}
+            <div class="mb-5 relative">
+                <label class="block text-left" style="max-width: 300px;">
+                    <span class="leading-7 text-sm text-gray-600">Category (Optional)</span>
+                    {{ Form::select('category_id[]', $categories, null, ['multiple' => 'multiple', 'id' => 'category', 'class' => 'form-multiselect block w-full mt-1']) }}
+                    @if ($errors->has('category'))
+                        <span class="red-text"><strong>{{ $errors->first('category') }}</strong></span>
+                    @endif
+                </label>
+            </div>
 
-                                <label for="folder">folder (Optional)</label>
-                                @if ($errors->has('folder'))
-                                <span class="red-text"><strong>{{ $errors->first('folder') }}</strong></span>
-                                @endif
-                            </div>
+            <div class="mb-5 relative">
+                <label class="block text-left" style="max-width: 300px;">
+                    <span class="leading-7 text-sm text-gray-600">Folder (Optional)</span>
+                    {{ Form::select('folder_id[]', $folders, null, ['multiple' => 'multiple', 'id' => 'folder', 'class' => 'form-multiselect block w-full mt-1']) }}
+                    @if ($errors->has('folder'))
+                        <span class="red-text"><strong>{{ $errors->first('folder') }}</strong></span>
+                    @endif
+                </label>
+            </div>
 
+            <div class="mb-5 relative">
+                <h3 class="text-gray-900 text-lg mt-6 mb-4 font-medium title-font uppercase">Permission</h3>
+                <div class="grid sm:grid-cols-2 lg:grid-cols-3">
+                    @if (count($depts) > 0)
+                        @foreach ($depts as $dept)
 
-                            <br>
-                            <div class="file-field input-field">
-                                <div class="btn white">
-                                    <span class="black-text">Choose File (Max: 50MB)</span>
-                                    {{ Form::file('file') }}
-                                    @if ($errors->has('file'))
-                                    <span class="red-text"><strong>{{ $errors->first('file') }}</strong></span>
-                                    @endif
+                            <div class="mb-6">
+                                <div class="text-gray-900 mb-2 font-medium title-font">
+                                    {{ $dept->dptName }}
                                 </div>
-                                <div class="file-path-wrapper">
-                                    <input class="file-path validate" type="text">
+
+                                <div class="">
+                                    <input type="radio" name="permissions_{{ $dept->id }}[]"
+                                        value="{{ $dept->id }}_all" id="{{ $dept->id }}_all">
+                                    <label for="{{ $dept->id }}_all">All</label>
+                                </div>
+
+                                <div class="">
+                                    <input type="radio" name="permissions_{{ $dept->id }}[]"
+                                        id="{{ $dept->id }}_admins" value="{{ $dept->id }}_admins" checked>
+                                    <label for="{{ $dept->id }}_admins">Admins</label>
                                 </div>
                             </div>
-                            <br>
-                            <div class="input-field">
-                                <p class="center">
-                                    {{ Form::submit('Save',['class' => 'btn-large waves-effect waves-light']) }}
-                                </p>
-                            </div>
-                        </div>
-                    </div>
-                    {!! Form::close() !!}
-                </div>
-                <div class="col m4 hide-on-med-and-down">
-                    <div class="card-panel teal">
-                        <h4>Notice</h4>
-                        <p>
-                        <ul>
-                            <li>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor
-                                incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud
-                                exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure
-                                dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur.
-                                Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt
-                                mollit anim id est laborum.</li>
-                            <li>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor
-                                incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud
-                                exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure
-                                dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur.
-                                Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt
-                                mollit anim id est laborum.</li>
-                        </ul>
-                        </p>
-                    </div>
+
+                        @endforeach
+                    @endif
                 </div>
             </div>
+
+            <div class="mb-5 relative">
+                <div class="btn white">
+                    <span class="black-text">Choose File (Max: 50MB)</span>
+                    {{ Form::file('file') }}
+                    @if ($errors->has('file'))
+                        <span class="red-text"><strong>{{ $errors->first('file') }}</strong></span>
+                    @endif
+                </div>
+                <div class="file-path-wrapper">
+                    <input class="file-path validate" type="text">
+                </div>
+            </div>
+
+            <div class="mb-5 relative">
+                <p class="center">
+                    {{ Form::submit('Save', ['class' => 'text-white bg-indigo-500 border-0 py-2 px-6 focus:outline-none hover:bg-indigo-600 text-lg']) }}
+                </p>
+            </div>
         </div>
+
+        {!! Form::close() !!}
     </div>
-</div>
+
 @endsection

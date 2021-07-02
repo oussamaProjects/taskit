@@ -8,8 +8,9 @@ use Spatie\Permission\Models\Permission;
 
 class RolesController extends Controller
 {
-    public function __construct() {
-        return $this->middleware(['auth','role:Root']);
+    public function __construct()
+    {
+        return $this->middleware(['auth', 'role:Root']);
     }
 
     /**
@@ -22,11 +23,11 @@ class RolesController extends Controller
         // for combo boxes
         // $roles = Role::pluck('name','id')->all();
         $roles = Role::all();
-        $permissions = Permission::pluck('name','id')->all();
+        $permissions = Permission::pluck('name', 'id')->all();
         // for table
         // $rs = Role::all();
 
-        return view('roles.index',compact('roles','permissions'));
+        return view('roles.index', compact('roles', 'permissions'));
     }
 
     /**
@@ -71,8 +72,7 @@ class RolesController extends Controller
     {
         $role = Role::findOrFail($id);
         $permissions = Permission::all();
-
-        return view('roles.edit',compact('role','permissions'));
+        return view('roles.edit', compact('role', 'permissions'));
     }
 
     /**
@@ -85,9 +85,8 @@ class RolesController extends Controller
     public function update(Request $request, $id)
     {
         $this->validate($request, [
-            'name' => 'required|max:15|unique:roles,name,'.$id,
+            'name' => 'required|max:15|unique:roles,name,' . $id,
             'permissions' => 'required',
-
         ]);
 
         $role = Role::findOrFail($id);
@@ -104,12 +103,11 @@ class RolesController extends Controller
 
         foreach ($permissions as $permission) {
             // get corresponding form permission in db
-            $p = Permission::where('id',$permission)->firstOrFail();
+            $p = Permission::where('id', $permission)->firstOrFail();
             $role->givePermissionTo($p);
         }
 
-        return redirect('/roles')->with('success','Role Updated');
-
+        return redirect('/roles')->with('success', 'Role Updated');
     }
 
     /**

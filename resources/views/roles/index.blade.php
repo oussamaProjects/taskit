@@ -1,111 +1,137 @@
 @extends('layouts.app')
 
 @section('content')
-<div class="row">
-  <div class="section">
-    <div class="col hide-on-med-and-down">
-      @include('inc.sidebar')
-    </div>
-    <div class="col m11 s12">
-      <div class="row">
-        <h3 class="flow-text"><i class="material-icons">assignment_ind</i> Roles &amp; Permissions</h3>
-        <div class="divider"></div>
-      </div>
-      <div class="row">
-        <div class="col m8 s12">
-          <div class="card z-depth-2 hoverable">
-            <div class="card-content">
-            <h5 class="indigo-text">Roles + Permissions</h5>
-              <table class="responsive-table striped">
-                <thead>
-                  <tr>
-                      <th>Role</th>
-                      <th>Permissions</th>
-                      <th></th>
-                  </tr>
-                </thead>
 
-                <tbody>
-                @if(count($roles) > 0)
-                  @foreach($roles as $r)
-                  <tr>
-                    <td>{{ $r->name }}</td>
-                    <td>{{ $r->permissions()->pluck('name')->implode(' ') }}</td>
-                    <td><a href="roles/{{ $r->id }}/edit"><i class="material-icons">mode_edit</i></a></td>
-                  </tr>
-                  @endforeach
-                @endif
-                </tbody>
-              </table>
-            </div>
-          </div>
-          <!-- ====================== -->
-          <div class="row">
-            <div class="card col m5 s12 z-depth-2 indigo lighten-1">
-              <div class="card-content">
-                <h5 class="white-text">Notice</h5>
-                <p class="grey-text text-lighten-2">
-                  Lorem ipsum dolor sit amet, consectetur adipisicing elit. Quo velit alias, veniam mollitia tenetur molestiae amet soluta distinctio laboriosam nobis. Impedit ab perspiciatis, debitis, modi ipsam obcaecati accusamus porro voluptate.
-                </p>
-              </div>
-            </div>
-            <div class="col m7 s12">
-              <div class="card z-depth-2 hoverable">
-                <div class="card-content">
-                <h5 class="indigo-text">Roles</h5>
-                  <table class="striped">
-                    <thead>
-                      <tr>
-                          <th>ID.</th>
-                          <th>Role</th>
-                      </tr>
-                    </thead>
+    @include('inc.sidebar')
+        
+    <div class="ml-14 mb-14 md:ml-64">
+        <div class="grid grid-cols-1 lg:grid-cols-1 p-4 gap-4 mt-14">
 
-                    <tbody>
-                    @if(count($roles) > 0)
-                      @foreach($roles as $key => $role)
-                      <tr>
-                        <td>{{ ++$key }}</td>
-                        <td>{{ $role->name }}</td>
-                      </tr>
-                      @endforeach
-                    @endif
-                    </tbody>
-                  </table>
+            <!-- Roles -->
+            <div class="relative flex flex-col min-w-0 mb-4 lg:mb-0 break-words bg-gray-50 dark:bg-gray-800 w-full shadow-lg rounded">
+                <div class="rounded-t mb-0 px-0 border-0">
+                <div class="flex flex-wrap items-center px-4 py-2">
+                    <div class="relative w-full max-w-full flex-grow flex-1">
+                    <h3 class="font-semibold text-base text-gray-900 dark:text-gray-50">Roles &amp; Permissions</h3>
+                    </div>
+                    <div class="relative w-full max-w-full flex-grow flex-1 text-right">
+                    </div>
                 </div>
-              </div>
+                <div class="block w-full overflow-x-auto">
+                    <table class="items-center w-full bg-transparent border-collapse">
+                    <thead>
+                        <tr>
+                        <th class="px-4 bg-gray-100 dark:bg-gray-600 text-gray-500 dark:text-gray-100 align-middle border border-solid border-gray-200 dark:border-gray-500 py-3 text-xs uppercase border-l-0 border-r-0 whitespace-nowrap font-semibold text-left">ID.</th>
+                        <th class="px-4 bg-gray-100 dark:bg-gray-600 text-gray-500 dark:text-gray-100 align-middle border border-solid border-gray-200 dark:border-gray-500 py-3 text-xs uppercase border-l-0 border-r-0 whitespace-nowrap font-semibold text-left">Permissions</th>
+                        <th class="px-4 bg-gray-100 dark:bg-gray-600 text-gray-500 dark:text-gray-100 align-middle border border-solid border-gray-200 dark:border-gray-500 py-3 text-xs uppercase border-l-0 border-r-0 whitespace-nowrap font-semibold text-left"> </th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr class="text-gray-700 dark:text-gray-100">
+                            @if (count($roles) > 0)
+                                @foreach ($roles as $r)
+                                    <tr>
+                                        <th class="border-t-0 px-4 align-middle border-l-0 border-r-0 text-xs whitespace-nowrap p-2 text-left">{{ $r->name }}</td>
+                                        <td class="border-t-0 px-4 align-middle border-l-0 border-r-0 text-xs whitespace-nowrap p-2">{{ $r->permissions()->pluck('name')->implode(' ') }}</td>
+                                        <td class="border-t-0 px-4 align-middle border-l-0 border-r-0 text-xs whitespace-nowrap p-2">
+                                            <a href="roles/{{ $r->id }}/edit">
+                                                <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6"
+                                                    fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                                    <path stroke-linecap="round" stroke-linejoin="round"
+                                                        stroke-width="2"
+                                                        d="M11 5H6a2 2 0 00-2 2v11a2 2 0 002 2h11a2 2 0 002-2v-5m-1.414-9.414a2 2 0 112.828 2.828L11.828 15H9v-2.828l8.586-8.586z" />
+                                                </svg>
+                                            </a>
+                                        </td>
+                                    </tr>
+                                @endforeach
+                            @endif
+                        </tr>
+                    </tbody>
+                    </table>
+                </div>
+                </div>
             </div>
-          </div>
+            <!-- ./Roles -->
         </div>
-        <!-- ===================================================== -->
-        <div class="col m4 s12">
-          <div class="card z-depth-2 hoverable">
-            <div class="card-content">
-            <h5 class="indigo-text">Permissions</h5>
-              <table class="striped">
-                <thead>
-                  <tr>
-                      <th>ID.</th>
-                      <th>Permission</th>
-                  </tr>
-                </thead>
+            
+        <div class="grid grid-cols-1 lg:grid-cols-2 p-4 gap-4">
 
-                <tbody>
-                @if(count($permissions) > 0)
-                  @foreach($permissions as $key => $permission)
-                  <tr>
-                    <td>{{ $key++ }}</td>
-                    <td>{{ $permission }}</td>
-                  </tr>
-                  @endforeach
-                @endif
-                </tbody>
-              </table>
+            <!-- Roles -->
+            <div class="relative flex flex-col min-w-0 mb-4 lg:mb-0 break-words bg-gray-50 dark:bg-gray-800 w-full shadow-lg rounded">
+                <div class="rounded-t mb-0 px-0 border-0">
+                <div class="flex flex-wrap items-center px-4 py-2">
+                    <div class="relative w-full max-w-full flex-grow flex-1">
+                    <h3 class="font-semibold text-base text-gray-900 dark:text-gray-50">Roles</h3>
+                    </div>
+                    <div class="relative w-full max-w-full flex-grow flex-1 text-right">
+                    </div>
+                </div>
+                <div class="block w-full overflow-x-auto">
+                    <table class="items-center w-full bg-transparent border-collapse">
+                    <thead>
+                        <tr>
+                        <th class="px-4 bg-gray-100 dark:bg-gray-600 text-gray-500 dark:text-gray-100 align-middle border border-solid border-gray-200 dark:border-gray-500 py-3 text-xs uppercase border-l-0 border-r-0 whitespace-nowrap font-semibold text-left">ID.</th>
+                        <th class="px-4 bg-gray-100 dark:bg-gray-600 text-gray-500 dark:text-gray-100 align-middle border border-solid border-gray-200 dark:border-gray-500 py-3 text-xs uppercase border-l-0 border-r-0 whitespace-nowrap font-semibold text-left">Role</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr class="text-gray-700 dark:text-gray-100">
+                        @if (count($roles) > 0)
+                        @foreach ($roles as $key => $role)
+                            <tr>
+                                <th class="border-t-0 px-4 align-middle border-l-0 border-r-0 text-xs whitespace-nowrap p-2 text-left">{{ ++$key }}</td>
+                                    <td class="border-t-0 px-4 align-middle border-l-0 border-r-0 text-xs whitespace-nowrap p-2">{{ $role->name }}</td>
+                            </tr>
+                        @endforeach
+                    @endif
+                        </tr>
+                        
+                    </tbody>
+                    </table>
+                </div>
+                </div>
             </div>
-          </div>
+            <!-- ./Roles -->
+        
+                <!-- Permissions -->
+            <div class="relative flex flex-col min-w-0 mb-4 lg:mb-0 break-words bg-gray-50 dark:bg-gray-800 w-full shadow-lg rounded">
+                <div class="rounded-t mb-0 px-0 border-0">
+                    <div class="flex flex-wrap items-center px-4 py-2">
+                    <div class="relative w-full max-w-full flex-grow flex-1">
+                        <h3 class="font-semibold text-base text-gray-900 dark:text-gray-50">Permissions</h3>
+                    </div>
+                    <div class="relative w-full max-w-full flex-grow flex-1 text-right">
+                    </div>
+                    </div>
+                    <div class="block w-full overflow-x-auto">
+                    <table class="items-center w-full bg-transparent border-collapse">
+                        <thead>
+                        <tr>
+                            <th class="px-4 bg-gray-100 dark:bg-gray-600 text-gray-500 dark:text-gray-100 align-middle border border-solid border-gray-200 dark:border-gray-500 py-3 text-xs uppercase border-l-0 border-r-0 whitespace-nowrap font-semibold text-left">ID.</th>
+                            <th class="px-4 bg-gray-100 dark:bg-gray-600 text-gray-500 dark:text-gray-100 align-middle border border-solid border-gray-200 dark:border-gray-500 py-3 text-xs uppercase border-l-0 border-r-0 whitespace-nowrap font-semibold text-left">Permission</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        <tr class="text-gray-700 dark:text-gray-100">
+                            @if (count($permissions) > 0)
+                            @foreach ($permissions as $key => $permission)
+                                <tr>
+                                    <th class="border-t-0 px-4 align-middle border-l-0 border-r-0 text-xs whitespace-nowrap p-2 text-left">{{ ++$key }}</td>
+                                        <td class="border-t-0 px-4 align-middle border-l-0 border-r-0 text-xs whitespace-nowrap p-2">{{ $permission }}</td>
+                                </tr>
+                            @endforeach
+                        @endif
+                        </tr>
+                        
+                        </tbody>
+                    </table>
+                    </div>
+                </div>
+            </div>
+            <!-- ./Permissions -->
+            
         </div>
-      </div>
     </div>
-  </div>
-</div>
+
 @endsection

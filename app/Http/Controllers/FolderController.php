@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Folder;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 
 class FolderController extends Controller
 {
@@ -20,9 +21,59 @@ class FolderController extends Controller
      */
     public function index()
     {
-        $folders = Folder::all();
+        $folders        = Folder::where('parent_id', '=', '0')->get();
+        $folders_input  = Folder::pluck('name', 'id')->all();
 
-        return view('folders.index', compact('folders'));
+        $folders_ = DB::table('folders as f1')
+            ->leftJoin('folders as f2', 'f2.parent_id', '=', 'f1.id')
+            ->leftJoin('folders as f3', 'f3.parent_id', '=', 'f2.id')
+            ->leftJoin('folders as f4', 'f4.parent_id', '=', 'f3.id')
+            ->select('f1.id as f1_id', 'f1.name as f1_name', 'f2.id as f2_id', 'f2.name as f2_name', 'f3.id as f3_id', 'f3.name as f3_name', 'f4.id  as f4_id', 'f4.name as f4_name')
+            ->where('f1.parent_id', '=', 0)
+            ->get();
+
+
+        $all_folders = [];
+        $folder_f1_id = '';
+        $folder_f2_id = '';
+        $folder_f3_id = '';
+        $folder_f4_id = '';
+        $f1_id = -1;
+        $f2_id = -1;
+        $f3_id = -1;
+        $f4_id = -1;
+        foreach ($folders_ as $k => $folder) {
+            if ($folder->f1_id != $folder_f1_id) {
+                $f1_id = $f1_id + 1;
+                $all_folders[$f1_id]['id'] = $folder->f1_id;
+                $all_folders[$f1_id]['name'] = $folder->f1_name;
+                $f2_id = -1;
+            }
+            if ($folder->f2_id != $folder_f2_id && $folder->f2_id <> NULL) {
+                $f2_id = $f2_id + 1;
+                $all_folders[$f1_id]['children'][$f2_id]['id'] = $folder->f2_id;
+                $all_folders[$f1_id]['children'][$f2_id]['name'] = $folder->f2_name;
+                $f3_id = -1;
+            }
+            if ($folder->f3_id != $folder_f3_id && $folder->f3_id <> NULL) {
+                $f3_id = $f3_id + 1;
+                $all_folders[$f1_id]['children'][$f2_id]['children'][$f3_id]['id'] = $folder->f3_id;
+                $all_folders[$f1_id]['children'][$f2_id]['children'][$f3_id]['name'] = $folder->f3_name;
+                $f4_id = -1;
+            }
+            if ($folder->f4_id != $folder_f4_id && $folder->f3_id <> NULL) {
+                $f4_id = $f4_id + 1;
+                $all_folders[$f1_id]['children'][$f2_id]['children'][$f3_id]['children'][$f4_id]['id'] = $folder->f4_id;
+                $all_folders[$f1_id]['children'][$f2_id]['children'][$f3_id]['children'][$f4_id]['name'] = $folder->f4_name;
+            }
+            $folder_f1_id = $folder->f1_id;
+            $folder_f2_id = $folder->f2_id;
+            $folder_f3_id = $folder->f3_id;
+            $folder_f4_id = $folder->f4_id;
+        }
+
+        // dd($all_folders);
+        return view('folders.index', compact('folders', 'folders_input'));
     }
 
     /**
@@ -55,6 +106,9 @@ class FolderController extends Controller
         $folder->name = $request->input('name');
         $folder->user_id = $user_id;
         $folder->department_id = $department_id;
+        // dd($request->input('folder_parent_id'));
+
+        $folder->parent_id = $request->input('folder_parent_id')[0];
 
         // save to db
         $folder->save();
@@ -85,7 +139,6 @@ class FolderController extends Controller
         return view('folders.results', compact('results'));
     }
 
-
     /**
      * Display the specified resource.
      *
@@ -94,9 +147,12 @@ class FolderController extends Controller
      */
     public function show(Folder $folder)
     {
-        $docs = $folder->documents()->get();
-        $filetype = '';
-        return view('documents.index', compact('docs', 'folder', 'filetype'));
+        $folders            = Folder::where('parent_id', '=', $folder->id)->get();
+        $folders_input      = Folder::pluck('name', 'id')->all();
+        $docs               = $folder->documents()->get();
+        $filetype           = '';
+
+        return view('folders.show', compact('docs', 'folder', 'folders', 'folders_input', 'filetype'));
     }
 
     /**
@@ -107,7 +163,7 @@ class FolderController extends Controller
      */
     public function edit(Folder $folder)
     {
-        $folder = Folder::findOrFail($id);
+        // $folder = Folder::findOrFail($folder);
 
         return view('folders.edit', compact('folder'));
     }

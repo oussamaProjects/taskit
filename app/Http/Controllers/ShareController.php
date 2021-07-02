@@ -8,8 +8,9 @@ use App\Document;
 
 class ShareController extends Controller
 {
-    public function __construct() {
-        return $this->middleware(['auth','permission:shared']);
+    public function __construct()
+    {
+        return $this->middleware(['auth', 'permission:shared']);
     }
 
     /**
@@ -20,8 +21,7 @@ class ShareController extends Controller
     public function index()
     {
         $shared = Shared::all();
-
-        return view('pages.shared',compact('shared'));
+        return view('pages.shared', compact('shared'));
     }
 
     /**
@@ -91,9 +91,9 @@ class ShareController extends Controller
         $shared->expires_at = $doc->expires_at;
         $shared->save();
 
-        \Log::addToLog('Document ID '.$id.' was shared');
+        \Log::addToLog('Document ID ' . $id . ' was shared');
 
-        return redirect('/documents')->with('success','File Shared!');
+        return redirect('/documents')->with('success', 'File Shared!');
     }
 
     /**

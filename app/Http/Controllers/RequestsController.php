@@ -8,8 +8,9 @@ use Spatie\Permission\Models\Role;
 
 class RequestsController extends Controller
 {
-    public function __construct() {
-       return $this->middleware(['auth','permission:manage']);
+    public function __construct()
+    {
+        return $this->middleware(['auth', 'permission:manage']);
     }
 
     /**
@@ -19,15 +20,13 @@ class RequestsController extends Controller
      */
     public function index()
     {
-        if (auth()->user()->hasRole('Admin'))
-        {
-            $users = User::where('status',false)->where('department_id',auth()->user()->department_id)->get();
-        }
-        elseif (auth()->user()->hasRole('Root')) {
-            $users = User::where('status',false)->get();
+        if (auth()->user()->hasRole('Admin')) {
+            $users = User::where('status', false)->where('department_id', auth()->user()->department_id)->get();
+        } elseif (auth()->user()->hasRole('Root')) {
+            $users = User::where('status', false)->get();
         }
 
-        return view('pages.requests',compact('users'));
+        return view('pages.requests', compact('users'));
     }
 
     /**
@@ -86,12 +85,12 @@ class RequestsController extends Controller
         $user->status = true;
         $user->save();
 
-        $r = Role::where('name','User')->first();
+        $r = Role::where('name', 'User')->first();
         $user->assignRole($r);
 
         \Log::addToLog('User Accepted');
 
-        return redirect('/requests')->with('success','User Accepted');
+        return redirect('/requests')->with('success', 'User Accepted');
     }
 
     /**

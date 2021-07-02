@@ -1,281 +1,208 @@
 @extends('layouts.app')
 
 @section('content')
-<style>
-.card-content2 {
-    padding: 10px 7px;
-}
 
-/* --- for right click menu --- */
-*,
-*::before,
-*::after {
-    box-sizing: border-box;
-}
+    @include('inc.sidebar')
 
-.task i {
-    color: orange;
-    font-size: 35px;
-}
+    <div class="ml-14 mt-14 md:ml-64">
+        <!-- Statistics Cards -->
+        <div class="flex p-4 gap-4">
 
-/* context-menu */
-.context-menu {
-    padding: 0 5px;
-    margin: 0;
-    background: #f7f7f7;
-    font-size: 15px;
-    display: none;
-    position: absolute;
-    z-index: 10;
-    box-shadow: 0 4px 5px 0 rgba(0, 0, 0, 0.14), 0 1px 10px 0 rgba(0, 0, 0, 0.12), 0 2px 4px -1px rgba(0, 0, 0, 0.3);
-}
+            <form action="/search" method="post" id="search-form"
+                class="bg-white flex items-center w-full max-w-xl  4 p-2">
+                {{ csrf_field() }}
+                <button class="outline-none focus:outline-none">
+                    <svg class="w-5 text-gray-600 h-5 cursor-pointer" fill="none" stroke-linecap="round"
+                        stroke-linejoin="round" stroke-width="2" stroke="currentColor" viewBox="0 0 24 24">
+                        <path d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"></path>
+                    </svg>
+                </button>
+                <input type="text" name="search" id="search" placeholder="Search Here ..."
+                    class="w-full pl-3 text-sm text-black outline-none focus:outline-none bg-transparent" />
+            </form>
 
-.context-menu--active {
-    display: block;
-}
+            <button id="buttonmodal" class="focus:outline-none py-2 px-4 bg-blue-600 text-white bg-opacity-75 ml-auto">
+                Ajouter un nouveau
+            </button>
 
-.context-menu_items {
-    margin: 0;
-}
+            @can('upload')
+            @endcan
 
-.context-menu_item {
-    border-bottom: 1px solid #ddd;
-    padding: 12px 30px;
-}
-
-.context-menu_item:last-child {
-    border-bottom: none;
-}
-
-.context-menu_item:hover {
-    background: #fff;
-}
-
-.context-menu_item i {
-    margin: 0;
-    padding: 0;
-}
-
-.context-menu_item p {
-    display: inline;
-    margin-left: 10px;
-}
-
-.unshow {
-    display: none;
-}
-</style>
-<div class="row">
-    <div class="section">
-        <div class="col hide-on-med-and-down">
-            @include('inc.sidebar')
         </div>
-        <div class="col m11 s12">
-            <div class="row">
-                <h3 class="flow-text"><i class="material-icons">folder</i> Folders
-                    <button data-target="modal1" class="btn waves-effect waves-light modal-trigger right">Add
-                        New</button>
-                    @can('upload')
-                    @endcan
-                </h3>
-                <div class="divider"></div>
-            </div>
-            <div class="card z-depth-2">
-                <div class="card-content">
-                    <!-- Switch -->
-                    <div class="switch" style="margin-bottom: 2em;">
-                        <label>
-                            Grid View
-                            <input type="checkbox">
-                            <span class="lever"></span>
-                            Table View
-                        </label>
-                    </div>
-                    <!-- FOLDER View -->
-                    <div id="folderView">
-                        <div class="row">
-                            <form action="/search" method="post" id="search-form">
-                                {{ csrf_field() }}
-                                <div class="input-field col m4 s12 right">
-                                    <i class="material-icons prefix">search</i>
-                                    <input type="text" name="search" id="search" placeholder="Search Here ...">
-                                    <label for="search"></label>
+    </div>
+
+    <div class="ml-14 mt-14 mb-10 md:ml-64">
+        <div class="grid grid-cols-1 sm:grid-cols-4 md:grid-cols-4 lg:grid-cols-6 p-4 gap-4">
+            @if (count($folders) > 0)
+                @foreach ($folders as $folder)
+                    <div id="tr_{{ $folder->id }}"
+                        class="overflow-hidden bg-white shadow-md px-4 py-4 dark:bg-gray-800 relative">
+                        <div class="" data-id="{{ $folder->id }}">
+                            <a href="/folders/{{ $folder->id }}">
+                                <div class="center">
+                                    <svg xmlns="http://www.w3.org/2000/svg" class="h-12 w-12 mx-auto my-4" fill="none"
+                                        viewBox="0 0 24 24" stroke="currentColor">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                            d="M5 19a2 2 0 01-2-2V7a2 2 0 012-2h4l2 2h4a2 2 0 012 2v1M5 19h14a2 2 0 002-2v-5a2 2 0 00-2-2H9a2 2 0 00-2 2v5a2 2 0 01-2 2z" />
+                                    </svg>
+                                    <h6 class="text-gray-900 text-lg mb-1 font-medium title-font text-center capitalize">
+                                        {{ $folder->name }}</h6>
                                 </div>
-                            </form>
-                        </div>
-                        <br>
-                        <div class="row">
-                            @if(count($folders) > 0)
-                            @foreach($folders as $folder)
-                            <div class="col m2 s6" id="tr_{{$folder->id}}">
-                                <div class="card hoverable indigo lighten-5 task" data-id="{{ $folder->id }}">
-                                    <input type="checkbox" class="filled-in sub_chk" id="chk_{{$folder->id}}"
-                                        data-id="{{$folder->id}}">
-                                    <label for="chk_{{$folder->id}}"></label>
-                                    <a href="/folders/{{ $folder->id }}">
-                                        <div class="card-content2 center">
-                                            <i class="material-icons">folder_open</i>
-                                            <h6>{{ $folder->name }}</h6>
-                                            <p>{{ $folder->filesize }}</p>
-                                        </div>
-                                    </a>
-                                </div>
-                            </div>
-                            @endforeach
-                            @else
-                            <h5 class="teal-text">No Document has been uploaded</h5>
-                            @endif
+                            </a>
                         </div>
                     </div>
-                    <!-- TABLE View -->
-                    <div id="tableView" class="unshow">
-                        <div class="row">
-                            <table class="bordered centered highlight responsive-table" id="myDataTable">
-                                <thead>
-                                    <tr>
-                                        <th></th>
-                                        <th>File Name</th>
-                                        <th>Owner</th>
-                                        <th>Department</th>
-                                        <th>Uploaded At</th>
-                                        <th>Expires At</th>
-                                        <th>Actions</th>
-                                    </tr>
-                                </thead>
-                                <tbody>
-                                    @if(count($folders) > 0)
-                                    @foreach($folders as $folder)
-                                    <tr id="tr_{{$folder->id}}">
-                                        <td>
+                @endforeach
+            @endif
+        </div>
+    </div>
+
+    <div class="grid grid-cols-1 lg:grid-cols-1 p-4 gap-4">
+        <div class="relative flex flex-col min-w-0 mb-4 lg:mb-0 break-words bg-gray-50 dark:bg-gray-800 w-full shadow-lg rounded">
+            <div class="rounded-t mb-0 px-0 border-0">
+                <div class="flex flex-wrap items-center px-4 py-2">
+                    <div class="relative w-full max-w-full flex-grow flex-1">
+                        <h3 class="font-semibold text-base text-gray-900 dark:text-gray-50">
+                        </h3>
+                        {{-- <button data-url="{{ url('categoriesDeleteMulti') }}"
+                            class="bg-blue-500 dark:bg-gray-100 text-white active:bg-blue-600 dark:text-gray-800 dark:active:text-gray-700 font-bold uppercase px-3 py-1 rounded outline-none focus:outline-none mr-1 mb-1 ease-linear transition-all duration-150"
+                            type="button">Supprimer toutes les sélections</button> --}}
+                    </div>
+                    <div class="relative w-full max-w-full flex-grow flex-1 text-right">
+
+                    </div>
+                </div>
+                <div class="block w-full overflow-x-auto">
+                    <table class="items-center w-full bg-transparent border-collapse">
+                        <thead>
+                            <tr>
+                                <th
+                                    class="px-4 bg-gray-100 dark:bg-gray-600 text-gray-500 dark:text-gray-100 align-middle border border-solid border-gray-200 dark:border-gray-500 py-3 text-xs uppercase border-l-0 border-r-0 whitespace-nowrap font-semibold text-left">
+                                </th>
+                                <th
+                                    class="px-4 bg-gray-100 dark:bg-gray-600 text-gray-500 dark:text-gray-100 align-middle border border-solid border-gray-200 dark:border-gray-500 py-3 text-xs uppercase border-l-0 border-r-0 whitespace-nowrap font-semibold text-left">
+                                    Nom du dossier</th>
+                                <th
+                                    class="px-4 bg-gray-100 dark:bg-gray-600 text-gray-500 dark:text-gray-100 align-middle border border-solid border-gray-200 dark:border-gray-500 py-3 text-xs uppercase border-l-0 border-r-0 whitespace-nowrap font-semibold text-left min-w-140-px">
+                                    Actions
+                                </th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @if (count($folders) > 0)
+                                @foreach ($folders as $folder)
+                                    <tr id="tr_{{ $folder->id }}" class="text-gray-700 dark:text-gray-100">
+                                        <th
+                                            class="border-t-0 px-4 align-middle border-l-0 border-r-0 whitespace-nowrap p-4 text-left">
                                             <input type="checkbox" id="chk_{{ $folder->id }}" class="sub_chk"
-                                                data-id="{{$folder->id}}">
+                                                data-id="{{ $folder->id }}">
                                             <label for="chk_{{ $folder->id }}"></label>
-                                        </td>
-                                        <td>{{ $folder->name }}</td>
-                                        <td>{{ $folder->user->name }}</td>
-                                        <td>{{ $folder->user->department['dptName'] }}</td>
-                                        <td>{{ $folder->created_at->toDayDateTimeString() }}</td>
-                                        <td>
-                                            @if($folder->isExpire)
-                                            {{ $folder->expires_at }}
-                                            @else
-                                            No Expiration
-                                            @endif
-                                        </td>
-                                        <td>
-                                            @can('read')
-                                            {!! Form::open() !!}
-                                            <a href="documents/{{ $folder->id }}" class="tooltipped"
-                                                data-position="left" data-delay="50" data-tooltip="View Details"><i
-                                                    class="material-icons">visibility</i></a>
-                                            {!! Form::close() !!}
-                                            {!! Form::open() !!}
-                                            <a href="documents/open/{{ $folder->id }}" class="tooltipped"
-                                                data-position="left" data-delay="50" data-tooltip="Open"><i
-                                                    class="material-icons">open_with</i></a>
-                                            {!! Form::close() !!}
-                                            @endcan
-                                            {!! Form::open() !!}
-                                            @can('download')
-                                            <a href="documents/download/{{ $folder->id }}" class="tooltipped"
-                                                data-position="left" data-delay="50" data-tooltip="Download"><i
-                                                    class="material-icons">file_download</i></a>
-                                            @endcan
-                                            {!! Form::close() !!}
-                                            <!-- SHARE using link -->
-                                            {!! Form::open(['action' => ['ShareController@update', $folder->id],
-                                            'method' => 'PATCH', 'id' => 'form-share-documents-' . $folder->id]) !!}
-                                            @can('shared')
-                                            <a href="" class="data-share tooltipped" data-position="left"
-                                                data-delay="50" data-tooltip="Share"
-                                                data-form="documents-{{ $folder->id }}"><i
-                                                    class="material-icons">share</i></a>
-                                            @endcan
-                                            {!! Form::close() !!}
-                                            {!! Form::open() !!}
-                                            @can('edit')
-                                            <a href="documents/{{ $folder->id }}/edit" class="tooltipped"
-                                                data-position="left" data-delay="50" data-tooltip="Edit"><i
-                                                    class="material-icons">mode_edit</i></a>
-                                            @endcan
-                                            {!! Form::close() !!}
+                                        </th>
+                                        <td
+                                            class="border-t-0 px-4 align-middle border-l-0 border-r-0 whitespace-nowrap p-4">
+                                            {{ $folder->name }}</td>
+                                        <td
+                                            class="flex border-t-0 px-4 align-middle border-l-0 border-r-0 whitespace-nowrap p-4">
+
                                             <!-- DELETE using link -->
-                                            {!! Form::open(['action' => ['DocumentsController@destroy', $folder->id],
-                                            'method' => 'DELETE', 'id' => 'form-delete-documents-' . $folder->id]) !!}
-                                            @can('delete')
-                                            <a href="" class="data-delete tooltipped" data-position="left"
-                                                data-delay="50" data-tooltip="Delete"
-                                                data-form="documents-{{ $folder->id }}"><i
-                                                    class="material-icons">delete</i></a>
-                                            @endcan
+                                            {!! Form::open(['action' => ['FolderController@destroy', $folder->id], 'method' => 'DELETE', 'id' => 'form-delete-folders-' . $folder->id, 'class' => 'flex items-center']) !!}
+                                            <a href="#" class="left"><i class="material-icons"></i></a>
+                                            <a href="/folders/{{ $folder->id }}/edit" class="center">
+                                                <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none"
+                                                    viewBox="0 0 24 24" stroke="currentColor">
+                                                    <path stroke-linecap="round" stroke-linejoin="round"
+                                                        stroke-width="2"
+                                                        d="M11 5H6a2 2 0 00-2 2v11a2 2 0 002 2h11a2 2 0 002-2v-5m-1.414-9.414a2 2 0 112.828 2.828L11.828 15H9v-2.828l8.586-8.586z" />
+                                                </svg>
+                                            </a>
+                                            <a href="" class="right data-delete"
+                                                data-form="folders-{{ $folder->id }}">
+                                                <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none"
+                                                    viewBox="0 0 24 24" stroke="currentColor">
+                                                    <path stroke-linecap="round" stroke-linejoin="round"
+                                                        stroke-width="2"
+                                                        d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16" />
+                                                </svg>
+                                            </a>
                                             {!! Form::close() !!}
+
                                         </td>
                                     </tr>
-                                    @endforeach
-                                    @else
-                                    <tr>
-                                        <td colspan="6">
-                                            <h5 class="teal-text">No Document has been uploaded</h5>
-                                        </td>
-                                    </tr>
-                                    @endif
-                                </tbody>
-                            </table>
-                        </div>
-                    </div>
+                                @endforeach
+                            @else
+                                <tr>
+                                    <td colspan="3">
+                                        <h5 class="teal-text">Aucune catégorie n'a été ajoutée</h5>
+                                    </td>
+                                </tr>
+                            @endif
+                        </tbody>
+                    </table>
                 </div>
             </div>
         </div>
     </div>
-</div>
-<!-- right click menu -->
-<div id="context-menu" class="context-menu">
-    <ul class="context-menu_items">
-        <li class="context-menu_item">
-            <a href="documents/open/15" class="context-menu_link" data-action="Open">
-                <i class="material-icons">open_with</i>
-                <p>Open</p>
-            </a>
-        </li>
-        <li class="context-menu_item">
-            <a href="#" class="context-menu_link" data-action="Share">
-                <i class="material-icons">share</i>
-                <p>Share</p>
-            </a>
-        </li>
-        <li class="context-menu_item">
-            <a href="documents/15/edit" class="context-menu_link" data-action="Edit">
-                <i class="material-icons">edit</i>
-                <p>Edit</p>
-            </a>
-        </li>
-        <li class="context-menu_item">
-            <a href="#" class="context-menu_link" data-action="Delete">
-                <i class="material-icons">delete</i>
-                <p>Delete</p>
-            </a>
-        </li>
-    </ul>
-</div>
 
 
-<!-- Modal -->
-<!-- Modal Structure -->
-<div id="modal1" class="modal">
-    <div class="modal-content">
-        <h4>Add folder</h4>
-        <div class="divider"></div>
-        {!! Form::open(['action' => 'FolderController@store', 'method' => 'POST', 'class' => 'col s12']) !!}
-        <div class="col s12 input-field">
-            <i class="material-icons prefix">class</i>
-            {{ Form::text('name','',['class' => 'validate', 'id' => 'folder']) }}
-            <label for="folder">folder Name</label>
+    <div id="modal"
+        class="fixed top-0 left-0 w-screen h-screen flex items-center justify-center bg-blue-500 bg-opacity-50 transform scale-0 transition-transform duration-300">
+        <!-- Modal content -->
+        <div class="bg-white w-1/2 h-1/3 p-12">
+            <!--Close modal button-->
+            <button id="closebutton" type="button" class="focus:outline-none float-right">
+                <!-- Hero icon - close button -->
+                <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24"
+                    stroke="currentColor">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                        d="M10 14l2-2m0 0l2-2m-2 2l-2-2m2 2l2 2m7-2a9 9 0 11-18 0 9 9 0 0118 0z" />
+                </svg>
+            </button>
+
+            <div>
+                <h2 class="text-gray-900 text-xl mb-1 font-medium title-font">Ajouter le dossier</h2>
+
+                {!! Form::open(['action' => 'FolderController@store', 'method' => 'POST', 'class' => '']) !!}
+
+                <div class="mb-5 relative">
+                    <label for="name" class="leading-7 text-sm text-gray-600">Nom de dossier</label>
+                    {{ Form::text('name', '', ['id' => 'name', 'class' => 'w-full bg-gray-100 bg-opacity-50 border border-gray-300 focus:border-indigo-500 focus:bg-white focus:ring-2 focus:ring-indigo-200 text-base outline-none text-gray-700 py-1 px-3 leading-8 transition-colors duration-200 ease-in-out']) }}
+                </div>
+
+                <div class="mb-5 relative">
+                    <label for="name" class="leading-7 text-sm text-gray-600">Folder Parent</label>
+                    <div class="relative inline-block w-full text-gray-700">
+                        {{ Form::select('folder_parent_id[]', $folders_input, $folders_input, ['id' => 'folder', 'class' => 'w-full bg-gray-100 bg-opacity-50 border border-gray-300 focus:border-indigo-500 focus:bg-white focus:ring-2 focus:ring-indigo-200 text-base outline-none text-gray-700 py-1 px-3 leading-8 transition-colors duration-200 ease-in-out placeholder-gray-600 border appearance-none focus:shadow-outline']) }}
+                        <div class="absolute inset-y-0 right-0 flex items-center px-2 pointer-events-none">
+                            <svg class="w-4 h-4 fill-current" viewBox="0 0 20 20">
+                                <path
+                                    d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z"
+                                    clip-rule="evenodd" fill-rule="evenodd">
+                                </path>
+                            </svg>
+                        </div>
+                    </div>
+                    @if ($errors->has('folder'))
+                        <span class="red-text"><strong>{{ $errors->first('folder') }}</strong></span>
+                    @endif
+                </div>
+
+            </div>
+
+            <div class="flex">
+                {{ Form::submit('submit', ['class' => 'focus:outline-none py-2 px-4 bg-blue-600 text-white bg-opacity-75 ml-auto']) }}
+                {!! Form::close() !!}
+            </div>
+
         </div>
     </div>
-    <div class="modal-footer">
-        {{ Form::submit('submit',['class' => 'btn']) }}
-        {!! Form::close() !!}
-    </div>
-</div>
+
+    <script>
+        const button = document.getElementById('buttonmodal')
+        const closebutton = document.getElementById('closebutton')
+        const modal = document.getElementById('modal')
+
+        button.addEventListener('click', () => modal.classList.add('scale-100'))
+        closebutton.addEventListener('click', () => modal.classList.remove('scale-100'))
+
+    </script>
 
 @endsection

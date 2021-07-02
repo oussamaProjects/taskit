@@ -33,7 +33,7 @@ Route::delete('categoriesDeleteMulti', 'CategoriesController@deleteMulti');
 // folders
 Route::resource('folders', 'FolderController');
 
-// documents
+// documents 
 Route::resource('documents', 'DocumentsController');
 Route::get('documents/download/{id}', 'DocumentsController@download');
 Route::get('documents/open/{id}', 'DocumentsController@open');

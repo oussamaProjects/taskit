@@ -5,9 +5,11 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Document;
 use App\Category;
+use App\Department;
 use App\Folder;
 use Illuminate\Support\Facades\Storage;
 use DB;
+use Illuminate\Support\Arr;
 
 class DocumentsController extends Controller
 {
@@ -35,11 +37,13 @@ class DocumentsController extends Controller
       // get docs in dept
       $dept_id = auth()->user()->department_id;
 
-      $docs = Document::where('isExpire', '!=', 2)->where('department_id', $dept_id)->where('user_id', '!=', auth()->user()->id)->get();
+      $docs = Document::where('isExpire', '!=', 2)->where('user_id', '!=', auth()->user()->id)->get();
+      // $docs = Document::where('isExpire', '!=', 2)->where('department_id', $dept_id)->where('user_id', '!=', auth()->user()->id)->get();
     }
     $filetype = null;
+    $folders = array();
 
-    return view('documents.index', compact('docs', 'filetype'));
+    return view('documents.index', compact('docs', 'filetype', 'folders'));
   }
 
   // my documents
@@ -62,8 +66,9 @@ class DocumentsController extends Controller
   {
     $categories = Category::pluck('name', 'id')->all();
     $folders = Folder::pluck('name', 'id')->all();
+    $depts = Department::all();
 
-    return view('documents.create', compact('categories', 'folders'));
+    return view('documents.create', compact('categories', 'folders', 'depts'));
   }
 
   /**
@@ -74,6 +79,14 @@ class DocumentsController extends Controller
    */
   public function store(Request $request)
   {
+
+    $depts = Department::all();
+    $permissions = [];
+
+    foreach ($depts as $dep) {
+      $permissions[] = $request->input('permissions_' . $dep->id);
+    }
+
     $this->validate($request, [
       'name' => 'required|string|max:255',
       'description' => 'required|string|max:255',
@@ -120,12 +133,27 @@ class DocumentsController extends Controller
       $doc->isExpire = true;
       $doc->expires_at = $request->input('expires_at');
     }
+
     // save to db
     $doc->save();
     // add Category
     $doc->categories()->sync($request->category_id);
     // add Folder
     $doc->folders()->sync($request->folder_id);
+
+    foreach ($permissions as $key => $permission) {
+      if ($permission !== null) {
+        $perms = explode('_', $permission[0]);
+        // echo '<pre>';
+        // var_dump($perms);
+        // var_dump($doc->id);
+        // echo '</pre>';
+        $doc->department()->attach($doc->id, [
+          'department_id' => $perms[0],
+          'permission_for' => ($perms[1] != 'all') ? 1 : 0
+        ]);
+      }
+    }
 
     \Log::addToLog('New Document, ' . $request->input('name') . ' was uploaded');
 
@@ -141,8 +169,70 @@ class DocumentsController extends Controller
   public function show($id)
   {
     $doc = Document::findOrFail($id);
+    $user = auth()->user();
 
-    return view('documents.show', compact('doc'));
+    $permission = DB::table('departments')
+      ->leftJoin('document_departement', 'document_departement.department_id', 'departments.id')
+      ->where('document_departement.document_id', '=', $id)
+      ->where('document_departement.department_id', '=', $user->department_id)
+      ->distinct()
+      ->get();
+
+    // if (!$user->hasRole('Root')) {
+    //   // var_dump($user->department_id);
+    //   // var_dump($id);
+    //   // var_dump($permission[0]->permission_for);
+    //   if (!is_null($permission)) {
+    //     if ($user->hasRole('Admin')) {
+    //       if ($permission[0]->permission_for == 1 || $permission[0]->permission_for == 0)
+    //         return view('documents.show', compact('doc'));
+    //       else
+    //         return redirect('/documents')->with('Do not have acces to view this file', 'File Uploaded');
+    //     } else if ($user->hasRole('User')) {
+    //       if ($permission[0]->permission_for == 0)
+    //         return view('documents.show', compact('doc'));
+    //       else
+    //         return redirect('/documents')->with('Do not have acces to view this file', 'File Uploaded');
+    //     } else
+    //       return redirect('/documents')->with('Do not have acces to view this file', 'File Uploaded');
+    //   }
+    // } 
+
+    if ($this->has_permission($id, $user))
+      return view('documents.show', compact('doc'));
+    else
+      return redirect('/documents')->with('success', 'You can not see this document');
+  }
+
+  function has_permission($id, $user)
+  {
+    $permission = DB::table('departments')
+      ->leftJoin('document_departement', 'document_departement.department_id', 'departments.id')
+      ->where('document_departement.document_id', '=', $id)
+      ->where('document_departement.department_id', '=', $user->department_id)
+      ->distinct()
+      ->get();
+    if (!$user->hasRole('Root')) {
+      // var_dump($user->department_id);
+      // var_dump($id);
+      // var_dump($permission[0]->permission_for);
+      if (isset($permission[0]) && !is_null($permission[0])) {
+        if ($user->hasRole('Admin')) {
+          if ($permission[0]->permission_for == 1 || $permission[0]->permission_for == 0)
+            return true;
+          else
+            return false;
+        } else if ($user->hasRole('User')) {
+          if ($permission[0]->permission_for == 0)
+            return true;
+          else
+            return false;
+        } else
+          return false;
+      }
+    }
+
+    return true;
   }
 
   /**
@@ -153,11 +243,35 @@ class DocumentsController extends Controller
    */
   public function edit($id)
   {
-    $doc = Document::findOrFail($id);
-    $categories = Category::pluck('name', 'id')->all();
-    $folders = Folder::pluck('name', 'id')->all();
+    $doc                = Document::findOrFail($id);
+    $selectedCategories = $doc->categories->pluck('id');
+    $selectedFolders    = $doc->folders->pluck('id');
 
-    return view('documents.edit', compact('doc', 'categories', 'folders'));
+    $categories         = Category::pluck('name', 'id')->all();
+    $folders            = Folder::pluck('name', 'id')->all();
+    $depts              = Department::all();
+
+
+    // dd($depts);
+    $document_departement = 0;
+
+    foreach ($depts as $key => $dept) {
+
+      $dp = DB::table('document_departement')
+        ->select('document_departement.document_id', 'document_departement.department_id', 'document_departement.permission_for')
+        ->where('document_departement.document_id', '=', $id)
+        ->where('document_departement.department_id', '=', $dept['id'])
+        ->get()
+        ->toArray();
+
+      if (isset($dp) && !empty($dp)) {
+        $document_departement = $dp[0];
+        $dept['permission_for'] = isset($document_departement->permission_for) ? $document_departement->permission_for : 0;
+      }
+    }
+
+    // dd($depts);
+    return view('documents.edit', compact('doc', 'categories', 'folders', 'depts', 'selectedCategories', 'selectedFolders'));
   }
 
   /**
@@ -169,6 +283,9 @@ class DocumentsController extends Controller
    */
   public function update(Request $request, $id)
   {
+    $depts = Department::all();
+    $permissions = [];
+
     $this->validate($request, [
       'name' => 'required|string|max:255',
       'description' => 'required|string|max:255'
@@ -186,6 +303,30 @@ class DocumentsController extends Controller
       $doc->expires_at = $request->input('expires_at');
     }
     $doc->save();
+
+    // add Category
+    $doc->categories()->sync($request->category_id);
+    // add Folder
+    $doc->folders()->sync($request->folder_id);
+
+    foreach ($depts as $dep) {
+      $permissions[] = $request->input('permissions_' . $dep->id);
+    }
+
+    $doc->department()->detach();
+    foreach ($permissions as $key => $permission) {
+      if ($permission !== null) {
+
+        $perms = explode('_', $permission[0]);
+
+
+        // $doc->department()->sync($perms[0]);
+        $doc->department()->attach($doc->id, [
+          'department_id' => $perms[0],
+          'permission_for' => ($perms[1] != 'all') ? 1 : 0
+        ]);
+      }
+    }
 
     \Log::addToLog('Document ID ' . $id . ' was edited');
 
@@ -287,9 +428,10 @@ class DocumentsController extends Controller
   {
     $filetype = $request->input('filetype');
 
-    $docs = Document::where('mimetype', $filetype)->get();
+    $folders  = array();
+    $docs     = Document::where('mimetype', $filetype)->get();
 
-    return view('documents.index', compact('docs', 'filetype'));
+    return view('documents.index', compact('docs', 'filetype', 'folders'));
   }
 
   public function trash()

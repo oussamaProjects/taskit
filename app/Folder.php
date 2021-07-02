@@ -17,4 +17,9 @@ class Folder extends Model
     {
         return $this->belongsToMany('App\Document');
     }
+
+    public function children()
+    {
+        return $this->hasMany('App\Folder', 'parent_id');
+    }
 }
