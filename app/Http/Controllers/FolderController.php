@@ -21,8 +21,8 @@ class FolderController extends Controller
      */
     public function index()
     {
-        $folders        = Folder::where('parent_id', '=', '0')->get();
-        $folders_input  = Folder::pluck('name', 'id')->all();
+        $folders = Folder::where('parent_id', '=', '0')->get();
+        $folders_input = Folder::pluck('name', 'id')->all();
 
         $folders_ = DB::table('folders as f1')
             ->leftJoin('folders as f2', 'f2.parent_id', '=', 'f1.id')
@@ -31,7 +31,6 @@ class FolderController extends Controller
             ->select('f1.id as f1_id', 'f1.name as f1_name', 'f2.id as f2_id', 'f2.name as f2_name', 'f3.id as f3_id', 'f3.name as f3_name', 'f4.id  as f4_id', 'f4.name as f4_name')
             ->where('f1.parent_id', '=', 0)
             ->get();
-
 
         $all_folders = [];
         $folder_f1_id = '';
@@ -49,19 +48,19 @@ class FolderController extends Controller
                 $all_folders[$f1_id]['name'] = $folder->f1_name;
                 $f2_id = -1;
             }
-            if ($folder->f2_id != $folder_f2_id && $folder->f2_id <> NULL) {
+            if ($folder->f2_id != $folder_f2_id && $folder->f2_id != null) {
                 $f2_id = $f2_id + 1;
                 $all_folders[$f1_id]['children'][$f2_id]['id'] = $folder->f2_id;
                 $all_folders[$f1_id]['children'][$f2_id]['name'] = $folder->f2_name;
                 $f3_id = -1;
             }
-            if ($folder->f3_id != $folder_f3_id && $folder->f3_id <> NULL) {
+            if ($folder->f3_id != $folder_f3_id && $folder->f3_id != null) {
                 $f3_id = $f3_id + 1;
                 $all_folders[$f1_id]['children'][$f2_id]['children'][$f3_id]['id'] = $folder->f3_id;
                 $all_folders[$f1_id]['children'][$f2_id]['children'][$f3_id]['name'] = $folder->f3_name;
                 $f4_id = -1;
             }
-            if ($folder->f4_id != $folder_f4_id && $folder->f3_id <> NULL) {
+            if ($folder->f4_id != $folder_f4_id && $folder->f3_id != null) {
                 $f4_id = $f4_id + 1;
                 $all_folders[$f1_id]['children'][$f2_id]['children'][$f3_id]['children'][$f4_id]['id'] = $folder->f4_id;
                 $all_folders[$f1_id]['children'][$f2_id]['children'][$f3_id]['children'][$f4_id]['name'] = $folder->f4_name;
@@ -95,7 +94,7 @@ class FolderController extends Controller
     public function store(Request $request)
     {
         $this->validate($request, [
-            'name' => 'required'
+            'name' => 'required',
         ]);
 
         $folder = new Folder;
@@ -108,7 +107,7 @@ class FolderController extends Controller
         $folder->department_id = $department_id;
         // dd($request->input('folder_parent_id'));
 
-        $folder->parent_id = $request->input('folder_parent_id')[0];
+        $folder->parent_id = isset($request->input('folder_parent_id')[0]) ? $request->input('folder_parent_id')[0] : 0;
 
         // save to db
         $folder->save();
@@ -122,7 +121,7 @@ class FolderController extends Controller
     public function search(Request $request)
     {
         $this->validate($request, [
-            'search' => 'required|string'
+            'search' => 'required|string',
         ]);
 
         $srch = strtolower($request->input('search'));
@@ -147,10 +146,10 @@ class FolderController extends Controller
      */
     public function show(Folder $folder)
     {
-        $folders            = Folder::where('parent_id', '=', $folder->id)->get();
-        $folders_input      = Folder::pluck('name', 'id')->all();
-        $docs               = $folder->documents()->get();
-        $filetype           = '';
+        $folders = Folder::where('parent_id', '=', $folder->id)->get();
+        $folders_input = Folder::pluck('name', 'id')->all();
+        $docs = $folder->documents()->get();
+        $filetype = '';
 
         return view('folders.show', compact('docs', 'folder', 'folders', 'folders_input', 'filetype'));
     }
@@ -178,7 +177,7 @@ class FolderController extends Controller
     public function update(Request $request, $id)
     {
         $this->validate($request, [
-            'name' => 'string|required'
+            'name' => 'string|required',
         ]);
 
         $folder = Folder::findOrFail($id);

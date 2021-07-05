@@ -38,7 +38,8 @@
             </form>
 
             <div class="flex">
-                <button class="flex btn red waves-effect waves-light right delete_all"
+                <button
+                    class="flex text-white bg-gray-900 border-0 py-2 px-6 focus:outline-none hover:bg-indigo-600 rounded ml-auto mr-4"
                     data-url="{{ url('documentsDeleteMulti') }}">
                     <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24"
                         stroke="currentColor">
@@ -51,7 +52,8 @@
                 </button>
                 &nbsp;
                 @can('upload')
-                    <a href="/documents/create" class="btn waves-effect waves-light right flex ml-4">
+                    <a href="/documents/create"
+                        class="flex text-white bg-gray-900 border-0 py-2 px-6 focus:outline-none hover:bg-indigo-600 rounded ml-auto">
                         <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24"
                             stroke="currentColor">
                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
@@ -65,13 +67,13 @@
     </div>
 
     <div class="ml-14 mb-14 md:ml-64">
-        <div class="grid grid-cols-1 sm:grid-cols-4 md:grid-cols-4 lg:grid-cols-6 p-4 gap-4">
+        <div class="grid grid-cols-4 sm:grid-cols-4 md:grid-cols-4 lg:grid-cols-6 p-4 gap-4">
             @if (count($docs) > 0)
                 @foreach ($docs as $doc)
                     <div id="tr_{{ $doc->id }}">
 
                         <div data-id="{{ $doc->id }}"
-                            class="max-w-xs mx-auto overflow-hidden bg-white shadow-lg dark:bg-gray-800 relative">
+                            class="max-w-xs mx-auto overflow-hidden bg-white shadow-lg dark:bg-gray-900 relative">
 
                             <input type="checkbox" class="filled-in sub_chk absolute m-4" id="chk_{{ $doc->id }}"
                                 data-id="{{ $doc->id }}">
@@ -145,7 +147,7 @@
             @if (count($folders) > 0)
                 @foreach ($folders as $fold)
                     <div data-id="{{ $fold->id }}"
-                        class="max-w-xs mx-auto overflow-hidden bg-white rounded-lg shadow-lg dark:bg-gray-800">
+                        class="max-w-xs mx-auto overflow-hidden bg-white rounded-lg shadow-lg dark:bg-gray-900">
                         {{-- <img class="object-cover w-full h-56"
                             src="https://images.unsplash.com/photo-1542156822-6924d1a71ace?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=500&q=60"
                             alt="avatar"> --}}
@@ -161,9 +163,6 @@
             @endif
 
         </div>
-    </div>
-
-    <div class="ml-14 mb-4 md:ml-64">
 
         <!-- Statistics Cards -->
         <div class="grid grid-cols-1 sm:grid-cols-1 lg:grid-cols-1 p-4 gap-4">
@@ -185,9 +184,9 @@
                             <th class="px-4 py-3 title-font tracking-wider font-medium text-gray-900 text-sm bg-gray-100">
                                 Propriétaire
                             </th>
-                            <th class="px-4 py-3 title-font tracking-wider font-medium text-gray-900 text-sm bg-gray-100">
+                            {{-- <th class="px-4 py-3 title-font tracking-wider font-medium text-gray-900 text-sm bg-gray-100">
                                 Département
-                            </th>
+                            </th> --}}
                             <th class="px-4 py-3 title-font tracking-wider font-medium text-gray-900 text-sm bg-gray-100">
                                 Téléchargé à
                             </th>
@@ -212,7 +211,7 @@
                                     </td>
                                     <td class="px-4 py-3">{{ $doc->name }}</td>
                                     <td class="px-4 py-3">{{ $doc->user->name }}</td>
-                                    <td class="px-4 py-3">{{ $doc->user->department['dptName'] }}</td>
+                                    {{-- <td class="px-4 py-3">{{ $doc->user->department['dptName'] }}</td> --}}
                                     <td class="px-4 py-3">{{ $doc->created_at->toDayDateTimeString() }}</td>
                                     <td class="px-4 py-3 text-lg text-gray-900">
                                         @if ($doc->isExpire)

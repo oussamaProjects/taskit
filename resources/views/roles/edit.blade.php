@@ -20,7 +20,7 @@
 
             <div class="rounded-t mb-0 px-0 border-0">
                 <div
-                    class="relative flex flex-col min-w-0 mb-4 lg:mb-0 break-words bg-gray-50 dark:bg-gray-800 w-full shadow-lg rounded p-4">
+                    class="relative flex flex-col min-w-0 mb-4 lg:mb-0 break-words bg-gray-50 dark:bg-gray-900 w-full shadow-lg rounded p-4">
                     <div class="rounded-t mb-0 px-0 border-0">
                         {!! Form::open(['action' => ['RolesController@update', $role->id], 'method' => 'PUT']) !!}
 
@@ -28,8 +28,8 @@
                             <div class="text-semibold text-lg">Assign Roles With Permissions</div>
 
                             <div class="mb-5 relative">
-                                <label for="role" class="leading-7 text-sm text-gray-600">Role</label>
-                                {{ Form::text('name', $role->name, ['id' => 'role', 'class' => 'w-full bg-gray-100 bg-opacity-50 border border-gray-300 focus:border-indigo-500 focus:bg-white focus:ring-2 focus:ring-indigo-200 text-base outline-none text-gray-700 py-1 px-3 leading-8 transition-colors duration-200 ease-in-out']) }}
+                                <label for="role" class="peer-placeholder-shown:opacity-100 opacity-75 peer-focus:opacity-75 peer-placeholder-shown:scale-100 scale-75 peer-focus:scale-75 peer-placeholder-shown:translate-y-0 -translate-y-3 peer-focus:-translate-y-3 peer-placeholder-shown:translate-x-0 translate-x-1 peer-focus:translate-x-1 absolute top-0 left-0 px-3 py-5 h-full pointer-events-none transform origin-left transition-all duration-100 ease-in-out">Role</label>
+                                {{ Form::text('name', $role->name, ['id' => 'role', 'class' => 'peer pt-8 border border-gray-200 focus:outline-none rounded-md focus:border-gray-500 focus:shadow-sm w-full p-3 h-16 placeholder-transparent']) }}
                             </div>
                         </div>
 
@@ -45,7 +45,7 @@
                         </div>
 
                         <div class="flex">
-                            {{ Form::submit('Assign', ['class' => 'focus:outline-none py-2 px-4 bg-blue-600 text-white bg-opacity-75 ml-auto']) }}
+                            {{ Form::submit('Assign', ['class' => 'focus:outline-none py-2 px-4 bg-gray-900 text-white bg-opacity-75 ml-auto']) }}
                         </div>
 
                         {!! Form::close() !!}

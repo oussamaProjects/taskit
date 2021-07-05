@@ -16,16 +16,16 @@
 
 
             <div class="mb-5 relative">
-                <label for="name" class="leading-7 text-sm text-gray-600">Nom de fichier</label>
-                {{ Form::text('name', '', ['id' => 'name', 'class' => 'w-full bg-gray-100 bg-opacity-50 border border-gray-300 focus:border-indigo-500 focus:bg-white focus:ring-2 focus:ring-indigo-200 text-base outline-none text-gray-700 py-1 px-3 leading-8 transition-colors duration-200 ease-in-out']) }}
+                <label for="name" class="peer-placeholder-shown:opacity-100 opacity-75 peer-focus:opacity-75 peer-placeholder-shown:scale-100 scale-75 peer-focus:scale-75 peer-placeholder-shown:translate-y-0 -translate-y-3 peer-focus:-translate-y-3 peer-placeholder-shown:translate-x-0 translate-x-1 peer-focus:translate-x-1 absolute top-0 left-0 px-3 py-5 h-full pointer-events-none transform origin-left transition-all duration-100 ease-in-out">Nom de fichier</label>
+                {{ Form::text('name', '', ['id' => 'name', 'class' => 'peer pt-8 border border-gray-200 focus:outline-none rounded-md focus:border-gray-500 focus:shadow-sm w-full p-3 h-16 placeholder-transparent']) }}
                 @if ($errors->has('name'))
                     <span class="red-text"><strong>{{ $errors->first('name') }}</strong></span>
                 @endif
             </div>
 
             <div class="mb-5 relative">
-                <label for="name" class="leading-7 text-sm text-gray-600">Description</label>
-                {{ Form::textarea('description', '', ['id' => 'description', 'class' => 'w-full bg-gray-100 bg-opacity-50 border border-gray-300 focus:border-indigo-500 focus:bg-white focus:ring-2 focus:ring-indigo-200 text-base outline-none text-gray-700 py-1 px-3 leading-8 transition-colors duration-200 ease-in-out']) }}
+                <label for="name" class="peer-placeholder-shown:opacity-100 opacity-75 peer-focus:opacity-75 peer-placeholder-shown:scale-100 scale-75 peer-focus:scale-75 peer-placeholder-shown:translate-y-0 -translate-y-3 peer-focus:-translate-y-3 peer-placeholder-shown:translate-x-0 translate-x-1 peer-focus:translate-x-1 absolute top-0 left-0 px-3 py-5 h-full pointer-events-none transform origin-left transition-all duration-100 ease-in-out">Description</label>
+                {{ Form::textarea('description', '', ['id' => 'description', 'class' => 'peer pt-8 border border-gray-200 focus:outline-none rounded-md focus:border-gray-500 focus:shadow-sm w-full p-3 h-16 placeholder-transparent']) }}
                 @if ($errors->has('description'))
                     <span class="red-text"><strong>{{ $errors->first('description') }}</strong></span>
                 @endif
@@ -33,12 +33,12 @@
 
             <div class="mb-5 relative hidden">
                 {{ Form::checkbox('isExpire', 1, true, ['id' => 'isExpire']) }}
-                <label for="name" class="leading-7 text-sm text-gray-600">Does Not Expire</label>
+                <label for="name" class="peer-placeholder-shown:opacity-100 opacity-75 peer-focus:opacity-75 peer-placeholder-shown:scale-100 scale-75 peer-focus:scale-75 peer-placeholder-shown:translate-y-0 -translate-y-3 peer-focus:-translate-y-3 peer-placeholder-shown:translate-x-0 translate-x-1 peer-focus:translate-x-1 absolute top-0 left-0 px-3 py-5 h-full pointer-events-none transform origin-left transition-all duration-100 ease-in-out">Does Not Expire</label>
             </div>
 
             <div class="mb-5 relative">
                 <label class="block text-left" style="max-width: 300px;">
-                    <span class="leading-7 text-sm text-gray-600">Category (Optional)</span>
+                    <span class="peer-placeholder-shown:opacity-100 opacity-75 peer-focus:opacity-75 peer-placeholder-shown:scale-100 scale-75 peer-focus:scale-75 peer-placeholder-shown:translate-y-0 -translate-y-3 peer-focus:-translate-y-3 peer-placeholder-shown:translate-x-0 translate-x-1 peer-focus:translate-x-1 absolute top-0 left-0 px-3 py-5 h-full pointer-events-none transform origin-left transition-all duration-100 ease-in-out">Category (Optional)</span>
                     {{ Form::select('category_id[]', $categories, null, ['multiple' => 'multiple', 'id' => 'category', 'class' => 'form-multiselect block w-full mt-1']) }}
                     @if ($errors->has('category'))
                         <span class="red-text"><strong>{{ $errors->first('category') }}</strong></span>
@@ -48,7 +48,7 @@
 
             <div class="mb-5 relative">
                 <label class="block text-left" style="max-width: 300px;">
-                    <span class="leading-7 text-sm text-gray-600">Folder (Optional)</span>
+                    <span class="peer-placeholder-shown:opacity-100 opacity-75 peer-focus:opacity-75 peer-placeholder-shown:scale-100 scale-75 peer-focus:scale-75 peer-placeholder-shown:translate-y-0 -translate-y-3 peer-focus:-translate-y-3 peer-placeholder-shown:translate-x-0 translate-x-1 peer-focus:translate-x-1 absolute top-0 left-0 px-3 py-5 h-full pointer-events-none transform origin-left transition-all duration-100 ease-in-out">Folder (Optional)</span>
                     {{ Form::select('folder_id[]', $folders, null, ['multiple' => 'multiple', 'id' => 'folder', 'class' => 'form-multiselect block w-full mt-1']) }}
                     @if ($errors->has('folder'))
                         <span class="red-text"><strong>{{ $errors->first('folder') }}</strong></span>
@@ -100,7 +100,7 @@
 
             <div class="mb-5 relative">
                 <p class="center">
-                    {{ Form::submit('Save', ['class' => 'text-white bg-indigo-500 border-0 py-2 px-6 focus:outline-none hover:bg-indigo-600 text-lg']) }}
+                    {{ Form::submit('Save', ['class' => 'text-white bg-gray-900 border-0 py-2 px-6 focus:outline-none hover:bg-indigo-600 text-lg']) }}
                 </p>
             </div>
         </div>

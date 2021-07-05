@@ -38,7 +38,7 @@
             background-color: rgba(243, 244, 246);
         }
 
-        .dark .dark\:bg-gray-600 {
+        .dark .dark\:bg-gray-900 {
             background-color: rgba(75, 85, 99);
         }
 
@@ -46,7 +46,7 @@
             background-color: rgba(55, 65, 81);
         }
 
-        .dark .dark\:bg-gray-800 {
+        .dark .dark\:bg-gray-900 {
             background-color: rgba(31, 41, 55);
         }
 
@@ -66,7 +66,7 @@
             background-color: rgba(229, 231, 235);
         }
 
-        .dark .dark\:hover\:bg-gray-600:hover {
+        .dark .dark\:hover\:bg-gray-900:hover {
             background-color: rgba(75, 85, 99);
         }
 

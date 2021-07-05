@@ -7,7 +7,7 @@
         <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 p-4 gap-4">
             <a href="/documents">
                 <div
-                    class="bg-blue-500 dark:bg-gray-800 shadow-lg rounded-md flex items-center justify-between p-3 border-b-4 border-blue-600 dark:border-gray-600 text-white font-medium group">
+                    class="bg-blue-500 dark:bg-gray-900 shadow-lg rounded-md flex items-center justify-between p-3 border-b-4 border-bg-gray-900 dark:border-gray-600 text-white font-medium group">
                     <div
                         class="flex justify-center items-center w-14 h-14 bg-white rounded-full transition-all duration-300 transform group-hover:rotate-12">
                         <svg width="30" height="30" fill="none" viewBox="0 0 24 24" stroke="currentColor"
@@ -25,7 +25,7 @@
             </a>
             <a href="/users">
                 <div
-                    class="bg-blue-500 dark:bg-gray-800 shadow-lg rounded-md flex items-center justify-between p-3 border-b-4 border-blue-600 dark:border-gray-600 text-white font-medium group">
+                    class="bg-blue-500 dark:bg-gray-900 shadow-lg rounded-md flex items-center justify-between p-3 border-b-4 border-bg-gray-900 dark:border-gray-600 text-white font-medium group">
                     <div
                         class="flex justify-center items-center w-14 h-14 bg-white rounded-full transition-all duration-300 transform group-hover:rotate-12">
                         <svg width="30" height="30" fill="none" viewBox="0 0 24 24" stroke="currentColor"
@@ -42,7 +42,7 @@
             </a>
             <a href="/departments">
                 <div
-                    class="bg-blue-500 dark:bg-gray-800 shadow-lg rounded-md flex items-center justify-between p-3 border-b-4 border-blue-600 dark:border-gray-600 text-white font-medium group">
+                    class="bg-blue-500 dark:bg-gray-900 shadow-lg rounded-md flex items-center justify-between p-3 border-b-4 border-bg-gray-900 dark:border-gray-600 text-white font-medium group">
                     <div
                         class="flex justify-center items-center w-14 h-14 bg-white rounded-full transition-all duration-300 transform group-hover:rotate-12">
                         <svg width="30" height="30" fill="none" viewBox="0 0 24 24" stroke="currentColor"
@@ -59,7 +59,7 @@
             </a>
             <a href="/roles">
                 <div
-                    class="bg-blue-500 dark:bg-gray-800 shadow-lg rounded-md flex items-center justify-between p-3 border-b-4 border-blue-600 dark:border-gray-600 text-white font-medium group">
+                    class="bg-blue-500 dark:bg-gray-900 shadow-lg rounded-md flex items-center justify-between p-3 border-b-4 border-bg-gray-900 dark:border-gray-600 text-white font-medium group">
                     <div
                         class="flex justify-center items-center w-14 h-14 bg-white rounded-full transition-all duration-300 transform group-hover:rotate-12">
                         <svg width="30" height="30" fill="none" viewBox="0 0 24 24" stroke="currentColor"
@@ -79,7 +79,7 @@
 
             <a href="/logs">
                 <div
-                    class="bg-blue-500 dark:bg-gray-800 shadow-lg rounded-md flex items-center justify-between p-3 border-b-4 border-blue-600 dark:border-gray-600 text-white font-medium group">
+                    class="bg-blue-500 dark:bg-gray-900 shadow-lg rounded-md flex items-center justify-between p-3 border-b-4 border-bg-gray-900 dark:border-gray-600 text-white font-medium group">
                     <div
                         class="flex justify-center items-center w-14 h-14 bg-white rounded-full transition-all duration-300 transform group-hover:rotate-12">
                         <svg width="30" height="30" fill="none" viewBox="0 0 24 24" stroke="currentColor"
@@ -99,7 +99,7 @@
 
             <a href="/categories">
                 <div
-                    class="bg-blue-500 dark:bg-gray-800 shadow-lg rounded-md flex items-center justify-between p-3 border-b-4 border-blue-600 dark:border-gray-600 text-white font-medium group">
+                    class="bg-blue-500 dark:bg-gray-900 shadow-lg rounded-md flex items-center justify-between p-3 border-b-4 border-bg-gray-900 dark:border-gray-600 text-white font-medium group">
                     <div
                         class="flex justify-center items-center w-14 h-14 bg-white rounded-full transition-all duration-300 transform group-hover:rotate-12">
                         <svg width="30" height="30" fill="none" viewBox="0 0 24 24" stroke="currentColor"

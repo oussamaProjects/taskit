@@ -19,7 +19,8 @@ class BackupController extends Controller
     	$disk = Storage::disk('local');
 
         // $files = $disk->files('http---localhost');
-        $files = $disk->files('http---127.0.0.1-8000');
+        $files = $disk->files('doccenter');
+    
         $backups = [];
         // make an array of backup files, with their filesize and creation date
         foreach ($files as $k => $f) {
@@ -60,7 +61,7 @@ class BackupController extends Controller
     {
         $disk = Storage::disk('local');
         // $file_name = 'http---localhost/' . request()->input('file_name');
-        $file_name = 'http---127.0.0.1-8000/' . request()->input('file_name');
+        $file_name = '/' . request()->input('file_name');
         $adapter = $disk->getDriver()->getAdapter();
 
         $storage_path = $disk->getDriver()->getAdapter()->getPathPrefix();
@@ -81,7 +82,7 @@ class BackupController extends Controller
     {
         $disk = Storage::disk('local');
         // $file_name = 'http---localhost/' . request()->input('file_name');
-        $file_name = 'http---127.0.0.1-8000/' . request()->input('file_name');
+        $file_name = '/' . request()->input('file_name');
 
         if ($disk->exists($file_name))
         {

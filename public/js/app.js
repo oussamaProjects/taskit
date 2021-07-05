@@ -115,8 +115,8 @@
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-__webpack_require__(/*! C:\laragon\www\app-mydadje\resources\assets\js\app.js */"./resources/assets/js/app.js");
-module.exports = __webpack_require__(/*! C:\laragon\www\app-mydadje\resources\assets\css\app.css */"./resources/assets/css/app.css");
+__webpack_require__(/*! C:\laragon\www\mydadje\resources\assets\js\app.js */"./resources/assets/js/app.js");
+module.exports = __webpack_require__(/*! C:\laragon\www\mydadje\resources\assets\css\app.css */"./resources/assets/css/app.css");
 
 
 /***/ })

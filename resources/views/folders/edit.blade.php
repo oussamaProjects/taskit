@@ -8,27 +8,29 @@
     <div class="h-full ml-14 mt-14 mb-10 md:ml-64">
         <div class="grid grid-cols-1 lg:grid-cols-1 p-4 gap-4">
             <div
-                class="relative flex flex-col min-w-0 mb-4 lg:mb-0 break-words bg-gray-50 dark:bg-gray-800 w-full shadow-lg rounded">
+                class="relative flex flex-col min-w-0 mb-4 lg:mb-0 break-words bg-gray-50 dark:bg-gray-900 w-full shadow-lg rounded">
                 <div class="rounded-t mb-0 px-0 border-0">
                     <div class="flex flex-wrap items-center px-4 py-2">
                         <div class="relative w-full max-w-full flex-grow flex-1">
                             <h3 class="font-semibold text-base text-gray-900 dark:text-gray-50">
-                                Categories
+                                Modifier un dossier
                             </h3>
                         </div>
                         <div class="relative w-full max-w-full flex-grow flex-1 text-right">
                             <button id="buttonmodal" data-target="modal1"
-                                class="bg-blue-500 dark:bg-gray-100 text-white active:bg-blue-600 dark:text-gray-800 dark:active:text-gray-700 text-xs font-bold uppercase px-3 py-2 rounded-sm outline-none focus:outline-none mr-1 mb-1 ease-linear transition-all duration-150"
-                                type="button">Ajouter un nouveau</button>
+                                class="flex text-white bg-gray-900 border-0 py-2 px-6 focus:outline-none hover:bg-indigo-600 rounded ml-auto"
+                                type="button">Ajouter un dossiers</button>
                         </div>
                     </div>
                 </div>
             </div>
         </div>
 
-        <div class="bg-gray-100 py-6 flex flex-col justify-center sm:py-12">
-            <div class="relative py-3 w-11/12 max-w-xl sm:mx-auto">
-                <div class="relative p-8 bg-white shadow-sm  ">
+       
+        <div class="grid grid-cols-3 sm:grid-cols-3 lg:grid-cols-3 p-4 gap-4">
+            <div class="col-span-2">
+
+                <div class="flex items-center p-4 gap-4">
                     {!! Form::open(['action' => ['FolderController@update', $folder->id], 'method' => 'PATCH', 'class' => 'w-full']) !!}
 
 
@@ -39,10 +41,11 @@
                             Nom de dossier
                         </label>
                     </div>
-                    {{ Form::submit('Sauvegarder les modifications', ['class' => 'w-full bg-indigo-600 text-white p-3 rounded-md']) }}
+                    {{ Form::submit('Sauvegarder les modifications', ['class' => 'flex text-white bg-gray-900 border-0 py-2 px-6 focus:outline-none hover:bg-indigo-600 rounded']) }}
                     {!! Form::close() !!}
                 </div>
             </div>
+            <img src="{{ asset('img/undraw_Add_files_re_v09g.svg') }}" alt="">
         </div>
     </div>
 
@@ -71,7 +74,7 @@
                         Nom de dossier
                     </label>
                 </div>
-                {{ Form::submit('Sauvegarder les modifications', ['class' => 'w-full bg-indigo-600 text-white p-3 rounded-md']) }}
+                {{ Form::submit('Sauvegarder les modifications', ['class' => 'flex text-white bg-gray-900 border-0 py-2 px-6 focus:outline-none hover:bg-indigo-600 rounded']) }}
                 {!! Form::close() !!}
             </div>
         </div>
