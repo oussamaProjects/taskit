@@ -49,7 +49,7 @@ class DepartmentsController extends Controller
 
         \Log::addToLog('New department '.$request->input('dptName').' was added');
 
-        return redirect('/departments')->with('success','Department Added');
+        return redirect('/departments')->with('success','Le département a été ajouté avec succès !' );
     }
 
     /**
@@ -95,7 +95,7 @@ class DepartmentsController extends Controller
 
         \Log::addToLog('Department ID '.$id.' was edited');
 
-        return redirect('/departments')->with('success','Department Updated');
+        return redirect('/departments')->with('success','Le département a été mis à jour avec succès !');
     }
 
     /**
@@ -111,6 +111,6 @@ class DepartmentsController extends Controller
 
         \Log::addToLog('Department ID '.$id.' was deleted');
 
-        return redirect('/departments')->with('success','Department Deleted');
+        return redirect('/departments')->with('success','Le département a été supprimé avec succès !');
     }
 }

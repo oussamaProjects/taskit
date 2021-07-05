@@ -51,9 +51,9 @@ class BackupController extends Controller
             // log the results
             \Log::addToLog('Created a backup');
 
-            return redirect('/backup')->with('success','Backup Created');
+            return redirect('/backup')->with('success','La sauvegarde a été créée avec succès !');
         } catch (Exception $e) {
-            return redirect('/backup')->with('error','Backup Failed');
+            return redirect('/backup')->with('error','Échec de la création de la sauvegarde');
         }
     }
 
@@ -89,7 +89,7 @@ class BackupController extends Controller
             $disk->delete($file_name);
             \Log::addToLog('Backup File Deleted');
 
-            return redirect('/backup')->with('success','Backup File Deleted');
+            return redirect('/backup')->with('success','La sauvegarde a été supprimé avec succès !');
         } else {
             return redirect('/backup')->with('error','404 File Not Found');
         }

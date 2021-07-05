@@ -93,7 +93,7 @@ class ProfileController extends Controller
         $user->email = $request->input('email');
         $user->save();
 
-        return redirect('/profile')->with('success','Profile Updated');
+        return redirect('/profile')->with('success','Le profil a été mis à ajour avec succès !');
     }
 
     public function changePassword(Request $request) {
@@ -108,7 +108,7 @@ class ProfileController extends Controller
             $user->password = $request->input('new_password');
             $user->save();
 
-            return redirect('/profile')->with('success','Password Successfully Changed');
+            return redirect('/profile')->with('success','Le profil a été changé avec succès !');
         } else {
             return redirect()->back()->withErrors('Current Password is incorrect!');
         }

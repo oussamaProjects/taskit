@@ -157,7 +157,7 @@ class DocumentsController extends Controller
 
     \Log::addToLog('New Document, ' . $request->input('name') . ' was uploaded');
 
-    return redirect('/documents')->with('success', 'File Uploaded');
+    return redirect('/documents')->with('success', 'Le fichier a été téléchargé avec succès !');
   }
 
   /**
@@ -201,7 +201,7 @@ class DocumentsController extends Controller
     if ($this->has_permission($id, $user))
       return view('documents.show', compact('doc'));
     else
-      return redirect('/documents')->with('success', 'You can not see this document');
+      return redirect('/documents')->with('success', 'Vous ne pouvez pas voir ce document');
   }
 
   function has_permission($id, $user)
@@ -330,7 +330,7 @@ class DocumentsController extends Controller
 
     \Log::addToLog('Document ID ' . $id . ' was edited');
 
-    return redirect('/documents')->with('success', 'Successfully Updated!');
+    return redirect('/documents')->with('success', 'Le fichier a été mis à jour avec succès !');
   }
 
   /**
@@ -351,7 +351,7 @@ class DocumentsController extends Controller
 
     \Log::addToLog('Document ID ' . $id . ' was deleted');
 
-    return redirect('/documents')->with('success', 'Deleted!');
+    return redirect('/documents')->with('success', 'Le fichier a été supprimé avec succès !');
   }
 
   // delete multiple docs selected
@@ -362,7 +362,7 @@ class DocumentsController extends Controller
 
     \Log::addToLog('Selected Documents Are Deleted!');
 
-    return redirect('/documents')->with('success', 'Selected Documents Deleted!');
+    return redirect('/documents')->with('success', 'Les documents sélectionnés ont été supprimés !');
   }
 
   // opening file
@@ -418,8 +418,7 @@ class DocumentsController extends Controller
       if (strpos($lower, $srch) !== false) {
         $results[$i] = Document::where('name', $names[$i])->get();
       }
-    }
-
+    } 
     return view('documents.results', compact('results'));
   }
 
@@ -468,6 +467,6 @@ class DocumentsController extends Controller
     $restoreDoc->expires_at = null;
     $restoreDoc->save();
 
-    return redirect()->back()->with('success', 'Successfully Restored!');
+    return redirect()->back()->with('success', 'Le fichier a été restauré avec succès !');
   }
 }

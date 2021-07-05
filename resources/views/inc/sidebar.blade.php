@@ -37,7 +37,7 @@
                     </span>
                     <span class="ml-2 text-sm tracking-wide truncate">Documents</span>
                     <span
-                        class="hidden md:block px-2 py-0.5 ml-auto text-xs font-medium tracking-wide text-blue-500 bg-indigo-50 rounded-full">New</span>
+                        class="hidden  px-2 py-0.5 ml-auto text-xs font-medium tracking-wide text-blue-500 bg-indigo-50 rounded-full">New</span>
                 </a>
             </li>
 
@@ -103,7 +103,7 @@
                     </span>
                     <span class="ml-2 text-sm tracking-wide truncate">Departments</span>
                     <span
-                        class="hidden md:block px-2 py-0.5 ml-auto text-xs font-medium tracking-wide text-red-500 bg-red-50 rounded-full">1.2k</span>
+                        class="hidden  px-2 py-0.5 ml-auto text-xs font-medium tracking-wide text-red-500 bg-red-50 rounded-full">1.2k</span>
                 </a>
             </li>
             @endhasrole
@@ -122,7 +122,7 @@
                     </span>
                     <span class="ml-2 text-sm tracking-wide truncate">My Documents</span>
                     <span
-                        class="hidden md:block px-2 py-0.5 ml-auto text-xs font-medium tracking-wide text-red-500 bg-red-50 rounded-full">1.2k</span>
+                        class="hidden  px-2 py-0.5 ml-auto text-xs font-medium tracking-wide text-red-500 bg-red-50 rounded-full">1.2k</span>
                 </a>
             </li>
             @endhasrole

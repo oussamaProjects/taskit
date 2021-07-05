@@ -114,7 +114,7 @@ class FolderController extends Controller
 
         \Log::addToLog('New folder ' . $request->input('name') . ' was added');
 
-        return redirect('/folders')->with('success', 'Folder Added');
+        return redirect('/folders')->with('success', 'Le dossier a été ajouté avec succès !');
     }
 
     // searching
@@ -186,7 +186,7 @@ class FolderController extends Controller
 
         \Log::addToLog('Folder ID ' . $id . ' was edited');
 
-        return redirect('folders')->with('success', 'Folder Updated!');
+        return redirect('folders')->with('success', 'Le dossier a été mis à ajour avec succès !');
     }
 
     /**
@@ -205,6 +205,6 @@ class FolderController extends Controller
 
         \Log::addToLog('Folder ID ' . $id . ' was deleted');
 
-        return redirect('/folders')->with('success', 'Folder Deleted');
+        return redirect('/folders')->with('success', 'Le dossier a été spprimé avec succès !');
     }
 }
