@@ -1,0 +1,8 @@
+/* ./resources/css/app.css */
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+.header-right {
+    width: calc(100% - 16rem);
+}
