@@ -11,16 +11,16 @@ class BackupController extends Controller
 {
     public function __construct()
     {
-    	return $this->middleware(['auth','role:Root']);
+        return $this->middleware(['auth', 'role:Root']);
     }
 
     public function index()
     {
-    	$disk = Storage::disk('local');
+        $disk = Storage::disk('local');
 
         // $files = $disk->files('http---localhost');
         $files = $disk->files('doccenter');
-    
+
         $backups = [];
         // make an array of backup files, with their filesize and creation date
         foreach ($files as $k => $f) {
@@ -38,7 +38,7 @@ class BackupController extends Controller
         // reverse the backups, so the newest one would be on top
         $backups = array_reverse($backups);
 
-    	return view('pages.backup', compact('backups'));
+        return view('pages.backup', compact('backups'));
     }
 
     public function create()
@@ -51,9 +51,9 @@ class BackupController extends Controller
             // log the results
             \Log::addToLog('Created a backup');
 
-            return redirect('/backup')->with('success','La sauvegarde a été créée avec succès !');
+            return redirect('/backup')->with('success', 'La sauvegarde a été créée avec succès !');
         } catch (Exception $e) {
-            return redirect('/backup')->with('error','Échec de la création de la sauvegarde');
+            return redirect('/backup')->with('failure', 'Échec de la création de la sauvegarde');
         }
     }
 
@@ -66,12 +66,11 @@ class BackupController extends Controller
 
         $storage_path = $disk->getDriver()->getAdapter()->getPathPrefix();
 
-        if ($disk->exists($file_name))
-        {
+        if ($disk->exists($file_name)) {
             \Log::addToLog('Backup File Downloaded');
-            return response()->download($storage_path.$file_name);
+            return response()->download($storage_path . $file_name);
         } else {
-            return redirect('/backup')->with('error','404 File Not Found');
+            return redirect('/backup')->with('failure', '404 File Not Found');
         }
     }
 
@@ -84,14 +83,13 @@ class BackupController extends Controller
         // $file_name = 'http---localhost/' . request()->input('file_name');
         $file_name = '/' . request()->input('file_name');
 
-        if ($disk->exists($file_name))
-        {
+        if ($disk->exists($file_name)) {
             $disk->delete($file_name);
             \Log::addToLog('Backup File Deleted');
 
-            return redirect('/backup')->with('success','La sauvegarde a été supprimé avec succès !');
+            return redirect('/backup')->with('success', 'La sauvegarde a été supprimé avec succès !');
         } else {
-            return redirect('/backup')->with('error','404 File Not Found');
+            return redirect('/backup')->with('failure', '404 File Not Found');
         }
     }
 }

@@ -7,12 +7,11 @@
     <div class="h-full ml-14 mt-14 mb-10 md:ml-64">
 
         <div class="grid grid-cols-1 lg:grid-cols-1 p-4 gap-4">
-            <div
-                class="relative flex flex-col min-w-0 mb-4 lg:mb-0 break-words bg-gray-50 dark:bg-gray-900 w-full shadow-lg rounded">
+            <div class="relative flex flex-col min-w-0 mb-4 lg:mb-0 break-words bg-gray-50   w-full shadow-md rounded">
                 <div class="rounded-t mb-0 px-0 border-0">
                     <div class="flex flex-wrap items-center px-4 py-4">
                         <div class="relative w-full max-w-full flex-grow flex-1">
-                            <h3 class="font-semibold text-base text-gray-900 dark:text-gray-50">
+                            <h3 class="font-semibold text-base text-2xl text-gray-900">
                                 Dossiers
                             </h3>
                         </div>
@@ -32,18 +31,19 @@
                     <div class="grid grid-cols-1 sm:grid-cols-4 md:grid-cols-4 lg:grid-cols-6 p-4 gap-4">
                         @foreach ($folders as $folder)
                             <div id="tr_{{ $folder->id }}"
-                                class="overflow-hidden bg-white shadow-md px-4 py-4 dark:bg-gray-900 relative">
+                                class="overflow-hidden bg-white shadow-md px-4 py-4   relative">
                                 <div class="" data-id="{{ $folder->id }}">
                                     <a href="/folders/{{ $folder->id }}">
                                         <div class="center">
-                                            <svg xmlns="http://www.w3.org/2000/svg" class="h-12 w-12 mx-auto my-4"
+                                            <svg xmlns="http://www.w3.org/2000/svg" class="h-10 w-10 mx-auto my-4"
                                                 fill="none" viewBox="0 0 24 24" stroke="currentColor">
                                                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
                                                     d="M5 19a2 2 0 01-2-2V7a2 2 0 012-2h4l2 2h4a2 2 0 012 2v1M5 19h14a2 2 0 002-2v-5a2 2 0 00-2-2H9a2 2 0 00-2 2v5a2 2 0 01-2 2z" />
                                             </svg>
                                             <h6
-                                                class="text-gray-900 text-lg mb-1 font-medium title-font text-center capitalize">
-                                                {{ $folder->name }}</h6>
+                                                class="text-gray-900 text-md mb-1 font-medium title-font text-center capitalize">
+                                                {{ $folder->name }}
+                                            </h6>
                                         </div>
                                     </a>
                                 </div>
@@ -56,7 +56,7 @@
         @endif
 
         <div class="grid grid-cols-1 lg:grid-cols-1 p-4 gap-4">
-            <div class="relative flex flex-col min-w-0 mb-4 lg:mb-0 break-words bg-gray-50 dark:bg-gray-900 w-full shadow-lg rounded">
+            <div class="relative flex flex-col min-w-0 mb-4 lg:mb-0 break-words bg-gray-50   w-full shadow-md rounded">
                 <div class="rounded-t mb-0 px-0 border-0">
 
                     <div class="block w-full overflow-x-auto">
@@ -64,13 +64,13 @@
                             <thead>
                                 <tr>
                                     <th
-                                        class="px-4 bg-gray-100 dark:bg-gray-900 text-gray-500 dark:text-gray-100 align-middle border border-solid border-gray-200 dark:border-gray-500 py-3 text-xs uppercase border-l-0 border-r-0 whitespace-nowrap font-semibold text-left">
+                                        class="px-4 bg-gray-100   text-gray-500 align-middle border border-solid border-gray-200 py-3 text-xs uppercase border-l-0 border-r-0 whitespace-nowrap font-semibold text-left">
                                     </th>
                                     <th
-                                        class="px-4 bg-gray-100 dark:bg-gray-900 text-gray-500 dark:text-gray-100 align-middle border border-solid border-gray-200 dark:border-gray-500 py-3 text-xs uppercase border-l-0 border-r-0 whitespace-nowrap font-semibold text-left">
+                                        class="px-4 bg-gray-100   text-gray-500 align-middle border border-solid border-gray-200 py-3 text-xs uppercase border-l-0 border-r-0 whitespace-nowrap font-semibold text-left">
                                         Nom du dossier</th>
                                     <th
-                                        class="px-4 bg-gray-100 dark:bg-gray-900 text-gray-500 dark:text-gray-100 align-middle border border-solid border-gray-200 dark:border-gray-500 py-3 text-xs uppercase border-l-0 border-r-0 whitespace-nowrap font-semibold text-left min-w-140-px">
+                                        class="px-4 bg-gray-100   text-gray-500 align-middle border border-solid border-gray-200 py-3 text-xs uppercase border-l-0 border-r-0 whitespace-nowrap font-semibold text-left min-w-140-px">
                                         Actions
                                     </th>
                                 </tr>
@@ -78,7 +78,7 @@
                             <tbody>
                                 @if (count($folders) > 0)
                                     @foreach ($folders as $folder)
-                                        <tr id="tr_{{ $folder->id }}" class="text-gray-700 dark:text-gray-100">
+                                        <tr id="tr_{{ $folder->id }}" class="text-gray-700 ">
                                             <th
                                                 class="border-t-0 px-4 align-middle border-l-0 border-r-0 whitespace-nowrap p-4 text-left">
                                                 <input type="checkbox" id="chk_{{ $folder->id }}" class="sub_chk"
@@ -95,7 +95,7 @@
                                                 {!! Form::open(['action' => ['FolderController@destroy', $folder->id], 'method' => 'DELETE', 'id' => 'form-delete-folders-' . $folder->id, 'class' => 'flex items-center']) !!}
                                                 <a href="#" class="left"><i class="material-icons"></i></a>
                                                 <a href="/folders/{{ $folder->id }}/edit" class="center">
-                                                    <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none"
+                                                    <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 m-1" fill="none"
                                                         viewBox="0 0 24 24" stroke="currentColor">
                                                         <path stroke-linecap="round" stroke-linejoin="round"
                                                             stroke-width="2"
@@ -104,7 +104,7 @@
                                                 </a>
                                                 <a href="" class="right data-delete"
                                                     data-form="folders-{{ $folder->id }}">
-                                                    <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none"
+                                                    <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 m-1" fill="none"
                                                         viewBox="0 0 24 24" stroke="currentColor">
                                                         <path stroke-linecap="round" stroke-linejoin="round"
                                                             stroke-width="2"
@@ -136,11 +136,11 @@
     <div id="modal"
         class="fixed top-0 left-0 w-screen h-screen flex items-center justify-center bg-blue-500 bg-opacity-50 transform scale-0 transition-transform duration-300">
         <!-- Modal content -->
-        <div class="bg-white w-1/2 h-1/3 p-12">
+        <div class="bg-white w-1/2 p-12">
             <!--Close modal button-->
             <button id="closebutton" type="button" class="focus:outline-none float-right">
                 <!-- Hero icon - close button -->
-                <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24"
+                <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 m-1" fill="none" viewBox="0 0 24 24"
                     stroke="currentColor">
                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
                         d="M10 14l2-2m0 0l2-2m-2 2l-2-2m2 2l2 2m7-2a9 9 0 11-18 0 9 9 0 0118 0z" />
@@ -153,12 +153,16 @@
                 {!! Form::open(['action' => 'FolderController@store', 'method' => 'POST', 'class' => '']) !!}
 
                 <div class="mb-5 relative">
-                    <label for="name" class="peer-placeholder-shown:opacity-100 opacity-75 peer-focus:opacity-75 peer-placeholder-shown:scale-100 scale-75 peer-focus:scale-75 peer-placeholder-shown:translate-y-0 -translate-y-3 peer-focus:-translate-y-3 peer-placeholder-shown:translate-x-0 translate-x-1 peer-focus:translate-x-1 absolute top-0 left-0 px-3 py-5 h-full pointer-events-none transform origin-left transition-all duration-100 ease-in-out">Nom de dossier</label>
+                    <label for="name"
+                        class="peer-placeholder-shown:opacity-100 opacity-75 peer-focus:opacity-75 peer-placeholder-shown:scale-100 scale-75 peer-focus:scale-75 peer-placeholder-shown:translate-y-0 -translate-y-3 peer-focus:-translate-y-3 peer-placeholder-shown:translate-x-0 translate-x-1 peer-focus:translate-x-1 absolute top-0 left-0 px-3 py-5 h-full pointer-events-none transform origin-left transition-all duration-100 ease-in-out">Nom
+                        de dossier</label>
                     {{ Form::text('name', '', ['id' => 'name', 'class' => 'peer pt-8 border border-gray-200 focus:outline-none rounded-md focus:border-gray-500 focus:shadow-sm w-full p-3 h-16 placeholder-transparent']) }}
                 </div>
 
                 <div class="mb-5 relative">
-                    <label for="name" class="peer-placeholder-shown:opacity-100 opacity-75 peer-focus:opacity-75 peer-placeholder-shown:scale-100 scale-75 peer-focus:scale-75 peer-placeholder-shown:translate-y-0 -translate-y-3 peer-focus:-translate-y-3 peer-placeholder-shown:translate-x-0 translate-x-1 peer-focus:translate-x-1 absolute top-0 left-0 px-3 py-5 h-full pointer-events-none transform origin-left transition-all duration-100 ease-in-out">Folder Parent</label>
+                    <label for="name"
+                        class="peer-placeholder-shown:opacity-100 opacity-75 peer-focus:opacity-75 peer-placeholder-shown:scale-100 scale-75 peer-focus:scale-75 peer-placeholder-shown:translate-y-0 -translate-y-3 peer-focus:-translate-y-3 peer-placeholder-shown:translate-x-0 translate-x-1 peer-focus:translate-x-1 absolute top-0 left-0 px-3 py-5 h-full pointer-events-none transform origin-left transition-all duration-100 ease-in-out">Dans
+                        le dossier</label>
                     <div class="relative inline-block w-full text-gray-700">
                         {{ Form::select('folder_parent_id[]', $folders_input, $folders_input, ['id' => 'folder', 'class' => 'peer pt-8 border border-gray-200 focus:outline-none rounded-md focus:border-gray-500 focus:shadow-sm w-full p-3 h-16 placeholder-transparent placeholder-gray-600 border appearance-none focus:shadow-outline']) }}
                         <div class="absolute inset-y-0 right-0 flex items-center px-2 pointer-events-none">
@@ -171,14 +175,14 @@
                         </div>
                     </div>
                     @if ($errors->has('folder'))
-                        <span class="red-text"><strong>{{ $errors->first('folder') }}</strong></span>
+                        <span class="text-red-600 text-xs">{{ $errors->first('folder') }}</span>
                     @endif
                 </div>
 
             </div>
 
             <div class="flex">
-                {{ Form::submit('submit', ['class' => 'focus:outline-none py-2 px-4 bg-gray-900 text-white bg-opacity-75 ml-auto']) }}
+                {{ Form::submit('Envoyer', ['class' => 'focus:outline-none py-2 px-4 bg-gray-900 text-white bg-opacity-75 ml-auto']) }}
                 {!! Form::close() !!}
             </div>
 

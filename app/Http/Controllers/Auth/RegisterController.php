@@ -48,7 +48,7 @@ class RegisterController extends Controller
     public function showRegistrationForm()
     {
         $depts = Department::all();
-        return view('auth.register',compact('depts'));
+        return view('auth.register', compact('depts'));
     }
 
     /**
@@ -75,12 +75,6 @@ class RegisterController extends Controller
      */
     protected function create(array $data)
     {
-        dd(User::create([
-            'name' => $data['name'],
-            'email' => $data['email'],
-            'password' => $data['password'],
-            'department_id' => $data['department_id'],
-        ]));
         return User::create([
             'name' => $data['name'],
             'email' => $data['email'],
@@ -92,11 +86,12 @@ class RegisterController extends Controller
     // prevent autologin
     public function register(Request $request)
     {
+
         $this->validator($request->all())->validate();
 
         event(new Registered($user = $this->create($request->all())));
 
         return $this->registered($request, $user)
-                        ?: redirect($this->redirectPath());
+            ?: redirect($this->redirectPath());
     }
 }

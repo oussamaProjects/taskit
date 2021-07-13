@@ -8,12 +8,11 @@
     <div class="h-full ml-14 mt-14 mb-10 md:ml-64">
 
         <div class="grid grid-cols-1 lg:grid-cols-1 p-4 gap-4">
-            <div
-                class="relative flex flex-col min-w-0 mb-4 lg:mb-0 break-words bg-gray-50 dark:bg-gray-900 w-full shadow-lg rounded">
+            <div class="relative flex flex-col min-w-0 mb-4 lg:mb-0 break-words bg-gray-50   w-full shadow-md rounded">
                 <div class="rounded-t mb-0 px-0 border-0">
                     <div class="flex flex-wrap items-center px-4 py-2">
                         <div class="relative w-full max-w-full flex-grow flex-1">
-                            <h3 class="font-semibold text-base text-gray-900 dark:text-gray-50">
+                            <h3 class="font-semibold text-base text-gray-900 ">
                                 Demandes d'enregistrement de compte
                             </h3>
                         </div>
@@ -49,8 +48,8 @@
                                         {!! Form::open(['action' => ['RequestsController@update', $user->id], 'method' => 'PATCH']) !!}
                                         {{ csrf_field() }}
                                         <button type="submit" name="b1">
-                                            <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 text-green-600" fill="none"
-                                                viewBox="0 0 24 24" stroke="currentColor">
+                                            <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 m-1 text-green-600"
+                                                fill="none" viewBox="0 0 24 24" stroke="currentColor">
                                                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
                                                     d="M5 13l4 4L19 7" />
                                             </svg>
@@ -61,8 +60,8 @@
                                         {!! Form::open(['action' => ['UsersController@destroy', $user->id], 'method' => 'DELETE']) !!}
                                         {{ csrf_field() }}
                                         <button type="submit" name="b2">
-                                            <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 text-red-600" fill="none"
-                                                viewBox="0 0 24 24" stroke="currentColor">
+                                            <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 m-1 text-red-600"
+                                                fill="none" viewBox="0 0 24 24" stroke="currentColor">
                                                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
                                                     d="M6 18L18 6M6 6l12 12" />
                                             </svg>
@@ -75,7 +74,7 @@
 
                         @endforeach
                     @else
-                        No Registeration Has Been Requested
+                        Aucune inscription n'a été demandée
                     @endif
                 </div>
             </div>

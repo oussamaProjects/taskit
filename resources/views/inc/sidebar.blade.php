@@ -1,17 +1,17 @@
 <!-- Sidebar -->
 <div
-    class="fixed flex flex-col top-14 left-0 w-14 hover:w-64 md:w-64 bg-gray-900 dark:bg-gray-900 h-full text-white transition-all duration-300 border-none z-10 sidebar">
+    class="fixed flex flex-col top-14 left-0 w-14 hover:w-64 md:w-64 bg-gray-900   h-full text-white transition-all duration-300 border-none z-10 sidebar">
     <div class="overflow-y-auto overflow-x-hidden flex flex-col justify-between flex-grow">
         <ul class="flex flex-col py-4 space-y-1">
             <li class="px-5 hidden md:block">
                 <div class="flex flex-row items-center h-8">
-                    <div class="text-sm font-light tracking-wide text-gray-400 uppercase">Main</div>
+                    <div class="text-sm font-light tracking-wide text-gray-400 uppercase">Principal</div>
                 </div>
             </li>
 
             <li>
                 <a href="/shared"
-                    class="relative flex flex-row items-center h-11 focus:outline-none hover:bg-gray-900 dark:hover:bg-gray-900 text-white-600 hover:text-white-800 border-l-4 border-transparent hover:border-blue-500 dark:hover:border-gray-800 pr-6">
+                    class="relative flex flex-row items-center h-11 focus:outline-none hover:bg-gray-900 text-white-600 hover:text-white-800 border-l-4 border-transparent hover:border-blue-500 pr-6">
                     <span class="inline-flex justify-center items-center ml-4">
                         <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"
                             xmlns="http://www.w3.org/2000/svg">
@@ -20,13 +20,13 @@
                             </path>
                         </svg>
                     </span>
-                    <span class="ml-2 text-sm tracking-wide truncate">Share</span>
+                    <span class="ml-2 text-sm tracking-wide truncate">Documents partagés</span>
                 </a>
             </li>
 
             <li>
                 <a href="/documents"
-                    class="relative flex flex-row items-center h-11 focus:outline-none hover:bg-gray-900 dark:hover:bg-gray-900 text-white-600 hover:text-white-800 border-l-4 border-transparent hover:border-blue-500 dark:hover:border-gray-800 pr-6">
+                    class="relative flex flex-row items-center h-11 focus:outline-none hover:bg-gray-900 text-white-600 hover:text-white-800 border-l-4 border-transparent hover:border-blue-500 pr-6">
                     <span class="inline-flex justify-center items-center ml-4">
                         <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"
                             xmlns="http://www.w3.org/2000/svg">
@@ -44,7 +44,7 @@
             @hasanyrole('Root|Admin')
             <li>
                 <a href="/categories"
-                    class="relative flex flex-row items-center h-11 focus:outline-none hover:bg-gray-900 dark:hover:bg-gray-900 text-white-600 hover:text-white-800 border-l-4 border-transparent hover:border-blue-500 dark:hover:border-gray-800 pr-6">
+                    class="relative flex flex-row items-center h-11 focus:outline-none hover:bg-gray-900 text-white-600 hover:text-white-800 border-l-4 border-transparent hover:border-blue-500 pr-6">
                     <span class="inline-flex justify-center items-center ml-4">
                         <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"
                             xmlns="http://www.w3.org/2000/svg">
@@ -53,13 +53,13 @@
                             </path>
                         </svg>
                     </span>
-                    <span class="ml-2 text-sm tracking-wide truncate">Categories</span>
+                    <span class="ml-2 text-sm tracking-wide truncate">Catégories</span>
                 </a>
             </li>
 
             <li>
                 <a href="/folders"
-                    class="relative flex flex-row items-center h-11 focus:outline-none hover:bg-gray-900 dark:hover:bg-gray-900 text-white-600 hover:text-white-800 border-l-4 border-transparent hover:border-blue-500 dark:hover:border-gray-800 pr-6">
+                    class="relative flex flex-row items-center h-11 focus:outline-none hover:bg-gray-900 text-white-600 hover:text-white-800 border-l-4 border-transparent hover:border-blue-500 pr-6">
                     <span class="inline-flex justify-center items-center ml-4">
                         <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"
                             xmlns="http://www.w3.org/2000/svg">
@@ -68,7 +68,7 @@
                             </path>
                         </svg>
                     </span>
-                    <span class="ml-2 text-sm tracking-wide truncate">Folders</span>
+                    <span class="ml-2 text-sm tracking-wide truncate">Dossiers</span>
                 </a>
             </li>
             @endhasanyrole
@@ -76,7 +76,7 @@
             @hasrole('Root')
             <li>
                 <a href="/users"
-                    class="relative flex flex-row items-center h-11 focus:outline-none hover:bg-gray-900 dark:hover:bg-gray-900 text-white-600 hover:text-white-800 border-l-4 border-transparent hover:border-blue-500 dark:hover:border-gray-800 pr-6">
+                    class="relative flex flex-row items-center h-11 focus:outline-none hover:bg-gray-900 text-white-600 hover:text-white-800 border-l-4 border-transparent hover:border-blue-500 pr-6">
                     <span class="inline-flex justify-center items-center ml-4">
                         <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"
                             xmlns="http://www.w3.org/2000/svg">
@@ -85,14 +85,14 @@
                             </path>
                         </svg>
                     </span>
-                    <span class="ml-2 text-sm tracking-wide truncate">Users</span>
+                    <span class="ml-2 text-sm tracking-wide truncate">Utilisateurs</span>
                 </a>
             </li>
 
 
             <li>
                 <a href="/departments"
-                    class="relative flex flex-row items-center h-11 focus:outline-none hover:bg-gray-900 dark:hover:bg-gray-900 text-white-600 hover:text-white-800 border-l-4 border-transparent hover:border-blue-500 dark:hover:border-gray-800 pr-6">
+                    class="relative flex flex-row items-center h-11 focus:outline-none hover:bg-gray-900 text-white-600 hover:text-white-800 border-l-4 border-transparent hover:border-blue-500 pr-6">
                     <span class="inline-flex justify-center items-center ml-4">
                         <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"
                             xmlns="http://www.w3.org/2000/svg">
@@ -111,7 +111,7 @@
             @hasrole('User')
             <li>
                 <a href="/mydocuments"
-                    class="relative flex flex-row items-center h-11 focus:outline-none hover:bg-gray-900 dark:hover:bg-gray-900 text-white-600 hover:text-white-800 border-l-4 border-transparent hover:border-blue-500 dark:hover:border-gray-800 pr-6">
+                    class="relative flex flex-row items-center h-11 focus:outline-none hover:bg-gray-900 text-white-600 hover:text-white-800 border-l-4 border-transparent hover:border-blue-500 pr-6">
                     <span class="inline-flex justify-center items-center ml-4">
                         <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"
                             xmlns="http://www.w3.org/2000/svg">
@@ -120,7 +120,7 @@
                             </path>
                         </svg>
                     </span>
-                    <span class="ml-2 text-sm tracking-wide truncate">My Documents</span>
+                    <span class="ml-2 text-sm tracking-wide truncate">Mes documents</span>
                     <span
                         class="hidden  px-2 py-0.5 ml-auto text-xs font-medium tracking-wide text-red-500 bg-red-50 rounded-full">1.2k</span>
                 </a>
@@ -130,13 +130,13 @@
             @hasrole('Root')
             <li class="px-5 hidden md:block">
                 <div class="flex flex-row items-center mt-5 h-8">
-                    <div class="text-sm font-light tracking-wide text-gray-400 uppercase">Settings</div>
+                    <div class="text-sm font-light tracking-wide text-gray-400 uppercase">Paramètres</div>
                 </div>
             </li>
 
             <li>
                 <a href="/backup"
-                    class="relative flex flex-row items-center h-11 focus:outline-none hover:bg-gray-900 dark:hover:bg-gray-900 text-white-600 hover:text-white-800 border-l-4 border-transparent hover:border-blue-500 dark:hover:border-gray-800 pr-6">
+                    class="relative flex flex-row items-center h-11 focus:outline-none hover:bg-gray-900 text-white-600 hover:text-white-800 border-l-4 border-transparent hover:border-blue-500 pr-6">
                     <span class="inline-flex justify-center items-center ml-4">
                         <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"
                             xmlns="http://www.w3.org/2000/svg">
@@ -150,7 +150,7 @@
 
             <li>
                 <a href="/roles"
-                    class="relative flex flex-row items-center h-11 focus:outline-none hover:bg-gray-900 dark:hover:bg-gray-900 text-white-600 hover:text-white-800 border-l-4 border-transparent hover:border-blue-500 dark:hover:border-gray-800 pr-6">
+                    class="relative flex flex-row items-center h-11 focus:outline-none hover:bg-gray-900 text-white-600 hover:text-white-800 border-l-4 border-transparent hover:border-blue-500 pr-6">
                     <span class="inline-flex justify-center items-center ml-4">
                         <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"
                             xmlns="http://www.w3.org/2000/svg">
@@ -158,13 +158,13 @@
                                 d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z"></path>
                         </svg>
                     </span>
-                    <span class="ml-2 text-sm tracking-wide truncate">Roles</span>
+                    <span class="ml-2 text-sm tracking-wide truncate">Les rôles</span>
                 </a>
             </li>
 
             <li>
                 <a href="/logs"
-                    class="relative flex flex-row items-center h-11 focus:outline-none hover:bg-gray-900 dark:hover:bg-gray-900 text-white-600 hover:text-white-800 border-l-4 border-transparent hover:border-blue-500 dark:hover:border-gray-800 pr-6">
+                    class="relative flex flex-row items-center h-11 focus:outline-none hover:bg-gray-900 text-white-600 hover:text-white-800 border-l-4 border-transparent hover:border-blue-500 pr-6">
                     <span class="inline-flex justify-center items-center ml-4">
                         <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"
                             xmlns="http://www.w3.org/2000/svg">
@@ -175,7 +175,7 @@
                                 d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"></path>
                         </svg>
                     </span>
-                    <span class="ml-2 text-sm tracking-wide truncate">Logs</span>
+                    <span class="ml-2 text-sm tracking-wide truncate">Journaux d'accès</span>
                 </a>
             </li>
             @endhasrole

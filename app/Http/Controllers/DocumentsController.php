@@ -201,7 +201,7 @@ class DocumentsController extends Controller
     if ($this->has_permission($id, $user))
       return view('documents.show', compact('doc'));
     else
-      return redirect('/documents')->with('success', 'Vous ne pouvez pas voir ce document');
+      return redirect('/documents')->with('failure', 'Vous ne pouvez pas voir ce document');
   }
 
   function has_permission($id, $user)
@@ -418,7 +418,7 @@ class DocumentsController extends Controller
       if (strpos($lower, $srch) !== false) {
         $results[$i] = Document::where('name', $names[$i])->get();
       }
-    } 
+    }
     return view('documents.results', compact('results'));
   }
 

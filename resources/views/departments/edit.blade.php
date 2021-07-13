@@ -8,12 +8,11 @@
     <div class="h-full ml-14 mt-14 mb-10 md:ml-64">
 
         <div class="grid grid-cols-1 lg:grid-cols-1 p-4 gap-4">
-            <div
-                class="relative flex flex-col min-w-0 mb-4 lg:mb-0 break-words bg-gray-50 dark:bg-gray-900 w-full shadow-lg rounded">
+            <div class="relative flex flex-col min-w-0 mb-4 lg:mb-0 break-words bg-gray-50   w-full shadow-md rounded">
                 <div class="rounded-t mb-0 px-0 border-0">
                     <div class="flex flex-wrap items-center px-4 py-2">
                         <div class="relative w-full max-w-full flex-grow flex-1">
-                            <h3 class="font-semibold text-base text-gray-900 dark:text-gray-50">
+                            <h3 class="font-semibold text-base text-gray-900 ">
                                 Modifier le département
                             </h3>
                         </div>
@@ -38,7 +37,7 @@
                             du département</label>
                         {{ Form::text('dptName', $dept->dptName, ['class' => 'peer pt-8 border border-gray-200 focus:outline-none rounded-md focus:border-gray-500 focus:shadow-sm w-full p-3 h-16 placeholder-transparent', 'id' => 'department']) }}
                     </div>
-                    {{ Form::submit('Save Changes', ['class' => 'flex text-white bg-gray-900 border-0 py-2 px-6 focus:outline-none hover:bg-indigo-600 rounded']) }}
+                    {{ Form::submit(' Sauvegarder', ['class' => 'flex text-white bg-gray-900 border-0 py-2 px-6 focus:outline-none hover:bg-indigo-600 rounded']) }}
                     {!! Form::close() !!}
 
                 </div>
@@ -71,7 +70,7 @@
                         du département</label>
                     {{ Form::text('dptName', '', ['class' => 'peer pt-8 border border-gray-200 focus:outline-none rounded-md focus:border-gray-500 focus:shadow-sm w-full p-3 h-16 placeholder-transparent', 'id' => 'dptName']) }}
                 </div>
-                {{ Form::submit('Submit', ['class' => 'flex text-white bg-gray-900 border-0 py-2 px-6 focus:outline-none hover:bg-indigo-600 rounded']) }}
+                {{ Form::submit('Envoyer', ['class' => 'flex text-white bg-gray-900 border-0 py-2 px-6 focus:outline-none hover:bg-indigo-600 rounded']) }}
                 {!! Form::close() !!}
             </div>
         </div>

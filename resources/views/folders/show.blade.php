@@ -8,21 +8,9 @@
         <!-- Statistics Cards -->
         <div class="flex p-4 gap-4">
 
-            <form action="/search" method="post" id="search-form"
-                class="bg-white   flex items-center w-full max-w-xl  4 p-2">
-                {{ csrf_field() }}
-                <button class="outline-none focus:outline-none">
-                    <svg class="w-5 text-gray-600 h-5 cursor-pointer" fill="none" stroke-linecap="round"
-                        stroke-linejoin="round" stroke-width="2" stroke="currentColor" viewBox="0 0 24 24">
-                        <path d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"></path>
-                    </svg>
-                </button>
-                <input type="text" name="search" id="search" placeholder="Search Here ..."
-                    class="w-full pl-3 text-sm text-black outline-none focus:outline-none bg-transparent" />
-            </form>
-
-            <button id="buttonmodal" class="flex text-white bg-gray-900 border-0 py-2 px-6 focus:outline-none hover:bg-indigo-600 rounded ml-auto">
-               Ajouter un dossiers
+            <button id="buttonmodal"
+                class="flex text-white bg-gray-900 border-0 py-2 px-6 focus:outline-none hover:bg-indigo-600 rounded ml-auto">
+                Ajouter un dossiers
             </button>
 
             @can('upload')
@@ -30,22 +18,28 @@
 
         </div>
 
+        <div class="my-1 px-4 ">
+            <h6 class="text-gray-900 text-5xl font-semibold capitalize text-center ">
+                {{ $folder->name }}
+            </h6>
+        </div>
+
         @if (count($folders) > 0)
 
             <div class="grid grid-cols-1 sm:grid-cols-4 md:grid-cols-4 lg:grid-cols-6 p-4 gap-4">
                 @foreach ($folders as $folder)
-                    <div id="tr_{{ $folder->id }}"
-                        class="overflow-hidden bg-white shadow-md px-4 py-4 dark:bg-gray-900 relative">
+                    <div id="tr_{{ $folder->id }}" class="overflow-hidden bg-white shadow-md px-4 py-4   relative">
                         <div class="" data-id="{{ $folder->id }}">
                             <a href="/folders/{{ $folder->id }}">
                                 <div class="center">
-                                    <svg xmlns="http://www.w3.org/2000/svg" class="h-12 w-12 mx-auto my-4" fill="none"
+                                    <svg xmlns="http://www.w3.org/2000/svg" class="h-10 w-10 mx-auto my-4" fill="none"
                                         viewBox="0 0 24 24" stroke="currentColor">
                                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
                                             d="M5 19a2 2 0 01-2-2V7a2 2 0 012-2h4l2 2h4a2 2 0 012 2v1M5 19h14a2 2 0 002-2v-5a2 2 0 00-2-2H9a2 2 0 00-2 2v5a2 2 0 01-2 2z" />
                                     </svg>
                                     <h6 class="text-gray-900 text-lg mb-1 font-medium title-font text-center capitalize">
-                                        {{ $folder->name }}</h6>
+                                        {{ $folder->name }}
+                                    </h6>
                                 </div>
                             </a>
                         </div>
@@ -55,13 +49,12 @@
         @endif
 
         <div class="grid grid-cols-1 lg:grid-cols-1 p-4 gap-4">
-            <div
-                class="relative flex flex-col min-w-0 mb-4 lg:mb-0 break-words bg-gray-50 pt-8 dark:bg-gray-900 w-full shadow-lg rounded">
+            <div class="min-w-0 mb-4 lg:mb-0 break-words pt-8 w-full rounded">
                 <div class="rounded-t mb-0 px-0 border-0">
                     <div class="flex flex-col text-center w-full mb-6">
-                        <h1 class="sm:text-4xl text-3xl font-medium title-font mb-2 text-gray-900">Documents</h1>
+                        <h1 class="sm:text-2xl text-xl font-medium title-font mb-2 text-gray-900">Documents</h1>
                     </div>
-                    <div class="block w-full overflow-x-auto">
+                    <div class="block w-full overflow-x-auto shadow">
                         <table class="items-center w-full bg-transparent border-collapse">
                             <thead>
                                 <tr>
@@ -105,22 +98,23 @@
                                                     data-id="{{ $doc->id }}">
                                                 <label for="chk_{{ $doc->id }}"></label>
                                             </td>
-                                            <td class="px-4 py-3">{{ $doc->name }}</td>
-                                            <td class="px-4 py-3">{{ $doc->user->name }}</td>
-                                            <td class="px-4 py-3">{{ $doc->user->department['dptName'] }}</td>
-                                            <td class="px-4 py-3">{{ $doc->created_at->toDayDateTimeString() }}</td>
-                                            <td class="px-4 py-3 text-lg text-gray-900">
+                                            <td class="px-4 py-3 text-sm">{{ $doc->name }}</td>
+                                            <td class="px-4 py-3 text-sm">{{ $doc->user->name }}</td>
+                                            <td class="px-4 py-3 text-sm">{{ $doc->user->department['dptName'] }}</td>
+                                            <td class="px-4 py-3 text-sm">{{ $doc->created_at->toDayDateTimeString() }}
+                                            </td>
+                                            <td class="px-4 py-3 text-sm">
                                                 @if ($doc->isExpire)
                                                     {{ $doc->expires_at }}
                                                 @else
                                                     No Expiration
                                                 @endif
                                             </td>
-                                            <td class="flex items-center px-4 py-3 text-lg text-gray-900 flex">
+                                            <td class="flex items-center px-4 py-3 text-sm flex">
                                                 @can('read')
                                                     {!! Form::open() !!}
                                                     <a href="/documents/{{ $doc->id }}">
-                                                        <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none"
+                                                        <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 m-1" fill="none"
                                                             viewBox="0 0 24 24" stroke="currentColor">
                                                             <path stroke-linecap="round" stroke-linejoin="round"
                                                                 stroke-width="2"
@@ -130,7 +124,7 @@
                                                     {!! Form::close() !!}
                                                     {!! Form::open() !!}
                                                     <a href="/documents/open/{{ $doc->id }}">
-                                                        <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none"
+                                                        <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 m-1" fill="none"
                                                             viewBox="0 0 24 24" stroke="currentColor">
                                                             <path stroke-linecap="round" stroke-linejoin="round"
                                                                 stroke-width="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z" />
@@ -143,7 +137,7 @@
                                                 @endcan
                                                 @can('download')
                                                     <a href="/documents/download/{{ $doc->id }}">
-                                                        <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none"
+                                                        <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 m-1" fill="none"
                                                             viewBox="0 0 24 24" stroke="currentColor">
                                                             <path stroke-linecap="round" stroke-linejoin="round"
                                                                 stroke-width="2"
@@ -155,7 +149,7 @@
                                                 @can('shared')
                                                     {!! Form::open(['action' => ['ShareController@update', $doc->id], 'method' => 'PATCH', 'id' => 'form-share-documents-' . $doc->id]) !!}
                                                     <a href="" class="data-share" data-form="documents-{{ $doc->id }}">
-                                                        <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none"
+                                                        <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 m-1" fill="none"
                                                             viewBox="0 0 24 24" stroke="currentColor">
                                                             <path stroke-linecap="round" stroke-linejoin="round"
                                                                 stroke-width="2"
@@ -167,7 +161,7 @@
                                                 @endcan
                                                 @can('edit')
                                                     <a href="/documents/{{ $doc->id }}/edit">
-                                                        <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none"
+                                                        <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 m-1" fill="none"
                                                             viewBox="0 0 24 24" stroke="currentColor">
                                                             <path stroke-linecap="round" stroke-linejoin="round"
                                                                 stroke-width="2"
@@ -179,7 +173,7 @@
                                                 @can('delete')
                                                     {!! Form::open(['action' => ['DocumentsController@destroy', $doc->id], 'method' => 'DELETE', 'id' => 'form-delete-documents-' . $doc->id]) !!}
                                                     <a href="" class="data-delete" data-form="documents-{{ $doc->id }}">
-                                                        <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none"
+                                                        <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 m-1" fill="none"
                                                             viewBox="0 0 24 24" stroke="currentColor">
                                                             <path stroke-linecap="round" stroke-linejoin="round"
                                                                 stroke-width="2"
@@ -192,10 +186,10 @@
                                         </tr>
                                     @endforeach
                                 @else
-                                    <tr> 
+                                    <tr>
                                         <td colspan="7">
                                             <h5 class="p-6 text-center">Aucun document n'a été téléchargé</h5>
-                                        </td> 
+                                        </td>
                                     </tr>
                                 @endif
 
@@ -211,11 +205,11 @@
     <div id="modal"
         class="fixed top-0 left-0 w-screen h-screen flex items-center justify-center bg-blue-500 bg-opacity-50 transform scale-0 transition-transform duration-300">
         <!-- Modal content -->
-        <div class="bg-white w-1/2 h-1/3 p-12">
+        <div class="bg-white w-1/2 p-12">
             <!--Close modal button-->
             <button id="closebutton" type="button" class="focus:outline-none float-right">
                 <!-- Hero icon - close button -->
-                <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24"
+                <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 m-1" fill="none" viewBox="0 0 24 24"
                     stroke="currentColor">
                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
                         d="M10 14l2-2m0 0l2-2m-2 2l-2-2m2 2l2 2m7-2a9 9 0 11-18 0 9 9 0 0118 0z" />
@@ -224,17 +218,21 @@
 
             <!-- Test content -->
             <div>
-                <h2 class="text-gray-900 text-xl mb-1 font-medium title-font">Add folder</h2>
+                <h2 class="text-gray-900 text-xl mb-1 font-medium title-font">Ajouter le dossier</h2>
 
                 {!! Form::open(['action' => 'FolderController@store', 'method' => 'POST', 'class' => '']) !!}
 
                 <div class="mb-5 relative">
-                    <label for="name" class="peer-placeholder-shown:opacity-100 opacity-75 peer-focus:opacity-75 peer-placeholder-shown:scale-100 scale-75 peer-focus:scale-75 peer-placeholder-shown:translate-y-0 -translate-y-3 peer-focus:-translate-y-3 peer-placeholder-shown:translate-x-0 translate-x-1 peer-focus:translate-x-1 absolute top-0 left-0 px-3 py-5 h-full pointer-events-none transform origin-left transition-all duration-100 ease-in-out">Folder Name</label>
+                    <label for="name"
+                        class="peer-placeholder-shown:opacity-100 opacity-75 peer-focus:opacity-75 peer-placeholder-shown:scale-100 scale-75 peer-focus:scale-75 peer-placeholder-shown:translate-y-0 -translate-y-3 peer-focus:-translate-y-3 peer-placeholder-shown:translate-x-0 translate-x-1 peer-focus:translate-x-1 absolute top-0 left-0 px-3 py-5 h-full pointer-events-none transform origin-left transition-all duration-100 ease-in-out">Nom
+                        de dossier</label>
                     {{ Form::text('name', '', ['id' => 'name', 'class' => 'peer pt-8 border border-gray-200 focus:outline-none rounded-md focus:border-gray-500 focus:shadow-sm w-full p-3 h-16 placeholder-transparent']) }}
                 </div>
 
                 <div class="mb-5 relative">
-                    <label for="name" class="peer-placeholder-shown:opacity-100 opacity-75 peer-focus:opacity-75 peer-placeholder-shown:scale-100 scale-75 peer-focus:scale-75 peer-placeholder-shown:translate-y-0 -translate-y-3 peer-focus:-translate-y-3 peer-placeholder-shown:translate-x-0 translate-x-1 peer-focus:translate-x-1 absolute top-0 left-0 px-3 py-5 h-full pointer-events-none transform origin-left transition-all duration-100 ease-in-out">Folder Parent</label>
+                    <label for="name"
+                        class="peer-placeholder-shown:opacity-100 opacity-75 peer-focus:opacity-75 peer-placeholder-shown:scale-100 scale-75 peer-focus:scale-75 peer-placeholder-shown:translate-y-0 -translate-y-3 peer-focus:-translate-y-3 peer-placeholder-shown:translate-x-0 translate-x-1 peer-focus:translate-x-1 absolute top-0 left-0 px-3 py-5 h-full pointer-events-none transform origin-left transition-all duration-100 ease-in-out">Dans
+                        le dossier</label>
                     <div class="relative inline-block w-full text-gray-700">
                         {{ Form::select('folder_parent_id[]', $folders_input, $folders_input, ['id' => 'folder', 'class' => 'peer pt-8 border border-gray-200 focus:outline-none rounded-md focus:border-gray-500 focus:shadow-sm w-full p-3 h-16 placeholder-transparent placeholder-gray-600 border appearance-none focus:shadow-outline']) }}
                         <div class="absolute inset-y-0 right-0 flex items-center px-2 pointer-events-none">
@@ -247,14 +245,14 @@
                         </div>
                     </div>
                     @if ($errors->has('folder'))
-                        <span class="red-text"><strong>{{ $errors->first('folder') }}</strong></span>
+                        <span class="text-red-600 text-xs">{{ $errors->first('folder') }}</span>
                     @endif
                 </div>
 
             </div>
 
             <div class="flex">
-                {{ Form::submit('submit', ['class' => 'focus:outline-none py-2 px-4 bg-gray-900 text-white bg-opacity-75 ml-auto']) }}
+                {{ Form::submit('Envoyer', ['class' => 'focus:outline-none py-2 px-4 bg-gray-900 text-white bg-opacity-75 ml-auto']) }}
                 {!! Form::close() !!}
             </div>
 

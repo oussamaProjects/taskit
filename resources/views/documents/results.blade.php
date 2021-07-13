@@ -6,41 +6,39 @@
 
     <div class="ml-14 mt-16 mb-4 md:ml-64">
         <div class="flex items-center p-4 gap-1">
-                <button
-                    class="flex text-white bg-gray-900 border-0 py-2 px-6 focus:outline-none hover:bg-indigo-600 rounded ml-auto"
-                    data-url="{{ url('documentsDeleteMulti') }}">
-                    <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24"
+            <button
+                class="flex text-white bg-gray-900 border-0 py-2 px-6 focus:outline-none hover:bg-indigo-600 rounded ml-auto"
+                data-url="{{ url('documentsDeleteMulti') }}">
+                <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 m-1" fill="none" viewBox="0 0 24 24"
+                    stroke="currentColor">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                        d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16" />
+                </svg>
+
+                <span class="ml-2">Supprimer la selection</span>
+
+            </button>
+            &nbsp;
+            @can('upload')
+                <a href="/documents/create"
+                    class="flex text-white bg-gray-900 border-0 py-2 px-6 focus:outline-none hover:bg-indigo-600 rounded">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 m-1" fill="none" viewBox="0 0 24 24"
                         stroke="currentColor">
                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                            d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16" />
+                            d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-8l-4-4m0 0L8 8m4-4v12" />
                     </svg>
-
-                    <span class="ml-2">Supprimer le fichier</span>
-
-                </button>
-                &nbsp;
-                @can('upload')
-                    <a href="/documents/create"
-                        class="flex text-white bg-gray-900 border-0 py-2 px-6 focus:outline-none hover:bg-indigo-600 rounded">
-                        <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24"
-                            stroke="currentColor">
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                                d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-8l-4-4m0 0L8 8m4-4v12" />
-                        </svg>
-                        <span class="ml-2">Ajouter un document</span>
-                    </a>
-                @endcan
+                    <span class="ml-2">Ajouter un document</span>
+                </a>
+            @endcan
         </div>
-
-
 
         <div class="grid grid-cols-1 sm:grid-cols-1 lg:grid-cols-1 p-4 gap-4">
             <div class="flex flex-col text-center w-full mb-6">
-                <h1 class="sm:text-4xl text-3xl font-medium title-font mb-2 text-gray-900">Documents</h1>
+                <h1 class="sm:text-2xl text-xl font-medium title-font mb-2 text-gray-900">Documents</h1>
                 <p class="lg:w-2/3 mx-auto leading-relaxed text-base">{{ count($results) }} Résultats
                 </p>
             </div>
-            <div class="w-full overflow-auto">
+            <div class="w-full">
                 <table class="table-auto w-full text-left whitespace-no-wrap">
                     <thead>
                         <tr>
@@ -78,11 +76,11 @@
                                                 data-id="{{ $doc->id }}">
                                             <label for="chk_{{ $doc->id }}"></label>
                                         </td>
-                                        <td class="px-4 py-3">{{ $doc->name }}</td>
-                                        <td class="px-4 py-3">{{ $doc->user->name }}</td>
-                                        {{-- <td class="px-4 py-3">{{ $doc->user->department['dptName'] }}</td> --}}
-                                        <td class="px-4 py-3">{{ $doc->created_at->toDayDateTimeString() }}</td>
-                                        <td class="px-4 py-3 text-lg text-gray-900">
+                                        <td class="px-4 py-3 text-sm">{{ $doc->name }}</td>
+                                        <td class="px-4 py-3 text-sm">{{ $doc->user->name }}</td>
+                                        {{-- <td class="px-4 py-3 text-sm">{{ $doc->user->department['dptName'] }}</td> --}}
+                                        <td class="px-4 py-3 text-sm">{{ $doc->created_at->toDayDateTimeString() }}</td>
+                                        <td class="px-4 py-3 text-sm">
                                             @if ($doc->isExpire)
                                                 {{ $doc->expires_at }}
                                             @else
@@ -94,7 +92,7 @@
                                                 @can('read')
                                                     {!! Form::open() !!}
                                                     <a href="/documents/{{ $doc->id }}" class="mr-4">
-                                                        <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none"
+                                                        <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 m-1" fill="none"
                                                             viewBox="0 0 24 24" stroke="currentColor">
                                                             <path stroke-linecap="round" stroke-linejoin="round"
                                                                 stroke-width="2"
@@ -104,7 +102,7 @@
                                                     {!! Form::close() !!}
                                                     {!! Form::open() !!}
                                                     <a href="/documents/open/{{ $doc->id }}">
-                                                        <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none"
+                                                        <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 m-1" fill="none"
                                                             viewBox="0 0 24 24" stroke="currentColor">
                                                             <path stroke-linecap="round" stroke-linejoin="round"
                                                                 stroke-width="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z" />
@@ -117,7 +115,7 @@
                                                 @endcan
                                                 @can('download')
                                                     <a href="/documents/download/{{ $doc->id }}">
-                                                        <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none"
+                                                        <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 m-1" fill="none"
                                                             viewBox="0 0 24 24" stroke="currentColor">
                                                             <path stroke-linecap="round" stroke-linejoin="round"
                                                                 stroke-width="2"
@@ -129,7 +127,7 @@
                                                 @can('shared')
                                                     {!! Form::open(['action' => ['ShareController@update', $doc->id], 'method' => 'PATCH', 'id' => 'form-share-documents-' . $doc->id]) !!}
                                                     <a href="" class="data-share" data-form="documents-{{ $doc->id }}">
-                                                        <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none"
+                                                        <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 m-1" fill="none"
                                                             viewBox="0 0 24 24" stroke="currentColor">
                                                             <path stroke-linecap="round" stroke-linejoin="round"
                                                                 stroke-width="2"
@@ -141,7 +139,7 @@
                                                 @endcan
                                                 @can('edit')
                                                     <a href="/documents/{{ $doc->id }}/edit">
-                                                        <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none"
+                                                        <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 m-1" fill="none"
                                                             viewBox="0 0 24 24" stroke="currentColor">
                                                             <path stroke-linecap="round" stroke-linejoin="round"
                                                                 stroke-width="2"
@@ -153,7 +151,7 @@
                                                 @can('delete')
                                                     {!! Form::open(['action' => ['DocumentsController@destroy', $doc->id], 'method' => 'DELETE', 'id' => 'form-delete-documents-' . $doc->id]) !!}
                                                     <a href="" class="data-delete" data-form="documents-{{ $doc->id }}">
-                                                        <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none"
+                                                        <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 m-1" fill="none"
                                                             viewBox="0 0 24 24" stroke="currentColor">
                                                             <path stroke-linecap="round" stroke-linejoin="round"
                                                                 stroke-width="2"

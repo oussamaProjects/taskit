@@ -4,12 +4,12 @@
     @include('inc.sidebar')
 
     <div class="ml-14 mt-20 mb-10 md:ml-64 bg-white">
- 
+
         <div class="grid grid-cols-1 sm:grid-cols-1 lg:grid-cols-1 p-4 gap-4">
             <div class="flex flex-col text-center w-full mb-4">
-                <h1 class="sm:text-4xl text-3xl font-medium title-font mb-2 text-gray-900">Shared Documents</h1>
+                <h1 class="sm:text-2xl text-xl font-medium title-font mb-2 text-gray-900">Documents partagés</h1>
             </div>
-            <div class="w-full overflow-auto">
+            <div class="w-full">
                 <table class="table-auto w-full text-left whitespace-no-wrap">
                     <thead>
                         <tr>
@@ -38,16 +38,15 @@
                         @if (count($shared) > 0)
                             @foreach ($shared as $share)
                                 <tr id="">
-                                    <td class="px-4 py-3">{{ $share->name }}</td>
-                                    <td class="px-4 py-3">{{ $share->user->name }}</td>
-                                    <td class="px-4 py-3">{{ $share->user->department['dptName'] }}</td>
-                                    <td class="px-4 py-3">{{ $share->updated_at->toDayDateTimeString() }}</td>
-                                    <td class="px-4 py-3">{{ $share->created_at->toDayDateTimeString() }}</td>
-                                    <td class="px-4 py-3 text-lg text-gray-900 flex">
-
+                                    <td class="px-4 py-3 text-sm">{{ $share->name }}</td>
+                                    <td class="px-4 py-3 text-sm">{{ $share->user->name }}</td>
+                                    <td class="px-4 py-3 text-sm">{{ $share->user->department['dptName'] }}</td>
+                                    <td class="px-4 py-3 text-sm">{{ $share->updated_at->toDayDateTimeString() }}</td>
+                                    <td class="px-4 py-3 text-sm">{{ $share->created_at->toDayDateTimeString() }}</td>
+                                    <td class="px-4 py-3 text-sm flex">
                                         <a href="documents/open/{{ $share->document_id }}" class="tooltipped"
                                             data-position="left" data-delay="50" data-tooltip="Open">
-                                            <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none"
+                                            <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 m-1" fill="none"
                                                 viewBox="0 0 24 24" stroke="currentColor">
                                                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
                                                     d="M15 12a3 3 0 11-6 0 3 3 0 016 0z" />
@@ -58,15 +57,13 @@
                                         &nbsp;
                                         <a href="documents/download/{{ $share->document_id }}" class="tooltipped"
                                             data-position="left" data-delay="50" data-tooltip="Download">
-                                            <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none"
+                                            <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 m-1" fill="none"
                                                 viewBox="0 0 24 24" stroke="currentColor">
                                                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
                                                     d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4" />
                                             </svg>
                                         </a>
-
                                     </td>
-
                                 </tr>
                             @endforeach
                         @else

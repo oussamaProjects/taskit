@@ -6,43 +6,42 @@
 
     <div class="h-full ml-14 mt-14 mb-10 md:ml-64">
         <div class="grid grid-cols-1 lg:grid-cols-1 p-4 gap-4">
-            <div
-                class="relative flex flex-col min-w-0 mb-4 lg:mb-0 break-words bg-gray-50 dark:bg-gray-900 w-full shadow-lg rounded">
+            <div class="relative flex flex-col min-w-0 mb-4 lg:mb-0 break-words bg-gray-50 w-full shadow-md rounded">
                 <div class="rounded-t mb-0 px-0 border-0">
                     <div class="flex flex-wrap items-center px-4 py-4">
                         <div class="relative w-full max-w-full flex-grow flex-1">
-                            <h3 class="font-semibold text-base text-gray-900 dark:text-gray-50">
-                                Categories
+                            <h3 class="font-semibold text-base text-2xl text-gray-900">
+                                Catégories
                             </h3>
                         </div>
                         <div class="relative w-full max-w-full flex-grow flex-1 text-right">
                             <button id="buttonmodal" data-target="modal1"
                                 class="flex text-white bg-gray-900 border-0 py-2 px-6 focus:outline-none hover:bg-indigo-600 rounded ml-auto"
-                                type="button">Ajouter une categories</button>
+                                type="button">Ajouter une catégorie</button>
                         </div>
                     </div>
                 </div>
             </div>
         </div>
 
-        <div class="grid grid-cols-4 lg:grid-cols-4 p-4 gap-4">
+        <div class="grid grid-cols-4 lg:grid-cols-4 pygap-4">
             <div class="col-span-3">
                 <div class="grid grid-cols-1 lg:grid-cols-1 p-4 gap-4">
                     <div
-                        class="relative flex flex-col min-w-0 mb-4 lg:mb-0 break-words bg-gray-50 dark:bg-gray-900 w-full shadow-lg rounded">
+                        class="relative flex flex-col min-w-0 mb-4 lg:mb-0 break-words bg-gray-50 w-full shadow-md rounded">
                         <div class="rounded-t mb-0 px-0 border-0">
                             <div class="block w-full overflow-x-auto">
                                 <table class="items-center w-full bg-transparent border-collapse">
                                     <thead>
                                         <tr>
                                             <th
-                                                class="px-4 bg-gray-100 dark:bg-gray-900 text-gray-500 dark:text-gray-100 align-middle border border-solid border-gray-200 dark:border-gray-500 py-3 text-xs uppercase border-l-0 border-r-0 whitespace-nowrap font-semibold text-left">
+                                                class="px-4 bg-gray-100   text-gray-500 align-middle border border-solid border-gray-200 py-3 text-xs uppercase border-l-0 border-r-0 whitespace-nowrap font-semibold text-left">
                                             </th>
                                             <th
-                                                class="px-4 bg-gray-100 dark:bg-gray-900 text-gray-500 dark:text-gray-100 align-middle border border-solid border-gray-200 dark:border-gray-500 py-3 text-xs uppercase border-l-0 border-r-0 whitespace-nowrap font-semibold text-left">
+                                                class="px-4 bg-gray-100   text-gray-500 align-middle border border-solid border-gray-200 py-3 text-xs uppercase border-l-0 border-r-0 whitespace-nowrap font-semibold text-left">
                                                 Nom de catégorie</th>
                                             <th
-                                                class="px-4 bg-gray-100 dark:bg-gray-900 text-gray-500 dark:text-gray-100 align-middle border border-solid border-gray-200 dark:border-gray-500 py-3 text-xs uppercase border-l-0 border-r-0 whitespace-nowrap font-semibold text-left min-w-140-px">
+                                                class="px-4 bg-gray-100   text-gray-500 align-middle border border-solid border-gray-200 py-3 text-xs uppercase border-l-0 border-r-0 whitespace-nowrap font-semibold text-left min-w-140-px">
                                                 Actions
                                             </th>
                                         </tr>
@@ -50,7 +49,7 @@
                                     <tbody>
                                         @if (count($categories) > 0)
                                             @foreach ($categories as $category)
-                                                <tr id="tr_{{ $category->id }}" class="text-gray-700 dark:text-gray-100">
+                                                <tr id="tr_{{ $category->id }}" class="text-gray-700 ">
                                                     <th
                                                         class="border-t-0 px-4 align-middle border-l-0 border-r-0 whitespace-nowrap p-4 text-left">
                                                         <input type="checkbox" id="chk_{{ $category->id }}"
@@ -67,7 +66,7 @@
                                                         {!! Form::open(['action' => ['CategoriesController@destroy', $category->id], 'method' => 'DELETE', 'id' => 'form-delete-categories-' . $category->id, 'class' => 'flex items-center']) !!}
                                                         <a href="#" class="left"><i class="material-icons"></i></a>
                                                         <a href="/categories/{{ $category->id }}/edit" class="center">
-                                                            <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6"
+                                                            <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 m-1"
                                                                 fill="none" viewBox="0 0 24 24" stroke="currentColor">
                                                                 <path stroke-linecap="round" stroke-linejoin="round"
                                                                     stroke-width="2"
@@ -76,7 +75,7 @@
                                                         </a>
                                                         <a href="" class="right data-delete"
                                                             data-form="categories-{{ $category->id }}">
-                                                            <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6"
+                                                            <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 m-1"
                                                                 fill="none" viewBox="0 0 24 24" stroke="currentColor">
                                                                 <path stroke-linecap="round" stroke-linejoin="round"
                                                                     stroke-width="2"
@@ -115,7 +114,7 @@
             <!--Close modal button-->
             <button id="closebutton" type="button" class="focus:outline-none float-right">
                 <!-- Hero icon - close button -->
-                <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24"
+                <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 m-1" fill="none" viewBox="0 0 24 24"
                     stroke="currentColor">
                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
                         d="M10 14l2-2m0 0l2-2m-2 2l-2-2m2 2l2 2m7-2a9 9 0 11-18 0 9 9 0 0118 0z" />
@@ -128,14 +127,16 @@
                 {!! Form::open(['action' => 'CategoriesController@store', 'method' => 'POST', 'class' => '']) !!}
 
                 <div class="mb-5 relative">
-                    <label for="name" class="peer-placeholder-shown:opacity-100 opacity-75 peer-focus:opacity-75 peer-placeholder-shown:scale-100 scale-75 peer-focus:scale-75 peer-placeholder-shown:translate-y-0 -translate-y-3 peer-focus:-translate-y-3 peer-placeholder-shown:translate-x-0 translate-x-1 peer-focus:translate-x-1 absolute top-0 left-0 px-3 py-5 h-full pointer-events-none transform origin-left transition-all duration-100 ease-in-out">Nom de dossier</label>
+                    <label for="name"
+                        class="peer-placeholder-shown:opacity-100 opacity-75 peer-focus:opacity-75 peer-placeholder-shown:scale-100 scale-75 peer-focus:scale-75 peer-placeholder-shown:translate-y-0 -translate-y-3 peer-focus:-translate-y-3 peer-placeholder-shown:translate-x-0 translate-x-1 peer-focus:translate-x-1 absolute top-0 left-0 px-3 py-5 h-full pointer-events-none transform origin-left transition-all duration-100 ease-in-out">Nom
+                        de dossier</label>
                     {{ Form::text('name', '', ['id' => 'name', 'class' => 'peer pt-8 border border-gray-200 focus:outline-none rounded-md focus:border-gray-500 focus:shadow-sm w-full p-3 h-16 placeholder-transparent']) }}
                 </div>
 
             </div>
 
             <div class="flex">
-                {{ Form::submit('submit', ['class' => 'focus:outline-none py-2 px-4 bg-gray-900 text-white bg-opacity-75 ml-auto']) }}
+                {{ Form::submit('Envoyer', ['class' => 'focus:outline-none py-2 px-4 bg-gray-900 text-white bg-opacity-75 ml-auto']) }}
                 {!! Form::close() !!}
             </div>
 

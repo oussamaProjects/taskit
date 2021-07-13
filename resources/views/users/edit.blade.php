@@ -6,12 +6,11 @@
 
     <div class="h-full ml-14 mt-14 mb-10 md:ml-64">
         <div class="grid grid-cols-1 lg:grid-cols-1 p-4 gap-4">
-            <div
-                class="relative flex flex-col min-w-0 mb-4 lg:mb-0 break-words bg-gray-50 dark:bg-gray-900 w-full shadow-lg rounded">
+            <div class="relative flex flex-col min-w-0 mb-4 lg:mb-0 break-words bg-gray-50   w-full shadow-md rounded">
                 <div class="rounded-t mb-0 px-0 border-0">
                     <div class="flex flex-wrap items-center px-4 py-2">
                         <div class="relative w-full max-w-full flex-grow flex-1">
-                            <h3 class="font-semibold text-base text-gray-900 dark:text-gray-50">
+                            <h3 class="font-semibold text-base text-gray-900 ">
                                 Utilisateurs
                             </h3>
                         </div>
@@ -32,23 +31,28 @@
                     {{ csrf_field() }}
 
                     <div class="mb-5 relative">
-                        {{ Form::text('name', $user->name, ['class' => 'peer pt-8 border border-gray-200 focus:outline-none rounded-md focus:border-gray-500 focus:shadow-sm w-full p-3 h-16 placeholder-transparent', 'id' => 'name']) }}
                         <label for="name"
                             class="peer-placeholder-shown:opacity-100 opacity-75 peer-focus:opacity-75 peer-placeholder-shown:scale-100 scale-75 peer-focus:scale-75 peer-placeholder-shown:translate-y-0 -translate-y-3 peer-focus:-translate-y-3 peer-placeholder-shown:translate-x-0 translate-x-1 peer-focus:translate-x-1 absolute top-0 left-0 px-3 py-5 h-full pointer-events-none transform origin-left transition-all duration-100 ease-in-out">
                             Current Name
                         </label>
+                        {{ Form::text('name', $user->name, ['class' => 'peer pt-8 border border-gray-200 focus:outline-none rounded-md focus:border-gray-500 focus:shadow-sm w-full p-3 h-16 placeholder-transparent', 'id' => 'name']) }}
+
                     </div>
 
                     <div class="mb-5 relative">
-                        {{ Form::email('email', $user->email, ['class' => 'peer pt-8 border border-gray-200 focus:outline-none rounded-md focus:border-gray-500 focus:shadow-sm w-full p-3 h-16 placeholder-transparent', 'id' => 'email']) }}
                         <label for="email"
                             class="peer-placeholder-shown:opacity-100 opacity-75 peer-focus:opacity-75 peer-placeholder-shown:scale-100 scale-75 peer-focus:scale-75 peer-placeholder-shown:translate-y-0 -translate-y-3 peer-focus:-translate-y-3 peer-placeholder-shown:translate-x-0 translate-x-1 peer-focus:translate-x-1 absolute top-0 left-0 px-3 py-5 h-full pointer-events-none transform origin-left transition-all duration-100 ease-in-out">
-                            Current Email Address
+                            Current Adresse e-mail
                         </label>
+                        {{ Form::email('email', $user->email, ['class' => 'peer pt-8 border border-gray-200 focus:outline-none rounded-md focus:border-gray-500 focus:shadow-sm w-full p-3 h-16 placeholder-transparent', 'id' => 'email']) }}
                     </div>
 
                     <div class="mb-5 relative">
-                        <select name="department_id" id="department_id">
+                        <label for="department_id"
+                            class="peer-placeholder-shown:opacity-100 opacity-75 peer-focus:opacity-75 peer-placeholder-shown:scale-100 scale-75 peer-focus:scale-75 peer-placeholder-shown:translate-y-0 -translate-y-3 peer-focus:-translate-y-3 peer-placeholder-shown:translate-x-0 translate-x-1 peer-focus:translate-x-1 absolute top-0 left-0 px-3 py-5 h-full pointer-events-none transform origin-left transition-all duration-100 ease-in-out">Département
+                            actuel</label>
+                        <select name="department_id" id="department_id"
+                            class="peer pt-8 border border-gray-200 focus:outline-none rounded-md focus:border-gray-500 focus:shadow-sm w-full p-3 h-16 placeholder-transparent">
                             @if (count($depts) > 0)
                                 @if (Auth::user()->hasRole('Root'))
                                     @foreach ($depts as $dept)
@@ -62,12 +66,15 @@
                                 @endif
                             @endif
                         </select>
-                        <label for="department_id" class="blue-text">Current Department</label>
                     </div>
 
                     <div class="mb-5 relative">
-                        <select name="role" id="role">
-                            <option value="" disabled selected>Assign Role</option>
+                        <label for="role"
+                            class="peer-placeholder-shown:opacity-100 opacity-75 peer-focus:opacity-75 peer-placeholder-shown:scale-100 scale-75 peer-focus:scale-75 peer-placeholder-shown:translate-y-0 -translate-y-3 peer-focus:-translate-y-3 peer-placeholder-shown:translate-x-0 translate-x-1 peer-focus:translate-x-1 absolute top-0 left-0 px-3 py-5 h-full pointer-events-none transform origin-left transition-all duration-100 ease-in-out">Rôle
+                            actuel</label>
+                        <select name="role" id="role"
+                            class="peer pt-8 border border-gray-200 focus:outline-none rounded-md focus:border-gray-500 focus:shadow-sm w-full p-3 h-16 placeholder-transparent">
+                            <option value="" disabled selected>Attribuer un rôle</option>
                             @if (count($roles) > 0)
                                 @foreach ($roles as $role)
                                     <option value="{{ $role->name }}"
@@ -76,34 +83,37 @@
                                 @endforeach
                             @endif
                         </select>
-                        <label for="role" class="blue-text">Current Role</label>
                     </div>
 
                     <!-- Switch -->
                     <div class="mb-5 relative">
-                        <h5>Account</h5>
-                        <label>
-                            @if ($user->status)
-                                Disable
-                                {{ Form::checkbox('status', '', true) }}
-                                <span class="lever"></span>
-                                Enabled
-                            @else
-                                Disabled
-                                {{ Form::checkbox('status', '') }}
-                                <span class="lever"></span>
-                                Enable
-                            @endif
+                        <label for="status"
+                            class="peer-placeholder-shown:opacity-100 opacity-75 peer-focus:opacity-75 peer-placeholder-shown:scale-100 scale-75 peer-focus:scale-75 peer-placeholder-shown:translate-y-0 -translate-y-3 peer-focus:-translate-y-3 peer-placeholder-shown:translate-x-0 translate-x-1 peer-focus:translate-x-1  px-3 py-5 h-full pointer-events-none transform origin-left transition-all duration-100 ease-in-out">
+                            Compte
                         </label>
+                        <div class="pt-1 pl-3">
+                            <div>
+                                Désactiver
+                            </div>
+                            @if ($user->status)
+                                {{ Form::checkbox('status', '', true) }}
+                            @else
+                                {{ Form::checkbox('status', '') }}
+                            @endif
+                            Activé
+                        </div>
                     </div>
 
                     <div class="mb-5 relative">
-                        <p><a href="#modal1" id="buttonmodal" data-target="modal1" class="modal-trigger">Change Password
-                                ?</a></p>
+                        <p>
+                            <a href="#modal1" id="buttonmodal" data-target="modal1" class="modal-trigger">
+                                Changer le mot de passe ?
+                            </a>
+                        </p>
                     </div>
 
                     <div class="mb-5 relative">
-                        {{ Form::submit('Save Changes', ['class' => 'flex text-white bg-gray-900 border-0 py-2 px-6 focus:outline-none hover:bg-indigo-600 rounded']) }}
+                        {{ Form::submit(' Sauvegarder', ['class' => 'flex text-white bg-gray-900 border-0 py-2 px-6 focus:outline-none hover:bg-indigo-600 rounded']) }}
                     </div>
 
                     {!! Form::close() !!}
@@ -111,9 +121,6 @@
             </div>
         </div>
     </div>
-
-
-
 
     <!-- Modal -->
     <div id="modal"
@@ -132,26 +139,26 @@
                 {!! Form::open(['action' => 'ProfileController@changePassword', 'method' => 'PATCH']) !!}
                 {{ csrf_field() }}
 
-                <h4>Change Password</h4>
+                <h4>Changer le mot de passe</h4>
 
                 <div class="mb-5 relative">
                     {{ Form::password('current_password', ['id' => 'current_password', 'class' => 'peer pt-8 border border-gray-200 focus:outline-none rounded-md focus:border-gray-500 focus:shadow-sm w-full p-3 h-16 placeholder-transparent']) }}
                     <label for="current_password"
                         class="peer-placeholder-shown:opacity-100 opacity-75 peer-focus:opacity-75 peer-placeholder-shown:scale-100 scale-75 peer-focus:scale-75 peer-placeholder-shown:translate-y-0 -translate-y-3 peer-focus:-translate-y-3 peer-placeholder-shown:translate-x-0 translate-x-1 peer-focus:translate-x-1 absolute top-0 left-0 px-3 py-5 h-full pointer-events-none transform origin-left transition-all duration-100 ease-in-out">
-                        Current Password
+                        Mot de passe actuel
                     </label>
                     @if ($errors->has('current_password'))
-                        <span class="red-text"><strong>{{ $errors->first('current_password') }}</strong></span>
+                        <span class="text-red-600 text-xs">{{ $errors->first('current_password') }}</span>
                     @endif
                 </div>
                 <div class="mb-5 relative">
                     {{ Form::password('new_password', ['id' => 'new_password', 'class' => 'peer pt-8 border border-gray-200 focus:outline-none rounded-md focus:border-gray-500 focus:shadow-sm w-full p-3 h-16 placeholder-transparent']) }}
                     <label for="new_password"
                         class="peer-placeholder-shown:opacity-100 opacity-75 peer-focus:opacity-75 peer-placeholder-shown:scale-100 scale-75 peer-focus:scale-75 peer-placeholder-shown:translate-y-0 -translate-y-3 peer-focus:-translate-y-3 peer-placeholder-shown:translate-x-0 translate-x-1 peer-focus:translate-x-1 absolute top-0 left-0 px-3 py-5 h-full pointer-events-none transform origin-left transition-all duration-100 ease-in-out">
-                        New Password
+                        Nouveau mot de passe
                     </label>
                     @if ($errors->has('new_password'))
-                        <span class="red-text"><strong>{{ $errors->first('new_password') }}</strong></span>
+                        <span class="text-red-600 text-xs">{{ $errors->first('new_password') }}</span>
                     @endif
                 </div>
                 <div class="mb-5 relative">
@@ -161,7 +168,7 @@
                         Nom de dossier
                     </label>
                     @if ($errors->has('new_password_confirmation'))
-                        <span class="red-text"><strong>{{ $errors->first('new_password_confirmation') }}</strong></span>
+                        <span class="text-red-600 text-xs">{{ $errors->first('new_password_confirmation') }}</span>
                     @endif
                 </div>
                 {{ Form::submit('Sauvegarder les modifications', ['class' => 'flex text-white bg-gray-900 border-0 py-2 px-6 focus:outline-none hover:bg-indigo-600 rounded']) }}
@@ -178,6 +185,5 @@
         button.addEventListener('click', () => modal.classList.add('scale-100'))
         closebutton.addEventListener('click', () => modal.classList.remove('scale-100'))
     </script>
-
 
 @endsection
