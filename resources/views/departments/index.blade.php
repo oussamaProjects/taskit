@@ -103,7 +103,7 @@
 
     <div id="modal"
         class="fixed top-0 left-0 w-screen h-screen flex items-center justify-center bg-blue-500 bg-opacity-50 transform scale-0 transition-transform duration-300">
-        <div class="bg-white w-1/2 p-12">
+        <div class="bg-white w-1/2 p-4">
             <button id="closebutton" type="button" class="focus:outline-none float-right">
                 <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 m-1" fill="none" viewBox="0 0 24 24"
                     stroke="currentColor">
@@ -112,14 +112,14 @@
                 </svg>
             </button>
             <div>
-                <h2 class="text-gray-900 text-xl mb-1 font-medium title-font">Ajouter un département</h2>
+                <h2 class="text-gray-900 text-xl mb-2 font-medium title-font">Ajouter un département</h2>
 
                 {!! Form::open(['action' => 'DepartmentsController@store', 'method' => 'POST', 'class' => 'col s12']) !!}
-                <div class="mb-5 relative">
+                <div class="mb-4 relative">
                     <label for="password-confirm">Nom du département</label>
-                    {{ Form::text('dptName', '', ['id' => 'dptName', 'class' => 'peer pt-8 border border-gray-200 focus:outline-none rounded-md focus:border-gray-500 focus:shadow-sm w-full p-3 h-16 placeholder-transparent']) }}
+                    {{ Form::text('dptName', '', ['id' => 'dptName', 'class' => 'peer border border-gray-200 focus:outline-none rounded focus:border-gray-500 focus:shadow-sm w-full py-1 px-2 h-10 placeholder-transparent']) }}
                 </div>
-                <div class="mb-5 relative">
+                <div class="mb-4 relative">
                     {{ Form::submit('Envoyer', ['class' => 'focus:outline-none py-2 px-4 bg-gray-900 text-white bg-opacity-75 ml-auto']) }}
                 </div>
                 {!! Form::close() !!}

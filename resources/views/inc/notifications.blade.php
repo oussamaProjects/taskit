@@ -23,10 +23,8 @@
         }
         element.parentNode.parentNode.removeChild(element.parentNode);
     }
-    $(document).ready(function() {
-        setTimeout(() => {
-            console.log($('#notification'));
-            $('#notification').hide();
-        }, 400);
-    });
+    setTimeout(() => {
+        document.getElementById('notification').hide();
+    }, 400);
+    // $(document).ready(function() {   });
 </script>

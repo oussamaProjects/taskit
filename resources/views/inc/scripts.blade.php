@@ -1,5 +1,5 @@
 <!-- JQuery -->
-<script src="{{ asset('js/jquery-3.2.1.min.js') }}"></script>
+<script src="{{ asset('js/app.js') }}"></script>
 <!-- Materialize css -->
 {{-- <script src="{{ asset('materialize-css/js/materialize.min.js') }}" charset="utf-8"></script> --}}
 
@@ -20,9 +20,15 @@
             e.preventDefault();
             $('#form-delete-' + $(this).data('form')).submit();
         });
-    });
-    // SHARE using link
-    $(function() {
+        $('.show-action').on('click', function(e) {
+            console.log($(this).parents('.folder-container'));
+            console.log($(this).parents('.folder-container').find('.other-actions'));
+            e.preventDefault();
+            $(this).parents('.folder-container').find('.other-actions').toggleClass('hidden');
+        });
+
+        // SHARE using link
+
         $('.data-share').on('click', function(e) {
             if (!confirm('Are you sure you want to share?')) return;
             e.preventDefault();
@@ -56,18 +62,16 @@
             $('#sort-form').submit();
         });
     });
-
 </script>
 <!-- data tables -->
 <script src="{{ asset('DataTables/datatables.min.js') }}" charset="utf-8"></script>
 <script type="text/javascript">
-    $(document).ready(function() {
-        $('#myDataTable').DataTable({
-            "paging": false,
-            "dom": '<"right"i>r<"left"f><"clear">'
-        });
-    });
-
+    // $(document).ready(function() {
+    //     $('#myDataTable').DataTable({
+    //         "paging": false,
+    //         "dom": '<"right"i>r<"left"f><"clear">'
+    //     });
+    // });
 </script>
 <!-- for spinner -->
 <script>
@@ -78,7 +82,6 @@
             .delay(1000)
             .fadeOut();
     });
-
 </script>
 <!-- sideNav -->
 <script>
@@ -88,7 +91,6 @@
     //     closeOnClick: true, // Closes side-nav on <a> clicks, useful for Angular/Meteor
     //     draggable: true, // Choose whether you can drag to open on touch screens,
     // });
-
 </script>
 <!-- enable/disable based on checkbox -->
 <script type="text/javascript">
@@ -102,7 +104,6 @@
             }
         });
     });
-
 </script>
 
 <!-- collapsible -->
@@ -110,107 +111,105 @@
     // $(document).ready(function() {
     //     $('.collapsible').collapsible();
     // });
-
 </script>
 
 <!-- for checkbox multiple delete -->
 <script type="text/javascript">
-    $(document).ready(function() {
+    // $(document).ready(function() {
 
-        $('#master').on('click', function(e) {
-            if ($(this).is(':checked', true)) {
-                $(".sub_chk").prop('checked', true);
-            } else {
-                $(".sub_chk").prop('checked', false);
-            }
-        });
+    //     $('#master').on('click', function(e) {
+    //         if ($(this).is(':checked', true)) {
+    //             $(".sub_chk").prop('checked', true);
+    //         } else {
+    //             $(".sub_chk").prop('checked', false);
+    //         }
+    //     });
 
-        $('.delete_all').on('click', function(e) {
+    //     $('.delete_all').on('click', function(e) {
 
-            var allVals = [];
-            $(".sub_chk:checked").each(function() {
-                allVals.push($(this).attr('data-id'));
-            });
+    //         var allVals = [];
+    //         $(".sub_chk:checked").each(function() {
+    //             allVals.push($(this).attr('data-id'));
+    //         });
 
-            if (allVals.length <= 0) {
-                alert("Please select.");
-            } else {
+    //         if (allVals.length <= 0) {
+    //             alert("Please select.");
+    //         } else {
 
-                var check = confirm("Are you sure you want to delete these?");
-                if (check == true) {
+    //             var check = confirm("Are you sure you want to delete these?");
+    //             if (check == true) {
 
-                    var join_selected_values = allVals.join(",");
+    //                 var join_selected_values = allVals.join(",");
 
-                    $.ajax({
-                        url: $(this).data('url'),
-                        type: 'DELETE',
-                        headers: {
-                            'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content'),
-                            "Access-Control-Allow-Headers": "POST, GET, DELETE, OPTIONS"
-                        },
-                        data: 'ids=' + join_selected_values,
-                        success: function(data) {
-                            if (data['success']) {
-                                $(".sub_chk:checked").each(function() {
-                                    $(this).parents("tr").remove();
-                                });
-                                alert(data['success']);
-                            } else if (data['error']) {
-                                alert('error');
-                                alert(data['error']);
-                            } else {
-                                alert('Whoops Something went wrong!!');
-                            }
-                        },
-                        error: function(data) {
-                                alert('error 2');
-                            alert(data.responseText);
-                        }
-                    });
+    //                 $.ajax({
+    //                     url: $(this).data('url'),
+    //                     type: 'DELETE',
+    //                     headers: {
+    //                         'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content'),
+    //                         "Access-Control-Allow-Headers": "POST, GET, DELETE, OPTIONS"
+    //                     },
+    //                     data: 'ids=' + join_selected_values,
+    //                     success: function(data) {
+    //                         if (data['success']) {
+    //                             $(".sub_chk:checked").each(function() {
+    //                                 $(this).parents("tr").remove();
+    //                             });
+    //                             alert(data['success']);
+    //                         } else if (data['error']) {
+    //                             alert('error');
+    //                             alert(data['error']);
+    //                         } else {
+    //                             alert('Whoops Something went wrong!!');
+    //                         }
+    //                     },
+    //                     error: function(data) {
+    //                         alert('error 2');
+    //                         alert(data.responseText);
+    //                     }
+    //                 });
 
-                    $.each(allVals, function(index, value) {
-                        $('table tr').filter("[data-row-id='" + value + "']").remove();
-                    });
-                }
-            }
-        });
+    //                 $.each(allVals, function(index, value) {
+    //                     $('table tr').filter("[data-row-id='" + value + "']").remove();
+    //                 });
+    //             }
+    //         }
+    //     });
 
-        // $('[data-toggle=confirmation]').confirmation({
-        //     rootSelector: '[data-toggle=confirmation]',
-        //     onConfirm: function(event, element) {
-        //         element.trigger('confirm');
-        //     }
-        // });
+    //     // $('[data-toggle=confirmation]').confirmation({
+    //     //     rootSelector: '[data-toggle=confirmation]',
+    //     //     onConfirm: function(event, element) {
+    //     //         element.trigger('confirm');
+    //     //     }
+    //     // });
 
-        $(document).on('confirm', function(e) {
-            var ele = e.target;
-            e.preventDefault();
+    //     $(document).on('confirm', function(e) {
+    //         var ele = e.target;
+    //         e.preventDefault();
 
-            $.ajax({
-                url: ele.href,
-                type: 'DELETE',
-                headers: {
-                    'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
-                },
-                success: function(data) {
-                    if (data['success']) {
-                        $("#" + data['tr']).slideUp("slow");
-                        alert(data['success']);
-                    } else if (data['error']) {
-                        alert(data['error']);
-                    } else {
-                        alert('Whoops Something went wrong!!');
-                    }
-                },
-                error: function(data) {
-                    alert(data.responseText);
-                }
-            });
+    //         $.ajax({
+    //             url: ele.href,
+    //             type: 'DELETE',
+    //             headers: {
+    //                 'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+    //             },
+    //             success: function(data) {
+    //                 if (data['success']) {
+    //                     $("#" + data['tr']).slideUp("slow");
+    //                     alert(data['success']);
+    //                 } else if (data['error']) {
+    //                     alert(data['error']);
+    //                 } else {
+    //                     alert('Whoops Something went wrong!!');
+    //                 }
+    //             },
+    //             error: function(data) {
+    //                 alert(data.responseText);
+    //             }
+    //         });
 
-            return false;
-        });
-    });
-
+    //         return false;
+    //     });
+    // });
 </script>
 <!-- switch -->
 <script type="text/javascript">
@@ -223,5 +222,4 @@
             $("#tableView").toggleClass('unshow');
         }
     });
-
 </script>

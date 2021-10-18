@@ -19,4 +19,9 @@ class Department extends Model
   {
     return $this->belongsToMany('App\Document', 'document_departement', 'department_id', 'document_id');
   }
+
+  public function folders()
+  {
+    return $this->belongsToMany('App\folder', 'folder_departement', 'department_id', 'folder_id');
+  }
 }

@@ -22,11 +22,13 @@ class RequestsController extends Controller
     {
         if (auth()->user()->hasRole('Admin')) {
             $users = User::where('status', false)->where('department_id', auth()->user()->department_id)->get();
+            return view('pages.requests', compact('users'));
         } elseif (auth()->user()->hasRole('Root')) {
             $users = User::where('status', false)->get();
+            return view('pages.requests', compact('users'));
         }
 
-        return view('pages.requests', compact('users'));
+        return redirect('/')->with('failure', 'You do not have the permission to acces to this page');
     }
 
     /**
@@ -81,11 +83,17 @@ class RequestsController extends Controller
      */
     public function update(Request $request, $id)
     {
+
+        $role = $request->input('role');
         $user = User::findOrFail($id);
         $user->status = true;
         $user->save();
 
-        $r = Role::where('name', 'User')->first();
+        if ($role == 'user')
+            $r = Role::where('name', 'User')->first();
+        else if ($role == 'admin')
+            $r = Role::where('name', 'Admin')->first();
+
         $user->assignRole($r);
 
         \Log::addToLog('User Accepted');

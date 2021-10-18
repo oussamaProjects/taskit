@@ -41,9 +41,48 @@ class DocumentsController extends Controller
       // $docs = Document::where('isExpire', '!=', 2)->where('department_id', $dept_id)->where('user_id', '!=', auth()->user()->id)->get();
     }
     $filetype = null;
-    $folders = array();
+    $user = auth()->user();
+    $folders  = Folder::where('parent_id', '=', '0')->get();
+    $folders_input = Folder::pluck('name', 'id')->all();
+    $categories = Category::pluck('name', 'id')->all();
+    $depts = Department::all();
 
-    return view('documents.index', compact('docs', 'filetype', 'folders'));
+    foreach ($folders as $key => $folder) {
+      $dp = DB::table('departments')
+        ->leftJoin('folder_departement', 'folder_departement.department_id', 'departments.id')
+        ->where('folder_departement.folder_id', '=', $folder->id)
+        ->where('folder_departement.department_id', '=', $user->department_id)
+        ->distinct()
+        ->get();
+
+      if (isset($dp) && !empty($dp[0])) {
+        $folder_departement = $dp[0];
+        $folder['permission_for'] = isset($folder_departement->permission_for) ? $folder_departement->permission_for : 0;
+      }
+    }
+    return view('documents.index', compact('docs', 'filetype', 'folders', 'folders_input', 'categories', 'depts'));
+  }
+
+  /**
+   * Display a listing of the resource.
+   *
+   * @return \Illuminate\Http\Response
+   */
+  public function all()
+  {
+
+    if (auth()->user()->hasRole('Root')) {
+      $docs = Document::where('isExpire', '!=', 2)->paginate(1);
+    } else {
+      $dept_id = auth()->user()->department_id;
+      $docs = Document::where('isExpire', '!=', 2)->paginate(1);
+    }
+    $filetype = null;
+    $folders_input = Folder::pluck('name', 'id')->all();
+    $categories = Category::pluck('name', 'id')->all();
+    $depts = Department::all();
+
+    return view('documents.all', compact('docs', 'filetype', 'folders_input', 'categories', 'depts'));
   }
 
   // my documents
@@ -96,7 +135,6 @@ class DocumentsController extends Controller
     // get the data of uploaded user
     $user_id = auth()->user()->id;
     $department_id = auth()->user()->department_id;
-
     // handle file upload
     if ($request->hasFile('file')) {
       // filename with extension
@@ -112,8 +150,25 @@ class DocumentsController extends Controller
     }
 
     $doc = new Document;
+    $check_name = Document::where('name', 'like', $request->input('name'))->first();
+    if ($check_name !== null) {
+      return redirect()->back()->with('failure', 'Le nom du fichier exist deja !');
+    }
+
+    $check_ref = Document::where('ref', 'like', $request->input('ref'))->first();
+    if ($check_ref !== null) {
+      return redirect()->back()->with('failure', 'La réference exist deja !');
+    }
+
+    $check_ver = Document::where('version', 'like', $request->input('version'))->first();
+    if ($check_ver !== null) {
+      return redirect()->back()->with('failure', 'Le version exist deja !');
+    }
+
     $doc->name = $request->input('name');
     $doc->description = $request->input('description');
+    $doc->ref = $request->input('ref');
+    $doc->version = $request->input('version');
     $doc->user_id = $user_id;
     $doc->department_id = $department_id;
     $doc->file = $path;
@@ -157,7 +212,7 @@ class DocumentsController extends Controller
 
     \Log::addToLog('New Document, ' . $request->input('name') . ' was uploaded');
 
-    return redirect('/documents')->with('success', 'Le fichier a été téléchargé avec succès !');
+    return redirect()->back()->with('success', 'Le fichier a été téléchargé avec succès !');
   }
 
   /**
@@ -169,6 +224,8 @@ class DocumentsController extends Controller
   public function show($id)
   {
     $doc = Document::findOrFail($id);
+    $doc_id = $doc->id;
+    $category_id = $doc->categories()->first()->id;
     $user = auth()->user();
 
     $permission = DB::table('departments')
@@ -198,42 +255,29 @@ class DocumentsController extends Controller
     //   }
     // } 
 
+    $path = Storage::disk('local')->getDriver()->getAdapter()->applyPathPrefix($doc->file);
+    $path = Storage::disk('public')->path($doc->file);
+    $path = Storage::url($doc->file);
+    $docID = $doc->id;
+    // get previous user id
+    $previous = Document::whereHas('categories', function ($query) use ($doc_id, $category_id) {
+      $query->where('document.id', '<', $doc_id);
+      $query->where('category.id', $category_id);
+    })->max('id');
+    // get next user id
+
+    $next = Document::whereHas('categories', function ($query) use ($doc_id, $category_id) {
+      $query->where('document.id', '>', $doc_id);
+      $query->where('category.id', $category_id);
+    })->min('id');
+
+
     if ($this->has_permission($id, $user))
-      return view('documents.show', compact('doc'));
+      return view('documents.show', compact('doc', 'path', 'previous', 'next'));
     else
       return redirect('/documents')->with('failure', 'Vous ne pouvez pas voir ce document');
   }
 
-  function has_permission($id, $user)
-  {
-    $permission = DB::table('departments')
-      ->leftJoin('document_departement', 'document_departement.department_id', 'departments.id')
-      ->where('document_departement.document_id', '=', $id)
-      ->where('document_departement.department_id', '=', $user->department_id)
-      ->distinct()
-      ->get();
-    if (!$user->hasRole('Root')) {
-      // var_dump($user->department_id);
-      // var_dump($id);
-      // var_dump($permission[0]->permission_for);
-      if (isset($permission[0]) && !is_null($permission[0])) {
-        if ($user->hasRole('Admin')) {
-          if ($permission[0]->permission_for == 1 || $permission[0]->permission_for == 0)
-            return true;
-          else
-            return false;
-        } else if ($user->hasRole('User')) {
-          if ($permission[0]->permission_for == 0)
-            return true;
-          else
-            return false;
-        } else
-          return false;
-      }
-    }
-
-    return true;
-  }
 
   /**
    * Show the form for editing the specified resource.
@@ -283,15 +327,32 @@ class DocumentsController extends Controller
    */
   public function update(Request $request, $id)
   {
-    $depts = Department::all();
-    $permissions = [];
 
     $this->validate($request, [
       'name' => 'required|string|max:255',
       'description' => 'required|string|max:255'
     ]);
 
+    $depts = Department::all();
+    $permissions = [];
+
     $doc = Document::findOrFail($id);
+
+    $check_name = Document::where('name', 'like', $request->input('name'))->where('id', '!=', $id)->first();
+    if ($check_name !== null) {
+      return redirect()->back()->with('failure', 'Le nom du fichier exist deja !');
+    }
+
+    $check_ref = Document::where('ref', 'like', $request->input('ref'))->where('id', '!=', $id)->first();
+    if ($check_ref !== null) {
+      return redirect()->back()->with('failure', 'La réference exist deja !');
+    }
+
+    $check_ver = Document::where('version', 'like', $request->input('version'))->where('id', '!=', $id)->first();
+    if ($check_ver !== null) {
+      return redirect()->back()->with('failure', 'Le version exist deja !');
+    }
+
     $doc->name = $request->input('name');
     $doc->description = $request->input('description');
     // determine whether it expires
@@ -341,65 +402,85 @@ class DocumentsController extends Controller
    */
   public function destroy($id)
   {
-    $doc = Document::findOrFail($id);
-    // delete the file on disk
-    Storage::delete($doc->file);
-    // delete db record
-    $doc->delete();
-    // delete associated categories
-    $doc->categories()->detach();
+    $user = auth()->user();
+    if ($user->hasRole('Root')) {
+      $doc = Document::findOrFail($id);
+      // delete the file on disk
+      Storage::delete($doc->file);
+      // delete db record
+      $doc->delete();
+      // delete associated categories
+      $doc->categories()->detach();
 
-    \Log::addToLog('Document ID ' . $id . ' was deleted');
+      \Log::addToLog('Document ID ' . $id . ' was deleted');
 
-    return redirect('/documents')->with('success', 'Le fichier a été supprimé avec succès !');
+      return redirect('/documents')->with('success', 'Le fichier a été supprimé avec succès !');
+    } else
+      return redirect('/documents')->with('failure', 'Vous ne pouvez pas supprimé ce document');
   }
 
   // delete multiple docs selected
   public function deleteMulti(Request $request)
   {
-    $ids = $request->ids;
-    DB::table('document')->whereIn('id', explode(',', $ids))->delete();
+    $user = auth()->user();
+    if (!$user->hasRole('Root')) {
+      $ids = $request->ids;
+      DB::table('document')->whereIn('id', explode(',', $ids))->delete();
 
-    \Log::addToLog('Selected Documents Are Deleted!');
+      \Log::addToLog('Selected Documents Are Deleted!');
 
-    return redirect('/documents')->with('success', 'Les documents sélectionnés ont été supprimés !');
+      return redirect('/documents')->with('success', 'Les documents sélectionnés ont été supprimés !');
+    } else
+      return redirect('/documents')->with('failure', 'Vous ne pouvez pas supprimé les documents sélectionnés');
   }
 
   // opening file
   public function open($id)
   {
-    $doc = Document::findOrFail($id);
-    $path = Storage::disk('local')->getDriver()->getAdapter()->applyPathPrefix($doc->file);
-    $type = $doc->mimetype;
+    $user = auth()->user();
+    // find trashed documents
+    // if ($user->hasRole('Root')) {
 
-    \Log::addToLog('Document ID ' . $id . ' was viewed');
+    if ($this->has_permission($id, $user)) {
+      $doc = Document::findOrFail($id);
+      $path = Storage::disk('local')->getDriver()->getAdapter()->applyPathPrefix($doc->file);
+      $type = $doc->mimetype;
 
-    if (
-      $type == 'application/pdf' || $type == 'image/jpeg' ||
-      $type == 'image/png' || $type == 'image/jpg' || $type == 'image/gif'
-    ) {
-      return response()->file($path, ['Content-Type' => $type]);
-    } elseif (
-      $type == 'video/mp4' || $type == 'audio/mpeg' ||
-      $type == 'audio/mp3' || $type == 'audio/x-m4a'
-    ) {
-      return view('documents.play', compact('doc'));
-    } else {
-      return response()->file($path, ['Content-Type' => $type]);
+      \Log::addToLog('Document ID ' . $id . ' was viewed');
+
+      if (
+        $type == 'application/pdf' || $type == 'image/jpeg' ||
+        $type == 'image/png' || $type == 'image/jpg' || $type == 'image/gif'
+      ) {
+        return response()->file($path, ['Content-Type' => $type]);
+      } elseif (
+        $type == 'video/mp4' || $type == 'audio/mpeg' ||
+        $type == 'audio/mp3' || $type == 'audio/x-m4a'
+      ) {
+        return view('documents.play', compact('doc'));
+      } else {
+        return response()->file($path, ['Content-Type' => $type]);
+      }
     }
+    return redirect()->back()->with('failure', 'Vous ne pouvez pas ouvrir ce document');
   }
 
   // download file
   public function download($id)
   {
-    $doc = Document::findOrFail($id);
-    $path = Storage::disk('local')->getDriver()->getAdapter()->applyPathPrefix($doc->file);
-    $type = $doc->mimetype;
+    $user = auth()->user();
+    // find trashed documents
+    if ($user->hasRole('Root')) {
+      $doc = Document::findOrFail($id);
+      $path = Storage::disk('local')->getDriver()->getAdapter()->applyPathPrefix($doc->file);
+      $type = $doc->mimetype;
 
-    \Log::addToLog('Document ID ' . $id . ' was downloaded');
+      \Log::addToLog('Document ID ' . $id . ' was downloaded');
 
-    // return response()->download($path, $doc->name, ['Content-Type:' . $type]);
-    return response()->download($path);
+      // return response()->download($path, $doc->name, ['Content-Type:' . $type]);
+      return response()->download($path);
+    }
+    return redirect()->back()->with('failure', 'Vous ne pouvez pas telecharger ce document');
   }
 
   // searching
@@ -427,10 +508,29 @@ class DocumentsController extends Controller
   {
     $filetype = $request->input('filetype');
 
-    $folders  = array();
     $docs     = Document::where('mimetype', $filetype)->get();
+    $folders  = Folder::where('parent_id', '=', '0')->get();
+    $user     = auth()->user();
 
-    return view('documents.index', compact('docs', 'filetype', 'folders'));
+    $folders_input = Folder::pluck('name', 'id')->all();
+    $categories = Category::pluck('name', 'id')->all();
+    $depts = Department::all();
+
+    foreach ($folders as $key => $folder) {
+      $dp = DB::table('departments')
+        ->leftJoin('folder_departement', 'folder_departement.department_id', 'departments.id')
+        ->where('folder_departement.folder_id', '=', $folder->id)
+        ->where('folder_departement.department_id', '=', $user->department_id)
+        ->distinct()
+        ->get();
+
+      if (isset($dp) && !empty($dp[0])) {
+        $folder_departement = $dp[0];
+        $folder['permission_for'] = isset($folder_departement->permission_for) ? $folder_departement->permission_for : 0;
+      }
+    }
+
+    return view('documents.index', compact('docs', 'filetype', 'folders', 'folders_input', 'categories', 'depts'));
   }
 
   public function trash()
@@ -468,5 +568,45 @@ class DocumentsController extends Controller
     $restoreDoc->save();
 
     return redirect()->back()->with('success', 'Le fichier a été restauré avec succès !');
+  }
+
+  public function changeColor(Request $request, $id)
+  {
+    $doc = Document::findOrFail($id);
+    $doc->color =  $request->input('color');
+    $doc->save();
+
+    return redirect()->back()->with('success', 'La couleur du fichier a été modifie avec succès !');
+  }
+
+  function has_permission($id, $user)
+  {
+    $permission = DB::table('departments')
+      ->leftJoin('document_departement', 'document_departement.department_id', 'departments.id')
+      ->where('document_departement.document_id', '=', $id)
+      ->where('document_departement.department_id', '=', $user->department_id)
+      ->distinct()
+      ->get();
+    if (!$user->hasRole('Root')) {
+      // var_dump($user->department_id);
+      // var_dump($id);
+      // var_dump($permission[0]->permission_for);
+      if (isset($permission[0]) && !is_null($permission[0])) {
+        if ($user->hasRole('Admin')) {
+          if ($permission[0]->permission_for == 1 || $permission[0]->permission_for == 0)
+            return true;
+          else
+            return false;
+        } else if ($user->hasRole('User')) {
+          if ($permission[0]->permission_for == 0)
+            return true;
+          else
+            return false;
+        } else
+          return false;
+      }
+    }
+
+    return true;
   }
 }

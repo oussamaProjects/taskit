@@ -31,6 +31,12 @@ class DashboardController extends Controller
         $users = User::count();
         $documents = Document::count();
 
-        return view('dashboard', compact('users', 'documents'));
+        if (auth()->user()->hasRole('Admin')) {
+            return view('dashboard', compact('users', 'documents'));
+        } elseif (auth()->user()->hasRole('Root')) {
+            return view('dashboard', compact('users', 'documents'));
+        }
+
+        return redirect('/documents');
     }
 }

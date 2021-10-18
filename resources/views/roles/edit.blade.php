@@ -27,19 +27,19 @@
                         <div class="mb-4">
                             <div class="text-semibold text-lg">Attribuer des rôles With Permissions</div>
 
-                            <div class="mb-5 relative">
-                                <label for="role"
-                                    class="peer-placeholder-shown:opacity-100 opacity-75 peer-focus:opacity-75 peer-placeholder-shown:scale-100 scale-75 peer-focus:scale-75 peer-placeholder-shown:translate-y-0 -translate-y-3 peer-focus:-translate-y-3 peer-placeholder-shown:translate-x-0 translate-x-1 peer-focus:translate-x-1 absolute top-0 left-0 px-3 py-5 h-full pointer-events-none transform origin-left transition-all duration-100 ease-in-out">Role</label>
-                                {{ Form::text('name', $role->name, ['id' => 'role', 'class' => 'peer pt-8 border border-gray-200 focus:outline-none rounded-md focus:border-gray-500 focus:shadow-sm w-full p-3 h-16 placeholder-transparent']) }}
+                            <div class="mb-4 relative">
+                                <label for="role" class="text-xs opacity-75 scale-75">Role</label>
+                                {{ Form::text('name', $role->name, ['id' => 'role', 'class' => 'peer border border-gray-200 focus:outline-none rounded focus:border-gray-500 focus:shadow-sm w-full py-1 px-2 h-10 placeholder-transparent']) }}
                             </div>
                         </div>
 
-                        <div class="mb-5 relative">
+                        <div class="mb-4 relative">
                             <div class="text-semibold mb-2">Available Permissions</div>
 
                             @foreach ($permissions as $permission)
                                 <div>
-                                    {{ Form::checkbox('permissions[]', $permission->id, $role->permissions, ['class' => 'filled-in', 'id' => $permission->id]) }}
+                                    permissions[]', $permission->id, $role->permissions, ['class' => 'filled-in', 'id' =>
+                                    $permission->id]) }}
                                     <label for="{{ $permission->id }}">{{ ucfirst($permission->name) }}</label>
                                 </div>
                             @endforeach

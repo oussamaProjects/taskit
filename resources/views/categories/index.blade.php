@@ -122,15 +122,14 @@
             </button>
 
             <div>
-                <h2 class="text-gray-900 text-xl mb-1 font-medium title-font">Ajouter une categorie</h2>
+                <h2 class="text-gray-900 text-xl mb-2 font-medium title-font">Ajouter une categorie</h2>
 
                 {!! Form::open(['action' => 'CategoriesController@store', 'method' => 'POST', 'class' => '']) !!}
 
-                <div class="mb-5 relative">
-                    <label for="name"
-                        class="peer-placeholder-shown:opacity-100 opacity-75 peer-focus:opacity-75 peer-placeholder-shown:scale-100 scale-75 peer-focus:scale-75 peer-placeholder-shown:translate-y-0 -translate-y-3 peer-focus:-translate-y-3 peer-placeholder-shown:translate-x-0 translate-x-1 peer-focus:translate-x-1 absolute top-0 left-0 px-3 py-5 h-full pointer-events-none transform origin-left transition-all duration-100 ease-in-out">Nom
+                <div class="mb-4 relative">
+                    <label for="name" class="text-xs opacity-75 scale-75">Nom
                         de dossier</label>
-                    {{ Form::text('name', '', ['id' => 'name', 'class' => 'peer pt-8 border border-gray-200 focus:outline-none rounded-md focus:border-gray-500 focus:shadow-sm w-full p-3 h-16 placeholder-transparent']) }}
+                    {{ Form::text('name', '', ['id' => 'name', 'class' => 'peer border border-gray-200 focus:outline-none rounded focus:border-gray-500 focus:shadow-sm w-full py-1 px-2 h-10 placeholder-transparent']) }}
                 </div>
 
             </div>

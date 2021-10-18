@@ -42,7 +42,7 @@
             </li>
 
             @hasanyrole('Root|Admin')
-            <li>
+            {{-- <li>
                 <a href="/categories"
                     class="relative flex flex-row items-center h-11 focus:outline-none hover:bg-gray-900 text-white-600 hover:text-white-800 border-l-4 border-transparent hover:border-blue-500 pr-6">
                     <span class="inline-flex justify-center items-center ml-4">
@@ -55,7 +55,9 @@
                     </span>
                     <span class="ml-2 text-sm tracking-wide truncate">Catégories</span>
                 </a>
-            </li>
+            </li> --}}
+
+            @endhasanyrole
 
             <li>
                 <a href="/folders"
@@ -71,7 +73,6 @@
                     <span class="ml-2 text-sm tracking-wide truncate">Dossiers</span>
                 </a>
             </li>
-            @endhasanyrole
 
             @hasrole('Root')
             <li>

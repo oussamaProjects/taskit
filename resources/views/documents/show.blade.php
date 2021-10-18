@@ -5,6 +5,31 @@
     @include('inc.sidebar')
 
     <div class="ml-14 mt-14 mb-10 md:ml-64">
+
+        <div class="flex items-center p-4 font-bold text-lg">
+
+            @if ($previous)
+                <a href="{{ URL::to('documents/' . $previous) }}" class="flex items-center justify-center">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" fill="none" viewBox="0 0 24 24"
+                        stroke="currentColor">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7" />
+                    </svg>
+                    Previous
+                </a>
+            @endif
+
+            @if ($next)
+                <a href="{{ URL::to('documents/' . $next) }}" class="ml-auto flex items-center justify-center">
+                    Next
+                    <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" fill="none" viewBox="0 0 24 24"
+                        stroke="currentColor">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7" />
+                    </svg>
+                </a>
+            @endif
+
+        </div>
+
         <!-- Statistics Cards -->
         <div class="grid grid-cols-1 sm:grid-cols-1 lg:grid-cols-1 p-4 gap-4">
 
@@ -18,30 +43,30 @@
             <section class="text-gray-600 body-font overflow-hidden">
                 <div class="container px-5 py-24 mx-auto">
                     <div class="lg:w-4/5 mx-auto flex flex-wrap">
-                        <div class="lg:w-1/2 w-full lg:pr-10 lg:py-6 mb-6 lg:mb-0">
+                        <div class="lg:w-1/2 w-full lg:pr-10 lg:py-6 mb-6 lg:mb-0 relative">
                             <h1 class="text-gray-900 text-3xl title-font font-medium mb-4">Document Information</h1>
 
-                            <div class="flex border-t border-gray-200 py-2">
+                            <div class="flex border-t border-gray-200 py-2 text-xs">
                                 <span class="text-gray-500">Document Name</span>
                                 <span class="ml-auto text-gray-900">{{ $doc->name }}</span>
                             </div>
 
-                            <div class="flex border-t border-gray-200 py-2">
+                            <div class="flex border-t border-gray-200 py-2 text-xs">
                                 <span class="text-gray-500">Description</span>
                                 <span class="ml-auto text-gray-900">{{ $doc->description }}</span>
                             </div>
 
-                            <div class="flex border-t border-gray-200 py-2">
+                            <div class="flex border-t border-gray-200 py-2 text-xs">
                                 <span class="text-gray-500">Owner</span>
                                 <span class="ml-auto text-gray-900">{{ $doc->user['name'] }}</span>
                             </div>
 
-                            <div class="flex border-t border-gray-200 py-2">
+                            <div class="flex border-t border-gray-200 py-2 text-xs">
                                 <span class="text-gray-500">Department</span>
                                 <span class="ml-auto text-gray-900">{{ $doc->user->department['dptName'] }}</span>
                             </div>
 
-                            <div class="flex border-t border-gray-200 py-2">
+                            <div class="flex border-t border-gray-200 py-2 text-xs">
                                 <span class="text-gray-500">Category</span>
                                 <div class="flex flex-col ml-auto ">
                                     @foreach ($doc->categories()->get() as $cate)
@@ -50,7 +75,7 @@
                                 </div>
                             </div>
 
-                            <div class="flex border-t border-gray-200 py-2">
+                            <div class="flex border-t border-gray-200 py-2 text-xs">
                                 <span class="text-gray-500">Folder</span>
                                 <div class="flex flex-col ml-auto ">
                                     @foreach ($doc->folders()->get() as $folder)
@@ -59,7 +84,7 @@
                                 </div>
                             </div>
 
-                            <div class="flex border-t border-gray-200 py-2">
+                            <div class="flex border-t border-gray-200 py-2 text-xs">
                                 <span class="text-gray-500">Expires At</span>
                                 <span class="ml-auto text-gray-900">
                                     @if ($doc->isExpire)
@@ -70,17 +95,17 @@
                                 </span>
                             </div>
 
-                            <div class="flex border-t border-gray-200 py-2">
+                            <div class="flex border-t border-gray-200 py-2 text-xs">
                                 <span class="text-gray-500">Uploaded At</span>
                                 <span class="ml-auto text-gray-900">{{ $doc->created_at->toDayDateTimeString() }} </span>
                             </div>
 
-                            <div class="flex border-t border-gray-200 py-2">
+                            <div class="flex border-t border-gray-200 py-2 text-xs">
                                 <span class="text-gray-500">Updated At</span>
                                 <span class="ml-auto text-gray-900">{{ $doc->updated_at->toDayDateTimeString() }} </span>
                             </div>
 
-                            <div class="flex border-t border-gray-200 py-2">
+                            <div class="flex border-t border-gray-200 py-2 text-xs">
                                 <span class="text-gray-500">MetaData</span>
                                 <span class="ml-auto text-right text-gray-900">
                                     Size : {{ $doc->filesize }} <br />
@@ -88,6 +113,27 @@
                                     Last Modified :
                                     {{ \Carbon\Carbon::createFromTimeStamp(Storage::lastModified($doc->file))->formatLocalized('%d %B %Y, %H:%M') }}
                                 </span>
+                            </div>
+
+                            <div class="flex border-t border-gray-200 py-2 text-xs">
+                                <div class="text-gray-500">Permission</div>
+                                <div class="ml-auto text-right text-gray-900">
+
+
+                                    @foreach ($doc->department()->get() as $department)
+                                        <div class="ml-auto text-gray-900">
+                                            <strong>{{ $department->dptName }}</strong>
+                                            @if (isset($department->pivot->permission_for))
+                                                -
+                                                {{ $department->pivot->permission_for == 0 ? 'Tous' : ' Admins' }}
+
+                                            @else
+                                                -
+                                                {{ 'All' }}
+                                            @endif
+                                        </div>
+                                    @endforeach
+                                </div>
                             </div>
 
 
@@ -131,7 +177,7 @@
                                 {!! Form::open(['action' => ['ShareController@update', $doc->id], 'method' => 'PATCH', 'id' => 'form-share-documents-' . $doc->id]) !!}
                                 @can('shared')
                                     <a href="#"
-                                        class="rounded-full w-10 h-10 bg-gray-200 p-0 border-0 inline-flex items-center justify-center text-gray-500 ml-4"
+                                        class="data-share rounded-full w-10 h-10 bg-gray-200 p-0 border-0 inline-flex items-center justify-center text-gray-500 ml-4"
                                         data-position="top" data-delay="50" data-tooltip="Share this"
                                         data-form="documents-{{ $doc->id }}">
                                         <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 m-1" fill="none"
@@ -160,8 +206,20 @@
                             </div>
 
                         </div>
-                        <img alt="ecommerce" class="lg:w-1/2 w-full lg:h-auto h-64 object-cover object-center rounded"
-                            src="https://dummyimage.com/400x400">
+                        <div class="lg:w-1/2 w-full lg:pr-10 lg:py-6 mb-6 lg:mb-0 relative">
+                            @if ($doc->mimetype == 'application/pdf')
+                                <embed src="{{ $path }}" type="application/pdf" class="w-full h-full">
+                            @elseif ($doc->mimetype ==
+                                'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet')
+                                <iframe
+                                    src="https://docs.google.com/gview?url=http://ieee802.org/secmail/docIZSEwEqHFr.doc&embedded=true"
+                                    frameborder="0" class="w-full h-full">
+                                </iframe>
+                            @else
+                                <img alt="" src="{{ $path }}" class="w-full h-full">
+                            @endif
+
+                        </div>
                     </div>
                 </div>
             </section>

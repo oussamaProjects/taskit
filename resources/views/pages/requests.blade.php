@@ -41,18 +41,27 @@
 
                                 <div class="ml-auto">
                                     <p class="text-blue">{{ $user->created_at->diffForHumans() }}</p>
-
                                 </div>
+
                                 <div class="flex ml-8">
                                     <div class="mr-4">
                                         {!! Form::open(['action' => ['RequestsController@update', $user->id], 'method' => 'PATCH']) !!}
                                         {{ csrf_field() }}
-                                        <button type="submit" name="b1">
-                                            <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 m-1 text-green-600"
+                                        <button type="submit" name="role" value="admin">
+                                            <svg xmlns="http://www.w3.org/2000/svg" class="h-3 w-3 m-1 text-green-600"
                                                 fill="none" viewBox="0 0 24 24" stroke="currentColor">
                                                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
                                                     d="M5 13l4 4L19 7" />
                                             </svg>
+                                            <span class="text-xs text-green-600">Admin</span>
+                                        </button>
+                                        <button type="submit" name="role" value="user">
+                                            <svg xmlns="http://www.w3.org/2000/svg" class="h-3 w-3 ml-2 m-1 text-green-600"
+                                                fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                                    d="M5 13l4 4L19 7" />
+                                            </svg>
+                                            User
                                         </button>
                                         {!! Form::close() !!}
                                     </div>

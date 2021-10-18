@@ -51,7 +51,7 @@ class CategoriesController extends Controller
 
         \Log::addToLog('New category ' . $request->input('name') . ' was added');
 
-        return redirect('/categories')->with('success', 'La catégorie a été ajoutée avec succès !');
+        return redirect()->back()->with('success', 'La catégorie a été ajoutée avec succès !');
     }
 
     /**

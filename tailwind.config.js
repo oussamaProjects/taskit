@@ -10,6 +10,10 @@ module.exports = {
     },
     variants: {
         extend: {}
-    },
-    plugins: []
+    }, 
+    plugins: [
+        // require("@tailwindcss-plugins/pagination")({
+        //     /* Customizations here */
+        // })
+    ]
 };

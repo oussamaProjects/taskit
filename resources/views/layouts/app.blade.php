@@ -11,7 +11,7 @@
 
     <title>{{ config('app.name', 'EDMS') }}</title>
 
-    <link rel="stylesheet" href="{{ asset('iconfont/material-icons.css') }}">
+    {{-- <link rel="stylesheet" href="{{ asset('iconfont/material-icons.css') }}"> --}}
     <!-- Materialize css -->
     {{-- <link rel="stylesheet" href="{{ asset('materialize-css/css/materialize.min.css') }}"> --}}
     <!-- datatables -->
@@ -21,6 +21,7 @@
     <!-- favicon -->
     <link rel="shortcut icon" type="image/x-icon" href="/storage/images/favicon.ico">
 
+    <script src="{{ asset('js/jquery-3.2.1.min.js') }}"></script>
 </head>
 
 <body class="my-auto w-full" style="height: min-content;">
@@ -68,7 +69,7 @@
             <!-- Scripts -->
             @include('inc.scripts')
             <!-- Right click context-menu -->
-            <script src="{{ asset('js/context-menu.js') }}"></script>
+            {{-- <script src="{{ asset('js/context-menu.js') }}"></script> --}}
             <!-- MESSAGES -->
             @include('inc.messages')
 

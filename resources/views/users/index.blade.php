@@ -183,7 +183,7 @@
 
     <div id="modal"
         class="fixed top-0 left-0 w-screen h-screen flex items-center justify-center bg-blue-500 bg-opacity-50 transform scale-0 transition-transform duration-300">
-        <div class="bg-white w-1/2 p-12">
+        <div class="bg-white w-1/2 p-4">
             <button id="closebutton" type="button" class="focus:outline-none float-right">
                 <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 m-1" fill="none" viewBox="0 0 24 24"
                     stroke="currentColor">
@@ -197,27 +197,24 @@
                 </h2>
 
 
-                <div class="mb-5 relative">
-                    <label for="name"
-                        class="peer-placeholder-shown:opacity-100 opacity-75 peer-focus:opacity-75 peer-placeholder-shown:scale-100 scale-75 peer-focus:scale-75 peer-placeholder-shown:translate-y-0 -translate-y-3 peer-focus:-translate-y-3 peer-placeholder-shown:translate-x-0 translate-x-1 peer-focus:translate-x-1 absolute top-0 left-0 px-3 py-5 h-full pointer-events-none transform origin-left transition-all duration-100 ease-in-out">
+                <div class="mb-4 relative">
+                    <label for="name" class="text-xs opacity-75 scale-75">
                         Nom</label>
-                    {{ Form::text('name', '', ['id' => 'name', 'class' => 'peer pt-8 border border-gray-200 focus:outline-none rounded-md focus:border-gray-500 focus:shadow-sm w-full p-3 h-16 placeholder-transparent']) }}
+                    {{ Form::text('name', '', ['id' => 'name', 'class' => 'peer border border-gray-200 focus:outline-none rounded focus:border-gray-500 focus:shadow-sm w-full py-1 px-2 h-10 placeholder-transparent']) }}
 
                 </div>
 
-                <div class="mb-5 relative">
-                    <label for="email"
-                        class="peer-placeholder-shown:opacity-100 opacity-75 peer-focus:opacity-75 peer-placeholder-shown:scale-100 scale-75 peer-focus:scale-75 peer-placeholder-shown:translate-y-0 -translate-y-3 peer-focus:-translate-y-3 peer-placeholder-shown:translate-x-0 translate-x-1 peer-focus:translate-x-1 absolute top-0 left-0 px-3 py-5 h-full pointer-events-none transform origin-left transition-all duration-100 ease-in-out">
+                <div class="mb-4 relative">
+                    <label for="email" class="text-xs opacity-75 scale-75">
                         Adresse e-mail</label>
-                    {{ Form::email('email', '', ['id' => 'email', 'class' => 'peer pt-8 border border-gray-200 focus:outline-none rounded-md focus:border-gray-500 focus:shadow-sm w-full p-3 h-16 placeholder-transparent']) }}
+                    {{ Form::email('email', '', ['id' => 'email', 'class' => 'peer border border-gray-200 focus:outline-none rounded focus:border-gray-500 focus:shadow-sm w-full py-1 px-2 h-10 placeholder-transparent']) }}
 
                 </div>
 
-                <div class="mb-5 relative">
-                    <label for="email"
-                        class="peer-placeholder-shown:opacity-100 opacity-75 peer-focus:opacity-75 peer-placeholder-shown:scale-100 scale-75 peer-focus:scale-75 peer-placeholder-shown:translate-y-0 -translate-y-3 peer-focus:-translate-y-3 peer-placeholder-shown:translate-x-0 translate-x-1 peer-focus:translate-x-1 absolute top-0 left-0 px-3 py-5 h-full pointer-events-none transform origin-left transition-all duration-100 ease-in-out">Department</label>
+                <div class="mb-4 relative">
+                    <label for="email" class="text-xs opacity-75 scale-75">Department</label>
                     <select name="department_id" id="department_id"
-                        class="peer pt-8 border border-gray-200 focus:outline-none rounded-md focus:border-gray-500 focus:shadow-sm w-full p-3 h-16 placeholder-transparent">
+                        class="peer border border-gray-200 focus:outline-none rounded focus:border-gray-500 focus:shadow-sm w-full py-1 px-2 h-10 placeholder-transparent">
                         <option value="" disabled selected>Choisissez le département</option>
                         @if (count($depts) > 0)
                             @if (Auth::user()->hasRole('Root'))
@@ -232,11 +229,10 @@
                     </select>
                 </div>
 
-                <div class="mb-5 relative">
-                    <label for="email"
-                        class="peer-placeholder-shown:opacity-100 opacity-75 peer-focus:opacity-75 peer-placeholder-shown:scale-100 scale-75 peer-focus:scale-75 peer-placeholder-shown:translate-y-0 -translate-y-3 peer-focus:-translate-y-3 peer-placeholder-shown:translate-x-0 translate-x-1 peer-focus:translate-x-1 absolute top-0 left-0 px-3 py-5 h-full pointer-events-none transform origin-left transition-all duration-100 ease-in-out">Role</label>
+                <div class="mb-4 relative">
+                    <label for="email" class="text-xs opacity-75 scale-75">Role</label>
                     <select name="role" id="role"
-                        class="peer pt-8 border border-gray-200 focus:outline-none rounded-md focus:border-gray-500 focus:shadow-sm w-full p-3 h-16 placeholder-transparent">
+                        class="peer border border-gray-200 focus:outline-none rounded focus:border-gray-500 focus:shadow-sm w-full py-1 px-2 h-10 placeholder-transparent">
                         <option value="" disabled selected>Attribuer un rôle</option>
                         @if (count($roles) > 0)
                             @foreach ($roles as $role)
@@ -247,18 +243,16 @@
                 </div>
 
 
-                <div class="mb-5 relative">
-                    <label for="password"
-                        class="peer-placeholder-shown:opacity-100 opacity-75 peer-focus:opacity-75 peer-placeholder-shown:scale-100 scale-75 peer-focus:scale-75 peer-placeholder-shown:translate-y-0 -translate-y-3 peer-focus:-translate-y-3 peer-placeholder-shown:translate-x-0 translate-x-1 peer-focus:translate-x-1 absolute top-0 left-0 px-3 py-5 h-full pointer-events-none transform origin-left transition-all duration-100 ease-in-out">Password</label>
-                    {{ Form::password('password', ['id' => 'password', 'class' => 'peer pt-8 border border-gray-200 focus:outline-none rounded-md focus:border-gray-500 focus:shadow-sm w-full p-3 h-16 placeholder-transparent']) }}
+                <div class="mb-4 relative">
+                    <label for="password" class="text-xs opacity-75 scale-75">Password</label>
+                    {{ Form::password('password', ['id' => 'password', 'class' => 'peer border border-gray-200 focus:outline-none rounded focus:border-gray-500 focus:shadow-sm w-full py-1 px-2 h-10 placeholder-transparent']) }}
                 </div>
 
-                <div class="mb-5 relative">
-                    <label for="password-confirm"
-                        class="peer-placeholder-shown:opacity-100 opacity-75 peer-focus:opacity-75 peer-placeholder-shown:scale-100 scale-75 peer-focus:scale-75 peer-placeholder-shown:translate-y-0 -translate-y-3 peer-focus:-translate-y-3 peer-placeholder-shown:translate-x-0 translate-x-1 peer-focus:translate-x-1 absolute top-0 left-0 px-3 py-5 h-full pointer-events-none transform origin-left transition-all duration-100 ease-in-out">Confirm
+                <div class="mb-4 relative">
+                    <label for="password-confirm" class="text-xs opacity-75 scale-75">Confirm
                         Mot de passe
                     </label>
-                    {{ Form::password('password_confirmation', ['id' => 'password-confirm', 'class' => 'peer pt-8 border border-gray-200 focus:outline-none rounded-md focus:border-gray-500 focus:shadow-sm w-full p-3 h-16 placeholder-transparent']) }}
+                    {{ Form::password('password_confirmation', ['id' => 'password-confirm', 'class' => 'peer border border-gray-200 focus:outline-none rounded focus:border-gray-500 focus:shadow-sm w-full py-1 px-2 h-10 placeholder-transparent']) }}
                 </div>
 
             </div>

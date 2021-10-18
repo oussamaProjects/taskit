@@ -27,6 +27,6 @@ class Document extends Model
 
     public function department()
     {
-        return $this->belongsToMany('App\Department', 'document_departement', 'document_id', 'department_id');
+        return $this->belongsToMany('App\Department', 'document_departement', 'document_id', 'department_id')->withPivot('permission_for');
     }
 }
