@@ -30,7 +30,7 @@
     @include('inc.notifications')
 
     <div>
-        <div class="min-h-screen flex flex-col flex-auto flex-shrink-0 antialiased bg-white text-black ">
+        <div class="min-h-screen flex flex-col flex-auto flex-shrink-0 antialiased bg-grey-100 text-black ">
 
             @include('inc.spinner')
 

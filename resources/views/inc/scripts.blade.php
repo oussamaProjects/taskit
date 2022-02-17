@@ -20,7 +20,9 @@
             e.preventDefault();
             $('#form-delete-' + $(this).data('form')).submit();
         });
+
         $('.show-action').on('click', function(e) {
+            $('.other-actions').not($(this).parents('.folder-container').find('.other-actions')).addClass('hidden');
             console.log($(this).parents('.folder-container'));
             console.log($(this).parents('.folder-container').find('.other-actions'));
             e.preventDefault();
@@ -28,7 +30,6 @@
         });
 
         // SHARE using link
-
         $('.data-share').on('click', function(e) {
             if (!confirm('Are you sure you want to share?')) return;
             e.preventDefault();

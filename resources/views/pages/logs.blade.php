@@ -2,7 +2,7 @@
 
 @section('content')
     @include('inc.sidebar')
-    <div class="ml-14 mt-20 mb-10 md:ml-64 bg-white p-4 ">
+    <div class="ml-14 mt-14 mb-10 md:ml-64 bg-white p-4 ">
 
         <div class="grid grid-cols-1 sm:grid-cols-1 lg:grid-cols-1 gap-4 mb-4">
 
@@ -26,7 +26,7 @@
         @if (count($logs) > 0)
 
             <div class="grid grid-cols-1 lg:grid-cols-1 gap-4">
-                <div class="relative flex flex-col min-w-0 mb-4 lg:mb-0 break-words bg-gray-50 w-full shadow-md rounded">
+                <div class="relative flex flex-col min-w-0 mb-4 lg:mb-0 break-words bg-white w-full shadow">
                     <div class="rounded-t mb-0 px-0 border-0">
 
                         <div class="block w-full overflow-x-auto">

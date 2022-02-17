@@ -10,3 +10,8 @@
         <a href="#!" class="modal-action modal-close waves-effect waves-green btn-flat ">OK</a>
     </div>
 </div> --}}
+
+
+<div id="ajaxShadow">
+    <div id="ajaxloader"></div>
+</div>

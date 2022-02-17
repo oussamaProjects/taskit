@@ -34,8 +34,17 @@ class User extends Authenticatable
         $this->attributes['password'] = bcrypt($password);
     }
 
-    public function department() {
-        return $this->belongsTo('App\Department');
+    // public function department() {
+    //     return $this->belongsTo('App\Department');
+    // }
+
+    public function departments()
+    {
+        return $this->belongsToMany('App\Department', 'user_departement', 'user_id', 'departement_id');
+    }
+
+    public function subsidiaries() {
+        return $this->belongsTo('App\Subsidiary');
     }
 
     public function documents() {

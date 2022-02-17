@@ -45,6 +45,27 @@
                                     @endif
                                 </div>
 
+                                {{-- <div class="relative w-full mb-3">
+                                    <label class="block uppercase text-gray-700 text-xs font-bold mb-2"
+                                        for="subsidiary_id">subsidiaries</label>
+
+                                    <select name="subsidiary_id" id="subsidiary_id"
+                                        class="border-0 px-3 py-3 placeholder-gray-400 text-gray-700 bg-white rounded text-sm shadow focus:outline-none focus:ring w-full"
+                                        style="transition: all 0.15s ease 0s;">
+                                        <option value="" disabled selected>Choisissez le subsidiaries</option>
+                                        @if (count($subsidiaries) > 0)
+                                            @foreach ($subsidiaries as $subsidiary)
+                                                <option value="{{ $subsidiary->id }}">{{ $subsidiary->subsName }}
+                                                </option>
+                                            @endforeach
+                                        @endif
+                                    </select>
+
+                                    @if ($errors->has('subsidiary'))
+                                        <span class="text-red-600 text-xs">{{ $errors->first('subsidiary') }}</span>
+                                    @endif
+                                </div>
+
                                 <div class="relative w-full mb-3">
                                     <label class="block uppercase text-gray-700 text-xs font-bold mb-2"
                                         for="department_id">Départements</label>
@@ -53,21 +74,47 @@
                                         class="border-0 px-3 py-3 placeholder-gray-400 text-gray-700 bg-white rounded text-sm shadow focus:outline-none focus:ring w-full"
                                         style="transition: all 0.15s ease 0s;">
                                         <option value="" disabled selected>Choisissez le département</option>
-                                        @if (count($depts) > 0)
-                                            @foreach ($depts as $dept)
-                                                <option value="{{ $dept->id }}">{{ $dept->dptName }}</option>
-                                            @endforeach
-                                        @endif
                                     </select>
 
                                     @if ($errors->has('department'))
                                         <span class="text-red-600 text-xs">{{ $errors->first('department') }}</span>
                                     @endif
-                                </div>
+                                </div> --}}
+
+
+                                @if (count($subsidiaries) > 0)
+                                    <div class="mb-2 relative">
+
+                                        <h3 class="text-gray-900 text-md mt-4 mb-4 font-medium title-font uppercase">
+                                            Filials
+                                        </h3>
+                                        <div class="grid sm:grid-cols-1 lg:grid-cols-1">
+
+                                            @foreach ($subsidiaries as $sub)
+                                                <div class="font-bold mt-2">{{ $sub->subsName }}</div>
+
+                                                @foreach ($sub->departments()->get() as $dept)
+                                                    <label class="text-gray-900 mb-2 font-medium title-font"
+                                                        for="{{ $dept['id'] }}_dept">
+                                                        <input type="checkbox" name="dept[]" id="{{ $dept['id'] }}_dept"
+                                                            value="{{ $dept['id'] }}">
+                                                        {{ $dept['dptName'] }}
+                                                    </label>
+                                                @endforeach
+                                            @endforeach
+
+                                        </div>
+
+                                        <div id="folder_dept_list"></div>
+
+                                    </div>
+                                @endif
+
 
                                 <div class="relative w-full mb-3">
-                                    <label class="block uppercase text-gray-700 text-xs font-bold mb-2" for="password">Mot
-                                        de passe</label>
+                                    <label class="block uppercase text-gray-700 text-xs font-bold mb-2" for="password">
+                                        Mot de passe
+                                    </label>
                                     <input id="password" type="password" name="password" required
                                         class="border-0 px-3 py-3 placeholder-gray-400 text-gray-700 bg-white rounded text-sm shadow focus:outline-none focus:ring w-full"
                                         placeholder="Mot de passe" style="transition: all 0.15s ease 0s;">
@@ -99,13 +146,13 @@
                 </div>
             </div>
         </div>
-        <footer class="absolute w-full bottom-0 bg-gray-900 pb-6">
+        <footer class="absolute w-full bottom-0 bg-gray-900 pb-4">
             <div class="container mx-auto px-4">
-                <hr class="mb-6 border-b-1 border-gray-700">
+                <hr class="mb-4 border-b-1 border-gray-700">
                 <div class="flex flex-wrap items-center md:justify-between justify-center">
                     <div class="w-full md:w-4/12 px-4">
                         <div class="text-sm text-white font-semibold py-1">
-                            Copyright © 2019
+                            Copyright © 2022
                             <a href="https://www.creative-tim.com"
                                 class="text-white hover:text-gray-400 text-sm font-semibold py-1"> </a>
                         </div>
@@ -115,5 +162,63 @@
             </div>
         </footer>
     </section>
+
+    <script>
+        $(function() {
+
+            $(document).on("click", ".getDepartement", function(e) {
+                e.preventDefault();
+                $('#ajaxShadow').show();
+                $('#ajaxloader').show();
+
+                var subs = $(this).data('subs_id');
+
+                var url = "{{ URL('getDepartements') }}";
+                var url = url + "/" + subs;
+
+                $.ajax({
+                    url: url,
+                    type: "GET",
+                    data: {
+                        _token: '{{ csrf_token() }}',
+                        subs: subs,
+                    },
+                    success: function(dataResult) {
+
+                        $('#folder_dept_list').empty();
+                        var dept_html = '';
+                        dept_html +=
+                            '<h3 class="text-gray-900 text-md mt-4 mb-4 font-medium title-font uppercase">Departments</h3>';
+                        dept_html += '<div class="grid sm:grid-cols-2 lg:grid-cols-3">';
+
+                        $.map(dataResult.data.departments, function(departement) {
+
+                            dept_html += '<div class="">';
+                            dept_html +=
+                                `<input type="checkbox" name="dept[]" id="${departement.id}_dept" value="${departement.id}" >`;
+                            dept_html +=
+                                `<label class="text-gray-900 mb-2 font-medium title-font" for="${departement.id}_dept">` +
+                                departement.dptName + `</label>`;
+                            dept_html += '</div>';
+
+                        });
+
+                        dept_html += '</div>';
+                        $('#folder_dept_list').html(dept_html);
+
+                        $('#ajaxShadow').hide();
+                        $('#ajaxloader').hide();
+                    },
+                    error: function(error) {
+                        console.log(error);
+                        // location.reload(true);
+                        $('#ajaxShadow').hide();
+                        $('#ajaxloader').hide();
+                    }
+                });
+
+            });
+        });
+    </script>
 
 @endsection

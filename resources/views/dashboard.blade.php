@@ -1,8 +1,6 @@
 @extends('layouts.app')
 
 @section('content')
-
-
     <div class="h-full my-20 mx-14 mb-10">
         <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 p-4 gap-4">
             <a href="/documents">
@@ -53,7 +51,7 @@
                     </div>
                     <div class="text-right">
                         <p class="text-2xl">Departments</p>
-                        <p> </p>
+                        <p>{{ $departments }}</p>
                     </div>
                 </div>
             </a>
@@ -117,5 +115,4 @@
             </a>
         </div>
     </div>
-
 @endsection

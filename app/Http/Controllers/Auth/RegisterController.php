@@ -8,6 +8,7 @@ use Illuminate\Support\Facades\Validator;
 use Illuminate\Foundation\Auth\RegistersUsers;
 // to display current departments
 use App\Department;
+use App\Subsidiary;
 // to prevent autologin
 use Illuminate\Http\Request;
 use Illuminate\Auth\Events\Registered;
@@ -47,8 +48,9 @@ class RegisterController extends Controller
     // override the existing function to pass the current departments data
     public function showRegistrationForm()
     {
+        $subsidiaries = Subsidiary::all();
         $depts = Department::all();
-        return view('auth.register', compact('depts'));
+        return view('auth.register', compact('depts', 'subsidiaries'));
     }
 
     /**
@@ -63,7 +65,6 @@ class RegisterController extends Controller
             'name' => 'required|string|max:255',
             'email' => 'required|string|email|max:255|unique:users',
             'password' => 'required|string|min:6|confirmed',
-            'department_id' => 'required',
         ]);
     }
 
@@ -75,12 +76,19 @@ class RegisterController extends Controller
      */
     protected function create(array $data)
     {
-        return User::create([
+        $user = User::create([
             'name' => $data['name'],
             'email' => $data['email'],
-            'password' => $data['password'],
-            'department_id' => $data['department_id'],
+            'password' => $data['password'], 
         ]);
+
+        // $user->departments()->sync($dep);
+
+        foreach ($data['dept'] as $dep) {
+            $user->departments()->attach($dep);
+        }
+
+        return true;
     }
 
     // prevent autologin

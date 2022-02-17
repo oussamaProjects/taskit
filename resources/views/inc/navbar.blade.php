@@ -4,11 +4,14 @@
 
     @if (!Auth::guest())
         <div class="flex items-center justify-start md:justify-center w-14 md:w-64 h-14 bg-gray-900   border-none">
-            <span class="hidden md:block font-bold text-2xl">DoCenter</span>
+            <span class="hidden md:block font-bold text-2xl">
+               
+                @include('logo')
+            </span>
         </div>
     @endif
 
-    <div class="flex justify-between items-center h-14 bg-gray-900   header-right">
+    <div class="flex justify-between items-center h-14 bg-gray-900 header-right">
 
         @if (!Auth::guest())
             <form action="/search" method="post" id="search-form"

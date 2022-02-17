@@ -99,8 +99,8 @@
         </tbody>
     </table> --}}
 
-    <div class="ml-14 mt-16 mb-4 md:ml-64">
-        <div class="flex items-center p-4 gap-4">
+    <div class="ml-14 mt-14 mb-4 md:ml-64">
+        <div class="flex items-center p-4 gap-4 bg-white">
 
             <form action="/search" method="post" id="search-form"
                 class="bg-white rounded flex items-center w-full max-w-sm mr-4 p-2 shadow-sm border border-gray-200 ">
@@ -117,7 +117,7 @@
 
             <div class="flex ml-auto">
                 <button
-                    class="flex text-white bg-gray-900 border-0 py-2 px-4 focus:outline-none hover:bg-indigo-600 rounded ml-auto mr-4"
+                    class="flex text-white bg-gray-900 border-0 py-2 px-4 focus:outline-none hover:bg-blue-500 rounded ml-auto mr-4"
                     data-url="{{ url('documentsDeleteMulti') }}">
                     <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 m-1" fill="none" viewBox="0 0 24 24"
                         stroke="currentColor">
@@ -131,7 +131,7 @@
                 &nbsp;
                 @can('upload')
                     <a href="/documents/create"
-                        class="flex text-white bg-gray-900 border-0 py-2 px-4 focus:outline-none hover:bg-indigo-600 rounded ml-auto">
+                        class="flex text-white bg-gray-900 border-0 py-2 px-4 focus:outline-none hover:bg-blue-500 rounded ml-auto">
                         <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 m-1" fill="none" viewBox="0 0 24 24"
                             stroke="currentColor">
                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
@@ -144,8 +144,8 @@
         </div>
 
         <!-- Statistics Cards -->
-        <div class="grid grid-cols-1 sm:grid-cols-1 lg:grid-cols-1 p-4 gap-4">
-            <div class="flex flex-col text-center w-full mb-6">
+        <div class="grid grid-cols-1 sm:grid-cols-1 lg:grid-cols-1 p-4 gap-4 ml-4 bg-white shadow">
+            <div class="flex flex-col text-center w-full">
                 <h1 class="sm:text-2xl text-xl font-medium title-font mb-2 text-gray-900">Mes documents</h1>
                 <p class="lg:w-2/3 mx-auto leading-relaxed text-base">Tous mes documents
                 </p>
@@ -155,24 +155,24 @@
                     <thead>
                         <tr>
                             <th
-                                class="w-10 title-font tracking-wider font-medium text-gray-900 text-sm bg-gray-100 rounded-tr rounded-br">
+                                class="w-10 title-font tracking-wider font-medium text-gray-900 text-sm bg-blue-100 rounded-tr rounded-br">
                             </th>
-                            <th class="px-4 py-3 title-font tracking-wider font-medium text-gray-900 text-sm bg-gray-100">
-                                Nom de fichier
+                            <th class="px-2 py-2 title-font tracking-wider font-medium text-gray-900 text-sm bg-blue-100">
+                                Nom du document
                             </th>
-                            <th class="px-4 py-3 title-font tracking-wider font-medium text-gray-900 text-sm bg-gray-100">
+                            <th class="px-2 py-2 title-font tracking-wider font-medium text-gray-900 text-sm bg-blue-100">
                                 Propriétaire
                             </th>
-                            {{-- <th class="px-4 py-3 title-font tracking-wider font-medium text-gray-900 text-sm bg-gray-100">
+                            {{-- <th class="px-2 py-2 title-font tracking-wider font-medium text-gray-900 text-sm bg-blue-100">
                             Département
                         </th> --}}
-                            <th class="px-4 py-3 title-font tracking-wider font-medium text-gray-900 text-sm bg-gray-100">
-                                Téléchargé à
+                            <th class="px-2 py-2 title-font tracking-wider font-medium text-gray-900 text-sm bg-blue-100">
+                                Date Insertion
                             </th>
-                            <th class="px-4 py-3 title-font tracking-wider font-medium text-gray-900 text-sm bg-gray-100">
+                            <th class="px-2 py-2 title-font tracking-wider font-medium text-gray-900 text-sm bg-blue-100">
                                 Expire le
                             </th>
-                            <th class="px-4 py-3 title-font tracking-wider font-medium text-gray-900 text-sm bg-gray-100">
+                            <th class="px-2 py-2 title-font tracking-wider font-medium text-gray-900 text-sm bg-blue-100">
                                 Actions
                             </th>
                         </tr>
@@ -285,4 +285,76 @@
 
     </div>
 
+    <script>
+        $(function() {
+    
+            $(document).on("click", ".getDepartement", function(e) {
+                e.preventDefault();
+                $('#ajaxShadow').show();
+                $('#ajaxloader').show();
+    
+                var subs = $(this).data('subs_id');
+                var folder = $(this).data('folder_id');
+    
+                var url = "{{ URL('departments/getDepartement') }}";
+                var url = url + "/subs/" + subs+ "/folder/" + folder;
+    
+                $.ajax({
+                    url: url,
+                    type: "GET",
+                    data: {
+                        _token: '{{ csrf_token() }}',
+                        subs: subs,
+                        folder: folder,
+                    },
+                    success: function(dataResult) {
+    
+                        $('#dept_list').empty(); 
+                        var dept_html = '';
+                        dept_html += '<h3 class="text-gray-900 text-md mt-4 mb-4 font-medium title-font uppercase">Departments</h3>'; 
+                        dept_html += '<div class="grid sm:grid-cols-2 lg:grid-cols-3">'; 
+    
+                        $.map(dataResult.data.departments, function(departement) {
+                            console.log(departement);
+    
+                            dept_html += '<div class="">'; 
+                           
+                            dept_html += '<div class="text-gray-900 mb-2 font-medium title-font">' + departement.dptName + '</div>';
+    
+                            dept_html += '<div class="">';
+                            dept_html += `<input type="radio" name="permissions_${departement.id}[]" id="${departement.id}_none" value="${departement.id}_none" ${ departement.permission_for == -1 ? "checked" : "" }> `;
+                            dept_html += `<label class="text-sm" for="${departement.id}_none">None</label>`;
+                            dept_html += '</div>';
+    
+                            dept_html += '<div class="">';
+                            dept_html += `<input type="radio" name="permissions_${departement.id}[]" value="${departement.id}_all" id="${departement.id}_all" ${ departement.permission_for == 0 ? "checked" : "" }> `;
+                            dept_html += `<label class="text-sm" for="${departement.id}_all">All</label>`;
+                            dept_html += '</div>';
+                            
+                            dept_html += '<div class="">';
+                            dept_html += `<input type="radio" name="permissions_${departement.id}[]" id="${departement.id}_admins" value="${departement.id}_admins" ${ departement.permission_for == 1 ? "checked" : "" }> `;
+                            dept_html += `<label class="text-sm" for="${departement.id}_admins">Admins</label>`;
+                            dept_html += '</div>';
+    
+                            dept_html += '</div>';
+                            
+                        });
+                        dept_html += '</div>';
+                        $('#dept_list').html(dept_html);
+    
+                        $('#ajaxShadow').hide();
+                        $('#ajaxloader').hide();
+                    },
+                    error: function(error) {
+                        console.log(error);
+                        // location.reload(true);
+                        $('#ajaxShadow').hide();
+                        $('#ajaxloader').hide();
+                    }
+                });
+    
+            });
+        });
+    </script>
+    
 @endsection

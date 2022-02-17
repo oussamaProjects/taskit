@@ -8,7 +8,7 @@
     <div class="h-full ml-14 mt-14 mb-10 md:ml-64">
 
         <div class="grid grid-cols-1 lg:grid-cols-1 p-4 gap-4">
-            <div class="relative flex flex-col min-w-0 mb-4 lg:mb-0 break-words bg-gray-50   w-full shadow-md rounded">
+            <div class="relative flex flex-col min-w-0 mb-4 lg:mb-0 break-words bg-white w-full shadow-md rounded">
                 <div class="rounded-t mb-0 px-0 border-0">
                     <div class="flex flex-wrap items-center px-4 py-2">
                         <div class="relative w-full max-w-full flex-grow flex-1">
@@ -25,17 +25,18 @@
         <div class="grid grid-cols-3 sm:grid-cols-3 lg:grid-cols-3 p-4 gap-4">
             <div class="col-span-2">
 
-                <div class="flex items-center p-4 gap-4">
+                <div class="flex items-center flex-col p-4 gap-4 bg-white">
 
                     @if (count($users) > 0)
                         @foreach ($users as $user)
-                            <div
-                                class="grid grid-cols-4 sm:grid-cols-4 lg:grid-cols-4 p-4 gap-4 border-b-2 border-fuchsia-600">
+                            <div class="grid grid-cols-4 sm:grid-cols-4 lg:grid-cols-4 ml-4 p-4 gap-4 bg-white shadow border-b-2 border-fuchsia-600">
 
                                 <div class="col-span-2">
                                     <p>Hi, I am <b>{{ $user->name }}</b> , my email is <b>{{ $user->email }}</b>.
                                         <br>and I want to be one of the system users who belongs to the department of
-                                        <b>{{ $user->department['dptName'] }}</b>.
+                                        @foreach ($user->departments()->get() as $dept)
+                                            <b>{{ $dept['dptName'] }}</b>.
+                                        @endforeach
                                     </p>
                                 </div>
 
@@ -80,7 +81,6 @@
                                 </div>
 
                             </div>
-
                         @endforeach
                     @else
                         Aucune inscription n'a été demandée
@@ -88,7 +88,9 @@
                 </div>
             </div>
 
-            <img src="{{ asset('img/undraw_Add_files_re_v09g.svg') }}" alt="">
+            <button id="buttonmodalFileImg" class="bg-white h-auto p-4 shadow" type="button">
+                <img src="{{ asset('img/undraw_Add_files_re_v09g.svg') }}" alt="">
+            </button>
         </div>
     </div>
 

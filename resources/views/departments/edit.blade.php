@@ -7,8 +7,7 @@
 
     <div class="h-full ml-14 mt-14 mb-10 md:ml-64">
 
-        <div class="grid grid-cols-1 lg:grid-cols-1 p-4 gap-4">
-            <div class="relative flex flex-col min-w-0 mb-4 lg:mb-0 break-words bg-gray-50   w-full shadow-md rounded">
+            <div class="relative flex flex-col min-w-0 mb-4 lg:mb-0 break-words bg-white w-full shadow">
                 <div class="rounded-t mb-0 px-0 border-0">
                     <div class="flex flex-wrap items-center px-4 py-2">
                         <div class="relative w-full max-w-full flex-grow flex-1">
@@ -18,33 +17,51 @@
                         </div>
                         <div class="relative w-full max-w-full flex-grow flex-1 text-right">
                             <button id="buttonmodal" data-target="modal1"
-                                class="flex text-white bg-gray-900 border-0 py-2 px-6 focus:outline-none hover:bg-indigo-600 rounded ml-auto"
+                                class="flex text-white bg-gray-900 border-0 py-2 px-6 focus:outline-none hover:bg-blue-500 rounded ml-auto"
                                 type="button">Ajouter un département</button>
                         </div>
                     </div>
                 </div>
             </div>
-        </div>
 
         <div class="grid grid-cols-3 sm:grid-cols-3 lg:grid-cols-3 p-4 gap-4">
             <div class="col-span-2">
 
-                <div class="flex items-center p-4 gap-4">
+                <div class="flex items-center p-4 gap-4 bg-white shadow">
                     {!! Form::open(['action' => ['DepartmentsController@update', $dept->id], 'method' => 'PATCH', 'class' => 'w-full']) !!}
-                    <div class="mb-4 relative">
+                    <div class="mb-2 relative">
                         <label for="department" class="text-xs opacity-75 scale-75">Nom
                             du département</label>
-                        {{ Form::text('dptName', $dept->dptName, ['class' => 'peer border border-gray-200 focus:outline-none rounded focus:border-gray-500 focus:shadow-sm w-full py-1 px-2 h-10 placeholder-transparent', 'id' => 'department']) }}
+                        {{ Form::text('dptName', $dept->dptName, ['autocomplete' => 'off','class' => 'peer border border-gray-200 focus:outline-none rounded focus:border-gray-500 focus:shadow-sm w-full py-1 px-2 h-8 placeholder-transparent text-sm', 'id' => 'department']) }}
                     </div>
-                    {{ Form::submit(' Sauvegarder', ['class' => 'flex text-white bg-gray-900 border-0 py-2 px-6 focus:outline-none hover:bg-indigo-600 rounded']) }}
+
+                    <div class="dept grid grid-cols-4 sm:grid-cols-4 lg:grid-cols-4 py-2 mb-4 gap-4 flex items-center">
+
+                        @foreach ($subsidiaries as $suds)
+                            <div class="flex items-center">
+                                <div class="pr-3 flex items-center">
+                                    {!! Form::radio('subs_id[]', $suds->id, null, ['id' => 'subs_id', 'class' => 'subs_id']) !!}
+                                </div>
+                                <label for="status"
+                                    class="peer-placeholder-shown:opacity-100 opacity-75 peer-focus:opacity-75 peer-placeholder-shown:scale-100 scale-75 peer-focus:scale-75 peer-placeholder-shown:translate-y-0 peer-focus:-translate-y-3 peer-placeholder-shown:translate-x-0 translate-x-1 peer-focus:translate-x-1 pointer-events-none transform origin-left transition-all duration-100 ease-in-out">
+                                    {{ $suds->subsName }} <br />
+                                </label>
+                            </div>
+                        @endforeach
+
+                    </div>
+
+                    {{ Form::submit('Sauvegarder', ['class' => 'flex text-white bg-gray-900 border-0 py-2 px-6 focus:outline-none hover:bg-blue-500 rounded']) }}
                     {!! Form::close() !!}
 
                 </div>
             </div>
+            
+        <button id="buttonmodalFileImg" class="bg-white h-auto p-4 shadow" type="button">
             <img src="{{ asset('img/undraw_Add_files_re_v09g.svg') }}" alt="">
+        </button>
         </div>
     </div>
-
 
     <!-- Modal -->
     <!-- Modal Structure -->
@@ -63,18 +80,16 @@
             </div>
             <div class="flex flex-col px-6 py-5 bg-gray-50">
                 {!! Form::open(['action' => 'DepartmentsController@store', 'method' => 'POST', 'class' => 'col s12']) !!}
-                <div class="mb-4 relative">
+                <div class="mb-2 relative">
                     <label for="dptName" class="text-xs opacity-75 scale-75">Nom
                         du département</label>
-                    {{ Form::text('dptName', '', ['class' => 'peer border border-gray-200 focus:outline-none rounded focus:border-gray-500 focus:shadow-sm w-full py-1 px-2 h-10 placeholder-transparent', 'id' => 'dptName']) }}
+                    {{ Form::text('dptName', '', ['autocomplete' => 'off','class' => 'peer border border-gray-200 focus:outline-none rounded focus:border-gray-500 focus:shadow-sm w-full py-1 px-2 h-8 placeholder-transparent text-sm', 'id' => 'dptName']) }}
                 </div>
-                {{ Form::submit('Envoyer', ['class' => 'flex text-white bg-gray-900 border-0 py-2 px-6 focus:outline-none hover:bg-indigo-600 rounded']) }}
+                {{ Form::submit('Envoyer', ['class' => 'flex text-white bg-gray-900 border-0 py-2 px-6 focus:outline-none hover:bg-blue-500 rounded']) }}
                 {!! Form::close() !!}
             </div>
         </div>
     </div>
-
-
 
     <script>
         const button = document.getElementById('buttonmodal')
@@ -85,5 +100,4 @@
         closebutton.addEventListener('click', () => modal.classList.remove('scale-100'))
     </script>
 
-
-@endsection
+  @endsection

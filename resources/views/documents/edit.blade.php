@@ -5,7 +5,7 @@
     @include('inc.sidebar')
 
     <div class="ml-14 mt-14 mb-4 md:ml-64 display-none">
-        <div class="flex items-center p-4 gap-4">
+        <div class="flex items-center p-4 gap-4 bg-white shadow">
 
             <form action="/search" method="post" id="search-form"
                 class="bg-white rounded flex items-center w-full max-w-xl mr-4 p-2 shadow-sm border border-gray-200 ">
@@ -16,14 +16,14 @@
                         <path d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"></path>
                     </svg>
                 </button>
-                <input type="text" name="search" id="search" placeholder="Recherche"
+                <input type="text" autocomplete="off" name="search" id="search" placeholder="Recherche"
                     class="w-full pl-3 text-sm text-black outline-none focus:outline-none bg-transparent" />
             </form>
 
             <div class="flex ml-auto">
                 @can('upload')
                     <button id="buttonmodalFile"
-                        class="flex text-white bg-gray-900 border-0 py-2 px-6 focus:outline-none hover:bg-indigo-600 rounded ml-4"
+                        class="flex text-white bg-gray-900 border-0 py-2 px-6 focus:outline-none hover:bg-blue-500 rounded ml-4"
                         type="button">
                         <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 m-1" fill="none" viewBox="0 0 24 24"
                             stroke="currentColor">
@@ -39,36 +39,36 @@
     </div>
 
 
-    <div class="grid grid-cols-3 sm:grid-cols-3 md:grid-cols-3 lg:grid-cols-3">
+    <div class="grid grid-cols-3 sm:grid-cols-3 md:grid-cols-3 lg:grid-cols-3 gap-4">
         <div class="col-span-2">
             <div class="h-full ml-14 mb-10 md:ml-64" style=" ">
-                <div class="flex flex-col w-full p-4">
+                <div class="flex flex-col p-4 ml-4 bg-white shadow">
                     <h1 class="sm:text-2xl text-xl font-medium title-font text-gray-900">Modifier le document</h1>
                 </div>
 
 
-                {!! Form::open(['action' => ['DocumentsController@update', $doc->id], 'method' => 'PATCH', 'enctype' => 'multipart/form-data', 'class' => 'grid grid-cols-2 lg:grid-cols-2 p-4 gap-4']) !!}
+                {!! Form::open(['action' => ['DocumentsController@update', $doc->id], 'method' => 'PATCH', 'enctype' => 'multipart/form-data', 'class' => 'grid grid-cols-2 lg:grid-cols-2 p-4 gap-4 mt-4 ml-4 bg-white shadow']) !!}
 
                 {{ csrf_field() }}
                 <div class=" ">
 
-                    <div class="mb-4 relative">
+                    <div class="mb-2 relative">
                         <label for="name" class="text-xs opacity-75 scale-75">Name</label>
-                        {{ Form::text('name', $doc->name, ['id' => 'name', 'class' => 'peer border border-gray-200 focus:outline-none rounded focus:border-gray-500 focus:shadow-sm w-full py-1 px-2 h-10 placeholder-transparent']) }}
+                        {{ Form::text('name', $doc->name, ['id' => 'name','autocomplete' => 'off','class' =>'peer border border-gray-200 focus:outline-none rounded focus:border-gray-500 focus:shadow-sm w-full py-1 px-2 h-8 placeholder-transparent text-sm']) }}
                         @if ($errors->has('name'))
                             <span class="text-red-600 text-xs">{{ $errors->first('name') }}</span>
                         @endif
                     </div>
 
-                    <div class="mb-4 relative">
+                    <div class="mb-2 relative">
                         <label for="name" class="text-xs opacity-75 scale-75">Description</label>
-                        {{ Form::textarea('description', $doc->description, ['id' => 'description', 'class' => 'peer border border-gray-200 focus:outline-none rounded focus:border-gray-500 focus:shadow-sm w-full py-1 px-2 h-10 placeholder-transparent']) }}
+                        {{ Form::textarea('description', $doc->description, ['id' => 'description','class' =>'peer border border-gray-200 focus:outline-none rounded focus:border-gray-500 focus:shadow-sm w-full py-1 px-2 h-8 placeholder-transparent text-sm']) }}
                         @if ($errors->has('description'))
                             <span class="text-red-600 text-xs">{{ $errors->first('description') }}</span>
                         @endif
                     </div>
 
-                    <div class="mb-4 relative hidden">
+                    <div class="mb-2 relative hidden">
                         @if (is_null($doc->expires_at))
                             {{ Form::checkbox('isExpire', 1, true, ['id' => 'isExpire']) }}
                         @else
@@ -80,28 +80,28 @@
                 </div>
 
                 <div class=" ">
-                    <div class="mb-4 relative">
+                    <div class="mb-2 relative">
                         <label for="ref" class="text-xs opacity-75 scale-75">
                             Réference
                         </label>
-                        {{ Form::text('ref', $doc->ref, ['id' => 'ref', 'class' => 'peer border border-gray-200 focus:outline-none rounded focus:border-gray-500 focus:shadow-sm w-full py-1 px-2 h-10 placeholder-transparent']) }}
+                        {{ Form::text('ref', $doc->ref, ['id' => 'ref','autocomplete' => 'off','class' =>'peer border border-gray-200 focus:outline-none rounded focus:border-gray-500 focus:shadow-sm w-full py-1 px-2 h-8 placeholder-transparent text-sm']) }}
                         @if ($errors->has('ref'))
                             <span class="text-red-600 text-xs">{{ $errors->first('ref') }}</span>
                         @endif
                     </div>
 
-                    <div class="mb-4 relative">
+                    <div class="mb-2 relative">
                         <label for="name" class="text-xs opacity-75 scale-75">
                             Version
                         </label>
-                        {{ Form::text('version', $doc->version, ['id' => 'version', 'class' => 'peer border border-gray-200 focus:outline-none rounded focus:border-gray-500 focus:shadow-sm w-full py-1 px-2 h-10 placeholder-transparent']) }}
+                        {{ Form::text('version', $doc->version, ['id' => 'version','autocomplete' => 'off','class' =>'peer border border-gray-200 focus:outline-none rounded focus:border-gray-500 focus:shadow-sm w-full py-1 px-2 h-8 placeholder-transparent text-sm']) }}
                         @if ($errors->has('version'))
                             <span class="text-red-600 text-xs">{{ $errors->first('version') }}</span>
                         @endif
                     </div>
                 </div>
 
-                <div class="mb-4 relative hidden">
+                <div class="mb-2 relative hidden">
                     @if (is_null($doc->expires_at))
                         {{ Form::text('expires_at', '', ['class' => 'datepicker', 'id' => 'expirePicker', 'disabled']) }}
                     @else
@@ -111,61 +111,80 @@
                         At</label>
                 </div>
 
-                <div class="mb-4 relative">
+                <div class="mb-2 relative">
                     <label class="text-xs opacity-75 scale-75">Category
                         (Optional)
                     </label>
-                    {{ Form::select('category_id[]', $categories, $selectedCategories, ['multiple' => 'multiple', 'id' => 'category', 'class' => 'form-multiselect peer border border-gray-200 focus:outline-none rounded focus:border-gray-500 focus:shadow-sm block w-full py-2']) }}
+                    {{ Form::select('category_id[]', $categories, $selectedCategories, ['multiple' => 'multiple','id' => 'category','class' =>'form-multiselect peer border border-gray-200 focus:outline-none rounded focus:border-gray-500 focus:shadow-sm block w-full py-2 text-sm']) }}
                     @if ($errors->has('category'))
                         <span class="text-red-600 text-xs">{{ $errors->first('category') }}</span>
                     @endif
                 </div>
 
-                <div class="mb-4 relative">
+                <div class="mb-2 relative">
                     <label class="text-xs opacity-75 scale-75">Folder
                         (Optional)
                     </label>
-                    {{ Form::select('folder_id[]', $folders, $selectedFolders, ['multiple' => 'multiple', 'id' => 'folder', 'class' => 'form-multiselect peer border border-gray-200 focus:outline-none rounded focus:border-gray-500 focus:shadow-sm block w-full py-2']) }}
+                    {{ Form::select('folder_id[]', $folders, $selectedFolders, ['multiple' => 'multiple','id' => 'folder','class' =>'form-multiselect peer border border-gray-200 focus:outline-none rounded focus:border-gray-500 focus:shadow-sm block w-full py-2 text-sm']) }}
                     @if ($errors->has('folder'))
                         <span class="text-red-600 text-xs">{{ $errors->first('folder') }}</span>
                     @endif
                 </div>
 
-                <div class="col-span-2">
-                    <div class="mb-4 relative">
-                        <h3 class="text-xs opacity-75 scale-75 uppercase">Permission</h3>
-                        <div class="grid sm:grid-cols-2 lg:grid-cols-3">
-                            @if (count($depts) > 0)
-                                @foreach ($depts as $dept)
+                <div class="col-span-2"> 
 
-                                    <div class="mb-6">
-                                        <div class="text-gray-900 mb-2 font-medium title-font">
-                                            {{ $dept->dptName }}
+                    @hasanyrole('Root|Admin')
+                        @if (count($subs) > 0)
+                            <div class="mb-2 relative">
+                                <h3 class="text-xs opacity-75 scale-75 uppercase">Autorisation</h3>
+                                <h3 class="text-gray-900 text-md mt-4 mb-4 font-medium title-font uppercase">Filials</h3>
+                                <div class="grid sm:grid-cols-2 lg:grid-cols-3">
+
+                                    @foreach ($subs as $sub)
+                                        <div>
+                                            <div class="font-bold mt-2">{{ $sub->subsName }}</div>
+                                            @foreach ($sub->departments()->get() as $dept)
+                                                <div>
+                                                    <label class="text-gray-900 mb-2 font-medium title-font">
+                                                        {{ $dept['dptName'] }}
+                                                    </label>
+                                                </div>
+                                                <div>
+                                                    <div class="">
+                                                        <input type="radio" name="permissions_{{ $dept['id'] }}[]"
+                                                            id="{{ $dept['id'] }}_none" value="{{ $dept['id'] }}_none"
+                                                            checked>
+                                                        <label class="text-sm"
+                                                            for="{{ $dept['id'] }}_none">None</label>
+                                                    </div>
+
+                                                    <div class="">
+                                                        <input type="radio" name="permissions_{{ $dept['id'] }}[]"
+                                                            value="{{ $dept['id'] }}_all" id="{{ $dept['id'] }}_all">
+                                                        <label class="text-sm" for="{{ $dept['id'] }}_all">All</label>
+                                                    </div>
+
+                                                    <div class="">
+                                                        <input type="radio" name="permissions_{{ $dept['id'] }}[]"
+                                                            id="{{ $dept['id'] }}_admins"
+                                                            value="{{ $dept['id'] }}_admins">
+                                                        <label class="text-sm"
+                                                            for="{{ $dept['id'] }}_admins">Admins</label>
+                                                    </div>
+                                                </div>
+                                            @endforeach
                                         </div>
+                                    @endforeach
 
-                                        <div class="">
-                                            <input type="radio" name="permissions_{{ $dept->id }}[]"
-                                                value="{{ $dept->id }}_all" id="{{ $dept->id }}_all"
-                                                {{ $dept->permission_for == 0 ? 'checked' : '' }}>
-                                            <label for="{{ $dept->id }}_all">All</label>
-                                        </div>
+                                </div>
+                            </div>
+                            <div id="folder_dept_list"></div>
+                        @endif
+                    @endhasanyrole
 
-                                        <div class="">
-                                            <input type="radio" name="permissions_{{ $dept->id }}[]"
-                                                id="{{ $dept->id }}_admins" value="{{ $dept->id }}_admins"
-                                                {{ $dept->permission_for == 1 ? 'checked' : '' }}>
-                                            <label for="{{ $dept->id }}_admins">Admins</label>
-                                        </div>
-                                    </div>
-
-                                @endforeach
-                            @endif
-                        </div>
-                    </div>
-
-                    <div class="relative">
+                    {{-- <div class="relative">
                         <div class="btn white">
-                            <span class="black-text">Choisir le fichier (Max: 50MB)</span>
+                            <span class="black-text">Sélectionner votre fichier (Max: 50MB)</span>
                             {{ Form::file('file') }}
                             @if ($errors->has('file'))
                                 <span class="text-red-600 text-xs">{{ $errors->first('file') }}</span>
@@ -174,11 +193,11 @@
                         <div class="file-path-wrapper">
                             <input class="file-path validate" type="text">
                         </div>
-                    </div>
+                    </div> --}}
 
-                    <div class="mb-4 relative">
+                    <div class="mb-2 relative">
                         <p class="center">
-                            {{ Form::submit(' Sauvegarder', ['class' => 'text-white bg-gray-900 border-0 py-2 px-6 focus:outline-none hover:bg-indigo-600 text-lg']) }}
+                            {{ Form::submit(' Sauvegarder', ['class' => 'text-white bg-gray-900 border-0 py-2 px-6 focus:outline-none hover:bg-blue-500 text-lg']) }}
                         </p>
                     </div>
                 </div>
@@ -188,7 +207,14 @@
 
             </div>
         </div>
-        <img src="{{ asset('img/undraw_Add_files_re_v09g.svg') }}" alt="">
+
+        @can('upload')
+            <button id="buttonmodalFileImg" class="bg-white h-auto p-4 shadow" type="button">
+                <img src="{{ asset('img/undraw_Add_files_re_v09g.svg') }}" alt="">
+            </button>
+        @endcan
+
+
     </div>
 
 
@@ -207,7 +233,7 @@
             </button>
 
             <div>
-                <h2 class="text-gray-900 text-xl mb-2 font-medium title-font">Ajouter le fichier</h2>
+                <h2 class="text-gray-900 text-xl mb-2 font-medium title-font">Ajouter un document</h2>
 
                 {!! Form::open(['action' => 'DocumentsController@store', 'method' => 'POST', 'enctype' => 'multipart/form-data', 'class' => 'col s12']) !!}
 
@@ -217,9 +243,9 @@
                 <div class="mb-4 flex">
                     <div class="mr-4 relative flex-1">
                         <label for="name" class="text-xs opacity-75 scale-75">
-                            Nom de fichier
+                            Nom du document
                         </label>
-                        {{ Form::text('name', '', ['id' => 'name', 'class' => 'peer border border-gray-200 focus:outline-none rounded focus:border-gray-500 focus:shadow-sm w-full py-1 px-2 h-10 placeholder-transparent']) }}
+                        {{ Form::text('name', '', ['id' => 'name','autocomplete' => 'off','class' =>'peer border border-gray-200 focus:outline-none rounded focus:border-gray-500 focus:shadow-sm w-full py-1 px-2 h-8 placeholder-transparent text-sm']) }}
                         @if ($errors->has('name'))
                             <span class="text-red-600 text-xs">{{ $errors->first('name') }}</span>
                         @endif
@@ -228,7 +254,7 @@
                         <label for="ref" class="text-xs opacity-75 scale-75">
                             Réference
                         </label>
-                        {{ Form::text('ref', '', ['id' => 'ref', 'class' => 'peer border border-gray-200 focus:outline-none rounded focus:border-gray-500 focus:shadow-sm w-full py-1 px-2 h-10 placeholder-transparent']) }}
+                        {{ Form::text('ref', '', ['id' => 'ref','autocomplete' => 'off','class' =>'peer border border-gray-200 focus:outline-none rounded focus:border-gray-500 focus:shadow-sm w-full py-1 px-2 h-8 placeholder-transparent text-sm']) }}
                         @if ($errors->has('ref'))
                             <span class="text-red-600 text-xs">{{ $errors->first('ref') }}</span>
                         @endif
@@ -237,35 +263,35 @@
                         <label for="name" class="text-xs opacity-75 scale-75">
                             Version
                         </label>
-                        {{ Form::text('version', '', ['id' => 'version', 'class' => 'peer border border-gray-200 focus:outline-none rounded focus:border-gray-500 focus:shadow-sm w-full py-1 px-2 h-10 placeholder-transparent']) }}
+                        {{ Form::text('version', '', ['id' => 'version','autocomplete' => 'off','class' =>'peer border border-gray-200 focus:outline-none rounded focus:border-gray-500 focus:shadow-sm w-full py-1 px-2 h-8 placeholder-transparent text-sm']) }}
                         @if ($errors->has('version'))
                             <span class="text-red-600 text-xs">{{ $errors->first('version') }}</span>
                         @endif
                     </div>
                 </div>
 
-                <div class="mb-4 relative">
+                <div class="mb-2 relative">
                     <label for="name" class="text-xs opacity-75 scale-75">Description</label>
-                    {{ Form::textarea('description', '', ['id' => 'description', 'class' => 'peer pt-5 border border-gray-200 focus:outline-none rounded focus:border-gray-500 focus:shadow-sm w-full py-1 px-3 h-20 placeholder-transparent']) }}
+                    {{ Form::textarea('description', '', ['id' => 'description','class' =>'peer pt-5 border border-gray-200 focus:outline-none rounded focus:border-gray-500 focus:shadow-sm w-full py-1 px-3 h-20 placeholder-transparent']) }}
                     @if ($errors->has('description'))
                         <span class="text-red-600 text-xs">{{ $errors->first('description') }}</span>
                     @endif
                 </div>
 
-                <div class="mb-4 relative hidden">
+                <div class="mb-2 relative hidden">
                     {{ Form::checkbox('isExpire', 1, true, ['id' => 'isExpire']) }}
                     <label for="name" class="text-xs opacity-75 scale-75">Does
                         Not Expire</label>
                 </div>
 
-                <div class="mb-4 relative">
+                <div class="mb-2 relative">
                     <div class="flex">
 
-                        <div class="mb-4 relative flex-1 hidden">
+                        <div class="mb-2 relative flex-1 hidden">
                             <label class="text-xs opacity-75 scale-75">
-                                Category (Optional)
+                                Catégorie (Optional)
                             </label>
-                            {{ Form::select('category_id[]', $categories, null, ['multiple' => 'multiple', 'id' => 'category', 'class' => 'form-multiselect peer border border-gray-200 focus:outline-none rounded focus:border-gray-500 focus:shadow-sm block w-full py-2']) }}
+                            {{ Form::select('category_id[]', $categories, null, ['multiple' => 'multiple','id' => 'category','class' =>'form-multiselect peer border border-gray-200 focus:outline-none rounded focus:border-gray-500 focus:shadow-sm block w-full py-2']) }}
                             @if ($errors->has('category'))
                                 <span class="text-red-600 text-xs">{{ $errors->first('category') }}</span>
                             @endif
@@ -275,7 +301,7 @@
                             <label class="text-xs opacity-75 scale-75">
                                 Folder (Optional)
                             </label>
-                            {{ Form::select('folder_id[]', $folders, null, ['multiple' => 'multiple', 'id' => 'folder', 'class' => 'form-multiselect peer border border-gray-200 focus:outline-none rounded focus:border-gray-500 focus:shadow-sm block w-full py-2']) }}
+                            {{ Form::select('folder_id[]', $folders, null, ['multiple' => 'multiple','id' => 'folder','class' =>'form-multiselect peer border border-gray-200 focus:outline-none rounded focus:border-gray-500 focus:shadow-sm block w-full py-2']) }}
                             @if ($errors->has('folder'))
                                 <span class="text-red-600 text-xs">{{ $errors->first('folder') }}</span>
                             @endif
@@ -284,10 +310,10 @@
 
                         <div class="mb-4 pr-2 relative flex-1">
                             <label for="name" class="text-xs opacity-75 scale-75">
-                                Category (Optional)
+                                Catégorie (Optional)
                             </label>
                             <select name="category_id" id="folder" onchange="javascript:handleSelect(this)"
-                                class="peer border border-gray-200 focus:outline-none rounded focus:border-gray-500 focus:shadow-sm w-full py-1 px-2 h-10 placeholder-transparent placeholder-gray-600 border appearance-none focus:shadow-outline">
+                                class="peer border border-gray-200 focus:outline-none rounded focus:border-gray-500 focus:shadow-sm w-full py-1 px-2 h-8 placeholder-transparent text-sm placeholder-gray-600 border appearance-none focus:shadow-outline">
                                 @foreach ($categories as $id => $name)
                                     <option value="{{ $id }}">{{ $name }}</option>
                                 @endforeach
@@ -310,7 +336,7 @@
                             <label for="name" class="text-xs opacity-75 scale-75">Dans
                                 le dossier</label>
                             <select name="folder_id" id="folder" onchange="javascript:handleSelect(this)"
-                                class="peer border border-gray-200 focus:outline-none rounded focus:border-gray-500 focus:shadow-sm w-full py-1 px-2 h-10 placeholder-transparent placeholder-gray-600 border appearance-none focus:shadow-outline">
+                                class="peer border border-gray-200 focus:outline-none rounded focus:border-gray-500 focus:shadow-sm w-full py-1 px-2 h-8 placeholder-transparent text-sm placeholder-gray-600 border appearance-none focus:shadow-outline">
                                 @foreach ($folders as $id => $name)
                                     <option value="{{ $id }}">{{ $name }}</option>
                                 @endforeach
@@ -332,39 +358,59 @@
                     </div>
                 </div>
 
-                <div class="mb-4 relative">
-                    <h3 class="text-gray-900 text-lg mt-6 mb-4 font-medium title-font uppercase">Autorisation</h3>
-                    <div class="grid sm:grid-cols-2 lg:grid-cols-3">
-                        @if (count($depts) > 0)
-                            @foreach ($depts as $dept)
+                @hasanyrole('Root|Admin')
+                @if (count($subs) > 0)
+                    <div class="mb-2 relative">
+                        <h3 class="text-xs opacity-75 scale-75 uppercase">Autorisation</h3>
+                        <h3 class="text-gray-900 text-md mt-4 mb-4 font-medium title-font uppercase">Filials</h3>
+                        <div class="grid sm:grid-cols-2 lg:grid-cols-3">
 
-                                <div class="mb-2">
-                                    <div class="text-gray-900 mb-2 text-xs title-font">
-                                        {{ $dept->dptName }}
-                                    </div>
+                            @foreach ($subs as $sub)
+                                <div>
+                                    <div class="font-bold mt-2">{{ $sub->subsName }}</div>
+                                    @foreach ($sub->departments()->get() as $dept)
+                                        <div>
+                                            <label class="text-gray-900 mb-2 font-medium title-font">
+                                                {{ $dept['dptName'] }}
+                                            </label>
+                                        </div>
+                                        <div>
+                                            <div class="">
+                                                <input type="radio" name="permissions_{{ $dept['id'] }}[]"
+                                                    id="{{ $dept['id'] }}_none" value="{{ $dept['id'] }}_none"
+                                                    checked>
+                                                <label class="text-sm"
+                                                    for="{{ $dept['id'] }}_none">None</label>
+                                            </div>
 
-                                    <div class="-mb-1">
-                                        <input type="radio" name="permissions_{{ $dept->id }}[]"
-                                            value="{{ $dept->id }}_all" id="{{ $dept->id }}_all" class="h-3 w-3">
-                                        <label for="{{ $dept->id }}_all" class="text-xs">All</label>
-                                    </div>
+                                            <div class="">
+                                                <input type="radio" name="permissions_{{ $dept['id'] }}[]"
+                                                    value="{{ $dept['id'] }}_all" id="{{ $dept['id'] }}_all">
+                                                <label class="text-sm" for="{{ $dept['id'] }}_all">All</label>
+                                            </div>
 
-                                    <div class="">
-                                        <input type="radio" name="permissions_{{ $dept->id }}[]"
-                                            id="{{ $dept->id }}_admins" value="{{ $dept->id }}_admins" checked
-                                            class="h-3 w-3">
-                                        <label for="{{ $dept->id }}_admins" class="text-xs">Admins</label>
-                                    </div>
+                                            <div class="">
+                                                <input type="radio" name="permissions_{{ $dept['id'] }}[]"
+                                                    id="{{ $dept['id'] }}_admins"
+                                                    value="{{ $dept['id'] }}_admins">
+                                                <label class="text-sm"
+                                                    for="{{ $dept['id'] }}_admins">Admins</label>
+                                            </div>
+                                        </div>
+                                    @endforeach
                                 </div>
-
                             @endforeach
-                        @endif
+
+                        </div>
                     </div>
-                </div>
+                    <div id="folder_dept_list"></div>
+                @endif
+                
+            @endhasanyrole
 
                 <div class="relative">
                     <div class="btn white">
-                        <span class="black-text">Choisir le fichier (Max: 50MB)</span>
+                        <span class="black-text">Sélectionner votre fichier (Max: 50MB)</span>
                         {{ Form::file('file') }}
                         @if ($errors->has('file'))
                             <span class="text-red-600 text-xs">{{ $errors->first('file') }}</span>
@@ -384,17 +430,96 @@
         </div>
     </div>
 
-
-
-
     <script type="text/javascript">
         const buttonFile = document.getElementById('buttonmodalFile')
+        const buttonFileImg = document.getElementById('buttonmodalFileImg')
         const closebuttonFile = document.getElementById('closebuttonFile')
         const modalFile = document.getElementById('modalFile')
 
         buttonFile.addEventListener('click', () => modalFile.classList.add('scale-100'))
+        buttonFileImg.addEventListener('click', () => modalFile.classList.add('scale-100'))
         closebuttonFile.addEventListener('click', () => modalFile.classList.remove('scale-100'))
     </script>
 
+    <script>
+        $(function() {
+
+            $(document).on("click", ".getDepartement", function(e) {
+                e.preventDefault();
+                $('#ajaxShadow').show();
+                $('#ajaxloader').show();
+
+                var subs = $(this).data('subs_id');
+                var folder = $(this).data('folder_id');
+
+                var url = "{{ URL('departments/getDepartement') }}";
+                var url = url + "/subs/" + subs + "/folder/" + folder;
+
+                $.ajax({
+                    url: url,
+                    type: "GET",
+                    data: {
+                        _token: '{{ csrf_token() }}',
+                        subs: subs,
+                        folder: folder,
+                    },
+                    success: function(dataResult) {
+
+                        $('#dept_list').empty();
+                        var dept_html = '';
+                        dept_html +=
+                            '<h3 class="text-gray-900 text-md mt-4 mb-4 font-medium title-font uppercase">Departments</h3>';
+                        dept_html += '<div class="grid sm:grid-cols-2 lg:grid-cols-3">';
+
+                        $.map(dataResult.data.departments, function(departement) {
+                            console.log(departement);
+
+                            dept_html += '<div class="">';
+
+                            dept_html +=
+                                '<div class="text-gray-900 mb-2 font-medium title-font">' +
+                                departement.dptName + '</div>';
+
+                            dept_html += '<div class="">';
+                            dept_html +=
+                                `<input type="radio" name="permissions_${departement.id}[]" id="${departement.id}_none" value="${departement.id}_none" ${ departement.permission_for == -1 ? "checked" : "" }> `;
+                            dept_html +=
+                                `<label class="text-sm" for="${departement.id}_none">None</label>`;
+                            dept_html += '</div>';
+
+                            dept_html += '<div class="">';
+                            dept_html +=
+                                `<input type="radio" name="permissions_${departement.id}[]" value="${departement.id}_all" id="${departement.id}_all" ${ departement.permission_for == 0 ? "checked" : "" }> `;
+                            dept_html +=
+                                `<label class="text-sm" for="${departement.id}_all">All</label>`;
+                            dept_html += '</div>';
+
+                            dept_html += '<div class="">';
+                            dept_html +=
+                                `<input type="radio" name="permissions_${departement.id}[]" id="${departement.id}_admins" value="${departement.id}_admins" ${ departement.permission_for == 1 ? "checked" : "" }> `;
+                            dept_html +=
+                                `<label class="text-sm" for="${departement.id}_admins">Admins</label>`;
+                            dept_html += '</div>';
+
+                            dept_html += '</div>';
+
+                        });
+                        dept_html += '</div>';
+                        $('#dept_list').html(dept_html);
+
+                        $('#ajaxShadow').hide();
+                        $('#ajaxloader').hide();
+                    },
+                    error: function(error) {
+                        console.log(error);
+                        // location.reload(true);
+                        $('#ajaxShadow').hide();
+                        $('#ajaxloader').hide();
+                    }
+                });
+
+            });
+        });
+    </script>
 
 @endsection

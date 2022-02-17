@@ -28,14 +28,19 @@ class LoginController extends Controller
     // protected $redirectTo = '/home';
     protected function redirectTo()
     {
-        if(auth()->user()->hasRole('Root')) {
-            return '/dashboard';
-        }
-        elseif (auth()->user()->hasRole('Admin')) {
-            return '/users';
-        }
-        else {
-            return '/documents';
+
+        $authUser = auth()->user();
+        
+        if ($authUser->status == 1) {
+            if ($authUser->hasRole('Root')) {
+                return '/dashboard';
+            } elseif ($authUser->hasRole('Admin')) {
+                return '/users';
+            } else {
+                return '/documents';
+            }
+        } else {
+            // return redirect()->back()->withErrors('Current Password is incorrect!');
         }
     }
 

@@ -7,7 +7,7 @@
     <div class="h-full ml-14 mt-14 mb-10 md:ml-64">
 
         <div class="grid grid-cols-1 lg:grid-cols-1 p-4 gap-4">
-            <div class="relative flex flex-col min-w-0 mb-4 lg:mb-0 break-words bg-gray-50   w-full shadow-md rounded">
+            <div class="relative flex flex-col min-w-0 mb-4 lg:mb-0 break-words bg-white w-full shadow-md rounded">
                 <div class="rounded-t mb-0 px-0 border-0">
                     <div class="flex flex-wrap items-center px-4 py-2">
                         <div class="relative w-full max-w-full flex-grow flex-1">
@@ -17,7 +17,7 @@
                         </div>
                         <div class="relative w-full max-w-full flex-grow flex-1 text-right">
                             <button id="buttonmodal" data-target="modal1"
-                                class="flex text-white bg-gray-900 border-0 py-2 px-6 focus:outline-none hover:bg-indigo-600 rounded ml-auto"
+                                class="flex text-white bg-gray-900 border-0 py-2 px-6 focus:outline-none hover:bg-blue-500 rounded ml-auto"
                                 type="button">Ajouter une categories</button>
                         </div>
                     </div>
@@ -28,25 +28,27 @@
         <div class="grid grid-cols-3 sm:grid-cols-3 lg:grid-cols-3 p-4 gap-4">
             <div class="col-span-2">
 
-                <div class="flex items-center p-4 gap-4">
+                <div class="flex items-center p-4 gap-4 bg-white">
 
                     {!! Form::open(['action' => ['CategoriesController@update', $category->id], 'method' => 'PATCH', 'class' => 'w-full']) !!}
 
-                    <div class="mb-4 relative">
-                        {{ Form::text('name', $category->name, ['class' => 'peer border border-gray-200 focus:outline-none rounded focus:border-gray-500 focus:shadow-sm w-full py-1 px-2 h-10 placeholder-transparent', 'id' => 'category']) }}
+                    <div class="mb-2 relative">
+                        {{ Form::text('name', $category->name, ['autocomplete' => 'off','class' => 'peer border border-gray-200 focus:outline-none rounded focus:border-gray-500 focus:shadow-sm w-full py-1 px-2 h-8 placeholder-transparent text-sm', 'id' => 'category']) }}
                         <label for="name" class="text-xs opacity-75 scale-75">
                             Nom de catégorie
                         </label>
                     </div>
 
-                    {{ Form::submit('Sauvegarder les modifications', ['class' => 'flex text-white bg-gray-900 border-0 py-2 px-6 focus:outline-none hover:bg-indigo-600 rounded']) }}
+                    {{ Form::submit('Sauvegarder les modifications', ['class' => 'flex text-white bg-gray-900 border-0 py-2 px-6 focus:outline-none hover:bg-blue-500 rounded']) }}
 
                     {!! Form::close() !!}
 
                 </div>
             </div>
 
+            <button id="buttonmodalFileImg" class="bg-white h-auto p-4 shadow" type="button">
             <img src="{{ asset('img/undraw_Add_files_re_v09g.svg') }}" alt="">
+            </button>
         </div>
 
     </div>
@@ -67,14 +69,14 @@
             <div class="flex flex-col px-6 py-5 bg-gray-50">
                 {!! Form::open(['action' => 'CategoriesController@store', 'method' => 'POST', 'class' => 'w-full']) !!}
 
-                <div class="mb-4 relative">
-                    {{ Form::text('name', '', ['class' => 'peer border border-gray-200 focus:outline-none rounded focus:border-gray-500 focus:shadow-sm w-full py-1 px-2 h-10 placeholder-transparent', 'id' => 'category']) }}
+                <div class="mb-2 relative">
+                    {{ Form::text('name', '', ['autocomplete' => 'off','class' => 'peer border border-gray-200 focus:outline-none rounded focus:border-gray-500 focus:shadow-sm w-full py-1 px-2 h-8 placeholder-transparent text-sm', 'id' => 'category']) }}
                     <label for="email" class="text-xs opacity-75 scale-75">
                         Nom de catégorie
                     </label>
                 </div>
 
-                {{ Form::submit('Sauvegarder les modifications', ['class' => 'flex text-white bg-gray-900 border-0 py-2 px-6 focus:outline-none hover:bg-indigo-600 rounded']) }}
+                {{ Form::submit('Sauvegarder les modifications', ['class' => 'flex text-white bg-gray-900 border-0 py-2 px-6 focus:outline-none hover:bg-blue-500 rounded']) }}
 
                 {!! Form::close() !!}
 
@@ -82,7 +84,6 @@
 
         </div>
     </div>
-
 
     <script>
         const button = document.getElementById('buttonmodal')
@@ -92,6 +93,5 @@
         button.addEventListener('click', () => modal.classList.add('scale-100'))
         closebutton.addEventListener('click', () => modal.classList.remove('scale-100'))
     </script>
-
 
 @endsection

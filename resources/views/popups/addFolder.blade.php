@@ -1,7 +1,7 @@
 <div id="modalFile"
     class="fixed top-0 left-0 w-screen h-screen flex items-center justify-center bg-blue-500 bg-opacity-50 transform scale-0 transition-transform duration-300">
     <!-- Modal content -->
-    <div class="bg-white w-1/2 p-4">
+    <div class="bg-white w-1/2 p-12 overflow-y-scroll h-2/4">
         <!--Close modal button-->
         <button id="closebuttonFile" type="button" class="focus:outline-none float-right">
             <!-- Hero icon - close button -->
@@ -13,19 +13,18 @@
         </button>
 
         <div>
-            <h2 class="text-gray-900 text-xl mb-2 font-medium title-font">Ajouter le fichier</h2>
+            <h2 class="text-gray-900 text-xl mb-2 font-medium title-font">Ajouter le document</h2>
 
             {!! Form::open(['action' => 'DocumentsController@store', 'method' => 'POST', 'enctype' => 'multipart/form-data', 'class' => 'col s12']) !!}
 
             {{ csrf_field() }}
 
-
             <div class="mb-4 flex">
                 <div class="mr-4 relative flex-1">
                     <label for="name" class="text-xs opacity-75 scale-75">
-                        Nom de fichier
+                        Nom du document
                     </label>
-                    {{ Form::text('name', '', ['id' => 'name', 'class' => 'peer border border-gray-200 focus:outline-none rounded focus:border-gray-500 focus:shadow-sm w-full py-1 px-2 h-10 placeholder-transparent']) }}
+                    {{ Form::text('name', '', ['id' => 'name','autocomplete' => 'off','class' =>'peer border border-gray-200 focus:outline-none rounded focus:border-gray-500 focus:shadow-sm w-full py-1 px-2 h-8 placeholder-transparent text-sm']) }}
                     @if ($errors->has('name'))
                         <span class="text-red-600 text-xs">{{ $errors->first('name') }}</span>
                     @endif
@@ -34,7 +33,7 @@
                     <label for="ref" class="text-xs opacity-75 scale-75">
                         Réference
                     </label>
-                    {{ Form::text('ref', '', ['id' => 'ref', 'class' => 'peer border border-gray-200 focus:outline-none rounded focus:border-gray-500 focus:shadow-sm w-full py-1 px-2 h-10 placeholder-transparent']) }}
+                    {{ Form::text('ref', '', ['id' => 'ref','autocomplete' => 'off','class' =>'peer border border-gray-200 focus:outline-none rounded focus:border-gray-500 focus:shadow-sm w-full py-1 px-2 h-8 placeholder-transparent text-sm']) }}
                     @if ($errors->has('ref'))
                         <span class="text-red-600 text-xs">{{ $errors->first('ref') }}</span>
                     @endif
@@ -43,43 +42,43 @@
                     <label for="name" class="text-xs opacity-75 scale-75">
                         Version
                     </label>
-                    {{ Form::text('version', '', ['id' => 'version', 'class' => 'peer border border-gray-200 focus:outline-none rounded focus:border-gray-500 focus:shadow-sm w-full py-1 px-2 h-10 placeholder-transparent']) }}
+                    {{ Form::text('version', '', ['id' => 'version','autocomplete' => 'off','class' =>'peer border border-gray-200 focus:outline-none rounded focus:border-gray-500 focus:shadow-sm w-full py-1 px-2 h-8 placeholder-transparent text-sm']) }}
                     @if ($errors->has('version'))
                         <span class="text-red-600 text-xs">{{ $errors->first('version') }}</span>
                     @endif
                 </div>
             </div>
 
-            <div class="mb-4 relative">
+            <div class="mb-2 relative">
                 <label for="name" class="text-xs opacity-75 scale-75">Description</label>
-                {{ Form::textarea('description', '', ['id' => 'description', 'class' => 'peer pt-5 border border-gray-200 focus:outline-none rounded focus:border-gray-500 focus:shadow-sm w-full py-1 px-3 h-20 placeholder-transparent']) }}
+                {{ Form::textarea('description', '', ['id' => 'description','class' =>'peer pt-5 border border-gray-200 focus:outline-none rounded focus:border-gray-500 focus:shadow-sm w-full py-1 px-3 h-20 placeholder-transparent']) }}
                 @if ($errors->has('description'))
                     <span class="text-red-600 text-xs">{{ $errors->first('description') }}</span>
                 @endif
             </div>
 
-            <div class="mb-4 relative hidden">
+            <div class="mb-2 relative hidden">
                 {{ Form::checkbox('isExpire', 1, true, ['id' => 'isExpire']) }}
                 <label for="name" class="text-xs opacity-75 scale-75">Does
                     Not Expire</label>
             </div>
 
-            <div class="mb-4 relative">
+            <div class="mb-2 relative">
                 <div class="flex">
 
-                    <div class="mb-4 relative flex-1 hidden flex items-end">
+                    <div class="mb-2 relative flex-1 hidden flex items-end">
                         <div class="w-full">
                             <label class="text-xs opacity-75 scale-75">
-                                Category (Optional)
+                                Catégorie (Optional)
                             </label>
-                            {{ Form::select('category_id[]', $categories, null, ['multiple' => 'multiple', 'id' => 'category', 'class' => 'form-multiselect peer border border-gray-200 focus:outline-none rounded focus:border-gray-500 focus:shadow-sm block w-full py-2']) }}
+                            {{ Form::select('category_id[]', $categories, null, ['multiple' => 'multiple','id' => 'category','class' =>'form-multiselect peer border border-gray-200 focus:outline-none rounded focus:border-gray-500 focus:shadow-sm block w-full py-2']) }}
                             @if ($errors->has('category'))
                                 <span class="text-red-600 text-xs">{{ $errors->first('category') }}</span>
                             @endif
                         </div>
                         <div class="w-6 ml-4">
-                            <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24"
-                                id="add_folder" stroke="currentColor">
+                            <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none"
+                                viewBox="0 0 24 24" id="add_folder" stroke="currentColor">
                                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
                                     d="M9 13h6m-3-3v6m-9 1V7a2 2 0 012-2h6l2 2h6a2 2 0 012 2v8a2 2 0 01-2 2H5a2 2 0 01-2-2z" />
                             </svg>
@@ -91,14 +90,14 @@
                             <label class="text-xs opacity-75 scale-75">
                                 Folder (Optional)
                             </label>
-                            {{ Form::select('folder_id[]', $folders_input, null, ['multiple' => 'multiple', 'id' => 'folder', 'class' => 'form-multiselect peer border border-gray-200 focus:outline-none rounded focus:border-gray-500 focus:shadow-sm block w-full py-2']) }}
+                            {{ Form::select('folder_id[]', $folders_input, null, ['multiple' => 'multiple','id' => 'folder','class' =>'form-multiselect peer border border-gray-200 focus:outline-none rounded focus:border-gray-500 focus:shadow-sm block w-full py-2']) }}
                             @if ($errors->has('folder'))
                                 <span class="text-red-600 text-xs">{{ $errors->first('folder') }}</span>
                             @endif
                         </div>
                         <div class="w-6 ml-4">
-                            <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24"
-                                id="add_folder" stroke="currentColor">
+                            <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none"
+                                viewBox="0 0 24 24" id="add_folder" stroke="currentColor">
                                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
                                     d="M9 13h6m-3-3v6m-9 1V7a2 2 0 012-2h6l2 2h6a2 2 0 012 2v8a2 2 0 01-2 2H5a2 2 0 01-2-2z" />
                             </svg>
@@ -108,10 +107,10 @@
                     <div class="mb-4 pr-2 relative flex-1 flex items-end">
                         <div class="w-full relative">
                             <label for="category" class="text-xs opacity-75 scale-75">
-                                Category (Optional)
+                                Catégorie (Optional)
                             </label>
                             <select name="category_id" id="category" onchange="javascript:handleSelect(this)"
-                                class="peer border border-gray-200 focus:outline-none rounded focus:border-gray-500 focus:shadow-sm w-full py-1 px-2 h-10 placeholder-transparent placeholder-gray-600 border appearance-none focus:shadow-outline">
+                                class="peer border border-gray-200 focus:outline-none rounded focus:border-gray-500 focus:shadow-sm w-full py-1 px-2 h-8 placeholder-transparent text-sm placeholder-gray-600 border appearance-none focus:shadow-outline">
                                 @foreach ($categories as $id => $name)
                                     <option value="{{ $id }}">{{ $name }}</option>
                                 @endforeach
@@ -127,8 +126,8 @@
                             </div>
                         </div>
                         <div class="w-6 ml-4">
-                            <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24"
-                                id="add_categorie" stroke="currentColor">
+                            <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none"
+                                viewBox="0 0 24 24" id="add_categorie" stroke="currentColor">
                                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
                                     d="M9 13h6m-3-3v6m-9 1V7a2 2 0 012-2h6l2 2h6a2 2 0 012 2v8a2 2 0 01-2 2H5a2 2 0 01-2-2z" />
                             </svg>
@@ -143,7 +142,7 @@
                             <label for="folder" class="text-xs opacity-75 scale-75">Dans
                                 le dossier</label>
                             <select name="folder_id" id="folder" onchange="javascript:handleSelect(this)"
-                                class="peer border border-gray-200 focus:outline-none rounded focus:border-gray-500 focus:shadow-sm w-full py-1 px-2 h-10 placeholder-transparent placeholder-gray-600 border appearance-none focus:shadow-outline">
+                                class="peer border border-gray-200 focus:outline-none rounded focus:border-gray-500 focus:shadow-sm w-full py-1 px-2 h-8 placeholder-transparent text-sm placeholder-gray-600 border appearance-none focus:shadow-outline">
                                 @foreach ($folders_input as $id => $name)
                                     <option value="{{ $id }}">{{ $name }}</option>
                                 @endforeach
@@ -159,8 +158,8 @@
                             </div>
                         </div>
                         <div class="w-6 ml-4">
-                            <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24"
-                                id="add_folder_main" stroke="currentColor">
+                            <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none"
+                                viewBox="0 0 24 24" id="add_folder_main" stroke="currentColor">
                                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
                                     d="M9 13h6m-3-3v6m-9 1V7a2 2 0 012-2h6l2 2h6a2 2 0 012 2v8a2 2 0 01-2 2H5a2 2 0 01-2-2z" />
                             </svg>
@@ -173,39 +172,54 @@
                 </div>
             </div>
 
-            <div class="mb-4 relative">
-                <h3 class="text-gray-900 text-lg mt-6 mb-4 font-medium title-font uppercase">Autorisation</h3>
-                <div class="grid sm:grid-cols-2 lg:grid-cols-3">
-                    @if (count($depts) > 0)
-                        @foreach ($depts as $dept)
+            @hasanyrole('Root|Admin')
+                @if (count($subs) > 0)
+                    <div class="mb-2 relative">
+                        <h3 class="text-xs opacity-75 scale-75 uppercase">Autorisation</h3>
+                        <h3 class="text-gray-900 text-md mt-4 mb-4 font-medium title-font uppercase">Filials</h3>
+                        <div class="grid sm:grid-cols-2 lg:grid-cols-3">
+                            @foreach ($subs as $sub)
+                                <div>
+                                    <div class="font-bold mt-2">{{ $sub->subsName }}</div>
+                                    @foreach ($sub->departments()->get() as $dept)
+                                        <div>
+                                            <label class="text-gray-900 mb-2 font-medium title-font">
+                                                {{ $dept['dptName'] }}
+                                            </label>
+                                        </div>
+                                        <div>
+                                            <div class="">
+                                                <input type="radio" name="permissions_{{ $dept['id'] }}[]"
+                                                    id="{{ $dept['id'] }}_none" value="{{ $dept['id'] }}_none"
+                                                    checked>
+                                                <label class="text-sm" for="{{ $dept['id'] }}_none">None</label>
+                                            </div>
 
-                            <div class="mb-2">
-                                <div class="text-gray-900 mb-2 text-xs title-font">
-                                    {{ $dept->dptName }}
+                                            <div class="">
+                                                <input type="radio" name="permissions_{{ $dept['id'] }}[]"
+                                                    value="{{ $dept['id'] }}_all" id="{{ $dept['id'] }}_all">
+                                                <label class="text-sm" for="{{ $dept['id'] }}_all">All</label>
+                                            </div>
+
+                                            <div class="">
+                                                <input type="radio" name="permissions_{{ $dept['id'] }}[]"
+                                                    id="{{ $dept['id'] }}_admins" value="{{ $dept['id'] }}_admins">
+                                                <label class="text-sm"
+                                                    for="{{ $dept['id'] }}_admins">Admins</label>
+                                            </div>
+                                        </div>
+                                    @endforeach
                                 </div>
-
-                                <div class="-mb-1">
-                                    <input type="radio" name="permissions_{{ $dept->id }}[]"
-                                        value="{{ $dept->id }}_all" id="{{ $dept->id }}_all" class="h-3 w-3">
-                                    <label for="{{ $dept->id }}_all" class="text-xs">All</label>
-                                </div>
-
-                                <div class="">
-                                    <input type="radio" name="permissions_{{ $dept->id }}[]"
-                                        id="{{ $dept->id }}_admins" value="{{ $dept->id }}_admins" checked
-                                        class="h-3 w-3">
-                                    <label for="{{ $dept->id }}_admins" class="text-xs">Admins</label>
-                                </div>
-                            </div>
-
-                        @endforeach
-                    @endif
-                </div>
-            </div>
+                            @endforeach
+                        </div>
+                        <div id="dept_list"></div>
+                    </div>
+                @endif
+            @endhasanyrole
 
             <div class="relative">
                 <div class="btn white">
-                    <span class="black-text">Choisir le fichier (Max: 50MB)</span>
+                    <span class="black-text">Sélectionner votre fichier (Max: 50MB)</span>
                     {{ Form::file('file') }}
                     @if ($errors->has('file'))
                         <span class="text-red-600 text-xs">{{ $errors->first('file') }}</span>
@@ -224,3 +238,86 @@
         </div>
     </div>
 </div>
+
+
+
+<script>
+    $(function() {
+
+        $(document).on("click", ".getDepartement", function(e) {
+            e.preventDefault();
+            $('#ajaxShadow').show();
+            $('#ajaxloader').show();
+
+            var subs = $(this).data('subs_id');
+            var folder = $(this).data('folder_id');
+
+            var url = "{{ URL('departments/getDepartement') }}";
+            var url = url + "/subs/" + subs + "/folder/" + folder;
+
+            $.ajax({
+                url: url,
+                type: "GET",
+                data: {
+                    _token: '{{ csrf_token() }}',
+                    subs: subs,
+                    folder: folder,
+                },
+                success: function(dataResult) {
+
+                    $('#dept_list').empty();
+                    var dept_html = '';
+                    dept_html +=
+                        '<h3 class="text-gray-900 text-md mt-4 mb-4 font-medium title-font uppercase">Departments</h3>';
+                    dept_html += '<div class="grid sm:grid-cols-2 lg:grid-cols-3">';
+
+                    $.map(dataResult.data.departments, function(departement) {
+                        console.log(departement);
+
+                        dept_html += '<div class="">';
+
+                        dept_html +=
+                            '<div class="text-gray-900 mb-2 font-medium title-font">' +
+                            departement.dptName + '</div>';
+
+                        dept_html += '<div class="">';
+                        dept_html +=
+                            `<input type="radio" name="permissions_${departement.id}[]" id="${departement.id}_none" value="${departement.id}_none" ${ departement.permission_for == -1 ? "checked" : "" }> `;
+                        dept_html +=
+                            `<label class="text-sm" for="${departement.id}_none">None</label>`;
+                        dept_html += '</div>';
+
+                        dept_html += '<div class="">';
+                        dept_html +=
+                            `<input type="radio" name="permissions_${departement.id}[]" value="${departement.id}_all" id="${departement.id}_all" ${ departement.permission_for == 0 ? "checked" : "" }> `;
+                        dept_html +=
+                            `<label class="text-sm" for="${departement.id}_all">All</label>`;
+                        dept_html += '</div>';
+
+                        dept_html += '<div class="">';
+                        dept_html +=
+                            `<input type="radio" name="permissions_${departement.id}[]" id="${departement.id}_admins" value="${departement.id}_admins" ${ departement.permission_for == 1 ? "checked" : "" }> `;
+                        dept_html +=
+                            `<label class="text-sm" for="${departement.id}_admins">Admins</label>`;
+                        dept_html += '</div>';
+
+                        dept_html += '</div>';
+
+                    });
+                    dept_html += '</div>';
+                    $('#dept_list').html(dept_html);
+
+                    $('#ajaxShadow').hide();
+                    $('#ajaxloader').hide();
+                },
+                error: function(error) {
+                    console.log(error);
+                    // location.reload(true);
+                    $('#ajaxShadow').hide();
+                    $('#ajaxloader').hide();
+                }
+            });
+
+        });
+    });
+</script>

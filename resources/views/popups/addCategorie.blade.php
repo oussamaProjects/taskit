@@ -1,7 +1,7 @@
 <div id="modalCategorie"
     class="fixed top-0 left-0 w-screen h-screen flex items-center justify-center bg-blue-500 bg-opacity-50 transform scale-0 transition-transform duration-300">
     <!-- Modal content -->
-    <div class="bg-white w-1/2 h-1/4 p-12">
+    <div class="bg-white w-1/2 p-12 overflow-y-scroll h-2/4">
         <!--Close modal button-->
         <button id="closebuttonCategorie" type="button" class="focus:outline-none float-right">
             <!-- Hero icon - close button -->
@@ -21,7 +21,7 @@
                 <label for="name" class="text-xs opacity-75 scale-75">
                     Nom de dossier
                 </label>
-                {{ Form::text('name', '', ['id' => 'name', 'class' => 'peer border border-gray-200 focus:outline-none rounded focus:border-gray-500 focus:shadow-sm w-full py-1 px-2 h-10 placeholder-transparent']) }}
+                {{ Form::text('name', '', ['id' => 'name', 'autocomplete' => 'off','class' => 'peer border border-gray-200 focus:outline-none rounded focus:border-gray-500 focus:shadow-sm w-full py-1 px-2 h-8 placeholder-transparent text-sm']) }}
                 @if ($errors->has('name'))
                     <span class="text-red-600 text-xs">{{ $errors->first('name') }}</span>
                 @endif

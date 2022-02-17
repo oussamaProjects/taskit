@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Department;
 use Illuminate\Support\Facades\Auth;
 
 use Illuminate\Http\Request;
@@ -30,11 +31,12 @@ class DashboardController extends Controller
         }
         $users = User::count();
         $documents = Document::count();
+        $departments = Department::count();
 
         if (auth()->user()->hasRole('Admin')) {
-            return view('dashboard', compact('users', 'documents'));
+            return view('dashboard', compact('users', 'documents', 'departments'));
         } elseif (auth()->user()->hasRole('Root')) {
-            return view('dashboard', compact('users', 'documents'));
+            return view('dashboard', compact('users', 'documents', 'departments'));
         }
 
         return redirect('/documents');

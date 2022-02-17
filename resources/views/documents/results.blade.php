@@ -4,10 +4,10 @@
 
     @include('inc.sidebar')
 
-    <div class="ml-14 mt-16 mb-4 md:ml-64">
+    <div class="ml-14 mt-14 mb-4 md:ml-64">
         <div class="flex items-center p-4 gap-1">
             <button
-                class="flex text-white bg-gray-900 border-0 py-2 px-6 focus:outline-none hover:bg-indigo-600 rounded ml-auto"
+                class="flex text-white bg-gray-900 border-0 py-2 px-6 focus:outline-none hover:bg-blue-500 rounded ml-auto"
                 data-url="{{ url('documentsDeleteMulti') }}">
                 <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 m-1" fill="none" viewBox="0 0 24 24"
                     stroke="currentColor">
@@ -21,7 +21,7 @@
             &nbsp;
             @can('upload')
                 <a href="/documents/create"
-                    class="flex text-white bg-gray-900 border-0 py-2 px-6 focus:outline-none hover:bg-indigo-600 rounded">
+                    class="flex text-white bg-gray-900 border-0 py-2 px-6 focus:outline-none hover:bg-blue-500 rounded">
                     <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 m-1" fill="none" viewBox="0 0 24 24"
                         stroke="currentColor">
                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
@@ -32,8 +32,8 @@
             @endcan
         </div>
 
-        <div class="grid grid-cols-1 sm:grid-cols-1 lg:grid-cols-1 p-4 gap-4">
-            <div class="flex flex-col text-center w-full mb-6">
+        <div class="grid grid-cols-1 sm:grid-cols-1 lg:grid-cols-1 p-4 gap-4 ml-4 bg-white shadow">
+            <div class="flex flex-col text-center w-full">
                 <h1 class="sm:text-2xl text-xl font-medium title-font mb-2 text-gray-900">Documents</h1>
                 <p class="lg:w-2/3 mx-auto leading-relaxed text-base">{{ count($results) }} Résultats
                 </p>
@@ -43,24 +43,24 @@
                     <thead>
                         <tr>
                             <th
-                                class="w-10 title-font tracking-wider font-medium text-gray-900 text-sm bg-gray-100 rounded-tr rounded-br">
+                                class="w-10 title-font tracking-wider font-medium text-gray-900 text-sm bg-blue-100 rounded-tr rounded-br">
                             </th>
-                            <th class="px-4 py-3 title-font tracking-wider font-medium text-gray-900 text-sm bg-gray-100">
-                                Nom de fichier
+                            <th class="px-2 py-2 title-font tracking-wider font-medium text-gray-900 text-sm bg-blue-100">
+                                Nom du document
                             </th>
-                            <th class="px-4 py-3 title-font tracking-wider font-medium text-gray-900 text-sm bg-gray-100">
+                            <th class="px-2 py-2 title-font tracking-wider font-medium text-gray-900 text-sm bg-blue-100">
                                 Propriétaire
                             </th>
-                            {{-- <th class="px-4 py-3 title-font tracking-wider font-medium text-gray-900 text-sm bg-gray-100">
+                            {{-- <th class="px-2 py-2 title-font tracking-wider font-medium text-gray-900 text-sm bg-blue-100">
                                     Département
                                 </th> --}}
-                            <th class="px-4 py-3 title-font tracking-wider font-medium text-gray-900 text-sm bg-gray-100">
-                                Téléchargé à
+                            <th class="px-2 py-2 title-font tracking-wider font-medium text-gray-900 text-sm bg-blue-100">
+                                Date Insertion
                             </th>
-                            <th class="px-4 py-3 title-font tracking-wider font-medium text-gray-900 text-sm bg-gray-100">
+                            <th class="px-2 py-2 title-font tracking-wider font-medium text-gray-900 text-sm bg-blue-100">
                                 Expire le
                             </th>
-                            <th class="px-4 py-3 title-font tracking-wider font-medium text-gray-900 text-sm bg-gray-100">
+                            <th class="px-2 py-2 title-font tracking-wider font-medium text-gray-900 text-sm bg-blue-100">
                                 Actions
                             </th>
                         </tr>

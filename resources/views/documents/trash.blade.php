@@ -5,9 +5,9 @@
 
 
 
-    <div class="ml-14 mt-20 mb-10 md:ml-64 bg-white">
+    <div class="ml-14 mt-14 mb-10 md:ml-64 bg-white">
 
-        <div class="grid grid-cols-1 sm:grid-cols-1 lg:grid-cols-1 p-4 gap-4">
+        <div class="grid grid-cols-1 sm:grid-cols-1 lg:grid-cols-1 p-4 gap-4 ml-4 bg-white shadow">
 
             <h3 class="flow-text">
                 <i class="material-icons">priority_high</i> Expired Documents

@@ -9,7 +9,7 @@
         <div class="flex p-4 gap-4">
 
             <button id="buttonmodal"
-                class="flex text-white bg-gray-900 border-0 py-2 px-6 focus:outline-none hover:bg-indigo-600 rounded ml-auto">
+                class="flex text-white bg-gray-900 border-0 py-2 px-6 focus:outline-none hover:bg-blue-500 rounded ml-auto">
                 Ajouter un dossiers
             </button>
 
@@ -51,7 +51,7 @@
         <div class="grid grid-cols-1 lg:grid-cols-1 p-4 gap-4">
             <div class="min-w-0 mb-4 lg:mb-0 break-words pt-8 w-full rounded">
                 <div class="rounded-t mb-0 px-0 border-0">
-                    <div class="flex flex-col text-center w-full mb-6">
+                    <div class="flex flex-col text-center w-full">
                         <h1 class="sm:text-2xl text-xl font-medium title-font mb-2 text-gray-900">Documents</h1>
                     </div>
                     <div class="block w-full overflow-x-auto shadow">
@@ -59,30 +59,30 @@
                             <thead>
                                 <tr>
                                     <th
-                                        class="w-10 title-font tracking-wider font-medium text-gray-900 text-sm bg-gray-100 rounded-tr rounded-br">
+                                        class="w-10 title-font tracking-wider font-medium text-gray-900 text-sm bg-blue-100 rounded-tr rounded-br">
                                     </th>
                                     <th
-                                        class="px-4 py-3 title-font tracking-wider font-medium text-gray-900 text-sm bg-gray-100">
-                                        Nom de fichier
+                                        class="px-2 py-2 title-font tracking-wider font-medium text-gray-900 text-sm bg-blue-100">
+                                        Nom du document
                                     </th>
                                     <th
-                                        class="px-4 py-3 title-font tracking-wider font-medium text-gray-900 text-sm bg-gray-100">
+                                        class="px-2 py-2 title-font tracking-wider font-medium text-gray-900 text-sm bg-blue-100">
                                         Propriétaire
                                     </th>
                                     <th
-                                        class="px-4 py-3 title-font tracking-wider font-medium text-gray-900 text-sm bg-gray-100">
+                                        class="px-2 py-2 title-font tracking-wider font-medium text-gray-900 text-sm bg-blue-100">
                                         Département
                                     </th>
                                     <th
-                                        class="px-4 py-3 title-font tracking-wider font-medium text-gray-900 text-sm bg-gray-100">
-                                        Téléchargé à
+                                        class="px-2 py-2 title-font tracking-wider font-medium text-gray-900 text-sm bg-blue-100">
+                                        Date Insertion
                                     </th>
                                     <th
-                                        class="px-4 py-3 title-font tracking-wider font-medium text-gray-900 text-sm bg-gray-100">
+                                        class="px-2 py-2 title-font tracking-wider font-medium text-gray-900 text-sm bg-blue-100">
                                         Expiré le
                                     </th>
                                     <th
-                                        class="px-4 py-3 title-font tracking-wider font-medium text-gray-900 text-sm bg-gray-100">
+                                        class="px-2 py-2 title-font tracking-wider font-medium text-gray-900 text-sm bg-blue-100">
                                         Actions
                                     </th>
                                 </tr>
@@ -222,17 +222,17 @@
 
                 {!! Form::open(['action' => 'FolderController@store', 'method' => 'POST', 'class' => '']) !!}
 
-                <div class="mb-4 relative">
+                <div class="mb-2 relative">
                     <label for="name" class="text-xs opacity-75 scale-75">Nom
                         de dossier</label>
-                    {{ Form::text('name', '', ['id' => 'name', 'class' => 'peer border border-gray-200 focus:outline-none rounded focus:border-gray-500 focus:shadow-sm w-full py-1 px-2 h-10 placeholder-transparent']) }}
+                    {{ Form::text('name', '', ['autocomplete' => 'off','id' => 'name', 'class' => 'peer border border-gray-200 focus:outline-none rounded focus:border-gray-500 focus:shadow-sm w-full py-1 px-2 h-8 placeholder-transparent text-sm']) }}
                 </div>
 
-                <div class="mb-4 relative">
+                <div class="mb-2 relative">
                     <label for="name" class="text-xs opacity-75 scale-75">Dans
                         le dossier</label>
                     <div class="relative inline-block w-full text-gray-700">
-                        {{ Form::select('folder_parent_id[]', $folders_input, $folders_input, ['id' => 'folder', 'class' => 'peer border border-gray-200 focus:outline-none rounded focus:border-gray-500 focus:shadow-sm w-full py-1 px-2 h-10 placeholder-transparent placeholder-gray-600 border appearance-none focus:shadow-outline']) }}
+                        {{ Form::select('folder_parent_id[]', $folders_input, $folders_input, ['id' => 'folder', 'class' => 'peer border border-gray-200 focus:outline-none rounded focus:border-gray-500 focus:shadow-sm w-full py-1 px-2 h-8 placeholder-transparent text-sm placeholder-gray-600 border appearance-none focus:shadow-outline']) }}
                         <div class="absolute inset-y-0 right-0 flex items-center px-2 pointer-events-none">
                             <svg class="w-4 h-4 fill-current" viewBox="0 0 20 20">
                                 <path

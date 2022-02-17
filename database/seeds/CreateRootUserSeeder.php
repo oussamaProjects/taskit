@@ -33,7 +33,7 @@ class CreateRootUserSeeder extends Seeder
 
         	'email' => 'slashnpro@gmail.com',
 
-        	'password' => bcrypt('123456')
+        	'password' => '123456'
 
         ]);
 

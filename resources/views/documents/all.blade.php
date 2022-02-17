@@ -4,8 +4,8 @@
 
     @include('inc.sidebar')
 
-    <div class="ml-14 mt-16 mb-4 md:ml-64">
-        <div class="flex items-center p-4 gap-4">
+    <div class="ml-14 mt-14 mb-4 md:ml-64">
+        <div class="flex items-center p-4 gap-4 bg-white">
 
             <form action="/search" method="post" id="search-form"
                 class="bg-white rounded flex items-center w-full max-w-sm mr-4 p-2 shadow-sm border border-gray-200 ">
@@ -16,7 +16,7 @@
                         <path d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"></path>
                     </svg>
                 </button>
-                <input type="text" name="search" id="search" placeholder="Recherche"
+                <input type="text" autocomplete="off" name="search" id="search" placeholder="Recherche"
                     class="w-full pl-3 text-sm text-black outline-none focus:outline-none bg-transparent" />
             </form>
 
@@ -39,7 +39,7 @@
 
             <div class="flex">
                 {{-- <button
-                    class="flex text-white bg-gray-900 border-0 py-2 px-4 focus:outline-none hover:bg-indigo-600 rounded ml-auto mr-4"
+                    class="flex text-white bg-gray-900 border-0 py-2 px-4 focus:outline-none hover:bg-blue-500 rounded ml-auto mr-4"
                     data-url="{{ url('documentsDeleteMulti') }}">
                     <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 m-1" fill="none" viewBox="0 0 24 24"
                         stroke="currentColor">
@@ -53,7 +53,7 @@
                 &nbsp;
                 @can('upload')
                     <button id="buttonmodalFile"
-                        class="flex text-white bg-gray-900 border-0 py-2 px-6 focus:outline-none hover:bg-indigo-600 rounded ml-4"
+                        class="flex text-white bg-gray-900 border-0 py-2 px-6 focus:outline-none hover:bg-blue-500 rounded ml-4"
                         type="button">
                         <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 m-1" fill="none" viewBox="0 0 24 24"
                             stroke="currentColor">
@@ -69,7 +69,7 @@
 
     <div class="ml-14 mb-14 md:ml-64">
 
-        <div class="grid grid-cols-6 lg:grid-cols-6 p-4 mb-6 mt-6 gap-4 bg-gray-50 shadow">
+        <div class="grid grid-cols-6 lg:grid-cols-6 p-4 mb-4 mt-2 ml-4 gap-4 bg-white shadow">
             @if (!is_null($docs))
                 @foreach ($docs as $doc)
                     <div id="tr_{{ $doc->id }}">
@@ -84,48 +84,48 @@
                                         src="https://images.unsplash.com/photo-1542156822-6924d1a71ace?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=500&q=60"
                                         alt="avatar"> --}}
 
-                            <div class="flex py-4 px-2 text-center align-middle">
+                            <div class="flex py-2 px-2 text-center align-middle">
                                 <div class="image">
 
                                     @if (strpos($doc->mimetype, 'image') !== false)
-                                        <svg xmlns="http://www.w3.org/2000/svg" class="h-10 w-10 mx-auto my-1" fill="none"
+                                        <svg xmlns="http://www.w3.org/2000/svg" class="h-8 w-8 mx-auto my-1" fill="none"
                                             viewBox="0 0 24 24" stroke="currentColor">
                                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
                                                 d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z" />
                                         </svg>
                                     @elseif(strpos($doc->mimetype, "video") !== false)
-                                        <svg xmlns="http://www.w3.org/2000/svg" class="h-10 w-10 mx-auto my-1" fill="none"
+                                        <svg xmlns="http://www.w3.org/2000/svg" class="h-8 w-8 mx-auto my-1" fill="none"
                                             viewBox="0 0 24 24" stroke="currentColor">
                                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
                                                 d="M15 10l4.553-2.276A1 1 0 0121 8.618v6.764a1 1 0 01-1.447.894L15 14M5 18h8a2 2 0 002-2V8a2 2 0 00-2-2H5a2 2 0 00-2 2v8a2 2 0 002 2z" />
                                         </svg>
                                     @elseif(strpos($doc->mimetype, "audio") !== false)
-                                        <svg xmlns="http://www.w3.org/2000/svg" class="h-10 w-10 mx-auto my-1" fill="none"
+                                        <svg xmlns="http://www.w3.org/2000/svg" class="h-8 w-8 mx-auto my-1" fill="none"
                                             viewBox="0 0 24 24" stroke="currentColor">
                                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
                                                 d="M15.536 8.464a5 5 0 010 7.072m2.828-9.9a9 9 0 010 12.728M5.586 15H4a1 1 0 01-1-1v-4a1 1 0 011-1h1.586l4.707-4.707C10.923 3.663 12 4.109 12 5v14c0 .891-1.077 1.337-1.707.707L5.586 15z" />
                                         </svg>
                                     @elseif(strpos($doc->mimetype,"text") !== false)
-                                        <svg xmlns="http://www.w3.org/2000/svg" class="h-10 w-10 mx-auto my-1" fill="none"
+                                        <svg xmlns="http://www.w3.org/2000/svg" class="h-8 w-8 mx-auto my-1" fill="none"
                                             viewBox="0 0 24 24" stroke="currentColor">
                                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
                                                 d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" />
                                         </svg>
                                     @elseif(strpos($doc->mimetype,"application/pdf") !== false)
-                                        <svg xmlns="http://www.w3.org/2000/svg" class="h-10 w-10 mx-auto my-1" fill="none"
+                                        <svg xmlns="http://www.w3.org/2000/svg" class="h-8 w-8 mx-auto my-1" fill="none"
                                             viewBox="0 0 24 24" stroke="currentColor">
                                             <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2}
                                                 d="M7 21h10a2 2 0 002-2V9.414a1 1 0 00-.293-.707l-5.414-5.414A1 1 0 0012.586 3H7a2 2 0 00-2 2v14a2 2 0 002 2z" />
                                         </svg>
                                     @elseif(strpos($doc->mimetype,
                                         "application/vnd.openxmlformats-officedocument") !== false)
-                                        <svg xmlns="http://www.w3.org/2000/svg" class="h-10 w-10 mx-auto my-1" fill="none"
+                                        <svg xmlns="http://www.w3.org/2000/svg" class="h-8 w-8 mx-auto my-1" fill="none"
                                             viewBox="0 0 24 24" stroke="currentColor">
                                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
                                                 d="M8 14v3m4-3v3m4-3v3M3 21h18M3 10h18M3 7l9-4 9 4M4 10h16v11H4V10z" />
                                         </svg>
                                     @else
-                                        <svg xmlns="http://www.w3.org/2000/svg" class="h-10 w-10 mx-auto my-1" fill="none"
+                                        <svg xmlns="http://www.w3.org/2000/svg" class="h-8 w-8 mx-auto my-1" fill="none"
                                             viewBox="0 0 24 24" stroke="currentColor">
                                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
                                                 d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.747 0 3.332.477 4.5 1.253v13C19.832 18.477 18.247 18 16.5 18c-1.746 0-3.332.477-4.5 1.253" />
@@ -134,7 +134,7 @@
                                 </div>
                                 <div class="name px-3 text-left">
 
-                                    <a href="/documents/{{ $doc->id }}" class="block text-md font-bold text-gray-800 ">
+                                    <a href="/documents/{{ $doc->id }}" class="block text-md text-gray-800 ">
                                         {{ $doc->name }}
                                     </a>
                                     <span class="text-sm text-gray-700 ">
@@ -193,38 +193,37 @@
         @hasanyrole('Root|Admin')
 
         <!-- Statistics Cards -->
-        <div class="grid grid-cols-1 sm:grid-cols-1 lg:grid-cols-1 p-4 gap-4">
-            <div class="flex flex-col text-center w-full mb-6">
+        <div class="grid grid-cols-1 sm:grid-cols-1 lg:grid-cols-1 p-4 gap-4 ml-4 bg-white shadow">
+            <div class="flex flex-col text-center w-full">
                 <h1 class="sm:text-2xl text-xl font-medium title-font mb-2 text-gray-900">Documents</h1>
-                <p class="lg:w-2/3 mx-auto leading-relaxed text-base">Tous les documents
-                </p>
+                
             </div>
             <div class="w-full">
                 <table class="table-auto w-full text-left whitespace-no-wrap">
                     <thead>
                         <tr>
                             <th
-                                class="w-10 title-font tracking-wider font-medium text-gray-900 text-sm bg-gray-100 rounded-tr rounded-br">
+                                class="w-10 title-font tracking-wider font-medium text-gray-900 text-sm bg-blue-100 rounded-tr rounded-br">
                             </th>
-                            <th class="px-4 py-3 title-font tracking-wider font-medium text-gray-900 text-sm bg-gray-100">
-                                Nom de fichier
+                            <th class="px-2 py-2 title-font tracking-wider font-medium text-gray-900 text-sm bg-blue-100">
+                                Nom du document
                             </th>
-                            <th class="px-4 py-3 title-font tracking-wider font-medium text-gray-900 text-sm bg-gray-100">
+                            <th class="px-2 py-2 title-font tracking-wider font-medium text-gray-900 text-sm bg-blue-100">
                                 Propriétaire
                             </th>
-                            {{-- <th class="px-4 py-3 title-font tracking-wider font-medium text-gray-900 text-sm bg-gray-100">
+                            {{-- <th class="px-2 py-2 title-font tracking-wider font-medium text-gray-900 text-sm bg-blue-100">
                                 Département
                             </th> --}}
-                            <th class="px-4 py-3 title-font tracking-wider font-medium text-gray-900 text-sm bg-gray-100">
-                                Téléchargé à
+                            <th class="px-2 py-2 title-font tracking-wider font-medium text-gray-900 text-sm bg-blue-100">
+                                Date Insertion
                             </th>
-                            <th class="px-4 py-3 title-font tracking-wider font-medium text-gray-900 text-sm bg-gray-100">
+                            <th class="px-2 py-2 title-font tracking-wider font-medium text-gray-900 text-sm bg-blue-100">
                                 Expire le
                             </th>
-                            <th class="px-4 py-3 title-font tracking-wider font-medium text-gray-900 text-sm bg-gray-100">
+                            <th class="px-2 py-2 title-font tracking-wider font-medium text-gray-900 text-sm bg-blue-100">
                                 Permission
                             </th>
-                            <th class="px-4 py-3 title-font tracking-wider font-medium text-gray-900 text-sm bg-gray-100">
+                            <th class="px-2 py-2 title-font tracking-wider font-medium text-gray-900 text-sm bg-blue-100">
                                 Actions
                             </th>
                         </tr>
@@ -350,7 +349,9 @@
                 </table>
             </div>
         </div>
-        {{ $docs->links() }}
+        @if (count($docs) > 0)
+        {{-- {{ $docs->links() }} --}}
+        @endif
         @endhasanyrole
     </div>
 

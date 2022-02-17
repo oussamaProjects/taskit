@@ -16,7 +16,7 @@
                         </div>
                         <div class="relative w-full max-w-full flex-grow flex-1 text-right">
                             <button id="buttonmodal" data-target="modal1"
-                                class="flex text-white bg-gray-900 border-0 py-2 px-6 focus:outline-none hover:bg-indigo-600 rounded ml-auto"
+                                class="flex text-white bg-gray-900 border-0 py-2 px-6 focus:outline-none hover:bg-blue-500 rounded ml-auto"
                                 type="button">Ajouter une catégorie</button>
                         </div>
                     </div>
@@ -64,8 +64,10 @@
 
                                                         <!-- DELETE using link -->
                                                         {!! Form::open(['action' => ['CategoriesController@destroy', $category->id], 'method' => 'DELETE', 'id' => 'form-delete-categories-' . $category->id, 'class' => 'flex items-center']) !!}
-                                                        <a href="#" class="left"><i class="material-icons"></i></a>
-                                                        <a href="/categories/{{ $category->id }}/edit" class="center">
+                                                        <a href="#" class="left"><i
+                                                                class="material-icons"></i></a>
+                                                        <a href="/categories/{{ $category->id }}/edit"
+                                                            class="center">
                                                             <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 m-1"
                                                                 fill="none" viewBox="0 0 24 24" stroke="currentColor">
                                                                 <path stroke-linecap="round" stroke-linejoin="round"
@@ -102,7 +104,10 @@
                     </div>
                 </div>
             </div>
-            <img src="{{ asset('img/undraw_Filing_system_re_56h6.svg') }}" alt="">
+
+            <button id="buttonmodalFileImg" class="bg-white h-auto p-4 shadow" type="button">
+                <img src="{{ asset('img/undraw_Filing_system_re_56h6.svg') }}" alt="">
+            </button>
         </div>
 
     </div>
@@ -126,10 +131,10 @@
 
                 {!! Form::open(['action' => 'CategoriesController@store', 'method' => 'POST', 'class' => '']) !!}
 
-                <div class="mb-4 relative">
+                <div class="mb-2 relative">
                     <label for="name" class="text-xs opacity-75 scale-75">Nom
                         de dossier</label>
-                    {{ Form::text('name', '', ['id' => 'name', 'class' => 'peer border border-gray-200 focus:outline-none rounded focus:border-gray-500 focus:shadow-sm w-full py-1 px-2 h-10 placeholder-transparent']) }}
+                    {{ Form::text('name', '', ['id' => 'name','autocomplete' => 'off','class' =>'peer border border-gray-200 focus:outline-none rounded focus:border-gray-500 focus:shadow-sm w-full py-1 px-2 h-8 placeholder-transparent text-sm']) }}
                 </div>
 
             </div>

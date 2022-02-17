@@ -7,7 +7,7 @@
                 {{-- <small>- 15kb</small> --}}
             </a>
             @if (count($child->children))
-                <svg xmlns="http://www.w3.org/2000/svg" class="open-folder h-4 w-4 absolute right-0 top-1" fill="none"
+                <svg xmlns="http://www.w3.org/2000/svg" class="open-folder h-4 w-4 absolute right-0 top-1 cursor-pointer" fill="none"
                     viewBox="0 0 24 24" stroke="currentColor">
                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7" />
                 </svg>

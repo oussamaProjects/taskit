@@ -5,12 +5,14 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Shared;
 use App\Document;
+use Illuminate\Support\Facades\DB;
 
 class ShareController extends Controller
 {
     public function __construct()
     {
-        return $this->middleware(['auth', 'permission:shared']);
+        return $this->middleware(['auth']);
+        // return $this->middleware(['auth', 'permission:shared']);
     }
 
     /**
@@ -78,24 +80,57 @@ class ShareController extends Controller
     {
         $doc = Document::findOrFail($id);
 
-        $shared = new Shared;
-        $shared->name = $doc->name;
-        $shared->description = $doc->description;
-        $shared->document_id = $doc->id;
-        $shared->user_id = $doc->user_id;
-        $shared->department_id = $doc->department_id;
-        $shared->file = $doc->file;
-        $shared->mimetype = $doc->mimetype;
-        $shared->filesize = $doc->filesize;
-        $shared->isExpire = $doc->isExpire;
-        $shared->expires_at = $doc->expires_at;
-        $shared->save();
+        if ($this->has_permission($id, auth()->user())) {
+            $shared = new Shared;
+            $shared->name = $doc->name;
+            $shared->description = $doc->description;
+            $shared->document_id = $doc->id;
+            $shared->user_id = $doc->user_id;
+            $shared->department_id = $doc->department_id;
+            $shared->file = $doc->file;
+            $shared->mimetype = $doc->mimetype;
+            $shared->filesize = $doc->filesize;
+            $shared->isExpire = $doc->isExpire;
+            $shared->expires_at = $doc->expires_at;
+            $shared->save();
 
-        \Log::addToLog('Document ID ' . $id . ' was shared');
+            \Log::addToLog('Document ID ' . $id . ' was shared');
 
-        return redirect('/documents')->with('success', 'File Shared!');
+            return redirect('/documents')->with('success', 'Fichier partagé!');
+        } else
+            return redirect('/documents')->with('failure', 'Vous ne pouvez pas partager ce document');
     }
 
+    function has_permission($id, $user)
+    {
+
+        $permission = DB::table('departments')
+            ->leftJoin('document_departement', 'document_departement.department_id', 'departments.id')
+            ->where('document_departement.document_id', '=', $id)
+            ->where('document_departement.department_id', '=', $user->department_id)
+            ->distinct()
+            ->get();
+            
+        if (!$user->hasRole('Root')) {
+            // var_dump($user->department_id);
+            // var_dump($id);
+            // var_dump($permission[0]->permission_for);
+            if (isset($permission[0]) && !is_null($permission[0])) {
+                if ($user->hasRole('Admin')) {
+                    if ($permission[0]->permission_for == 1 || $permission[0]->permission_for == 0)
+                        return true;
+                    else
+                        return false;
+                } else if ($user->hasRole('User')) {
+                    if ($permission[0]->permission_for == 0)
+                        return true;
+                    else
+                        return false;
+                } else
+                    return false;
+            }
+        }
+    }
     /**
      * Remove the specified resource from storage.
      *

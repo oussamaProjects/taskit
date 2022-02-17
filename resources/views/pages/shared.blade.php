@@ -3,32 +3,32 @@
 @section('content')
     @include('inc.sidebar')
 
-    <div class="ml-14 mt-20 mb-10 md:ml-64 bg-white">
+    <div class="ml-14 mt-14 mb-10 md:ml-64">
 
-        <div class="grid grid-cols-1 sm:grid-cols-1 lg:grid-cols-1 p-4 gap-4">
-            <div class="flex flex-col text-center w-full mb-4">
+        <div class="grid grid-cols-1 sm:grid-cols-1 lg:grid-cols-1 p-4 gap-4 m-4 bg-white shadow">
+            <div class="flex flex-col text-center w-full">
                 <h1 class="sm:text-2xl text-xl font-medium title-font mb-2 text-gray-900">Documents partagés</h1>
             </div>
             <div class="w-full">
                 <table class="table-auto w-full text-left whitespace-no-wrap">
                     <thead>
                         <tr>
-                            <th class="px-4 py-3 title-font tracking-wider font-medium text-gray-900 text-sm bg-gray-100">
+                            <th class="px-2 py-2 title-font tracking-wider font-medium text-gray-900 text-sm bg-blue-100">
                                 File Name
                             </th>
-                            <th class="px-4 py-3 title-font tracking-wider font-medium text-gray-900 text-sm bg-gray-100">
+                            <th class="px-2 py-2 title-font tracking-wider font-medium text-gray-900 text-sm bg-blue-100">
                                 Owner
                             </th>
-                            <th class="px-4 py-3 title-font tracking-wider font-medium text-gray-900 text-sm bg-gray-100">
+                            <th class="px-2 py-2 title-font tracking-wider font-medium text-gray-900 text-sm bg-blue-100">
                                 Department
                             </th>
-                            <th class="px-4 py-3 title-font tracking-wider font-medium text-gray-900 text-sm bg-gray-100">
+                            <th class="px-2 py-2 title-font tracking-wider font-medium text-gray-900 text-sm bg-blue-100">
                                 Uploaded At
                             </th>
-                            <th class="px-4 py-3 title-font tracking-wider font-medium text-gray-900 text-sm bg-gray-100">
+                            <th class="px-2 py-2 title-font tracking-wider font-medium text-gray-900 text-sm bg-blue-100">
                                 Expires At
                             </th>
-                            <th class="px-4 py-3 title-font tracking-wider font-medium text-gray-900 text-sm bg-gray-100">
+                            <th class="px-2 py-2 title-font tracking-wider font-medium text-gray-900 text-sm bg-blue-100">
                                 Actions
                             </th>
 
@@ -40,11 +40,12 @@
                                 <tr id="">
                                     <td class="px-4 py-3 text-sm">{{ $share->name }}</td>
                                     <td class="px-4 py-3 text-sm">{{ $share->user->name }}</td>
-                                    <td class="px-4 py-3 text-sm">{{ $share->user->department['dptName'] }}</td>
+                                    <td class="px-4 py-3 text-sm">{{ $share->user->department['dptName'] ?? 'No-dept' }}
+                                    </td>
                                     <td class="px-4 py-3 text-sm">{{ $share->updated_at->toDayDateTimeString() }}</td>
                                     <td class="px-4 py-3 text-sm">{{ $share->created_at->toDayDateTimeString() }}</td>
                                     <td class="px-4 py-3 text-sm flex">
-                                        <a href="documents/open/{{ $share->document_id }}" class="tooltipped"
+                                        <a href="documents/open/{{ $share->document_id }}" class="tooltipped" target="_blank"
                                             data-position="left" data-delay="50" data-tooltip="Open">
                                             <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 m-1" fill="none"
                                                 viewBox="0 0 24 24" stroke="currentColor">

@@ -1,5 +1,6 @@
 <?php
 
+use Illuminate\Support\Facades\Artisan;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -15,6 +16,14 @@ use Illuminate\Support\Facades\Route;
 
 Route::get('/', 'DashboardController@index');
 
+Route::get('/clear-cache', function() {
+    Artisan::call('cache:clear');
+    Artisan::call('route:clear');
+    Artisan::call('config:clear');
+    Artisan::call('view:clear');
+    return "Cache is cleared";
+});
+
 Auth::routes();
 
 // dashboard
@@ -25,6 +34,12 @@ Route::resource('users', 'UsersController');
 
 // departments
 Route::resource('departments', 'DepartmentsController');
+Route::post('departments/linkDS', 'DepartmentsController@linkDS')->name('linkDS');
+Route::patch('departments/linkDtoS/{id}', 'DepartmentsController@linkDtoS')->name('linkDtoS');
+Route::get('departments/getDepartement/subs/{subs}/folder/{folder}', 'DepartmentsController@getDepartement')->name('getDepartement');
+Route::resource('subsidiaries', 'SubsidiaryController');
+
+Route::get('getDepartements/{subsidiary}', 'SharedDataController@getDepartements')->name('getSubsidiaryDepartement');
 
 // categories
 Route::resource('categories', 'CategoriesController');
@@ -35,10 +50,7 @@ Route::resource('folders', 'FolderController');
 Route::get('allFolders', 'FolderController@all');
 Route::patch('folder/color/{id}', 'FolderController@changeColor');
 
-
-
 Route::get('folder/{id}/child', 'FolderController@child');
-
 
 // documents 
 Route::resource('documents', 'DocumentsController');

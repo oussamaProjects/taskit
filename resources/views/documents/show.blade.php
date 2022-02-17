@@ -31,7 +31,7 @@
         </div>
 
         <!-- Statistics Cards -->
-        <div class="grid grid-cols-1 sm:grid-cols-1 lg:grid-cols-1 p-4 gap-4">
+        <div class="grid grid-cols-1 sm:grid-cols-1 lg:grid-cols-1 p-4 gap-4 ml-4 bg-white shadow">
 
             @if ($doc->isExpire == 2)
                 <h5 class="text-red-600 text-xs">
@@ -63,7 +63,7 @@
 
                             <div class="flex border-t border-gray-200 py-2 text-xs">
                                 <span class="text-gray-500">Department</span>
-                                <span class="ml-auto text-gray-900">{{ $doc->user->department['dptName'] }}</span>
+                                <span class="ml-auto text-gray-900">{{ $doc->user->department['dptName']?? '' }}</span>
                             </div>
 
                             <div class="flex border-t border-gray-200 py-2 text-xs">
@@ -116,7 +116,7 @@
                             </div>
 
                             <div class="flex border-t border-gray-200 py-2 text-xs">
-                                <div class="text-gray-500">Permission</div>
+                                <div class="text-gray-500">Autorisation</div>
                                 <div class="ml-auto text-right text-gray-900">
 
 
@@ -140,7 +140,7 @@
                             <div class="flex mt-6">
 
                                 <a href="/documents"
-                                    class="mr-auto flex text-white bg-gray-900 border-0 py-2 px-6 focus:outline-none hover:bg-indigo-600 rounded">
+                                    class="mr-auto flex text-white bg-gray-900 border-0 py-2 px-6 focus:outline-none hover:bg-blue-500 rounded">
                                     <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 m-1" fill="none"
                                         viewBox="0 0 24 24" stroke="currentColor">
                                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"

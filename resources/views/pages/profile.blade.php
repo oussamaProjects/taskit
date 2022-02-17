@@ -21,13 +21,13 @@
                                         <br>
                                         <div class="input-field">
                                             <i class="material-icons prefix">account_circle</i>
-                                            {{ Form::text('name', $acc->name, ['id' => 'Name']) }}
+                                            {{ Form::text('name', $acc->name, ['id' => 'Name','autocomplete' => 'off',]) }}
                                             <label for="Name" class="active">Nom</label>
                                         </div>
                                         <br>
                                         <div class="input-field">
                                             <i class="material-icons prefix">email</i>
-                                            {{ Form::email('email', $acc->email, ['id' => 'Email']) }}
+                                            {{ Form::email('email', $acc->email, ['id' => 'Email','autocomplete' => 'off',]) }}
                                             <label for="Email" class="active">Email</label>
                                         </div>
                                         <br>

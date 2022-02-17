@@ -32204,7 +32204,6 @@ video {
 
 body {
   font-size: 1rem;
-  background: #f5f5f5;
 }
 
 .tree {
@@ -32271,6 +32270,11 @@ body {
 
 .tree ul a:hover {
   text-decoration: none;
+}
+
+.tree ul a.active {
+  color: #000000;
+  font-weight: bold;
 }
 
 .nested {
@@ -32347,19 +32351,19 @@ ul.pagination li.page-item .page-link {
 }
 
 ul.pagination li.page-item.active .page-link,
-ul.pagination li.page-item>a.page-link:hover {
+ul.pagination li.page-item > a.page-link:hover {
   color: #fff;
   border-color: #028ce8;
   background-color: #028ce8;
 }
 
-.colors>.update_color:first-child>div,
-.colors>.update_color_folder:first-child>div {
+.colors > .update_color:first-child > div,
+.colors > .update_color_folder:first-child > div {
   position: relative;
 }
 
-.colors>.update_color:first-child>div::before,
-.colors>.update_color_folder:first-child>div::before {
+.colors > .update_color:first-child > div::before,
+.colors > .update_color_folder:first-child > div::before {
   content: "";
   position: absolute;
   top: -2px;
@@ -32373,9 +32377,38 @@ ul.pagination li.page-item>a.page-link:hover {
   background-color: red;
 }
 
-.colors>.update_color:first-child>div::after,
-.colors>.update_color_folder:first-child>div::after {
+.colors > .update_color:first-child > div::after,
+.colors > .update_color_folder:first-child > div::after {
   background-color: white;
+}
+
+#ajaxShadow {
+  display: none;
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  z-index: 8;
+  background: rgba(31, 31, 44, 0.6);
+}
+
+#ajaxloader {
+  display: none;
+  position: fixed;
+  height: 50px;
+  margin-top: -25px;
+  top: 50%;
+  width: 50px;
+  z-index: 9;
+  margin-left: -25px;
+  left: 50%;
+  border: 8px solid #fff;
+  border-right-color: transparent;
+  border-radius: 50%;
+  box-shadow: 0 0 25px 2px #eee;
+  -webkit-animation: spin 0.45s linear infinite;
+  animation: spin 0.45s linear infinite;
 }
 
 @media (min-width: 640px) {

@@ -5,7 +5,8 @@ namespace App\Http\Controllers;
 use App\Folder;
 use App\Category;
 use App\Department;
-use Hamcrest\Type\IsNumeric;
+use App\Document;
+use App\Subsidiary;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 
@@ -25,30 +26,46 @@ class FolderController extends Controller
      */
     public function index()
     {
-        $folders = $folders_table = Folder::where('parent_id', '=', '0')->get();
-        $folders_input = Folder::pluck('name', 'id')->all();
+        $user = auth()->user();
         $categories = Category::pluck('name', 'id')->all();
         $depts = Department::all();
+        $subs = Subsidiary::all();
         $docs = null;
-        $user = auth()->user();
 
-        foreach ($folders as $key => $folder) {
-            $dp = DB::table('departments')
-                ->leftJoin('folder_departement', 'folder_departement.department_id', 'departments.id')
-                ->where('folder_departement.folder_id', '=', $folder->id)
-                ->where('folder_departement.department_id', '=', $user->department_id)
-                ->distinct()
-                ->get();
+        $folders = $folders_table = Folder::where('parent_id', '=', 0)->get();
+        $folders_input = Folder::pluck('name', 'id')->all();
 
-            if (isset($dp) && !empty($dp[0])) {
-                $folder_departement = $dp[0];
-                $folder['permission_for'] = isset($folder_departement->permission_for) ? $folder_departement->permission_for : 0;
-            }
-        }
+        // if ($user->hasRole('Root')) {
+
+        //     $folders = $folders_table = Folder::where('parent_id', '=', 0)->get();
+        //     $folders_input = Folder::pluck('name', 'id')->all();
+        // } else {
+
+        //     $dept_id = $user->department_id;
+        //     $folders_sql = DB::table('departments')
+        //         ->select('folders.*')
+        //         ->leftJoin('folder_departement', 'folder_departement.department_id', 'departments.id')
+        //         ->leftJoin('folders', 'folder_departement.folder_id', 'folders.id')
+        //         ->where('folder_departement.department_id', '=', $dept_id)
+        //         ->where('folders.parent_id', '=', '0')
+        //         ->distinct()
+        //         ->get();
+
+        //     $folders_table_sql = DB::table('departments')
+        //         ->select('folders.*')
+        //         ->leftJoin('folder_departement', 'folder_departement.department_id', 'departments.id')
+        //         ->leftJoin('folders', 'folder_departement.folder_id', 'folders.id')
+        //         ->where('folder_departement.department_id', '=', $dept_id)
+        //         ->distinct()
+        //         ->get();
+
+        //     $folders = $folders_table = Folder::hydrate($folders_sql->toArray());
+        //     $folders_input = $folders_table_sql->pluck('name', 'id')->toArray();
+        // }
+
         // dd($folders);
-        return view('folders.index', compact('folders', 'folders_input', 'folders_table', 'docs', 'depts', 'categories'));
+        return view('folders.index', compact('folders', 'folders_input', 'folders_table', 'docs', 'depts', 'subs', 'categories'));
     }
-
 
     /**
      * Display a listing of the resource.
@@ -58,28 +75,45 @@ class FolderController extends Controller
     public function all()
     {
 
-        $folders_input = Folder::pluck('name', 'id')->all();
-        $folders_table = $folders = Folder::all();
         $categories = Category::pluck('name', 'id')->all();
         $depts = Department::all();
+        $subs = Subsidiary::all();
         $docs = null;
         $user = auth()->user();
 
-        foreach ($folders as $key => $folder) {
-            $dp = DB::table('departments')
+        if ($user->hasRole('Root')) {
+            $docs = Document::where('isExpire', '!=', 2)->get();
+            $folders = $folders_table = Folder::where('parent_id', '=', 0)->get();
+            $folders_input = Folder::pluck('name', 'id')->all();
+        } else {
+
+            $dept_id = $user->department_id;
+            $folders_sql = DB::table('departments')
+                ->select('folders.*')
                 ->leftJoin('folder_departement', 'folder_departement.department_id', 'departments.id')
-                ->where('folder_departement.folder_id', '=', $folder->id)
-                ->where('folder_departement.department_id', '=', $user->department_id)
+                ->leftJoin('folders', 'folder_departement.folder_id', 'folders.id')
+                ->where('folder_departement.department_id', '=', $dept_id)
+                ->where('folders.parent_id', '=', 0)
                 ->distinct()
                 ->get();
 
-            if (isset($dp) && !empty($dp[0])) {
-                $folder_departement = $dp[0];
-                $folder['permission_for'] = isset($folder_departement->permission_for) ? $folder_departement->permission_for : 0;
-            }
+            $folders_table_sql = DB::table('departments')
+                ->select('folders.*')
+                ->leftJoin('folder_departement', 'folder_departement.department_id', 'departments.id')
+                ->leftJoin('folders', 'folder_departement.folder_id', 'folders.id')
+                ->where('folder_departement.department_id', '=', $dept_id)
+                ->distinct()
+                ->get();
+
+            $folders = $folders_table = Folder::hydrate($folders_sql->toArray());
+            $folders_input = $folders_table_sql->pluck('name', 'id')->toArray();
+
+            // dd($folders_input);
+
         }
+
         // dd($folders);
-        return view('folders.all', compact('folders', 'folders_input', 'folders_table', 'docs', 'depts', 'categories'));
+        return view('folders.all', compact('folders', 'folders_input', 'folders_table', 'docs', 'depts', 'subs', 'categories'));
     }
 
     /**
@@ -104,9 +138,17 @@ class FolderController extends Controller
             'name' => 'required',
         ]);
 
+        $depts = Department::all();
+        $permissions = [];
+
+        foreach ($depts as $dep) {
+            $permissions[] = $request->input('permissions_' . $dep->id);
+        }
+
         $folder = new Folder;
-        $user_id = auth()->user()->id;
-        $department_id = auth()->user()->department_id;
+        $user = auth()->user();
+        $user_id = $user->id;
+        $department_id = $user->department_id;
 
         $check_name = Folder::where('name', '=', $request->input('name'))->first();
         if ($check_name !== null) {
@@ -116,12 +158,16 @@ class FolderController extends Controller
         $folder->name = $request->input('name');
         $folder->user_id = $user_id;
         $folder->department_id = $department_id;
+        $folder->color = '#FFFFFF';
 
         if ($request->input('parent'))
             $folder->parent_id = !is_numeric($request->input('folder_parent_id')) ?  0 : $request->input('folder_parent_id');
 
         // save to db
         $folder->save();
+
+
+        UtilityController::attachFolderToDept($folder, $permissions);
 
         \Log::addToLog('New folder ' . $request->input('name') . ' was added');
 
@@ -159,21 +205,63 @@ class FolderController extends Controller
     {
 
         $user = auth()->user();
-        $folders = Folder::where('parent_id', '=', '0')->get();
-        $folders_table = Folder::where('parent_id', '=', $folder->id)->get();
         $categories = Category::pluck('name', 'id')->all();
         $depts = Department::all();
-        $folders_input = Folder::pluck('name', 'id')->all();
         $docs = $folder->documents()->get();
+        $subs = Subsidiary::all();
         $filetype = '';
 
+        $folders = Folder::where('parent_id', '=', 0)->get();
+        $folders_table = Folder::where('parent_id', '=', $folder->id)->get();
+        $folders_input = Folder::pluck('name', 'id')->all();
 
-        if ($this->has_permission_for_folder($folder->id, $user))
-            return view('documents.index', compact('docs', 'folder', 'folders', 'folders_table', 'folders_input', 'filetype', 'depts', 'categories'));
+        // if ($user->hasRole('Root')) {
+
+        //     $folders = Folder::where('parent_id', '=', 0)->get();
+        //     $folders_table = Folder::where('parent_id', '=', $folder->id)->get();
+        //     $folders_input = Folder::pluck('name', 'id')->all();
+        // } else {
+        //     $dept_id = $user->department_id;
+        //     $folders_sql = DB::table('departments')
+        //         ->select('folders.*')
+        //         ->leftJoin('folder_departement', 'folder_departement.department_id', 'departments.id')
+        //         ->leftJoin('folders', 'folder_departement.folder_id', 'folders.id')
+        //         ->where('folder_departement.department_id', '=', $dept_id)
+        //         ->where('folders.parent_id', '=', 0)
+        //         ->distinct()
+        //         ->get();
+
+        //     $folders_table_sql = DB::table('departments')
+        //         ->select('folders.*')
+        //         ->leftJoin('folder_departement', 'folder_departement.department_id', 'departments.id')
+        //         ->leftJoin('folders', 'folder_departement.folder_id', 'folders.id')
+        //         ->where('folder_departement.department_id', '=', $dept_id)
+        //         ->where('folders.parent_id', '=', $folder->id)
+        //         ->distinct()
+        //         ->get();
+
+        //     $folders_input_sql = DB::table('departments')
+        //         ->select('folders.*')
+        //         ->leftJoin('folder_departement', 'folder_departement.department_id', 'departments.id')
+        //         ->leftJoin('folders', 'folder_departement.folder_id', 'folders.id')
+        //         ->where('folder_departement.department_id', '=', $dept_id)
+        //         ->distinct()
+        //         ->get();
+
+        //     $folders = $folders_sql->toArray();
+        //     $folders = Folder::hydrate($folders);
+
+        //     $folders_table = $folders_table_sql->toArray();
+        //     $folders_table = Folder::hydrate($folders_table);
+
+        //     $folders_input = $folders_input_sql->pluck('name', 'id')->toArray();
+        //     $folders_input = Folder::hydrate($folders_input);
+        // }
+        if (UtilityController::has_permission_for_folder($folder->id, $user))
+            return view('documents.index', compact('docs', 'folder', 'folders', 'folders_table', 'folders_input', 'filetype', 'depts', 'subs', 'categories'));
         else
             return redirect('/documents')->with('failure', 'vous n\'avez pas accès à ce dossier');
     }
-
 
     /**
      * Display the specified resource.
@@ -185,54 +273,68 @@ class FolderController extends Controller
     {
 
         $user = auth()->user();
-        $folders = Folder::where('parent_id', '=', '0')->get();
-        $folders_table = Folder::where('parent_id', '=', $id)->get();
         $categories = Category::pluck('name', 'id')->all();
         $depts = Department::all();
-        $folders_input = Folder::pluck('name', 'id')->all();
+        $subs = Subsidiary::all();
 
         $folder = Folder::findOrFail($id);
         $docs = $folder->documents()->get();
         $filetype = '';
 
-        if ($this->has_permission_for_folder($id, $user))
-            return view('folders.index', compact('docs', 'folder', 'folders', 'folders_table', 'folders_input', 'filetype', 'depts', 'categories'));
+
+        $folders = Folder::where('parent_id', '=', '0')->get();
+        $folders_table = Folder::where('parent_id', '=', $id)->get();
+        $folders_input = Folder::pluck('name', 'id')->all();
+
+
+        // if ($user->hasRole('Root') || $user->hasRole('Admin')) {
+
+        //     $folders = Folder::where('parent_id', '=', '0')->get();
+        //     $folders_table = Folder::where('parent_id', '=', $id)->get();
+        //     $folders_input = Folder::pluck('name', 'id')->all();
+        // } else {
+
+        //     $dept_id = $user->department_id;
+        //     $folders_sql = DB::table('departments')
+        //         ->select('folders.*')
+        //         ->leftJoin('folder_departement', 'folder_departement.department_id', 'departments.id')
+        //         ->leftJoin('folders', 'folder_departement.folder_id', 'folders.id')
+        //         ->where('folder_departement.department_id', '=', $dept_id)
+        //         ->where('folders.parent_id', '=', 0)
+        //         ->distinct()
+        //         ->get();
+
+        //     $folders_table_sql = DB::table('departments')
+        //         ->select('folders.*')
+        //         ->leftJoin('folder_departement', 'folder_departement.department_id', 'departments.id')
+        //         ->leftJoin('folders', 'folder_departement.folder_id', 'folders.id')
+        //         ->where('folder_departement.department_id', '=', $dept_id)
+        //         ->where('folders.parent_id', '=', $id)
+        //         ->distinct()
+        //         ->get();
+
+        //     $folders_input_sql = DB::table('departments')
+        //         ->select('folders.*')
+        //         ->leftJoin('folder_departement', 'folder_departement.department_id', 'departments.id')
+        //         ->leftJoin('folders', 'folder_departement.folder_id', 'folders.id')
+        //         ->where('folder_departement.department_id', '=', $dept_id)
+        //         ->distinct()
+        //         ->get();
+
+        //     $folders = $folders_sql->toArray();
+        //     $folders = Folder::hydrate($folders);
+
+        //     $folders_table = $folders_table_sql->toArray();
+        //     $folders_table = Folder::hydrate($folders_table);
+
+        //     $folders_input = $folders_input_sql->pluck('name', 'id')->toArray();
+        // }
+
+
+        if (UtilityController::has_permission_for_folder($id, $user))
+            return view('folders.index', compact('docs', 'folder', 'folders', 'folders_table', 'folders_input', 'filetype', 'depts', 'categories', 'subs'));
         else
             return redirect('/folders')->with('failure', 'vous n\'avez pas accès à ce dossier');
-    }
-
-
-
-    function has_permission_for_folder($id, $user)
-    {
-        $permission = DB::table('departments')
-            ->leftJoin('folder_departement', 'folder_departement.department_id', 'departments.id')
-            ->where('folder_departement.folder_id', '=', $id)
-            ->where('folder_departement.department_id', '=', $user->department_id)
-            ->distinct()
-            ->get();
-        if (!$user->hasRole('Root')) {
-            // var_dump($user->department_id);
-            // var_dump($id);
-            // var_dump($permission[0]->permission_for);
-            if (isset($permission[0]) && !is_null($permission[0])) {
-                if ($user->hasRole('Admin')) {
-                    if ($permission[0]->permission_for == 1 || $permission[0]->permission_for == 0)
-                        return true;
-                    else
-                        return false;
-                } else if ($user->hasRole('User')) {
-                    if ($permission[0]->permission_for == 0)
-                        return true;
-                    else
-                        return false;
-                } else
-                    return false;
-            }
-            return false;
-        }
-
-        return true;
     }
 
     /**
@@ -243,16 +345,19 @@ class FolderController extends Controller
      */
     public function edit(Folder $folder)
     {
-        // $folder = Folder::findOrFail($folder);
         $user = auth()->user();
-        $depts              = Department::all();
-        // dd($depts);
+        $document_departement = 0;
+        $depts   = Department::all();
+
+        $subs    = Subsidiary::all();
+        $folders = Folder::pluck('name', 'id')->all();
         $document_departement = 0;
 
         foreach ($depts as $key => $dept) {
 
             $dp = DB::table('folder_departement')
                 ->select('folder_departement.folder_id', 'folder_departement.department_id', 'folder_departement.permission_for')
+                ->Join('subsidiaries_departement', 'subsidiaries_departement.departement_id', '=', 'folder_departement.department_id')
                 ->where('folder_departement.folder_id', '=', $folder->id)
                 ->where('folder_departement.department_id', '=', $dept['id'])
                 ->get()
@@ -264,8 +369,41 @@ class FolderController extends Controller
             }
         }
 
-        if ($user->hasRole('Root'))
-            return view('folders.edit', compact('folder', 'depts'));
+        // if ($user->hasRole('Root')) {
+        //     $subs    = Subsidiary::all();
+        //     $folders = Folder::pluck('name', 'id')->all();
+        //     $document_departement = 0;
+        //     foreach ($depts as $key => $dept) {
+        //         $dp = DB::table('folder_departement')
+        //             ->select('folder_departement.folder_id', 'folder_departement.department_id', 'folder_departement.permission_for')
+        //             ->Join('subsidiaries_departement', 'subsidiaries_departement.departement_id', '=', 'folder_departement.department_id')
+        //             ->where('folder_departement.folder_id', '=', $folder->id)
+        //             ->where('folder_departement.department_id', '=', $dept['id'])
+        //             ->get()
+        //             ->toArray();
+        //         if (isset($dp) && !empty($dp)) {
+        //             $folder_departement = $dp[0];
+        //             $dept['permission_for'] = isset($folder_departement->permission_for) ? $folder_departement->permission_for : 0;
+        //         }
+        //     }
+        // } else {
+        //     $department_id = auth()->user()->department_id;
+        //     $department    = Department::findOrFail($department_id);
+        //     $subs          = $department->subsidiaries()->get();
+        //     $dept_id = $user->department_id;
+        //     $folders_sql = DB::table('departments')
+        //         ->select('folders.*')
+        //         ->leftJoin('folder_departement', 'folder_departement.department_id', 'departments.id')
+        //         ->leftJoin('folders', 'folder_departement.folder_id', 'folders.id')
+        //         ->where('folder_departement.department_id', '=', $dept_id)
+        //         ->where('folders.parent_id', '=', 0)
+        //         ->distinct()
+        //         ->get();
+        //     $folders = $folders_table = Folder::hydrate($folders_sql->toArray());
+        // }
+
+        if (UtilityController::has_permission_for_folder($folder->id, $user))
+            return view('folders.edit', compact('folder', 'subs', 'depts'));
         else
             return redirect('/folders')->with('failure', 'Vous ne pouvez pas modifier ce dossier');
     }
@@ -290,29 +428,15 @@ class FolderController extends Controller
         $folder->name = $request->input('name');
         $folder->save();
 
-
         foreach ($depts as $dep) {
             $permissions[] = $request->input('permissions_' . $dep->id);
         }
 
-        $folder->department()->detach();
-        foreach ($permissions as $key => $permission) {
-            if ($permission !== null) {
-
-                $perms = explode('_', $permission[0]);
-
-
-                // $doc->department()->sync($perms[0]);
-                $folder->department()->attach($folder->id, [
-                    'department_id' => $perms[0],
-                    'permission_for' => ($perms[1] != 'all') ? 1 : 0
-                ]);
-            }
-        }
+        UtilityController::attachFolderToDept($folder, $permissions);
 
         \Log::addToLog('Folder ID ' . $id . ' was edited');
 
-        return redirect('folders')->with('success', 'Le dossier a été mis à ajour avec succès !');
+        return redirect('folders')->with('success', 'Le dossier a été mis à jour avec succès !');
     }
 
     /**
@@ -324,13 +448,11 @@ class FolderController extends Controller
     public function destroy($id)
     {
         $user = auth()->user();
-        if ($user->hasRole('Root')) {
+        if ($user->hasRole('Root') || $user->hasRole('Admin')) {
+
             $folder = Folder::find($id);
-
             $folder->delete();
-
             $folder->documents()->detach();
-
             \Log::addToLog('Folder ID ' . $id . ' was deleted');
 
             return redirect()->back()->with('success', 'Le dossier a été supprimé avec succès !');
@@ -338,12 +460,13 @@ class FolderController extends Controller
             return redirect()->back()->with('failure', 'Vous ne pouvez pas supprimé ce dossier');
     }
 
+
     public function changeColor(Request $request, $id)
     {
         $folder = Folder::findOrFail($id);
         $folder->color =  $request->input('color');
         $folder->save();
 
-        return redirect()->back()->with('success', 'La couleur du dossier a été modifie avec succès !');
+        return redirect()->back()->with('success', 'La couleur du fichier a été modifie avec succès !');
     }
 }

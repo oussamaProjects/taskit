@@ -4,10 +4,10 @@
 
     @include('inc.sidebar')
 
-    <div class="h-full ml-14 mt-14 mb-10 md:ml-64 p-4">
+    <div class="h-full ml-14 mt-14 mb-10 md:ml-64">
 
         <div class="grid grid-cols-1 lg:grid-cols-1">
-            <div class="relative flex flex-col min-w-0 mb-4 lg:mb-0 break-words bg-gray-50 w-full shadow rounded">
+            <div class="relative flex flex-col min-w-0 mb-2 break-words bg-white w-full shadow rounded">
                 <div class="rounded-t mb-0 px-0 border-0">
                     <div class="flex flex-wrap items-center px-4 py-4">
                         <div class="relative w-full max-w-full flex-grow flex-1">
@@ -17,14 +17,14 @@
                         </div>
                         <div class="flex ml-auto relative text-right">
                             <a href="\allFolders"
-                                class="flex text-white bg-gray-900 border-0 py-2 px-6 focus:outline-none hover:bg-indigo-600 rounded">Afficher
+                                class="flex text-white bg-gray-900 border-0 py-2 px-6 focus:outline-none hover:bg-blue-500 rounded">Afficher
                                 tous les dossiers</a>
                             <button id="buttonmodal"
-                                class="flex text-white bg-gray-900 border-0 py-2 px-6 focus:outline-none hover:bg-indigo-600 rounded ml-4"
+                                class="flex text-white bg-gray-900 border-0 py-2 px-6 focus:outline-none hover:bg-blue-500 rounded ml-4"
                                 type="button">Ajouter un dossiers</button>
                             @can('upload')
                                 <button id="buttonmodalFile"
-                                    class="flex text-white bg-gray-900 border-0 py-2 px-6 focus:outline-none hover:bg-indigo-600 rounded ml-4"
+                                    class="flex text-white bg-gray-900 border-0 py-2 px-6 focus:outline-none hover:bg-blue-500 rounded ml-4"
                                     type="button">
                                     <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 m-1" fill="none" viewBox="0 0 24 24"
                                         stroke="currentColor">
@@ -42,7 +42,7 @@
 
 
 
-        <div class="grid grid-cols-6 lg:grid-cols-6 p-4 mb-6 mt-6 gap-4 bg-gray-50 shadow">
+        <div class="grid grid-cols-6 lg:grid-cols-6 p-4 mb-4 mt-2 ml-4 gap-4 bg-white shadow">
 
             @if (count($folders_table) > 0)
                 @foreach ($folders_table as $folder)
@@ -60,7 +60,7 @@
 
                             <div class="flex py-4 px-2 text-center align-middle">
                                 <div class="image">
-                                    <svg xmlns="http://www.w3.org/2000/svg" class="h-10 w-10 mx-auto my-1" fill="none"
+                                    <svg xmlns="http://www.w3.org/2000/svg" class="h-8 w-8 mx-auto my-1" fill="none"
                                         viewBox="0 0 24 24" stroke="currentColor">
                                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
                                             d="M5 19a2 2 0 01-2-2V7a2 2 0 012-2h4l2 2h4a2 2 0 012 2v1M5 19h14a2 2 0 002-2v-5a2 2 0 00-2-2H9a2 2 0 00-2 2v5a2 2 0 01-2 2z" />
@@ -69,7 +69,7 @@
                                 <div class="flex flex-col name px-3 text-left">
 
                                     <a href="/folder/{{ $folder->id }}/child"
-                                        class="block text-md font-bold text-gray-800 capitalize">
+                                        class="block text-md text-gray-800 capitalize">
                                         {{ $folder->name }}
                                     </a>
                                     <div class="text-xs mt-auto">
@@ -114,11 +114,11 @@
 
         @hasanyrole('Root|Admin')
 
-        <div class="grid grid-cols-4 lg:grid-cols-4 ">
+        <div class="grid grid-cols-4 lg:grid-cols-4 ml-4 p-4 gap-4 bg-white shadow">
             <div class="col-span-4">
                 <div class="relative flex flex-col min-w-0 mb-4 lg:mb-0 break-words w-full">
                     <div class="rounded-t mb-0 px-0 border-0">
-                        <div class="flex flex-col text-center w-full mb-6">
+                        <div class="flex flex-col text-center w-full">
                             <h1 class="sm:text-2xl text-xl font-medium title-font mb-2 text-gray-900">Dossiers</h1>
                             <p class="lg:w-2/3 mx-auto leading-relaxed text-base">Tous les dossiers</p>
                         </div>

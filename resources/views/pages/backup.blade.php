@@ -6,7 +6,7 @@
 
     <div class="h-full ml-14 mt-14 mb-10 md:ml-64">
         <div class="grid grid-cols-1 lg:grid-cols-1 p-4 gap-4">
-            <div class="relative flex flex-col min-w-0 mb-4 lg:mb-0 break-words bg-gray-50   w-full shadow-md rounded">
+            <div class="relative flex flex-col min-w-0 mb-4 lg:mb-0 break-words bg-white w-full shadow-md rounded">
                 <div class="rounded-t mb-0 px-0 border-0">
                     <div class="flex flex-wrap items-center px-4 py-4">
                         <div class="relative w-full max-w-full flex-grow flex-1">
@@ -17,7 +17,7 @@
                         <div class="relative text-right">
 
                             <a href="/backup/create"
-                                class="flex text-white bg-gray-900 border-0 py-2 px-6 focus:outline-none hover:bg-indigo-600 rounded ml-auto">
+                                class="flex text-white bg-gray-900 border-0 py-2 px-6 focus:outline-none hover:bg-blue-500 rounded ml-auto">
                                 <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 m-1" fill="none" viewBox="0 0 24 24"
                                     stroke="currentColor">
                                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
@@ -36,7 +36,7 @@
             <div class="col-span-3">
                 <div class="grid grid-cols-1 lg:grid-cols-1 p-4 gap-4">
                     <div
-                        class="relative flex flex-col min-w-0 mb-4 lg:mb-0 break-words bg-gray-50   w-full shadow-md rounded">
+                        class="relative flex flex-col min-w-0 mb-4 lg:mb-0 break-words bg-white w-full shadow-md rounded">
                         <div class="rounded-t mb-0 px-0 border-0">
                             <div class="block w-full overflow-x-auto">
                                 <table class="items-center w-full bg-transparent border-collapse">
@@ -108,7 +108,10 @@
                     </div>
                 </div>
             </div>
+            
+        <button id="buttonmodalFileImg" class="bg-white h-auto p-4 shadow" type="button">
             <img src="{{ asset('img/undraw_Transfer_files_re_a2a9.svg') }}" alt="">
+        </button>
         </div>
     </div>
 

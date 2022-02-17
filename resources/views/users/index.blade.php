@@ -6,7 +6,7 @@
 
     <div class="ml-14 mt-14 md:ml-64">
         <!-- Statistics Cards -->
-        <div class="flex p-4 gap-4">
+        <div class="flex items-center p-4 gap-4 bg-white mb-4">
 
             <form action="/search" method="post" id="search-form" class="bg-white flex items-center w-full max-w-xl  4 p-2">
                 {{ csrf_field() }}
@@ -16,12 +16,12 @@
                         <path d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"></path>
                     </svg>
                 </button>
-                <input type="text" name="search" id="search" placeholder="Recherche ..."
+                <input type="text" autocomplete="off" name="search" id="search" placeholder="Recherche ..."
                     class="w-full pl-3 text-sm text-black outline-none focus:outline-none bg-transparent" />
             </form>
 
             <button id="buttonmodal"
-                class="flex text-white bg-gray-900 border-0 py-2 px-6 focus:outline-none hover:bg-indigo-600 rounded ml-auto">
+                class="flex text-white bg-gray-900 border-0 py-2 px-6 focus:outline-none hover:bg-blue-500 rounded ml-auto">
                 Ajouter un utilisateur
             </button>
 
@@ -31,9 +31,9 @@
         </div>
 
         <!-- Statistics Cards -->
-        <div class="grid grid-cols-4 sm:grid-cols-4 lg:grid-cols-4 p-4 gap-4">
+        <div class="grid grid-cols-4 sm:grid-cols-4 lg:grid-cols-4 ml-4 p-4 gap-4 bg-white shadow">
             <div class="col-span-3">
-                <div class="flex flex-col text-center w-full mb-6">
+                <div class="flex flex-col text-center w-full">
                     <h1 class="sm:text-2xl text-xl font-medium title-font mb-2 text-gray-900">Tous les utilisateurs</h1>
                     <p class="lg:w-2/3 mx-auto leading-relaxed text-base">Utilisateurs
                     </p>
@@ -43,19 +43,23 @@
                         <thead>
                             <tr>
                                 <th
-                                    class="px-4 py-3 title-font tracking-wider font-medium text-gray-900 text-sm bg-gray-100">
+                                    class="px-2 py-2 title-font tracking-wider font-medium text-gray-900 text-sm bg-blue-100">
                                     Name
                                 </th>
                                 <th
-                                    class="px-4 py-3 title-font tracking-wider font-medium text-gray-900 text-sm bg-gray-100">
+                                    class="px-2 py-2 title-font tracking-wider font-medium text-gray-900 text-sm bg-blue-100">
                                     Role
                                 </th>
                                 <th
-                                    class="px-4 py-3 title-font tracking-wider font-medium text-gray-900 text-sm bg-gray-100">
+                                    class="px-2 py-2 title-font tracking-wider font-medium text-gray-900 text-sm bg-blue-100">
+                                    Filiales
+                                </th>
+                                <th
+                                    class="px-2 py-2 title-font tracking-wider font-medium text-gray-900 text-sm bg-blue-100">
                                     Department
                                 </th>
                                 <th
-                                    class="px-4 py-3 title-font tracking-wider font-medium text-gray-900 text-sm bg-gray-100">
+                                    class="px-2 py-2 title-font tracking-wider font-medium text-gray-900 text-sm bg-blue-100">
                                     Actions
                                 </th>
                             </tr>
@@ -66,16 +70,33 @@
                                 @foreach ($users as $user)
                                     @if (!$user->hasRole('Root'))
                                         <tr>
+
                                             <td class="px-4 py-3 text-sm">{{ $user->name }}</td>
+
                                             <td class="px-4 py-3 text-sm">
-                                                {{ $user->roles()->pluck('name')->implode(' ') }}</td>
-                                            <td class="px-4 py-3 text-sm">{{ $user->department['dptName'] }}</td>
+                                                {{ $user->roles()->pluck('name')->implode(' ') }}
+                                            </td>
+
+                                            <td class="px-4 py-3 text-sm">
+                                                @foreach ($user->departments()->get() as $dept)
+                                                    @foreach ($dept->subsidiaries()->get() as $subs)
+                                                        {{ $subs['subsName'] }}<br>
+                                                    @endforeach
+                                                @endforeach
+                                            </td>
+
+                                            <td class="px-4 py-3 text-sm">
+                                                @foreach ($user->departments()->get() as $dept)
+                                                    {{ $dept['dptName'] }}<br>
+                                                @endforeach
+                                            </td>
+
                                             <td class="px-4 py-3 text-sm">
                                                 <!-- DELETE using link -->
                                                 {!! Form::open(['action' => ['UsersController@destroy', $user->id], 'method' => 'DELETE', 'id' => 'form-delete-users-' . $user->id, 'class' => 'flex']) !!}
                                                 <a href="#" class="left">
-                                                    <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 m-1" fill="none"
-                                                        viewBox="0 0 24 24" stroke="currentColor">
+                                                    <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 m-1"
+                                                        fill="none" viewBox="0 0 24 24" stroke="currentColor">
                                                         <path stroke-linecap="round" stroke-linejoin="round"
                                                             stroke-width="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z" />
                                                         <path stroke-linecap="round" stroke-linejoin="round"
@@ -84,16 +105,16 @@
                                                     </svg>
                                                 </a>
                                                 <a href="/users/{{ $user->id }}/edit" class="center">
-                                                    <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 m-1" fill="none"
-                                                        viewBox="0 0 24 24" stroke="currentColor">
+                                                    <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 m-1"
+                                                        fill="none" viewBox="0 0 24 24" stroke="currentColor">
                                                         <path stroke-linecap="round" stroke-linejoin="round"
                                                             stroke-width="2"
                                                             d="M11 5H6a2 2 0 00-2 2v11a2 2 0 002 2h11a2 2 0 002-2v-5m-1.414-9.414a2 2 0 112.828 2.828L11.828 15H9v-2.828l8.586-8.586z" />
                                                     </svg>
                                                 </a>
                                                 <a href="" class="right data-delete" data-form="users-{{ $user->id }}">
-                                                    <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 m-1" fill="none"
-                                                        viewBox="0 0 24 24" stroke="currentColor">
+                                                    <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 m-1"
+                                                        fill="none" viewBox="0 0 24 24" stroke="currentColor">
                                                         <path stroke-linecap="round" stroke-linejoin="round"
                                                             stroke-width="2"
                                                             d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16" />
@@ -197,24 +218,24 @@
                 </h2>
 
 
-                <div class="mb-4 relative">
+                <div class="mb-2 relative">
                     <label for="name" class="text-xs opacity-75 scale-75">
                         Nom</label>
-                    {{ Form::text('name', '', ['id' => 'name', 'class' => 'peer border border-gray-200 focus:outline-none rounded focus:border-gray-500 focus:shadow-sm w-full py-1 px-2 h-10 placeholder-transparent']) }}
+                    {{ Form::text('name', '', ['autocomplete' => 'off','id' => 'name','class' =>'peer border border-gray-200 focus:outline-none rounded focus:border-gray-500 focus:shadow-sm w-full py-1 px-2 h-8 placeholder-transparent text-sm']) }}
 
                 </div>
 
-                <div class="mb-4 relative">
+                <div class="mb-2 relative">
                     <label for="email" class="text-xs opacity-75 scale-75">
                         Adresse e-mail</label>
-                    {{ Form::email('email', '', ['id' => 'email', 'class' => 'peer border border-gray-200 focus:outline-none rounded focus:border-gray-500 focus:shadow-sm w-full py-1 px-2 h-10 placeholder-transparent']) }}
+                    {{ Form::email('email', '', ['id' => 'email','class' =>'peer border border-gray-200 focus:outline-none rounded focus:border-gray-500 focus:shadow-sm w-full py-1 px-2 h-8 placeholder-transparent text-sm']) }}
 
                 </div>
 
-                <div class="mb-4 relative">
+                <div class="mb-2 relative">
                     <label for="email" class="text-xs opacity-75 scale-75">Department</label>
                     <select name="department_id" id="department_id"
-                        class="peer border border-gray-200 focus:outline-none rounded focus:border-gray-500 focus:shadow-sm w-full py-1 px-2 h-10 placeholder-transparent">
+                        class="peer border border-gray-200 focus:outline-none rounded focus:border-gray-500 focus:shadow-sm w-full py-1 px-2 h-8 placeholder-transparent text-sm">
                         <option value="" disabled selected>Choisissez le département</option>
                         @if (count($depts) > 0)
                             @if (Auth::user()->hasRole('Root'))
@@ -223,16 +244,17 @@
                                 @endforeach
                             @elseif(Auth::user()->hasRole('Admin'))
                                 <option value="{{ Auth::user()->department_id }}">
-                                    {{ Auth::user()->department['dptName'] }}</option>
+                                    {{ Auth::user()->departments()->get() }}
+                                </option>
                             @endif
                         @endif
                     </select>
                 </div>
 
-                <div class="mb-4 relative">
+                <div class="mb-2 relative">
                     <label for="email" class="text-xs opacity-75 scale-75">Role</label>
                     <select name="role" id="role"
-                        class="peer border border-gray-200 focus:outline-none rounded focus:border-gray-500 focus:shadow-sm w-full py-1 px-2 h-10 placeholder-transparent">
+                        class="peer border border-gray-200 focus:outline-none rounded focus:border-gray-500 focus:shadow-sm w-full py-1 px-2 h-8 placeholder-transparent text-sm">
                         <option value="" disabled selected>Attribuer un rôle</option>
                         @if (count($roles) > 0)
                             @foreach ($roles as $role)
@@ -243,16 +265,16 @@
                 </div>
 
 
-                <div class="mb-4 relative">
+                <div class="mb-2 relative">
                     <label for="password" class="text-xs opacity-75 scale-75">Password</label>
-                    {{ Form::password('password', ['id' => 'password', 'class' => 'peer border border-gray-200 focus:outline-none rounded focus:border-gray-500 focus:shadow-sm w-full py-1 px-2 h-10 placeholder-transparent']) }}
+                    {{ Form::password('password', ['id' => 'password','class' =>'peer border border-gray-200 focus:outline-none rounded focus:border-gray-500 focus:shadow-sm w-full py-1 px-2 h-8 placeholder-transparent text-sm']) }}
                 </div>
 
-                <div class="mb-4 relative">
+                <div class="mb-2 relative">
                     <label for="password-confirm" class="text-xs opacity-75 scale-75">Confirm
                         Mot de passe
                     </label>
-                    {{ Form::password('password_confirmation', ['id' => 'password-confirm', 'class' => 'peer border border-gray-200 focus:outline-none rounded focus:border-gray-500 focus:shadow-sm w-full py-1 px-2 h-10 placeholder-transparent']) }}
+                    {{ Form::password('password_confirmation', ['id' => 'password-confirm','class' =>'peer border border-gray-200 focus:outline-none rounded focus:border-gray-500 focus:shadow-sm w-full py-1 px-2 h-8 placeholder-transparent text-sm']) }}
                 </div>
 
             </div>

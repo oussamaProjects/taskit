@@ -24,4 +24,9 @@ class Department extends Model
   {
     return $this->belongsToMany('App\folder', 'folder_departement', 'department_id', 'folder_id');
   }
+
+  public function subsidiaries()
+  {
+    return $this->belongsToMany('App\Subsidiary', 'subsidiaries_departement', 'departement_id', 'subs_id');
+  }
 }

@@ -27,7 +27,7 @@
             <form action="/search" method="post" id="search-form">
                 {{ csrf_field() }}
                 <i class="material-icons prefix">search</i>
-                <input type="text" name="search" id="search" placeholder="Recherche ...">
+                <input type="text" autocomplete="off" name="search" id="search" placeholder="Recherche ...">
                 <label for="search"></label>
             </form>
 

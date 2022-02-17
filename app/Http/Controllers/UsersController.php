@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use App\User;
 // for displaying data
 use App\Department;
+use App\Subsidiary;
 // for assigning roles
 use Spatie\Permission\Models\Role;
 
@@ -36,6 +37,7 @@ class UsersController extends Controller
     }
     // get all dept
     $depts = Department::all();
+    
     // get roles
     if (auth()->user()->hasRole('Root')) {
       $roles = Role::where('name', '!=', 'Root')->get();
@@ -68,7 +70,7 @@ class UsersController extends Controller
       'name' => 'required|string|max:255',
       'email' => 'required|string|email|max:255|unique:users',
       'password' => 'required|string|min:6|confirmed',
-      'department_id' => 'required',
+      'dept' => 'required',
       'role' => 'required',
     ]);
 
@@ -76,10 +78,14 @@ class UsersController extends Controller
     $user = new User;
     $user->name = $request->input('name');
     $user->email = $request->input('email');
-    $user->password = $request->input('password');
-    $user->department_id = $request->input('department_id');
+    $user->password = $request->input('password'); 
     $user->status = true;
     $user->save();
+
+    $user->departments()->detach();
+    foreach ($request->input('dept') as $dep) {
+      $user->departments()->attach($dep);
+    }
 
     $role = $request->input('role');
     $role_r = Role::where('id', $role)->firstOrFail();
@@ -110,8 +116,10 @@ class UsersController extends Controller
    */
   public function edit($id)
   {
+
     $user = User::findOrFail($id);
     $depts = Department::all();
+    $subsidiaries = Subsidiary::all();
     // get roles
     if (auth()->user()->hasRole('Root')) {
       $roles = Role::where('name', '!=', 'Root')->get();
@@ -119,7 +127,7 @@ class UsersController extends Controller
       $roles = Role::where('name', '!=', 'Root')->where('name', '!=', 'Admin')->get();
     }
 
-    return view('users.edit', compact('user', 'depts', 'roles'));
+    return view('users.edit', compact('user', 'depts', 'subsidiaries', 'roles'));
   }
 
   /**
@@ -131,24 +139,33 @@ class UsersController extends Controller
    */
   public function update(Request $request, $id)
   {
+
     $this->validate($request, [
       'name' => 'required|string|max:255',
       'email' => 'required|string|email|max:255',
-      'department_id' => 'required',
+      'dept' => 'required',
       'role' => 'required',
-    ]);
+    ]); 
 
     $user = User::findOrFail($id);
     $user->name = $request->input('name');
     $user->email = $request->input('email');
-    $user->department_id = $request->input('department_id');
+    $user->department_id = 0;
+    $user->status = true;
+   
     // if ($request->input('status')) {
-    //     $user->status = true;
+    //   $user->status = true;
+    // } else {
+    //   $user->status = false;
     // }
-    // else{
-    //     $user->status = false;
-    // }
-    $user->save();
+    
+    $user->save(); 
+
+    $user->departments()->detach();
+    foreach ($request->input('dept') as $dep) {
+      $user->departments()->attach($dep);
+    }
+
     // $role_id = $request->input('role');
     //
     // // get the obj of current role
@@ -159,7 +176,7 @@ class UsersController extends Controller
     // $user->removeRole($curr_role);
     // // then assign the new role
     // $user->assignRole($new_role);
-
+ 
     if ($request->input('role') !== $user->roles->pluck('name')->implode(' ')) {
       // first remove current role
       $user->removeRole($user->roles->pluck('name')->implode(' '));
