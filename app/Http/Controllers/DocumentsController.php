@@ -84,63 +84,30 @@ class DocumentsController extends Controller
    * @return \Illuminate\Http\Response
    */
   public function all()
-  {
-    $user = auth()->user();
-    if ($user->hasRole('Root')) {
-      $docs = Document::where('isExpire', '!=', 2)->paginate(1);
-      $folders_input = Folder::pluck('name', 'id')->all();
-    } else {
-
-      $dept_id = auth()->user()->department_id;
-      $docs = DB::table('departments')
-        ->select('document.*')
-        ->leftJoin('document_departement', 'document_departement.department_id', 'departments.id')
-        ->leftJoin('document', 'document_departement.document_id', 'document.id')
-        ->where('document_departement.department_id', '=', $dept_id)
-        ->where('document.isExpire', '!=', 2)
-        ->distinct()
-        ->get();
-
-      // $docs = Document::where('isExpire', '!=', 2)->where('department_id', $dept_id)->where('user_id', '!=', $user->id)->get();
-      $folders_sql = DB::table('departments')
-        ->select('folders.*')
-        ->leftJoin('folder_departement', 'folder_departement.department_id', 'departments.id')
-        ->leftJoin('folders', 'folder_departement.folder_id', 'folders.id')
-        ->where('folder_departement.department_id', '=', $dept_id)
-        ->where('folders.parent_id', '=', 0)
-        ->distinct()
-        ->get();
-
-
-      $folders_input_sql = DB::table('departments')
-        ->select('folders.*')
-        ->leftJoin('folder_departement', 'folder_departement.department_id', 'departments.id')
-        ->leftJoin('folders', 'folder_departement.folder_id', 'folders.id')
-        ->where('folder_departement.department_id', '=', $dept_id)
-        ->distinct()
-        ->get();
-
-      $folders_input = $folders_input_sql->pluck('name', 'id')->all();
-      $folders = Folder::hydrate($folders_sql->toArray());
-      $docs = Document::hydrate($docs->toArray());
-    }
+  {  
     $filetype = null;
+    $docs = Document::where('isExpire', '!=', 2)->get(); 
+    $folders_input = Folder::pluck('name', 'id')->all();
     $categories = Category::pluck('name', 'id')->all();
-    $depts = Department::all();
     $subs  = Subsidiary::all();
+    $depts = Department::all();
 
     return view('documents.all', compact('docs', 'filetype', 'folders_input', 'categories', 'depts', 'subs'));
   }
 
   // my documents
   public function mydocuments()
-  {
+  { 
+    $filetype = null;
+    $folders_input = Folder::pluck('name', 'id')->all();
+    $categories = Category::pluck('name', 'id')->all();
+    $subs  = Subsidiary::all(); 
+    $depts = Department::all();
     // get user's docs
     $user_id = auth()->user()->id;
-
     $docs = Document::where('user_id', $user_id)->get();
 
-    return view('documents.mydocuments', compact('docs'));
+    return view('documents.mydocuments', compact('docs', 'filetype', 'folders_input', 'categories', 'depts', 'subs'));
   }
 
   /**
@@ -239,7 +206,7 @@ class DocumentsController extends Controller
     $doc->user_id = $user_id;
     $doc->department_id = $department_id;
     $doc->file = $path;
-    $doc->color = '#FFFFFF';
+    $doc->color = '#fdf4d0';
     $doc->mimetype = Storage::mimeType($path);
     $size = Storage::size($path);
     if ($size >= 1000000) {
@@ -263,7 +230,7 @@ class DocumentsController extends Controller
     $doc->categories()->sync($request->category_id);
     // add Folder
     $doc->folders()->sync($request->folder_id);
-// dd($permissions);
+    // dd($permissions);
     UtilityController::attachDocToDept($doc, $permissions);
 
     \Log::addToLog('New Document, ' . $request->input('name') . ' was uploaded');
@@ -284,7 +251,7 @@ class DocumentsController extends Controller
     $category_id = $doc->categories()->first()->id;
     $user = auth()->user();
     $department_id = $user->department_id;
-    
+
     $permission = DB::table('departments')
       ->leftJoin('document_departement', 'document_departement.department_id', 'departments.id')
       ->where('document_departement.document_id', '=', $id)
@@ -308,8 +275,8 @@ class DocumentsController extends Controller
     //   $query->where('category.id', $category_id);
     // })->min('id');
 
-     // get previous user id
-     $previous = Document::whereHas('categories', function ($query) use ($doc_id, $department_id) {
+    // get previous user id
+    $previous = Document::whereHas('categories', function ($query) use ($doc_id, $department_id) {
       $query->where('document.id', '<', $doc_id);
       $query->where('category.id', $department_id);
     })->max('id');
@@ -339,8 +306,13 @@ class DocumentsController extends Controller
     $selectedFolders    = $doc->folders->pluck('id');
 
     $subs    = Subsidiary::all();
-    $folders = Folder::pluck('name', 'id')->all();
     $depts   = Department::all();
+
+
+    $docs = Document::where('isExpire', '!=', 2)->get();
+    $folders  = Folder::where('parent_id', '=', '0')->get();
+    $folders_input = Folder::pluck('name', 'id')->all();
+
 
     foreach ($depts as $key => $dept) {
 
@@ -405,7 +377,7 @@ class DocumentsController extends Controller
 
     // dd($depts);
     if (UtilityController::has_permission_for_doc($id, $user))
-      return view('documents.edit', compact('doc', 'categories', 'folders', 'depts', 'subs', 'selectedCategories', 'selectedFolders'));
+      return view('documents.edit', compact('doc', 'categories', 'folders', 'folders_input', 'depts', 'subs', 'selectedCategories', 'selectedFolders'));
     else
       return redirect('/documents')->with('failure', 'Vous ne pouvez pas voir ce document');
   }
@@ -600,6 +572,7 @@ class DocumentsController extends Controller
 
     $folders_input = Folder::pluck('name', 'id')->all();
     $categories = Category::pluck('name', 'id')->all();
+    $subs  = Subsidiary::all();
     $depts = Department::all();
 
     foreach ($folders as $key => $folder) {
@@ -616,7 +589,7 @@ class DocumentsController extends Controller
       }
     }
 
-    return view('documents.index', compact('docs', 'filetype', 'folders', 'folders_input', 'categories', 'depts'));
+    return view('documents.index', compact('docs', 'filetype', 'folders', 'folders_input', 'categories', 'depts', 'subs'));
   }
 
   public function trash()
@@ -664,5 +637,4 @@ class DocumentsController extends Controller
 
     return redirect()->back()->with('success', 'La couleur du fichier a été modifie avec succès !');
   }
-  
 }

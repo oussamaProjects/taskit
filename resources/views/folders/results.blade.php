@@ -4,55 +4,53 @@
 
     @include('inc.sidebar')
 
-    <div class="ml-14 mt-14 mb-10 md:ml-64">
-        <div class="grid grid-cols-1 sm:grid-cols-4 md:grid-cols-4 lg:grid-cols-6 p-4 gap-4">
+    <div class="h-full ml-14 mt-14 mb-10 md:ml-64">
 
-            <h3 class="flow-text"><i class="material-icons">folder</i> Dossiers
-                <a href="#" class="btn red waves-effect waves-light right tooltipped" data-position="left" data-delay="50"
-                    data-tooltip="Delete Selected folders">
-                    <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 m-1" fill="none" viewBox="0 0 24 24"
-                        stroke="currentColor">
-                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                            d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16" />
-                    </svg>
-                </a>
-                @can('upload')
-                    <a href="/folders/create" class="btn waves-effect waves-light right tooltipped" data-position="left"
-                        data-delay="50" data-tooltip="Upload New folder"><i class="material-icons">file_upload</i></a>
-                @endcan
-            </h3>
+        @include('folders.inc.head')
 
-            <h6 class="flow-text orange-text">{{ count($results) }} Résultats</h6>
-
-            <form action="/search" method="post" id="search-form">
-                {{ csrf_field() }}
-                <i class="material-icons prefix">search</i>
-                <input type="text" autocomplete="off" name="search" id="search" placeholder="Recherche ...">
-                <label for="search"></label>
-            </form>
-
+        @hasanyrole('Root|Admin')
             @if (count($results) > 0)
-                @foreach ($results as $res)
-                    @foreach ($res as $r)
-                        <div class="col m2 s6">
-                            <a href="folders/{{ $r->id }}">
-                                <div class="card hoverable indigo lighten-5 task" data-id="{{ $r->id }}">
-                                    <input type="checkbox" class="filled-in" id="chk{{ $r->id }}"><label
-                                        for="chk{{ $r->id }}"></label>
-                                    <div class="card-content2 center">
+                <div class="grid grid-cols-4 lg:grid-cols-4 ml-4 p-4 gap-4 bg-bg-color shadow">
+                    <div class="col-span-4">
+                        <div class="relative flex flex-col min-w-0 mb-4 lg:mb-0 break-words w-full">
+                            <div class="rounded-t mb-0 px-0 border-0">
 
-                                        <h6>{{ $r->name }}</h6>
-                                    </div>
+                                <div class="flex flex-col text-center w-full">
+                                    <h1 class="sm:text-2xl text-xl font-medium title-font mb-1 text-gray-800">Dossiers</h1>
+                                    <p class="lg:w-2/3 mx-auto leading-relaxed text-base mb-2">
+                                        <span class="text-main">{{ count($results) }} </span>
+                                        Dossiers trouvés
+                                    </p>
                                 </div>
-                            </a>
-                        </div>
-                    @endforeach
-                @endforeach
-            @else
-                <h5 class="teal-text">Aucun résultat :(</h5>
-            @endif
+                                <div class="block w-full overflow-x-auto">
+                                    <table
+                                        class="table-auto w-full text-left whitespace-no-wrap border border-bg-color border border-bg-color">
 
-        </div>
+                                        @include('inc.tables.head.folders' )
+                                        <tbody>
+                                            @if (count($results) > 0)
+                                                @foreach ($results as $res)
+                                                    @foreach ($res as $r)
+                                                        @include('inc.tables.body.folders',['current_folder' => $r])
+                                                    @endforeach
+                                                @endforeach
+                                            @else
+                                                <tr>
+                                                    <td colspan="3">
+                                                        @include('inc.no-records.folders' )
+                                                    </td>
+                                                </tr>
+                                            @endif
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            @endif
+        @endhasanyrole
+
     </div>
 
 @endsection

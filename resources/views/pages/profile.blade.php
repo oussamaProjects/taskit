@@ -76,27 +76,27 @@
                     {{ Form::password('current_password', ['id' => 'current_password']) }}
                     <label for="current_password">Mot de passe actuel</label>
                     @if ($errors->has('current_password'))
-                        <span class="text-red-600 text-xs">{{ $errors->first('current_password') }}</span>
+                        <span class="text-amber text-xs">{{ $errors->first('current_password') }}</span>
                     @endif
                 </div>
                 <div class="input-field col m4">
                     {{ Form::password('new_password', ['id' => 'new_password']) }}
                     <label for="new_password">Nouveau mot de passe</label>
                     @if ($errors->has('new_password'))
-                        <span class="text-red-600 text-xs">{{ $errors->first('new_password') }}</span>
+                        <span class="text-amber text-xs">{{ $errors->first('new_password') }}</span>
                     @endif
                 </div>
                 <div class="input-field col m4">
                     {{ Form::password('new_password_confirmation', ['id' => 'new_password_confirmation']) }}
                     <label for="new_password_confirmation">Confirmez le mot de passe</label>
                     @if ($errors->has('new_password_confirmation'))
-                        <span class="text-red-600 text-xs">{{ $errors->first('new_password_confirmation') }}</span>
+                        <span class="text-amber text-xs">{{ $errors->first('new_password_confirmation') }}</span>
                     @endif
                 </div>
 
             </div>
         </div>
-        <div class="modal-footer">
+        <div class="flex items-end justify-end">
             {{ Form::submit(' Sauvegarder', ['class' => 'modal-action modal-close waves-effect waves-green btn']) }}
         </div>
         {!! Form::close() !!}

@@ -11,8 +11,7 @@
     // $('select').material_select();
     // modal
     // $('#modal1').modal();
-    // modal for help
-    // $('#modal2').modal();
+    // modal for help 
     // DELETE using link
     $(function() {
         $('.data-delete').on('click', function(e) {
@@ -22,13 +21,11 @@
         });
 
         $('.show-action').on('click', function(e) {
-            $('.other-actions').not($(this).parents('.folder-container').find('.other-actions')).addClass('hidden');
-            console.log($(this).parents('.folder-container'));
-            console.log($(this).parents('.folder-container').find('.other-actions'));
             e.preventDefault();
-            $(this).parents('.folder-container').find('.other-actions').toggleClass('hidden');
+            $('.other-actions').not($(this).parents('.doc-folder-container').find('.other-actions')).addClass('hidden');  
+             $(this).parents('.doc-folder-container').find('.other-actions').toggleClass('hidden');
         });
-
+         
         // SHARE using link
         $('.data-share').on('click', function(e) {
             if (!confirm('Are you sure you want to share?')) return;

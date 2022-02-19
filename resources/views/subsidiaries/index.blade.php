@@ -9,17 +9,17 @@
 
     <div class="h-full ml-14 mb-4 mt-14 md:ml-64">
 
-            <div class="relative flex flex-col min-w-0 mb-4 lg:mb-0 break-words bg-white w-full shadow">
+            <div class="relative flex flex-col min-w-0 mb-4 lg:mb-0 break-words bg-bg-color w-full shadow">
                 <div class="rounded-t mb-0 px-0 border-0">
                     <div class="flex flex-wrap items-center px-4 py-2">
                         <div class="relative w-full max-w-full flex-grow flex-1">
-                            <h3 class="font-semibold text-base text-gray-900 ">
+                            <h3 class="font-semibold text-base text-gray-800 ">
                                 Subsidiaries
                             </h3>
                         </div>
                         <div class="relative w-full max-w-full flex-grow flex-1 text-right">
                             <button id="buttonmodal" data-target="modal1"
-                                class="flex text-white bg-gray-900 border-0 py-2 px-6 focus:outline-none hover:bg-blue-500 rounded ml-auto"
+                                class="flex text-bg-color bg-gray-800 border-0 py-2 px-6 focus:outline-none hover:bg-main rounded ml-auto"
                                 type="button">Ajouter un susbsidiary</button>
                         </div>
                     </div>
@@ -30,22 +30,22 @@
         <!-- Statistics Cards -->
         <div class="grid grid-cols-4 sm:grid-cols-4 lg:grid-cols-4 p-4 gap-4">
             <div class="col-span-3">
-                <div class="grid grid-cols-1 sm:grid-cols-1 lg:grid-cols-1 p-4 gap-4 bg-white shadow">
+                <div class="grid grid-cols-1 sm:grid-cols-1 lg:grid-cols-1 p-4 gap-4 bg-bg-color shadow">
                     <div class="flex flex-col text-center w-full">
-                        <h1 class="sm:text-2xl text-xl font-medium title-font mb-2 text-gray-900">Subsidiaries</h1>
+                        <h1 class="sm:text-2xl text-xl font-medium title-font mb-2 text-gray-800">Subsidiaries</h1>
                         <p class="lg:w-2/3 mx-auto leading-relaxed text-base">Tous les susbsidiaries
                         </p>
                     </div>
                     <div class="w-full">
-                        <table class="table-auto w-full text-left whitespace-no-wrap">
+                        <table class="table-auto w-full text-left bg-colorspace-no-wrap border border-bg-color">
                             <thead>
                                 <tr>
                                     <th
-                                        class="px-2 py-2 title-font tracking-wider font-medium text-gray-900 text-sm bg-blue-100">
+                                        class="px-2 py-3 title-font tracking-wider font-medium text-bg-color text-base bg-main shadow-md">
                                         Name
                                     </th>
                                     <th
-                                        class="px-2 py-2 title-font tracking-wider font-medium text-gray-900 text-sm bg-blue-100">
+                                        class="px-2 py-3 title-font tracking-wider font-medium text-bg-color text-base bg-main shadow-md">
                                         Actions
                                     </th>
                                 </tr>
@@ -61,7 +61,7 @@
                                                 {!! Form::open(['action' => ['SubsidiaryController@destroy', $subs->id], 'method' => 'DELETE', 'id' => 'form-delete-subsidiaries-' . $subs->id, 'class' => 'flex']) !!}
                                                 <a href="#" class="left"><i class="material-icons"></i></a>
                                                 <a href="/subsidiaries/{{ $subs->id }}/edit" class="center">
-                                                    <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 m-1" fill="none"
+                                                    <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 m-1" fill="none"
                                                         viewBox="0 0 24 24" stroke="currentColor">
                                                         <path stroke-linecap="round" stroke-linejoin="round"
                                                             stroke-width="2"
@@ -70,7 +70,7 @@
                                                 </a>
                                                 <a href="" class="right data-delete"
                                                     data-form="subsidiaries-{{ $subs->id }}">
-                                                    <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 m-1" fill="none"
+                                                    <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 m-1" fill="none"
                                                         viewBox="0 0 24 24" stroke="currentColor">
                                                         <path stroke-linecap="round" stroke-linejoin="round"
                                                             stroke-width="2"
@@ -95,32 +95,32 @@
                 </div>
             </div>
 
-            <button id="buttonmodalFileImg" class="bg-white h-auto p-4 shadow" type="button">
+            <button id="buttonmodalFileImg" class="bg-bg-color h-auto p-4 shadow" type="button">
             <img src="{{ asset('img/undraw_Add_files_re_v09g.svg') }}" alt="">
             </button>
         </div>
     </div>
 
     <div id="modal"
-        class="fixed top-0 left-0 w-screen h-screen flex items-center justify-center bg-blue-500 bg-opacity-50 transform scale-0 transition-transform duration-300">
-        <div class="bg-white w-1/2 p-4">
+        class="fixed top-0 left-0 w-screen h-screen flex items-center justify-center bg-main bg-opacity-50 transform scale-0 transition-transform duration-300">
+        <div class="bg-bg-color w-1/2 p-4">
             <button id="closebutton" type="button" class="focus:outline-none float-right">
-                <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 m-1" fill="none" viewBox="0 0 24 24"
+                <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 m-1" fill="none" viewBox="0 0 24 24"
                     stroke="currentColor">
                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
                         d="M10 14l2-2m0 0l2-2m-2 2l-2-2m2 2l2 2m7-2a9 9 0 11-18 0 9 9 0 0118 0z" />
                 </svg>
             </button>
             <div>
-                <h2 class="text-gray-900 text-xl mb-2 font-medium title-font">Ajouter un susbsidiary</h2>
+                <h2 class="text-gray-800 text-xl mb-2 font-medium title-font">Ajouter un susbsidiary</h2>
 
                 {!! Form::open(['action' => 'SubsidiaryController@store', 'method' => 'POST', 'class' => 'col s12']) !!}
                 <div class="mb-2 relative">
                     <label for="password-confirm">Nom du susbsidiary</label>
-                    {{ Form::text('subsName', '', ['autocomplete' => 'off','id' => 'subsName', 'class' => 'peer border border-gray-200 focus:outline-none rounded focus:border-gray-500 focus:shadow-sm w-full py-1 px-2 h-8 placeholder-transparent text-sm']) }}
+                    {{ Form::text('subsName', '', ['autocomplete' => 'off','id' => 'subsName', 'class' => 'peer border border-main focus:outline-none focus:border-secondary shadow focus:shadow-sm w-full py-1 px-2 h-10 text-sm']) }}
                 </div>
                 <div class="mb-2 relative">
-                    {{ Form::submit('Envoyer', ['class' => 'focus:outline-none py-2 px-4 bg-gray-900 text-white bg-opacity-75 ml-auto']) }}
+                    {{ Form::submit('Envoyer', ['class' => 'flex text-bg-color bg-secondary hover:bg-main border-0 py-2 px-6 text-tiny focus:outline-none hover:bg-main ml-2']) }}
                 </div>
                 {!! Form::close() !!}
 

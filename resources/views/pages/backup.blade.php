@@ -6,19 +6,19 @@
 
     <div class="h-full ml-14 mt-14 mb-10 md:ml-64">
         <div class="grid grid-cols-1 lg:grid-cols-1 p-4 gap-4">
-            <div class="relative flex flex-col min-w-0 mb-4 lg:mb-0 break-words bg-white w-full shadow-md rounded">
+            <div class="relative flex flex-col min-w-0 mb-4 lg:mb-0 break-words bg-bg-color w-full shadow-md rounded">
                 <div class="rounded-t mb-0 px-0 border-0">
                     <div class="flex flex-wrap items-center px-4 py-4">
                         <div class="relative w-full max-w-full flex-grow flex-1">
-                            <h3 class="font-semibold text-base text-gray-900 ">
+                            <h3 class="font-semibold text-base text-gray-800 ">
                                 Backup Manager
                             </h3>
                         </div>
                         <div class="relative text-right">
 
                             <a href="/backup/create"
-                                class="flex text-white bg-gray-900 border-0 py-2 px-6 focus:outline-none hover:bg-blue-500 rounded ml-auto">
-                                <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 m-1" fill="none" viewBox="0 0 24 24"
+                                class="flex text-bg-color bg-secondary hover:bg-main border-0 py-2 px-6 text-tiny focus:outline-none hover:bg-main ml-2 ml-auto">
+                                <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 m-1" fill="none" viewBox="0 0 24 24"
                                     stroke="currentColor">
                                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
                                         d="M7 16a4 4 0 01-.88-7.903A5 5 0 1115.9 6L16 6a5 5 0 011 9.9M15 13l-3-3m0 0l-3 3m3-3v12" />
@@ -36,26 +36,26 @@
             <div class="col-span-3">
                 <div class="grid grid-cols-1 lg:grid-cols-1 p-4 gap-4">
                     <div
-                        class="relative flex flex-col min-w-0 mb-4 lg:mb-0 break-words bg-white w-full shadow-md rounded">
+                        class="relative flex flex-col min-w-0 mb-4 lg:mb-0 break-words bg-bg-color w-full shadow-md rounded">
                         <div class="rounded-t mb-0 px-0 border-0">
                             <div class="block w-full overflow-x-auto">
-                                <table class="items-center w-full bg-transparent border-collapse">
+                                <table class="table-auto w-full text-left whitespace-no-wrap border border-bg-color border border-bg-color">
                                     <thead>
                                         <tr>
                                             <th
-                                                class="px-4 bg-gray-100   text-gray-500 align-middle border border-solid border-gray-200 py-3 text-xs uppercase border-l-0 border-r-0 whitespace-nowrap font-semibold text-left">
+                                                class="px-2 py-3 title-font tracking-wider font-medium text-bg-color text-tiny bg-main shadow-md">
                                                 Location</th>
                                             <th
-                                                class="px-4 bg-gray-100   text-gray-500 align-middle border border-solid border-gray-200 py-3 text-xs uppercase border-l-0 border-r-0 whitespace-nowrap font-semibold text-left">
+                                                class="px-2 py-3 title-font tracking-wider font-medium text-bg-color text-tiny bg-main shadow-md">
                                                 Name</th>
                                             <th
-                                                class="px-4 bg-gray-100   text-gray-500 align-middle border border-solid border-gray-200 py-3 text-xs uppercase border-l-0 border-r-0 whitespace-nowrap font-semibold text-left">
+                                                class="px-2 py-3 title-font tracking-wider font-medium text-bg-color text-tiny bg-main shadow-md">
                                                 Size</th>
                                             <th
-                                                class="px-4 bg-gray-100   text-gray-500 align-middle border border-solid border-gray-200 py-3 text-xs uppercase border-l-0 border-r-0 whitespace-nowrap font-semibold text-left">
+                                                class="px-2 py-3 title-font tracking-wider font-medium text-bg-color text-tiny bg-main shadow-md">
                                                 Last Modified</th>
                                             <th
-                                                class="px-4 bg-gray-100   text-gray-500 align-middle border border-solid border-gray-200 py-3 text-xs uppercase border-l-0 border-r-0 whitespace-nowrap font-semibold text-left">
+                                                class="px-2 py-3 title-font tracking-wider font-medium text-bg-color text-tiny bg-main shadow-md">
                                             </th>
                                         </tr>
                                     </thead>
@@ -65,23 +65,23 @@
                                             @foreach ($backups as $b)
                                                 <tr>
                                                     <td
-                                                        class="border-t-0 px-4 align-middle border-l-0 border-r-0 whitespace-nowrap p-4">
+                                                        class="px-4 py-3 text-sm">
                                                         {{ $b['file_path'] }}</td>
                                                     <td
-                                                        class="border-t-0 px-4 align-middle border-l-0 border-r-0 whitespace-nowrap p-4">
+                                                        class="px-4 py-3 text-sm">
                                                         {{ $b['file_name'] }}</td>
                                                     <td
-                                                        class="border-t-0 px-4 align-middle border-l-0 border-r-0 whitespace-nowrap p-4">
+                                                        class="px-4 py-3 text-sm">
                                                         {{ round((int) $b['file_size'] / 1048576, 2) . ' MB' }}</td>
                                                     <td
-                                                        class="border-t-0 px-4 align-middle border-l-0 border-r-0 whitespace-nowrap p-4">
+                                                        class="px-4 py-3 text-sm">
                                                         {{ \Carbon\Carbon::createFromTimeStamp($b['last_modified'])->formatLocalized('%d %B %Y, %H:%M') }}
                                                     </td>
                                                     <td
-                                                        class="border-t-0 px-4 align-middle border-l-0 border-r-0 whitespace-nowrap p-4 flex">
+                                                        class="px-4 py-3 text-sm flex">
                                                         <a href="/backup/download?file_name={{ urlencode($b['file_name']) }}"
                                                             class="mr-4">
-                                                            <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 m-1"
+                                                            <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 m-1"
                                                                 fill="none" viewBox="0 0 24 24" stroke="currentColor">
                                                                 <path stroke-linecap="round" stroke-linejoin="round"
                                                                     stroke-width="2"
@@ -90,7 +90,7 @@
                                                         </a>
                                                         <a href="/backup/delete?file_name={{ urlencode($b['file_name']) }}"
                                                             class="">
-                                                            <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 m-1"
+                                                            <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 m-1"
                                                                 fill="none" viewBox="0 0 24 24" stroke="currentColor">
                                                                 <path stroke-linecap="round" stroke-linejoin="round"
                                                                     stroke-width="2"
@@ -109,7 +109,7 @@
                 </div>
             </div>
             
-        <button id="buttonmodalFileImg" class="bg-white h-auto p-4 shadow" type="button">
+        <button id="buttonmodalFileImg" class="bg-bg-color h-auto p-4 shadow" type="button">
             <img src="{{ asset('img/undraw_Transfer_files_re_a2a9.svg') }}" alt="">
         </button>
         </div>

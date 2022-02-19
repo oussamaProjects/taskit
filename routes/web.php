@@ -65,6 +65,7 @@ Route::delete('documentsDeleteMulti', 'DocumentsController@deleteMulti');
 Route::get('allDocuments', 'DocumentsController@all');
 // search
 Route::post('/search', 'DocumentsController@search');
+Route::post('/folder-search', 'FolderController@search');
 
 // sort
 Route::post('/sort', 'DocumentsController@sort');

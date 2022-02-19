@@ -1,6 +1,6 @@
 @if (session('success') || session('failure'))
     <div id="notification"
-        class="text-white px-6 pt-2 pb-3 border-0 rounded mb-4 {{ !is_null(session('success')) ? 'bg-green-500' : 'bg-pink-500' }} absolute top-16 right-4 z-50">
+        class="text-bg-color px-6 pt-2 pb-3 border-0 rounded mb-4 {{ !is_null(session('success')) ? 'bg-secondary' : 'bg-amber' }} absolute top-16 right-4 z-50">
         <span class="text-xl inline-block mr-5 align-middle">
             <i class="fas fa-bell"></i>
         </span>
@@ -14,17 +14,4 @@
         </button>
     </div>
 @endif
-
-<script>
-    function closeAlert(event) {
-        let element = event.target;
-        while (element.nodeName !== "BUTTON") {
-            element = element.parentNode;
-        }
-        element.parentNode.parentNode.removeChild(element.parentNode);
-    }
-    setTimeout(() => {
-        document.getElementById('notification').hide();
-    }, 400);
-    // $(document).ready(function() {   });
-</script>
+ 

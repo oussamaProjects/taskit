@@ -6,26 +6,26 @@
 
     <div class="h-full ml-14 mt-14 mb-10 md:ml-64">
         <div class="grid grid-cols-1 lg:grid-cols-1 gap-4">
-            <div class="relative flex flex-col min-w-0 mb-4 lg:mb-0 break-words bg-white w-full shadow">
+            <div class="relative flex flex-col min-w-0 mb-4 lg:mb-0 break-words bg-bg-color w-full shadow">
                 <div class="rounded-t mb-0 px-0 border-0">
                     <div class="flex flex-wrap items-center px-4 py-2">
                         <div class="relative w-full max-w-full flex-grow flex-1">
-                            <h3 class="font-semibold text-base text-gray-900 ">
+                            <h3 class="font-semibold text-base text-gray-800 ">
                                 Utilisateurs
                             </h3>
                         </div>
                         <div class="relative w-full max-w-full flex-grow flex-1 text-right">
                             <button
-                                class="flex text-white bg-gray-900 border-0 py-2 px-6 focus:outline-none hover:bg-blue-500 rounded ml-auto"
+                                class="flex text-bg-color bg-secondary hover:bg-main border-0 py-2 px-6 text-tiny focus:outline-none hover:bg-main ml-2 ml-auto"
                                 type="button">Ajouter un utilisateur</button>
                         </div>
                     </div>
                 </div>
             </div>
         </div>
-        <div class="bg-gray-100 py-6 flex flex-col justify-center sm:py-12">
+        <div class="bg-bg-color py-6 flex flex-col justify-center sm:py-12">
             <div class="relative py-3 w-11/12 max-w-xl sm:mx-auto">
-                <div class="relative p-8 bg-white shadow-sm  ">
+                <div class="relative p-8 bg-bg-color shadow-sm  ">
                     {!! Form::open(['action' => ['UsersController@update', $user->id], 'method' => 'PATCH', 'enctype' => 'multipart/form-data', 'class' => 'col s12']) !!}
 
                     {{ csrf_field() }}
@@ -34,7 +34,7 @@
                         <label for="name" class="text-xs opacity-75 scale-75">
                             Current Name
                         </label>
-                        {{ Form::text('name', $user->name, ['autocomplete' => 'off','class' =>'peer border border-gray-200 focus:outline-none rounded focus:border-gray-500 focus:shadow-sm w-full py-1 px-2 h-8 placeholder-transparent text-sm','id' => 'name']) }}
+                        {{ Form::text('name', $user->name, ['autocomplete' => 'off','class' =>'peer border border-main focus:outline-none focus:border-secondary shadow focus:shadow-sm w-full py-1 px-2 h-10 text-sm','id' => 'name']) }}
 
                     </div>
 
@@ -42,14 +42,14 @@
                         <label for="email" class="text-xs opacity-75 scale-75">
                             Current Adresse e-mail
                         </label>
-                        {{ Form::email('email', $user->email, ['class' =>'peer border border-gray-200 focus:outline-none rounded focus:border-gray-500 focus:shadow-sm w-full py-1 px-2 h-8 placeholder-transparent text-sm','id' => 'email']) }}
+                        {{ Form::email('email', $user->email, ['class' =>'peer border border-main focus:outline-none focus:border-secondary shadow focus:shadow-sm w-full py-1 px-2 h-10 text-sm','id' => 'email']) }}
                     </div>
 
                     {{-- <div class="mb-2 relative">
                         <label for="subs_id" class="text-xs opacity-75 scale-75">Subsidiaries</label>
                         @php($subsidiary = $user->department()->first()->subsidiaries()->get())
                         <select name="subs_id" id="subs_id"
-                            class="peer border border-gray-200 focus:outline-none rounded focus:border-gray-500 focus:shadow-sm w-full py-1 px-2 h-8 placeholder-transparent text-sm">
+                            class="peer border border-main focus:outline-none focus:border-secondary shadow focus:shadow-sm w-full py-1 px-2 h-10 text-sm">
                             <option value="--">--</option>
                             @if (count($subs) > 0)
                                 @if (Auth::user()->hasRole('Root'))
@@ -72,7 +72,7 @@
                         <label for="department_id" class="text-xs opacity-75 scale-75">Département
                             actuel</label>
                         <select name="department_id" id="department_id"
-                            class="peer border border-gray-200 focus:outline-none rounded focus:border-gray-500 focus:shadow-sm w-full py-1 px-2 h-8 placeholder-transparent text-sm">
+                            class="peer border border-main focus:outline-none focus:border-secondary shadow focus:shadow-sm w-full py-1 px-2 h-10 text-sm">
                             <option value="--">--</option>
                             @if (count($depts) > 0)
                                 @if (Auth::user()->hasRole('Root'))
@@ -94,7 +94,7 @@
                         <label for="role" class="text-xs opacity-75 scale-75">Rôle
                             actuel</label>
                         <select name="role" id="role"
-                            class="peer border border-gray-200 focus:outline-none rounded focus:border-gray-500 focus:shadow-sm w-full py-1 px-2 h-8 placeholder-transparent text-sm">
+                            class="peer border border-main focus:outline-none focus:border-secondary shadow focus:shadow-sm w-full py-1 px-2 h-10 text-sm">
                             <option value="" disabled selected>Attribuer un rôle</option>
                             @if (count($roles) > 0)
                                 @foreach ($roles as $role)
@@ -111,7 +111,7 @@
                     @if (count($subsidiaries) > 0)
                     <div class="mb-2 relative">
 
-                        <h3 class="text-gray-900 text-md mt-4 mb-4 font-medium title-font uppercase">
+                        <h3 class="text-gray-800 text-md mt-4 mb-4 font-medium title-font uppercase">
                             Filials
                         </h3>
                         <div class="grid sm:grid-cols-1 lg:grid-cols-1">
@@ -120,7 +120,7 @@
                                 <div class="font-bold mt-2">{{ $sub->subsName }}</div>
 
                                 @foreach ($sub->departments()->get() as $dept)
-                                    <label class="text-gray-900 mb-2 font-medium title-font"
+                                    <label class="text-gray-800 mb-2 font-medium title-font"
                                         for="{{ $dept['id'] }}_dept">
                                         <input type="checkbox" name="dept[]" id="{{ $dept['id'] }}_dept"
                                             value="{{ $dept['id'] }}">
@@ -164,7 +164,7 @@
                     </div>
 
                     <div class="mb-2 relative">
-                        {{ Form::submit(' Sauvegarder', ['class' => 'flex text-white bg-gray-900 border-0 py-2 px-6 focus:outline-none hover:bg-blue-500 rounded']) }}
+                        {{ Form::submit(' Sauvegarder', ['class' => 'flex text-bg-color bg-secondary hover:bg-main border-0 py-2 px-6 text-tiny focus:outline-none hover:bg-main ml-2']) }}
                     </div>
 
                     {!! Form::close() !!}
@@ -175,51 +175,51 @@
 
     <!-- Modal -->
     <div id="modal"
-        class="fixed top-0 left-0 w-screen h-screen flex items-center justify-center bg-blue-500 bg-opacity-50 transform scale-0 transition-transform duration-300">
-        <div class="flex flex-col w-11/12 sm:w-5/6 lg:w-1/2 max-w-2xl mx-auto rounded-lg border border-gray-300 shadow-xl">
+        class="fixed top-0 left-0 w-screen h-screen flex items-center justify-center bg-main bg-opacity-50 transform scale-0 transition-transform duration-300">
+        <div class="flex flex-col w-11/12 sm:w-5/6 lg:w-1/2 max-w-2xl mx-auto rounded-lg border border-bg-color shadow-xl">
             <div id="closebutton"
-                class="flex flex-row justify-between p-6 bg-white border-b border-gray-200 rounded-tl-lg rounded-tr-lg">
-                <p class="font-semibold text-gray-800">Ajouter un dossier</p>
+                class="flex flex-row justify-between p-6 bg-bg-color border-b border-bg-color rounded-tl-lg rounded-tr-lg">
+                <p class="font-semibold text-gray-800"></p>
                 <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"
                     xmlns="http://www.w3.org/2000/svg">
                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12">
                     </path>
                 </svg>
             </div>
-            <div class="flex flex-col px-6 py-5 bg-gray-50">
+            <div class="flex flex-col px-6 py-5 bg-bg-color">
                 {!! Form::open(['action' => 'ProfileController@changePassword', 'method' => 'PATCH']) !!}
                 {{ csrf_field() }}
 
                 <h4>Changer le mot de passe</h4>
 
                 <div class="mb-2 relative">
-                    {{ Form::password('current_password', ['id' => 'current_password','class' =>'peer border border-gray-200 focus:outline-none rounded focus:border-gray-500 focus:shadow-sm w-full py-1 px-2 h-8 placeholder-transparent text-sm']) }}
+                    {{ Form::password('current_password', ['id' => 'current_password','class' =>'peer border border-main focus:outline-none focus:border-secondary shadow focus:shadow-sm w-full py-1 px-2 h-10 text-sm']) }}
                     <label for="current_password" class="text-xs opacity-75 scale-75">
                         Mot de passe actuel
                     </label>
                     @if ($errors->has('current_password'))
-                        <span class="text-red-600 text-xs">{{ $errors->first('current_password') }}</span>
+                        <span class="text-amber text-xs">{{ $errors->first('current_password') }}</span>
                     @endif
                 </div>
                 <div class="mb-2 relative">
-                    {{ Form::password('new_password', ['id' => 'new_password','class' =>'peer border border-gray-200 focus:outline-none rounded focus:border-gray-500 focus:shadow-sm w-full py-1 px-2 h-8 placeholder-transparent text-sm']) }}
+                    {{ Form::password('new_password', ['id' => 'new_password','class' =>'peer border border-main focus:outline-none focus:border-secondary shadow focus:shadow-sm w-full py-1 px-2 h-10 text-sm']) }}
                     <label for="new_password" class="text-xs opacity-75 scale-75">
                         Nouveau mot de passe
                     </label>
                     @if ($errors->has('new_password'))
-                        <span class="text-red-600 text-xs">{{ $errors->first('new_password') }}</span>
+                        <span class="text-amber text-xs">{{ $errors->first('new_password') }}</span>
                     @endif
                 </div>
                 <div class="mb-2 relative">
-                    {{ Form::password('new_password_confirmation', ['id' => 'new_password_confirmation','class' =>'peer border border-gray-200 focus:outline-none rounded focus:border-gray-500 focus:shadow-sm w-full py-1 px-2 h-8 placeholder-transparent text-sm']) }}
+                    {{ Form::password('new_password_confirmation', ['id' => 'new_password_confirmation','class' =>'peer border border-main focus:outline-none focus:border-secondary shadow focus:shadow-sm w-full py-1 px-2 h-10 text-sm']) }}
                     <label for="name" class="text-xs opacity-75 scale-75">
                         Nom de dossier
                     </label>
                     @if ($errors->has('new_password_confirmation'))
-                        <span class="text-red-600 text-xs">{{ $errors->first('new_password_confirmation') }}</span>
+                        <span class="text-amber text-xs">{{ $errors->first('new_password_confirmation') }}</span>
                     @endif
                 </div>
-                {{ Form::submit('Sauvegarder les modifications', ['class' => 'flex text-white bg-gray-900 border-0 py-2 px-6 focus:outline-none hover:bg-blue-500 rounded']) }}
+                {{ Form::submit('Sauvegarder les modifications', ['class' => 'flex text-bg-color bg-secondary hover:bg-main border-0 py-2 px-6 text-tiny focus:outline-none hover:bg-main ml-2']) }}
                 {!! Form::close() !!}
             </div>
         </div>

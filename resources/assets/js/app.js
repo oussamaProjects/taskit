@@ -9,8 +9,10 @@ for (i = 0; i < toggler.length; i++) {
     toggler[i].addEventListener("click", function() {
         this.parentElement.querySelector(".nested").classList.toggle("hide");
         // this.classList.toggle("hidden");
-        // this.nextSibling.cla ssList.toggle("hidden");
-        // log(this.nextSibling);
+        // this.nextSibling.classList.toggle("hidden");
+        console.log(this.querySelector('.opened-folder'));
+        this.querySelector('.opened-folder').classList.toggle("hidden");
+        this.querySelector('.closed-folder').classList.toggle("hidden");
     });
 }
 

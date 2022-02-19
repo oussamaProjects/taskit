@@ -2,7 +2,7 @@
 
 @section('content')
     @include('inc.sidebar')
-    <div class="ml-14 mt-14 mb-10 md:ml-64 bg-white p-4 ">
+    <div class="ml-14 mt-14 mb-10 md:ml-64 bg-bg-color p-4 ">
 
         <div class="grid grid-cols-1 sm:grid-cols-1 lg:grid-cols-1 gap-4 mb-4">
 
@@ -10,8 +10,8 @@
                 <div class="text-lg font-semibold"> Users' Activities</div>
                 @can('root')
                     <a href="logsdel" data-position="left" data-delay="50" data-tooltip="Tout effacer"
-                        class="flex ml-auto text-red-600">
-                        <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 m-1" fill="none" viewBox="0 0 24 24"
+                        class="flex ml-auto text-amber">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 m-1" fill="none" viewBox="0 0 24 24"
                             stroke="currentColor">
                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
                                 d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16" />
@@ -26,71 +26,71 @@
         @if (count($logs) > 0)
 
             <div class="grid grid-cols-1 lg:grid-cols-1 gap-4">
-                <div class="relative flex flex-col min-w-0 mb-4 lg:mb-0 break-words bg-white w-full shadow">
+                <div class="relative flex flex-col min-w-0 mb-4 lg:mb-0 break-words bg-bg-color w-full shadow">
                     <div class="rounded-t mb-0 px-0 border-0">
 
                         <div class="block w-full overflow-x-auto">
-                            <table class="table-auto items-center w-full bg-transparent border-collapse">
+                            <table class="table-auto table-auto w-full text-left whitespace-no-wrap border border-bg-color border border-bg-color">
                                 <thead>
                                     <tr>
                                         <th
-                                            class="px-2 bg-gray-100 text-gray-500 align-middle border border-solid border-gray-200 py-3 text-xs uppercase border-l-0 border-r-0 whitespace-nowrap font-semibold text-left">
+                                            class="px-2 py-3 title-font tracking-wider font-medium text-bg-color text-xs bg-main shadow-md">
                                         </th>
                                         <th
-                                            class="px-2 bg-gray-100 text-gray-500 align-middle border border-solid border-gray-200 py-3 text-xs uppercase border-l-0 border-r-0 whitespace-nowrap font-semibold text-left">
+                                            class="px-2 py-3 title-font tracking-wider font-medium text-bg-color text-xs bg-main shadow-md">
                                             Subject
                                         </th>
                                         <th
-                                            class="px-2 bg-gray-100 text-gray-500 align-middle border border-solid border-gray-200 py-3 text-xs uppercase border-l-0 border-r-0 whitespace-nowrap font-semibold text-left">
+                                            class="w-32 px-2 py-3 title-font tracking-wider font-medium text-bg-color text-xs bg-main shadow-md">
                                             ID d'utilisateur
                                         </th>
                                         <th
-                                            class="px-2 bg-gray-100 text-gray-500 align-middle border border-solid border-gray-200 py-3 text-xs uppercase border-l-0 border-r-0 whitespace-nowrap font-semibold text-left">
+                                            class="px-2 py-3 title-font tracking-wider font-medium text-bg-color text-xs bg-main shadow-md">
                                             URL
                                         </th>
                                         <th
-                                            class="px-2 bg-gray-100 text-gray-500 align-middle border border-solid border-gray-200 py-3 text-xs uppercase border-l-0 border-r-0 whitespace-nowrap font-semibold text-left">
+                                            class="px-2 py-3 title-font tracking-wider font-medium text-bg-color text-xs bg-main shadow-md">
                                             Method
                                         </th>
                                         <th
-                                            class="px-2 bg-gray-100 text-gray-500 align-middle border border-solid border-gray-200 py-3 text-xs uppercase border-l-0 border-r-0 whitespace-nowrap font-semibold text-left">
+                                            class="px-2 py-3 title-font tracking-wider font-medium text-bg-color text-xs bg-main shadow-md">
                                             IP
                                         </th>
                                         <th
-                                            class="px-2 bg-gray-100 text-gray-500 align-middle border border-solid border-gray-200 py-3 text-xs uppercase border-l-0 border-r-0 whitespace-nowrap font-semibold text-left">
+                                            class="px-2 py-3 title-font tracking-wider font-medium text-bg-color text-xs bg-main shadow-md">
                                             Agent
                                         </th>
                                     </tr>
                                 </thead>
                                 <tbody>
                                     @foreach ($logs as $key => $log)
-                                        <tr class="text-gray-700 ">
+                                        <tr class="text-gray-800 ">
                                             <th
-                                                class="border-t-0 px-2 py-2 align-middle border-l-0 border-r-0 text-xs whitespace-nowrap text-left">
+                                                class="border-t-0 px-2 py-2 align-middle border-l-0 border-r-0 text-xs bg-colorspace-nowrap text-left">
                                                 {{ ++$key }}
                                             </th>
                                             <td
-                                                class="border-t-0 px-2 py-2 align-middle border-l-0 border-r-0 text-xs whitespace-nowrap">
+                                                class="border-t-0 px-2 py-2 align-middle border-l-0 border-r-0 text-xs bg-colorspace-nowrap">
                                                 {{ $log->subject }}
                                             </td>
                                             <td
-                                                class="border-t-0 px-2 py-2 align-middle border-l-0 border-r-0 text-xs whitespace-nowrap">
+                                                class="border-t-0 px-2 py-2 align-middle border-l-0 border-r-0 text-xs bg-colorspace-nowrap">
                                                 {{ $log->user_id }}
                                             </td>
                                             <td
-                                                class="border-t-0 px-2 py-2 align-middle border-l-0 border-r-0 text-xs whitespace-nowrap">
+                                                class="border-t-0 px-2 py-2 align-middle border-l-0 border-r-0 text-xs bg-colorspace-nowrap">
                                                 {{ $log->url }}
                                             </td>
                                             <td
-                                                class="border-t-0 px-2 py-2 align-middle border-l-0 border-r-0 text-xs whitespace-nowrap">
+                                                class="border-t-0 px-2 py-2 align-middle border-l-0 border-r-0 text-xs bg-colorspace-nowrap">
                                                 {{ $log->method }}
                                             </td>
                                             <td
-                                                class="border-t-0 px-2 py-2 align-middle border-l-0 border-r-0 text-xs whitespace-nowrap">
+                                                class="border-t-0 px-2 py-2 align-middle border-l-0 border-r-0 text-xs bg-colorspace-nowrap">
                                                 {{ $log->ip }}
                                             </td>
                                             <td
-                                                class="border-t-0 px-2 py-2 align-middle border-l-0 border-r-0 text-xs whitespace-nowrap">
+                                                class="border-t-0 px-2 py-2 align-middle border-l-0 border-r-0 text-xs bg-colorspace-nowrap">
                                                 {{ $log->agent }}
                                             </td>
 

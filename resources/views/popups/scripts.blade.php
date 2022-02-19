@@ -1,5 +1,6 @@
 <script type="text/javascript">
     const buttonFile = document.getElementById('buttonmodalFile')
+    const buttonFileImg = document.getElementById('buttonmodalFileImg')
     const buttonFileA = document.getElementById('buttonmodalFileA')
     const buttonFileB = document.getElementById('buttonmodalFileB')
 
@@ -8,47 +9,56 @@
 
     if (buttonFile)
         buttonFile.addEventListener('click', () => modalFile.classList.add('scale-100'))
+    if (buttonFileImg)
+        buttonFileImg.addEventListener('click', () => modalFile.classList.add('scale-100'))
     if (buttonFileA)
         buttonFileA.addEventListener('click', () => modalFile.classList.add('scale-100'))
     if (buttonFileB)
         buttonFileB.addEventListener('click', () => modalFile.classList.add('scale-100'))
+    if (closebuttonFile)
+        closebuttonFile.addEventListener('click', () => modalFile.classList.remove('scale-100'))
 
-    closebuttonFile.addEventListener('click', () => modalFile.classList.remove('scale-100'))
+    const buttonFolder = document.getElementById('buttonmodalFolder')
+    const buttonFolderA = document.getElementById('buttonmodalFolderA')
+    const buttonFolderImg = document.getElementById('buttonmodalFolderImg')
 
-    const buttonDossier = document.getElementById('buttonmodalDossier')
-    const buttonDossierA = document.getElementById('buttonmodalDossierA')
+    const closebuttonFolder = document.getElementById('closebuttonFolder')
 
-    const closebuttonDossier = document.getElementById('closebuttonDossier')
-    const modalDossier = document.getElementById('modalDossier')
-    if (buttonDossier)
-        buttonDossier.addEventListener('click', () => modalDossier.classList.add('scale-100'))
-    if (buttonDossierA)
-        buttonDossierA.addEventListener('click', () => modalDossier.classList.add('scale-100'))
-    closebuttonDossier.addEventListener('click', () => modalDossier.classList.remove('scale-100'))
+    if (buttonFolder)
+        buttonFolder.addEventListener('click', () => modalFolder.classList.add('scale-100'))
+    if (buttonFolderA)
+        buttonFolderA.addEventListener('click', () => modalFolder.classList.add('scale-100'))
+    if (buttonFolderImg)
+        buttonFolderImg.addEventListener('click', () => modalFolder.classList.add('scale-100'))
+    if (closebuttonFolder)
+        closebuttonFolder.addEventListener('click', () => modalFolder.classList.remove('scale-100'))
 
     const closebuttonCategorie = document.getElementById('closebuttonCategorie')
     const modalCategorie = document.getElementById('modalCategorie')
-
-    closebuttonCategorie.addEventListener('click', () => modalCategorie.classList.remove('scale-100'))
+    if (closebuttonCategorie)
+        closebuttonCategorie.addEventListener('click', () => modalCategorie.classList.remove('scale-100'))
 
     const closebutton2 = document.getElementById('closebutton2')
     const modal2 = document.getElementById('modal2')
-
-    closebutton2.addEventListener('click', () => modal2.classList.remove('scale-100'))
+    if (closebutton2)
+        closebutton2.addEventListener('click', () => modal2.classList.remove('scale-100'))
 
     const add_folder_main = document.getElementById('add_folder_main')
-    add_folder_main.addEventListener('click', () => modalDossier.classList.add('scale-100'))
+    if (add_folder_main)
+        add_folder_main.addEventListener('click', () => modalFolder.classList.add('scale-100'))
 
     const add_folder = document.getElementById('add_folder')
-    add_folder.addEventListener('click', () => modal2.classList.add('scale-100'))
+    if (add_folder)
+        add_folder.addEventListener('click', () => modal2.classList.add('scale-100'))
 
     const add_categorie = document.getElementById('add_categorie')
-    add_categorie.addEventListener('click', () => modalCategorie.classList.add('scale-100'))
+    if (add_categorie)
+        add_categorie.addEventListener('click', () => modalCategorie.classList.add('scale-100'))
 
     function handleSelect(elm) {
 
         if (elm.value == 'add_folder_main') {
-            modalDossier.classList.add('scale-100')
+            modalFolder.classList.add('scale-100')
         }
 
         if (elm.value == 'add_folder') {
@@ -62,55 +72,137 @@
     }
 
     function checkRadio(value) {
-        console.log(value);
-        if (value == 2) {
+        if (value == 2)
             document.getElementById("dossier_parent").classList.add("hidden");
-        }
-        if (value == 1) {
+        else
             document.getElementById("dossier_parent").classList.remove("hidden");
-        }
+        if (value == 1)
+            document.getElementById("dossier_parent").classList.remove("hidden");
+        else
+            document.getElementById("dossier_parent").classList.add("hidden");
     }
 
-    
-            // input: r,g,b in [0,1], out: h in [0,360) and s,v in [0,1]
-            function rgb2hsv(r, g, b) {
-                let v = Math.max(r, g, b),
-                    c = v - Math.min(r, g, b);
-                let h = c && ((v == r) ? (g - b) / c : ((v == g) ? 2 + (b - r) / c : 4 + (r - g) / c));
-                return v && c / v;
-                return [60 * (h < 0 ? h + 6 : h), v && c / v, v];
-            }
-            $(document).ready(function(e) {
 
-                setTimeout(() => {}, 400);
-                let textColor = '#3a1e2e';
-                let folderContainer = $('.folder-container');
-                if (folderContainer != null)
+    // input: r,g,b in [0,1], out: h in [0,360) and s,v in [0,1]
+    function rgb2hsv(r, g, b) {
+        let v = Math.max(r, g, b),
+            c = v - Math.min(r, g, b);
+        let h = c && ((v == r) ? (g - b) / c : ((v == g) ? 2 + (b - r) / c : 4 + (r - g) / c));
+        return v && c / v;
+        return [60 * (h < 0 ? h + 6 : h), v && c / v, v];
+    }
 
-                    folderContainer.each(function() {
-                        let folder = $(this);
-                        let rgb = folder.css("background-color");
+    $(function() {
 
-                        let sep = rgb.indexOf(",") > -1 ? "," : " ";
-                        // Turn "rgb(r,g,b)" into [r,g,b]
-                        rgb = rgb.substr(4).split(")")[0].split(sep);
+        setTimeout(() => {}, 400);
+        let textColor = '#3a1e2e';
+        let folderContainer = $('.doc-folder-container');
+        if (folderContainer != null)
 
-                        let r = rgb[0],
-                            g = rgb[1],
-                            b = rgb[2];
+            folderContainer.each(function() {
+                let folder = $(this);
+                let rgb = folder.css("background-color");
 
-                        let l = rgb2hsv(r, g, b);
+                let sep = rgb.indexOf(",") > -1 ? "," : " ";
+                // Turn "rgb(r,g,b)" into [r,g,b]
+                rgb = rgb.substr(4).split(")")[0].split(sep);
 
-                        if (l < 0.6)
-                            textColor = '#FFFFFF';
-                          if (l == 0)
-                            textColor = '#3a1e2e';
+                let r = rgb[0],
+                    g = rgb[1],
+                    b = rgb[2];
 
-                        folder.css('color', textColor);
-                        console.log('Light : ' + l);
+                let l = rgb2hsv(r, g, b);
 
-                    });
+                if (l < 0.6)
+                    textColor = '#fdf4d0';
+                if (l == 0)
+                    textColor = '#3a1e2e';
+                if (l < 0.2)
+                    textColor = '#3a1e2e';
+
+                folder.css('color', textColor);
+
             });
 
 
+        $(document).on("click", ".update_color", function(e) {
+            e.preventDefault();
+            var color = $(this).data('color');
+            var id = $(this).parents('.colors').data('id');
+
+            var url = "{{ URL('documents/color') }}";
+            var url = url + "/" + id;
+
+
+            $.ajax({
+                url: url,
+                type: "PATCH",
+                cache: false,
+                data: {
+                    _token: '{{ csrf_token() }}',
+                    id: id,
+                    color: color,
+                },
+                success: function(dataResult) {
+                    dataResult = JSON.parse(dataResult);
+                    if (dataResult.statusCode) {
+                        location.reload(true);
+                    } else {
+                        alert("Internal Server Error");
+                    }
+
+                },
+                error: function(error) {
+                    location.reload(true);
+                }
+            });
+        });
+
+        $(document).on("click", ".update_color_folder", function(e) {
+            e.preventDefault();
+            var color = $(this).data('color');
+            var id = $(this).parents('.colors').data('id');
+
+            var url = "{{ URL('folder/color') }}";
+            var url = url + "/" + id;
+
+
+            $.ajax({
+                url: url,
+                type: "PATCH",
+                cache: false,
+                data: {
+                    _token: '{{ csrf_token() }}',
+                    id: id,
+                    color: color,
+                },
+                success: function(dataResult) {
+                    dataResult = JSON.parse(dataResult);
+                    if (dataResult.statusCode) {
+                        location.reload(true);
+                    } else {
+                        alert("Internal Server Error");
+                    }
+
+                },
+                error: function(error) {
+                    location.reload(true);
+                }
+            });
+        });
+    });
+
+    function closeAlert(event) {
+        let element = event.target;
+        while (element.nodeName !== "BUTTON") {
+            element = element.parentNode;
+        }
+        element.parentNode.parentNode.removeChild(element.parentNode);
+    }
+    setTimeout(() => {
+        let notification = document.getElementById('notification');
+        if (notification)
+            notification.hide();
+    }, 400);
+    // $(document).ready(function() {   });
 </script>

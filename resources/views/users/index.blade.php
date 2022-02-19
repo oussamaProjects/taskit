@@ -6,12 +6,12 @@
 
     <div class="ml-14 mt-14 md:ml-64">
         <!-- Statistics Cards -->
-        <div class="flex items-center p-4 gap-4 bg-white mb-4">
+        <div class="flex items-center p-4 gap-4 bg-bg-color mb-4">
 
-            <form action="/search" method="post" id="search-form" class="bg-white flex items-center w-full max-w-xl  4 p-2">
+            <form action="/search" method="post" id="search-form" class="bg-bg-color flex items-center w-full max-w-xl  4 p-2">
                 {{ csrf_field() }}
                 <button class="outline-none focus:outline-none">
-                    <svg class="w-5 text-gray-600 h-5 cursor-pointer" fill="none" stroke-linecap="round"
+                    <svg class="w-5 text-gray-800 h-5 cursor-pointer" fill="none" stroke-linecap="round"
                         stroke-linejoin="round" stroke-width="2" stroke="currentColor" viewBox="0 0 24 24">
                         <path d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"></path>
                     </svg>
@@ -21,7 +21,7 @@
             </form>
 
             <button id="buttonmodal"
-                class="flex text-white bg-gray-900 border-0 py-2 px-6 focus:outline-none hover:bg-blue-500 rounded ml-auto">
+                class="flex text-bg-color bg-secondary hover:bg-main border-0 py-2 px-6 text-tiny focus:outline-none hover:bg-main ml-2ml-auto">
                 Ajouter un utilisateur
             </button>
 
@@ -31,35 +31,35 @@
         </div>
 
         <!-- Statistics Cards -->
-        <div class="grid grid-cols-4 sm:grid-cols-4 lg:grid-cols-4 ml-4 p-4 gap-4 bg-white shadow">
+        <div class="grid grid-cols-4 sm:grid-cols-4 lg:grid-cols-4 ml-4 p-4 gap-4 bg-bg-color shadow">
             <div class="col-span-3">
                 <div class="flex flex-col text-center w-full">
-                    <h1 class="sm:text-2xl text-xl font-medium title-font mb-2 text-gray-900">Tous les utilisateurs</h1>
+                    <h1 class="sm:text-2xl text-xl font-medium title-font mb-2 text-gray-800">Tous les utilisateurs</h1>
                     <p class="lg:w-2/3 mx-auto leading-relaxed text-base">Utilisateurs
                     </p>
                 </div>
                 <div class="w-full">
-                    <table class="table-auto w-full text-left whitespace-no-wrap">
+                    <table class="table-auto w-full text-left bg-colorspace-no-wrap border border-bg-color">
                         <thead>
                             <tr>
                                 <th
-                                    class="px-2 py-2 title-font tracking-wider font-medium text-gray-900 text-sm bg-blue-100">
+                                    class="px-2 py-2 title-font tracking-wider text-bg-color text-base bg-main shadow-md">
                                     Name
                                 </th>
                                 <th
-                                    class="px-2 py-2 title-font tracking-wider font-medium text-gray-900 text-sm bg-blue-100">
+                                    class="px-2 py-2 title-font tracking-wider text-bg-color text-base bg-main shadow-md">
                                     Role
                                 </th>
                                 <th
-                                    class="px-2 py-2 title-font tracking-wider font-medium text-gray-900 text-sm bg-blue-100">
+                                    class="px-2 py-2 title-font tracking-wider text-bg-color text-base bg-main shadow-md">
                                     Filiales
                                 </th>
                                 <th
-                                    class="px-2 py-2 title-font tracking-wider font-medium text-gray-900 text-sm bg-blue-100">
+                                    class="px-2 py-2 title-font tracking-wider text-bg-color text-base bg-main shadow-md">
                                     Department
                                 </th>
                                 <th
-                                    class="px-2 py-2 title-font tracking-wider font-medium text-gray-900 text-sm bg-blue-100">
+                                    class="px-2 py-2 title-font tracking-wider text-bg-color text-base bg-main shadow-md">
                                     Actions
                                 </th>
                             </tr>
@@ -79,23 +79,23 @@
 
                                             <td class="px-4 py-3 text-sm">
                                                 @foreach ($user->departments()->get() as $dept)
-                                                    @foreach ($dept->subsidiaries()->get() as $subs)
-                                                        {{ $subs['subsName'] }}<br>
+                                                    @foreach ($dept->subsidiaries()->get() as $subs) 
+                                                        <div class="text-yellow-600 p-1 px-2 rounded mb-1">{{ $subs['subsName'] }}</div>
                                                     @endforeach
                                                 @endforeach
                                             </td>
 
                                             <td class="px-4 py-3 text-sm">
                                                 @foreach ($user->departments()->get() as $dept)
-                                                    {{ $dept['dptName'] }}<br>
+                                                     <div class="text-main bg-secondary p-1 px-2 rounded mb-1">{{ $dept['dptName'] }}</div>
                                                 @endforeach
                                             </td>
 
                                             <td class="px-4 py-3 text-sm">
                                                 <!-- DELETE using link -->
                                                 {!! Form::open(['action' => ['UsersController@destroy', $user->id], 'method' => 'DELETE', 'id' => 'form-delete-users-' . $user->id, 'class' => 'flex']) !!}
-                                                <a href="#" class="left">
-                                                    <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 m-1"
+                                                <a href="#" class="left ">
+                                                    <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 m-1"
                                                         fill="none" viewBox="0 0 24 24" stroke="currentColor">
                                                         <path stroke-linecap="round" stroke-linejoin="round"
                                                             stroke-width="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z" />
@@ -105,7 +105,7 @@
                                                     </svg>
                                                 </a>
                                                 <a href="/users/{{ $user->id }}/edit" class="center">
-                                                    <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 m-1"
+                                                    <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 m-1"
                                                         fill="none" viewBox="0 0 24 24" stroke="currentColor">
                                                         <path stroke-linecap="round" stroke-linejoin="round"
                                                             stroke-width="2"
@@ -113,7 +113,7 @@
                                                     </svg>
                                                 </a>
                                                 <a href="" class="right data-delete" data-form="users-{{ $user->id }}">
-                                                    <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 m-1"
+                                                    <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 m-1"
                                                         fill="none" viewBox="0 0 24 24" stroke="currentColor">
                                                         <path stroke-linecap="round" stroke-linejoin="round"
                                                             stroke-width="2"
@@ -203,17 +203,17 @@
     </div>
 
     <div id="modal"
-        class="fixed top-0 left-0 w-screen h-screen flex items-center justify-center bg-blue-500 bg-opacity-50 transform scale-0 transition-transform duration-300">
-        <div class="bg-white w-1/2 p-4">
+        class="fixed top-0 left-0 w-screen h-screen flex items-center justify-center bg-main bg-opacity-50 transform scale-0 transition-transform duration-300">
+        <div class="bg-bg-color w-1/2 p-4">
             <button id="closebutton" type="button" class="focus:outline-none float-right">
-                <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 m-1" fill="none" viewBox="0 0 24 24"
+                <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 m-1" fill="none" viewBox="0 0 24 24"
                     stroke="currentColor">
                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
                         d="M10 14l2-2m0 0l2-2m-2 2l-2-2m2 2l2 2m7-2a9 9 0 11-18 0 9 9 0 0118 0z" />
                 </svg>
             </button>
             <div>
-                <h2 class="text-gray-900 text-xl mb-8 font-medium title-font">
+                <h2 class="text-gray-800 text-xl mb-8 font-medium title-font">
                     Ajouter un utilisateur
                 </h2>
 
@@ -221,21 +221,21 @@
                 <div class="mb-2 relative">
                     <label for="name" class="text-xs opacity-75 scale-75">
                         Nom</label>
-                    {{ Form::text('name', '', ['autocomplete' => 'off','id' => 'name','class' =>'peer border border-gray-200 focus:outline-none rounded focus:border-gray-500 focus:shadow-sm w-full py-1 px-2 h-8 placeholder-transparent text-sm']) }}
+                    {{ Form::text('name', '', ['autocomplete' => 'off','id' => 'name','class' =>'peer border border-main focus:outline-none focus:border-secondary shadow focus:shadow-sm w-full py-1 px-2 h-10 text-sm']) }}
 
                 </div>
 
                 <div class="mb-2 relative">
                     <label for="email" class="text-xs opacity-75 scale-75">
                         Adresse e-mail</label>
-                    {{ Form::email('email', '', ['id' => 'email','class' =>'peer border border-gray-200 focus:outline-none rounded focus:border-gray-500 focus:shadow-sm w-full py-1 px-2 h-8 placeholder-transparent text-sm']) }}
+                    {{ Form::email('email', '', ['id' => 'email','class' =>'peer border border-main focus:outline-none focus:border-secondary shadow focus:shadow-sm w-full py-1 px-2 h-10 text-sm']) }}
 
                 </div>
 
                 <div class="mb-2 relative">
                     <label for="email" class="text-xs opacity-75 scale-75">Department</label>
                     <select name="department_id" id="department_id"
-                        class="peer border border-gray-200 focus:outline-none rounded focus:border-gray-500 focus:shadow-sm w-full py-1 px-2 h-8 placeholder-transparent text-sm">
+                        class="peer border border-main focus:outline-none focus:border-secondary shadow focus:shadow-sm w-full py-1 px-2 h-10 text-sm">
                         <option value="" disabled selected>Choisissez le département</option>
                         @if (count($depts) > 0)
                             @if (Auth::user()->hasRole('Root'))
@@ -254,7 +254,7 @@
                 <div class="mb-2 relative">
                     <label for="email" class="text-xs opacity-75 scale-75">Role</label>
                     <select name="role" id="role"
-                        class="peer border border-gray-200 focus:outline-none rounded focus:border-gray-500 focus:shadow-sm w-full py-1 px-2 h-8 placeholder-transparent text-sm">
+                        class="peer border border-main focus:outline-none focus:border-secondary shadow focus:shadow-sm w-full py-1 px-2 h-10 text-sm">
                         <option value="" disabled selected>Attribuer un rôle</option>
                         @if (count($roles) > 0)
                             @foreach ($roles as $role)
@@ -267,20 +267,20 @@
 
                 <div class="mb-2 relative">
                     <label for="password" class="text-xs opacity-75 scale-75">Password</label>
-                    {{ Form::password('password', ['id' => 'password','class' =>'peer border border-gray-200 focus:outline-none rounded focus:border-gray-500 focus:shadow-sm w-full py-1 px-2 h-8 placeholder-transparent text-sm']) }}
+                    {{ Form::password('password', ['id' => 'password','class' =>'peer border border-main focus:outline-none focus:border-secondary shadow focus:shadow-sm w-full py-1 px-2 h-10 text-sm']) }}
                 </div>
 
                 <div class="mb-2 relative">
                     <label for="password-confirm" class="text-xs opacity-75 scale-75">Confirm
                         Mot de passe
                     </label>
-                    {{ Form::password('password_confirmation', ['id' => 'password-confirm','class' =>'peer border border-gray-200 focus:outline-none rounded focus:border-gray-500 focus:shadow-sm w-full py-1 px-2 h-8 placeholder-transparent text-sm']) }}
+                    {{ Form::password('password_confirmation', ['id' => 'password-confirm','class' =>'peer border border-main focus:outline-none focus:border-secondary shadow focus:shadow-sm w-full py-1 px-2 h-10 text-sm']) }}
                 </div>
 
             </div>
         </div>
         <div class="flex">
-            {{ Form::submit('Envoyer', ['class' => 'focus:outline-none py-2 px-4 bg-gray-900 text-white bg-opacity-75 ml-auto']) }}
+            {{ Form::submit('Envoyer', ['class' => 'flex text-bg-color bg-secondary hover:bg-main border-0 py-2 px-6 text-tiny focus:outline-none hover:bg-main ml-2']) }}
         </div>
         {!! Form::close() !!}
     </div>

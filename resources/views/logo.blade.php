@@ -1,4 +1,4 @@
-<svg class="max-w-6xl logo h-12" xmlns="http://www.w3.org/2000/svg" fill="white" viewBox="0 0 4411.16 1578.55">
+<svg class="max-w-6xl logo h-12" xmlns="http://www.w3.org/2000/svg" fill="#FFFFFF" viewBox="0 0 4411.16 1578.55">
     <g id="Layer_2" data-name="Layer 2">
         <g id="Layer_1-2" data-name="Layer 1">
             <path class="cls-1"
