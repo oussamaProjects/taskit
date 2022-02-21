@@ -8,7 +8,7 @@
 <div class="relative mb-4">
     {!! Form::checkbox('parent', 1, false, ['id' => 'parent_yes', 'class' => 'opacity-0 absolute', 'onclick' => 'checkRadio(value)']) !!}
     <label
-        class="select-none inline-block text-sm font-medium text-bg-color bg-secondary hover:text-bg-color hover:bg-main transition text-center px-2 py-1 mb-1 rounded-sm w-30 cursor-pointer"
+        class="select-none inline-block text-sm font-medium text-bg-color bg-secondary hover:text-bg-color hover:bg-main transition text-center px-2 py-1 mb-1 rounded-sm w-30 cursor-pointer w-full"
         for="parent_yes">Have a parent</label>
 </div>
 
@@ -18,20 +18,20 @@
             <label for="name" class="text-xs opacity-75 scale-75">Dans
                 le dossier</label>
             <select name="folder_parent_id" id="folder" onchange="javascript:handleSelect(this)"
-                class="peer border border-main focus:outline-none focus:border-secondary shadow focus:shadow-sm w-full py-1 px-2 h-10 text-sm placeholder-gray-800 border appearance-none focus:shadow-outline">
+                class="peer border border-main focus:outline-none focus:border-secondary shadow focus:shadow-sm w-full py-1 px-2 h-10 text-sm">
                 @foreach ($folders_input as $id => $name)
                     <option value="{{ $id }}">{{ $name }}</option>
                 @endforeach
                 <option value="add_folder"> --- Ajouter un autre dossier</option>
             </select>
-            <div class="absolute inset-y-0 right-0 flex items-center px-2 pointer-events-none">
+            {{-- <div class="absolute inset-y-0 right-0 flex items-center px-2 pointer-events-none">
                 <svg class="w-4 h-4 fill-current" viewBox="0 0 20 20">
                     <path
                         d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z"
                         clip-rule="evenodd" fill-rule="evenodd">
                     </path>
                 </svg>
-            </div>
+            </div> --}}
         </div>
     </div>
     <div class="w-6 ml-4">
@@ -46,10 +46,10 @@
     @endif
 </div>
 
-@include('inc.autorisation', ['subs' => $subs])
+@include('inc.folders.autorisation', ['subs' => $subs])
 
 
 <div class="flex items-end justify-end">
-    {{ Form::submit('Sauvegarder', ['class' =>'flex text-bg-color bg-secondary hover:bg-main border-0 py-2 px-6 text-tiny focus:outline-none hover:bg-main ml-2']) }}
+    {{ Form::submit('Sauvegarder', ['class' =>'flex text-bg-color bg-secondary hover:bg-main border-0 py-2 px-6 text-tiny focus:outline-none transition hover:bg-main ml-2']) }}
     {!! Form::close() !!}
 </div>

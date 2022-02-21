@@ -30,6 +30,7 @@
         buttonFolderA.addEventListener('click', () => modalFolder.classList.add('scale-100'))
     if (buttonFolderImg)
         buttonFolderImg.addEventListener('click', () => modalFolder.classList.add('scale-100'))
+
     if (closebuttonFolder)
         closebuttonFolder.addEventListener('click', () => modalFolder.classList.remove('scale-100'))
 
@@ -51,9 +52,73 @@
     if (add_folder)
         add_folder.addEventListener('click', () => modal2.classList.add('scale-100'))
 
+    const link_add_categorie = document.getElementById('link_add_categorie')
+    if (link_add_categorie)
+        link_add_categorie.addEventListener('click', () => modalCategorie.classList.add('scale-100'))
+
     const add_categorie = document.getElementById('add_categorie')
     if (add_categorie)
         add_categorie.addEventListener('click', () => modalCategorie.classList.add('scale-100'))
+
+
+
+    // addDept
+    const modalDept = document.getElementById('modalDept')
+
+    const addDeptButton = document.getElementById('addDeptButton')
+    if (addDeptButton)
+        addDeptButton.addEventListener('click', () => modalDept.classList.add('scale-100'))
+
+    const addDeptButtonFileImg = document.getElementById('addDeptButtonFileImg')
+    if (addDeptButtonFileImg)
+        addDeptButtonFileImg.addEventListener('click', () => modalDept.classList.add('scale-100'))
+
+    const closebuttonDept = document.getElementById('closebuttonDept')
+    if (closebuttonDept)
+        closebuttonDept.addEventListener('click', () => modalDept.classList.remove('scale-100'))
+
+    // addUser
+    const modalUser = document.getElementById('modalUser')
+
+    const addUserButton = document.getElementById('addUserButton')
+    if (addUserButton)
+        addUserButton.addEventListener('click', () => modalUser.classList.add('scale-100'))
+
+    const addUserButtonFileImg = document.getElementById('addUserButtonFileImg')
+    if (addUserButtonFileImg)
+        addUserButtonFileImg.addEventListener('click', () => modalUser.classList.add('scale-100'))
+
+    const closebuttonUser = document.getElementById('closebuttonUser')
+    if (closebuttonUser)
+        closebuttonUser.addEventListener('click', () => modalUser.classList.remove('scale-100'))
+
+
+    // changePassword
+    const modalchangePassword = document.getElementById('modalchangePassword')
+
+    const changePasswordButton = document.getElementById('changePasswordButton')
+    if (changePasswordButton)
+        changePasswordButton.addEventListener('click', () => modalchangePassword.classList.add('scale-100'))
+
+    const closebuttonchangePassword = document.getElementById('closebuttonchangePassword')
+    if (closebuttonchangePassword)
+        closebuttonchangePassword.addEventListener('click', () => modalchangePassword.classList.remove('scale-100'))
+
+    // addSubs
+    const modaladdSubs = document.getElementById('modaladdSubs')
+
+    const addSubsButton = document.getElementById('addSubsButton')
+    if (addSubsButton)
+        addSubsButton.addEventListener('click', () => modaladdSubs.classList.add('scale-100'))
+
+    const addSubsButtonImg = document.getElementById('addSubsButtonImg')
+    if (addSubsButtonImg)
+        addSubsButtonImg.addEventListener('click', () => modaladdSubs.classList.add('scale-100'))
+
+    const closebuttonaddSubs = document.getElementById('closebuttonaddSubs')
+    if (closebuttonaddSubs)
+        closebuttonaddSubs.addEventListener('click', () => modaladdSubs.classList.remove('scale-100'))
+
 
     function handleSelect(elm) {
 

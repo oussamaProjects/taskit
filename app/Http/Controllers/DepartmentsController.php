@@ -93,8 +93,10 @@ class DepartmentsController extends Controller
     {
         $dept = Department::findOrFail($id);
         $subsidiaries = Subsidiary::all();
+        $subs = Subsidiary::pluck('subsName', 'id')->all();
+        $depts = Department::pluck('dptName', 'id')->all();
 
-        return view('departments.edit', compact('dept', 'subsidiaries'));
+        return view('departments.edit', compact('dept', 'subsidiaries','subs'));
     }
 
     /**

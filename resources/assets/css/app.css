@@ -9,7 +9,7 @@ html {
 }
 
 .header-right {
-    width: calc(100% - 16rem);
+    width: calc(100% - 14rem);
 }
 
 body {

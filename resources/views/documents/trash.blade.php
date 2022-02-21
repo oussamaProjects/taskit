@@ -1,112 +1,171 @@
 @extends('layouts.app')
 
 @section('content')
+
     @include('inc.sidebar')
 
+    <div class="flex items-end p-4 gap-1">
+        @can('upload')
+            <a href="/documents/create"
+                class="flex text-bg-color bg-secondary border-0 py-2 px-6 text-tiny focus:outline-none hover:bg-main ml-auto">
+                <svg xmlns="http://www.w3.org/2000/svg" class="h-3 w-3 m-1" fill="none" viewBox="0 0 24 24"
+                    stroke="currentColor">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                        d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-8l-4-4m0 0L8 8m4-4v12" />
+                </svg>
+                <span class="ml-2">Ajouter un document</span>
+            </a>
+        @endcan
+    </div>
 
-
-    <div class="ml-14 mt-14 mb-10 md:ml-64 bg-bg-color">
-
-        <div class="grid grid-cols-1 sm:grid-cols-1 lg:grid-cols-1 p-4 gap-4 ml-4 bg-bg-color shadow">
-
-            <h3 class="flow-text">
-                <i class="material-icons">priority_high</i> Expired Documents
-            </h3>
-            @if (count($trash) > 0)
-                @foreach ($trash as $t)
-                    <div class="card z-depth-1 red darken-1" style="margin: 7px 0">
-                        <div class="trash-content">
-                            <div class="row trashBox" style="margin: auto">
-                                <div class="trashIcon">
-                                    @if ($t->mimetype == 'image/jpeg')
-                                        <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 m-1" fill="none"
-                                            viewBox="0 0 24 24" stroke="currentColor">
-                                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                                                d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z" />
-                                        </svg>
-                                    @elseif($t->mimetype == "video/mp4")
-                                        <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 m-1" fill="none"
-                                            viewBox="0 0 24 24" stroke="currentColor">
-                                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                                                d="M7 4v16M17 4v16M3 8h4m10 0h4M3 12h18M3 16h4m10 0h4M4 20h16a1 1 0 001-1V5a1 1 0 00-1-1H4a1 1 0 00-1 1v14a1 1 0 001 1z" />
-                                        </svg>
-                                    @elseif($t->mimetype == "audio/mpeg")
-                                        <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 m-1" fill="none"
-                                            viewBox="0 0 24 24" stroke="currentColor">
-                                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                                                d="M9 19V6l12-3v13M9 19c0 1.105-1.343 2-3 2s-3-.895-3-2 1.343-2 3-2 3 .895 3 2zm12-3c0 1.105-1.343 2-3 2s-3-.895-3-2 1.343-2 3-2 3 .895 3 2zM9 10l12-3" />
-                                        </svg>
-                                    @elseif($t->mimetype ==
-                                        "application/vnd.openxmlformats-officedocument.wordprocessingml.document")
-                                        <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 m-1" fill="none"
-                                            viewBox="0 0 24 24" stroke="currentColor">
-                                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                                                d="M3 7v10a2 2 0 002 2h14a2 2 0 002-2V9a2 2 0 00-2-2h-6l-2-2H5a2 2 0 00-2 2z" />
-                                        </svg>
-                                    @else
-                                        <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 m-1" fill="none"
-                                            viewBox="0 0 24 24" stroke="currentColor">
-                                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                                                d="M5 19a2 2 0 01-2-2V7a2 2 0 012-2h4l2 2h4a2 2 0 012 2v1M5 19h14a2 2 0 002-2v-5a2 2 0 00-2-2H9a2 2 0 00-2 2v5a2 2 0 01-2 2z" />
-                                        </svg>
-                                    @endif
-                                </div>
-                                <div class="trashInfo">
-                                    {{ $t->name }}
-                                </div>
-                                <div class="trashInfo">
-                                    {{ $t->filesize }}
-                                </div>
-                                <div class="trashInfo">
-                                    Expired Since {{ $t->expires_at }}
-                                </div>
-                                <div class="trashAction">
-                                    <!-- DELETE using link -->
-                                    {!! Form::open(['action' => ['DocumentsController@destroy', $t->id], 'method' => 'DELETE', 'id' => 'form-delete-documents-' . $t->id]) !!}
-                                    <a href="documents/{{ $t->id }}">
-                                        <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 m-1" fill="none"
-                                            viewBox="0 0 24 24" stroke="currentColor">
-                                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                                                d="M15 12a3 3 0 11-6 0 3 3 0 016 0z" />
-                                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                                                d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z" />
-                                        </svg>
-                                    </a>
-                                    <a href="documents/download/{{ $t->id }}">
-                                        <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 m-1" fill="none"
-                                            viewBox="0 0 24 24" stroke="currentColor">
-                                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                                                d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4" />
-                                        </svg>
-                                    </a>
-                                    <a href="" class="data-delete" data-form="documents-{{ $t->id }}">
-                                        <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 m-1" fill="none"
-                                            viewBox="0 0 24 24" stroke="currentColor">
-                                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                                                d="M10 14l2-2m0 0l2-2m-2 2l-2-2m2 2l2 2m7-2a9 9 0 11-18 0 9 9 0 0118 0z" />
-                                        </svg>
-                                    </a>
-
-                                    <a href="documents/restore/{{ $t->id }}">
-                                        <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 m-1" fill="none"
-                                            viewBox="0 0 24 24" stroke="currentColor">
-                                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                                                d="M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0H9m11 11v-5h-.581m0 0a8.003 8.003 0 01-15.357-2m15.357 2H15" />
-                                        </svg>
-                                    </a>
-                                    {!! Form::close() !!}
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                @endforeach
-            @else
-                <div class="card z-depth-1 red darken-1">
-                    <div class="card-content">
-                        <h5>Documents are not expired yet!</h5>
-                    </div>
-                </div>
-            @endif
-
+    <div class="grid grid-cols-1 sm:grid-cols-1 lg:grid-cols-1 p-4 ml-4 bg-bg-color shadow">
+        <div class="flex flex-col text-center w-full">
+            <h1 class="sm:text-xl text-lg font-medium title-font mb-6 text-gray-800 text-center">Documents</h1>
+            <p class="lg:w-2/3 mx-auto leading-relaxed text-base">{{ count($trash) }} à été supprimer
+            </p>
         </div>
-    @endsection
+        <div class="w-full">
+            <table class="table-auto w-full text-left bg-colorspace-no-wrap border">
+                <thead>
+                    <tr>
+                        <th
+                            class="w-10 px-2 py-2 title-font tracking-wider font-medium text-bg-color text-base bg-main shadow-md">
+                        </th>
+                        <th
+                            class="px-2 py-2 title-font tracking-wider font-medium text-bg-color text-base bg-main shadow-md">
+                            Nom du document
+                        </th>
+                        <th
+                            class="px-2 py-2 title-font tracking-wider font-medium text-bg-color text-base bg-main shadow-md">
+                            Propriétaire
+                        </th>
+                        {{-- <th class="px-2 py-2 title-font tracking-wider font-medium text-bg-color text-base bg-main shadow-md">
+                                    Département
+                                </th> --}}
+                        <th
+                            class="px-2 py-2 title-font tracking-wider font-medium text-bg-color text-base bg-main shadow-md">
+                            Date Insertion
+                        </th>
+                        <th
+                            class="px-2 py-2 title-font tracking-wider font-medium text-bg-color text-base bg-main shadow-md">
+                            Expire le
+                        </th>
+                        <th
+                            class="px-2 py-2 title-font tracking-wider font-medium text-bg-color text-base bg-main shadow-md">
+                            Actions
+                        </th>
+                    </tr>
+                </thead>
+                <tbody>
+
+                    @if (count($trash) > 0)
+                        @foreach ($trash as $tra)
+                            @foreach ($tra as $t)
+                                <tr id="tr_{{ $t->id }}" class="border-b">
+                                    <td>
+                                        <input type="checkbox" id="chk_{{ $t->id }}" class="sub_chk"
+                                            data-id="{{ $t->id }}">
+                                        <label for="chk_{{ $t->id }}"></label>
+                                    </td>
+                                    <td class="px-4 py-3 text-sm">{{ $t->name }}</td>
+                                    <td class="px-4 py-3 text-sm">{{ $t->user->name }}</td>
+                                    {{-- <td class="px-4 py-3 text-sm">{{ $t->user->department['dptName'] }}</td> --}}
+                                    <td class="px-4 py-3 text-sm">
+                                        {{ \Carbon\Carbon::createFromTimeStamp($t->created_at->toDayDateTimeString())->formatLocalized('%d %B %Y, %H:%M') }}
+                                    </td>
+                                    <td class="px-4 py-3 text-sm">
+                                        @if ($t->isExpire)
+                                            {{ $t->expires_at }}
+                                        @else
+                                            No Expiration
+                                        @endif
+                                    </td>
+                                    <td class="px-8 py-3 text-lg text-gray-800">
+                                        <div class="h-6 flex ">
+                                            @can('read')
+                                                {!! Form::open() !!}
+                                                <a href="/documents/{{ $t->id }}" class="mr-4">
+                                                    <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 m-1" fill="none"
+                                                        viewBox="0 0 24 24" stroke="currentColor">
+                                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                                            d="M5 19a2 2 0 01-2-2V7a2 2 0 012-2h4l2 2h4a2 2 0 012 2v1M5 19h14a2 2 0 002-2v-5a2 2 0 00-2-2H9a2 2 0 00-2 2v5a2 2 0 01-2 2z" />
+                                                    </svg>
+                                                </a>
+                                                {!! Form::close() !!}
+                                                {!! Form::open() !!}
+                                                <a href="/documents/open/{{ $t->id }}" target="_blank">
+                                                    <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 m-1" fill="none"
+                                                        viewBox="0 0 24 24" stroke="currentColor">
+                                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                                            d="M15 12a3 3 0 11-6 0 3 3 0 016 0z" />
+                                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                                            d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z" />
+                                                    </svg>
+                                                </a>
+                                                {!! Form::close() !!}
+                                            @endcan
+                                            @can('download')
+                                                <a href="/documents/download/{{ $t->id }}">
+                                                    <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 m-1" fill="none"
+                                                        viewBox="0 0 24 24" stroke="currentColor">
+                                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                                            d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4" />
+                                                    </svg>
+                                                </a>
+                                            @endcan
+                                            <!-- SHARE using link -->
+                                            @can('shared')
+                                                {!! Form::open(['action' => ['ShareController@update', $t->id], 'method' => 'PATCH', 'id' => 'form-share-documents-' . $t->id]) !!}
+                                                <a href="" class="data-share" data-form="documents-{{ $t->id }}">
+                                                    <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 m-1" fill="none"
+                                                        viewBox="0 0 24 24" stroke="currentColor">
+                                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                                            d="M8.684 13.342C8.886 12.938 9 12.482 9 12c0-.482-.114-.938-.316-1.342m0 2.684a3 3 0 110-2.684m0 2.684l6.632 3.316m-6.632-6l6.632-3.316m0 0a3 3 0 105.367-2.684 3 3 0 00-5.367 2.684zm0 9.316a3 3 0 105.368 2.684 3 3 0 00-5.368-2.684z" />
+                                                    </svg>
+                                                </a>
+
+                                                {!! Form::close() !!}
+                                            @endcan
+                                            @can('edit')
+                                                <a href="/documents/{{ $t->id }}/edit">
+                                                    <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 m-1" fill="none"
+                                                        viewBox="0 0 24 24" stroke="currentColor">
+                                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                                            d="M11 5H6a2 2 0 00-2 2v11a2 2 0 002 2h11a2 2 0 002-2v-5m-1.414-9.414a2 2 0 112.828 2.828L11.828 15H9v-2.828l8.586-8.586z" />
+                                                    </svg>
+                                                </a>
+                                            @endcan
+                                            <!-- DELETE using link -->
+                                            @can('delete')
+                                                {!! Form::open(['action' => ['DocumentsController@destroy', $t->id], 'method' => 'DELETE', 'id' => 'form-delete-documents-' . $t->id]) !!}
+                                                <a href="" class="data-delete" data-form="documents-{{ $t->id }}">
+                                                    <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 m-1" fill="none"
+                                                        viewBox="0 0 24 24" stroke="currentColor">
+                                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                                            d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16" />
+                                                    </svg>
+                                                </a>
+                                                {!! Form::close() !!}
+                                            @endcan
+                                    </td>
+
+                                </tr>
+                            @endforeach
+                        @endforeach
+                    @else
+                        <tr>
+                            <td colspan="9">
+                                <h5 class="p-6 text-center">Aucun document n'a été téléchargé</h5>
+                            </td>
+                        </tr>
+                    @endif
+
+
+                </tbody>
+            </table>
+        </div>
+    </div>
+
+    @include('inc.sidebar-footer')
+    
+@endsection

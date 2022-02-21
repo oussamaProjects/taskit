@@ -1,6 +1,6 @@
 <!-- Sidebar -->
 <div
-    class="fixed flex flex-col top-14 left-0 w-14 hover:w-64 md:w-64 bg-gray-800   h-full text-bg-color transition-all duration-300 border-none z-10 sidebar">
+    class="fixed flex flex-col top-14 left-0 w-14 hover:w-64 md:w-56 bg-main  h-full text-bg-color transition-all duration-300 border-none z-10 sidebar">
     <div class="overflow-y-auto overflow-x-hidden flex flex-col justify-between flex-grow">
         <ul class="flex flex-col py-4 space-y-1">
             <li class="px-5 hidden md:block">
@@ -90,7 +90,7 @@
                     </span>
                     <span class="ml-2 text-sm tracking-wide truncate">Utilisateurs</span>
                     <span
-                        class="px-2 py-0.5 ml-auto text-xs font-medium tracking-wide text-red-800 bg-amber rounded-full">{{ $users_count }}</span>
+                        class="px-2 py-0.5 ml-auto text-xs font-medium tracking-wide text-white bg-secondary rounded-full">{{ $users_count }}</span>
                 </a>
             </li>
 
@@ -108,7 +108,7 @@
                     </span>
                     <span class="ml-2 text-sm tracking-wide truncate">Départments</span>
                     <span
-                        class="px-2 py-0.5 ml-auto text-xs font-medium tracking-wide text-red-800 bg-amber rounded-full">{{ $dept_count }}</span>
+                        class="px-2 py-0.5 ml-auto text-xs font-medium tracking-wide text-white bg-secondary rounded-full">{{ $dept_count }}</span>
                 </a>
             </li>
 
@@ -125,7 +125,7 @@
                     </span>
                     <span class="ml-2 text-sm tracking-wide truncate">Filiales</span>
                     <span
-                        class="px-2 py-0.5 ml-auto text-xs font-medium tracking-wide text-red-800 bg-amber rounded-full">{{ $subs_count }}</span>
+                        class="px-2 py-0.5 ml-auto text-xs font-medium tracking-wide text-white bg-secondary rounded-full">{{ $subs_count }}</span>
                 </a>
             </li>
             @endhasrole
@@ -205,3 +205,6 @@
     </div>
 </div>
 <!-- ./Sidebar -->
+
+
+<div class="h-full ml-14 mt-14 mb-10 md:ml-56">

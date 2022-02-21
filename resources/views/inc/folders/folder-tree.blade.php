@@ -1,4 +1,4 @@
-<div class="tree px-2 py-6 h-full text-xs text-bg-color0 border">
+<div class="tree px-2 py-6 h-full text-xs text-main border">
     <ul class="pt-1 pr-6">
         <li>
             <a href="\folders">

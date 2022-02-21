@@ -57,7 +57,7 @@ Route::resource('documents', 'DocumentsController');
 Route::patch('documents/color/{id}', 'DocumentsController@changeColor');
 Route::get('documents/download/{id}', 'DocumentsController@download');
 Route::get('documents/open/{id}', 'DocumentsController@open');
-Route::get('mydocuments', 'DocumentsController@mydocuments');
+Route::get('mydocuments', 'DocumentsController@mydocuments')->name('mydocuments');
 Route::get('/trash', 'DocumentsController@trash');
 Route::get('documents/restore/{id}', 'DocumentsController@restore');
 Route::delete('documentsDeleteMulti', 'DocumentsController@deleteMulti');

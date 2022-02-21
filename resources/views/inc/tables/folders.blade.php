@@ -4,10 +4,9 @@
             <div class="relative flex flex-col min-w-0 mb-4 lg:mb-0 break-words w-full">
                 <div class="rounded-t mb-0 px-0 border-0">
                     <div class="flex flex-col text-center w-full">
-                        <h1 class="sm:text-2xl text-xl font-medium title-font mb-1 text-gray-800">Dossiers</h1>
-                        <p class="lg:w-2/3 mx-auto leading-relaxed text-base mb-2">
-                            Tous les dossiers
-                        </p>
+                        <h1 class="sm:text-xl text-lg font-medium title-font mb-6 text-gray-800 text-center">
+                            <span class="text-secondary"> Tous les dossiers</span>
+                        </h1>
                     </div>
                     <div class="block w-full overflow-x-auto">
                         <table

@@ -5,7 +5,7 @@
         <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 p-4 gap-4">
             <a href="/documents">
                 <div
-                    class="bg-main shadow-sm rounded-md flex items-center justify-between p-3 border-b-4 border-bg-gray-800 text-bg-color font-medium group">
+                    class="bg-main shadow-sm rounded-md flex items-center justify-between p-3 border-b-4 border-bg-main text-bg-color font-medium group">
                     <div
                         class="flex justify-center items-center w-14 h-14 bg-bg-color rounded-full transition-all duration-300 transform group-hover:rotate-12">
                         <svg width="30" height="30" fill="none" viewBox="0 0 24 24" stroke="currentColor"
@@ -23,7 +23,7 @@
             </a>
             <a href="/folders">
                 <div
-                    class="bg-main shadow-sm rounded-md flex items-center justify-between p-3 border-b-4 border-bg-gray-800 text-bg-color font-medium group">
+                    class="bg-main shadow-sm rounded-md flex items-center justify-between p-3 border-b-4 border-bg-main text-bg-color font-medium group">
                     <div
                         class="flex justify-center items-center w-14 h-14 bg-bg-color rounded-full transition-all duration-300 transform group-hover:rotate-12">
                         <svg width="30" height="30" fill="none" viewBox="0 0 24 24" stroke="currentColor"
@@ -34,14 +34,14 @@
                         </svg>
                     </div>
                     <div class="text-right">
-                        <p class="text-2xl">folders</p>
+                        <p class="text-2xl">Dossiers</p>
                         <p>{{ $folders }}</p>
                     </div>
                 </div>
             </a>
             <a href="/users">
                 <div
-                    class="bg-main shadow-sm rounded-md flex items-center justify-between p-3 border-b-4 border-bg-gray-800 text-bg-color font-medium group">
+                    class="bg-main shadow-sm rounded-md flex items-center justify-between p-3 border-b-4 border-bg-main text-bg-color font-medium group">
                     <div
                         class="flex justify-center items-center w-14 h-14 bg-bg-color rounded-full transition-all duration-300 transform group-hover:rotate-12">
                         <svg width="30" height="30" fill="none" viewBox="0 0 24 24" stroke="currentColor"
@@ -51,14 +51,14 @@
                         </svg>
                     </div>
                     <div class="text-right">
-                        <p class="text-2xl">Users</p>
+                        <p class="text-2xl">Utilisateurs</p>
                         <p>{{ $users }}</p>
                     </div>
                 </div>
             </a>
             <a href="/departments">
                 <div
-                    class="bg-main shadow-sm rounded-md flex items-center justify-between p-3 border-b-4 border-bg-gray-800 text-bg-color font-medium group">
+                    class="bg-main shadow-sm rounded-md flex items-center justify-between p-3 border-b-4 border-bg-main text-bg-color font-medium group">
                     <div
                         class="flex justify-center items-center w-14 h-14 bg-bg-color rounded-full transition-all duration-300 transform group-hover:rotate-12">
                         <svg width="30" height="30" fill="none" viewBox="0 0 24 24" stroke="currentColor"
@@ -75,7 +75,7 @@
             </a>
             <a href="/roles">
                 <div
-                    class="bg-main shadow-sm rounded-md flex items-center justify-between p-3 border-b-4 border-bg-gray-800 text-bg-color font-medium group">
+                    class="bg-main shadow-sm rounded-md flex items-center justify-between p-3 border-b-4 border-bg-main text-bg-color font-medium group">
                     <div
                         class="flex justify-center items-center w-14 h-14 bg-bg-color rounded-full transition-all duration-300 transform group-hover:rotate-12">
                         <svg width="30" height="30" fill="none" viewBox="0 0 24 24" stroke="currentColor"
@@ -86,7 +86,7 @@
                         </svg>
                     </div>
                     <div class="text-right">
-                        <p class="text-2xl">roles</p>
+                        <p class="text-2xl">Les rôles</p>
                         <p> </p>
                     </div>
                 </div>
@@ -95,7 +95,7 @@
 
             <a href="/logs">
                 <div
-                    class="bg-main shadow-sm rounded-md flex items-center justify-between p-3 border-b-4 border-bg-gray-800 text-bg-color font-medium group">
+                    class="bg-main shadow-sm rounded-md flex items-center justify-between p-3 border-b-4 border-bg-main text-bg-color font-medium group">
                     <div
                         class="flex justify-center items-center w-14 h-14 bg-bg-color rounded-full transition-all duration-300 transform group-hover:rotate-12">
                         <svg width="30" height="30" fill="none" viewBox="0 0 24 24" stroke="currentColor"
@@ -115,7 +115,7 @@
 
             <a href="/categories">
                 <div
-                    class="bg-main shadow-sm rounded-md flex items-center justify-between p-3 border-b-4 border-bg-gray-800 text-bg-color font-medium group">
+                    class="bg-main shadow-sm rounded-md flex items-center justify-between p-3 border-b-4 border-bg-main text-bg-color font-medium group">
                     <div
                         class="flex justify-center items-center w-14 h-14 bg-bg-color rounded-full transition-all duration-300 transform group-hover:rotate-12">
                         <svg width="30" height="30" fill="none" viewBox="0 0 24 24" stroke="currentColor"

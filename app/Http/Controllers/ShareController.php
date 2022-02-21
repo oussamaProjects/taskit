@@ -2,9 +2,13 @@
 
 namespace App\Http\Controllers;
 
+use App\Category;
+use App\Department;
 use Illuminate\Http\Request;
 use App\Shared;
 use App\Document;
+use App\Folder;
+use App\Subsidiary;
 use Illuminate\Support\Facades\DB;
 
 class ShareController extends Controller
@@ -23,7 +27,16 @@ class ShareController extends Controller
     public function index()
     {
         $shared = Shared::all();
-        return view('pages.shared', compact('shared'));
+        $user = auth()->user();
+        $filetype = null;
+        $categories = Category::pluck('name', 'id')->all();
+        $depts = Department::all();
+        $subs  = Subsidiary::all();
+        $docs = Document::where('isExpire', '!=', 2)->get();
+        $folders  = Folder::where('parent_id', '=', '0')->get();
+        $folders_input = Folder::pluck('name', 'id')->all();
+
+        return view('pages.shared', compact('shared', 'filetype', 'folders', 'folders_input', 'categories', 'depts', 'subs'));
     }
 
     /**
@@ -110,7 +123,7 @@ class ShareController extends Controller
             ->where('document_departement.department_id', '=', $user->department_id)
             ->distinct()
             ->get();
-            
+
         if (!$user->hasRole('Root')) {
             // var_dump($user->department_id);
             // var_dump($id);

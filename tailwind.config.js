@@ -31,11 +31,11 @@ module.exports = {
                 ]
             },
             colors: {
-                'bg-color': "#FFFAF0",
+                'bg-color': "#FEFEFE",
                 // blue: "#407986",
-                main: "#407986",
+                main: "#1f2937",
                 lime: "#b7b063",
-                secondary: "#6384a2",
+                secondary: "#0091D5",
                 // cyan: "#6384a2",
                 amber: "#d8c7bf"
             }

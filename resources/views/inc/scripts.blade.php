@@ -4,14 +4,7 @@
 {{-- <script src="{{ asset('materialize-css/js/materialize.min.js') }}" charset="utf-8"></script> --}}
 
 <script type="text/javascript">
-    // $(".dropdown-button").dropdown();
-    // side nav
-    // $(".button-collapse").sideNav();
-    // select
-    // $('select').material_select();
-    // modal
-    // $('#modal1').modal();
-    // modal for help 
+    
     // DELETE using link
     $(function() {
         $('.data-delete').on('click', function(e) {

@@ -3,10 +3,7 @@
 @section('content')
 
     @include('inc.sidebar')
-
-
-    <div class="h-full ml-14 mt-14 mb-10 md:ml-64">
-
+ 
         <div class="grid grid-cols-1 lg:grid-cols-1 p-4 gap-4">
             <div class="relative flex flex-col min-w-0 mb-4 lg:mb-0 break-words bg-bg-color w-full shadow-md rounded">
                 <div class="rounded-t mb-0 px-0 border-0">
@@ -41,7 +38,7 @@
                                 </div>
 
                                 <div class="ml-auto">
-                                    <p class="text-main">{{ $user->created_at->diffForHumans() }}</p>
+                                    <p class="text-secondary">{{ $user->created_at->diffForHumans() }}</p>
                                 </div>
 
                                 <div class="flex ml-8">
@@ -49,7 +46,7 @@
                                         {!! Form::open(['action' => ['RequestsController@update', $user->id], 'method' => 'PATCH']) !!}
                                         {{ csrf_field() }}
                                         <button type="submit" name="role" value="admin">
-                                            <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 m-1 text-secondary"
+                                            <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 m-1 text-secondary"
                                                 fill="none" viewBox="0 0 24 24" stroke="currentColor">
                                                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
                                                     d="M5 13l4 4L19 7" />
@@ -70,7 +67,7 @@
                                         {!! Form::open(['action' => ['UsersController@destroy', $user->id], 'method' => 'DELETE']) !!}
                                         {{ csrf_field() }}
                                         <button type="submit" name="b2">
-                                            <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 m-1 text-amber"
+                                            <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 m-1 text-amber"
                                                 fill="none" viewBox="0 0 24 24" stroke="currentColor">
                                                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
                                                     d="M6 18L18 6M6 6l12 12" />
@@ -88,10 +85,11 @@
                 </div>
             </div>
 
-            <button id="buttonmodalFileImg" class="bg-bg-color h-auto p-4 shadow" type="button">
+            <button id="buttonmodalFileImg" class="bg-bg-color h-auto p-4" type="button">
                 <img src="{{ asset('img/undraw_Add_files_re_v09g.svg') }}" alt="">
             </button>
         </div>
-    </div>
+        @include('inc.sidebar-footer')
+
 
 @endsection

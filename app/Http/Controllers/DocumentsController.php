@@ -301,6 +301,7 @@ class DocumentsController extends Controller
    */
   public function edit($id)
   {
+    $filetype = null;
     $doc                = Document::findOrFail($id);
     $selectedCategories = $doc->categories->pluck('id');
     $selectedFolders    = $doc->folders->pluck('id');
@@ -377,7 +378,7 @@ class DocumentsController extends Controller
 
     // dd($depts);
     if (UtilityController::has_permission_for_doc($id, $user))
-      return view('documents.edit', compact('doc', 'categories', 'folders', 'folders_input', 'depts', 'subs', 'selectedCategories', 'selectedFolders'));
+      return view('documents.edit', compact('filetype','doc', 'categories', 'folders', 'folders_input', 'depts', 'subs', 'selectedCategories', 'selectedFolders'));
     else
       return redirect('/documents')->with('failure', 'Vous ne pouvez pas voir ce document');
   }

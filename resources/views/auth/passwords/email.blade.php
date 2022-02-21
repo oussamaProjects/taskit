@@ -13,7 +13,7 @@
                         class="relative flex flex-col min-w-0 break-words w-full mb-6 shadow-md rounded-lg bg-bg-color border-0">
 
                         <div class="flex-auto px-4 lg:px-10 py-8 pt-8">
-                            <div class="text-bg-color0 text-center font-bold mb-6">
+                            <div class="text-bg-color text-center font-bold mb-6">
                                 <small>Réinitialiser le mot de passe</small>
                             </div>
 
@@ -33,7 +33,7 @@
                                         e-mail</label>
                                     <input id="email" type="email" name="email" value="{{ old('email') }}" required
                                         autofocus
-                                        class="border-0 px-3 py-3 placeholder-bg-color text-gray-800 bg-bg-color rounded text-sm shadow focus:outline-none focus:ring w-full"
+                                        class="peer border border-main focus:outline-none focus:border-secondary shadow focus:shadow-sm w-full py-1 px-2 h-10 text-sm"
                                         placeholder="Email" style="transition: all 0.15s ease 0s;">
                                     @if ($errors->has('email'))
                                         <span class="text-amber text-xs">{{ $errors->first('email') }}</span>
@@ -42,7 +42,7 @@
 
                                 <div class="text-center mt-6">
                                     <button name="login"
-                                        class="bg-gray-800 text-bg-color active:bg-gray-800 text-sm font-bold uppercase px-6 py-3 rounded shadow hover:shadow-md outline-none focus:outline-none mr-1 mb-1 w-full"
+                                        class="bg-main text-bg-color active:bg-main text-sm font-bold uppercase px-6 py-3 rounded shadow hover:shadow-md outline-none focus:outline-none mr-1 mb-1 w-full"
                                         type="submit" style="transition: all 0.15s ease 0s;">
                                         Envoyer le lien de réinitialisation du mot de passe
                                     </button>
@@ -55,7 +55,7 @@
                 </div>
             </div>
         </div>
-        <footer class="absolute w-full bottom-0 bg-gray-800 pb-4">
+        <footer class="absolute w-full bottom-0 bg-main pb-4">
             <div class="container mx-auto px-4">
                 <hr class="mb-4 border-b-1 border-gray-800">
                 <div class="flex flex-wrap items-center md:justify-between justify-center">

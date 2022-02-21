@@ -4,62 +4,54 @@
 
     @include('inc.sidebar')
 
-    <div class="ml-14 mt-14 md:ml-64">
-        <!-- Statistics Cards -->
-        <div class="flex items-center p-4 gap-4 bg-bg-color mb-4">
-
-            <form action="/search" method="post" id="search-form" class="bg-bg-color flex items-center w-full max-w-xl  4 p-2">
-                {{ csrf_field() }}
-                <button class="outline-none focus:outline-none">
-                    <svg class="w-5 text-gray-800 h-5 cursor-pointer" fill="none" stroke-linecap="round"
-                        stroke-linejoin="round" stroke-width="2" stroke="currentColor" viewBox="0 0 24 24">
-                        <path d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"></path>
-                    </svg>
-                </button>
-                <input type="text" autocomplete="off" name="search" id="search" placeholder="Recherche ..."
-                    class="w-full pl-3 text-sm text-black outline-none focus:outline-none bg-transparent" />
-            </form>
-
-            <button id="buttonmodal"
-                class="flex text-bg-color bg-secondary hover:bg-main border-0 py-2 px-6 text-tiny focus:outline-none hover:bg-main ml-2ml-auto">
-                Ajouter un utilisateur
-            </button>
-
-            @can('upload')
-            @endcan
-
-        </div>
-
-        <!-- Statistics Cards -->
-        <div class="grid grid-cols-4 sm:grid-cols-4 lg:grid-cols-4 ml-4 p-4 gap-4 bg-bg-color shadow">
-            <div class="col-span-3">
-                <div class="flex flex-col text-center w-full">
-                    <h1 class="sm:text-2xl text-xl font-medium title-font mb-2 text-gray-800">Tous les utilisateurs</h1>
-                    <p class="lg:w-2/3 mx-auto leading-relaxed text-base">Utilisateurs
-                    </p>
+    <div class="grid grid-cols-1 lg:grid-cols-1 p-4 gap-4">
+        <div class="relative flex flex-col min-w-0 mb-4 lg:mb-0 break-words bg-bg-color w-full shadow-md rounded">
+            <div class="rounded-t mb-0 px-0 border-0">
+                <div class="flex flex-wrap items-center px-4 py-4">
+                    <div class="relative w-full max-w-full flex-grow flex-1">
+                        <h3 class="font-semibold uppercase text-xl text-gray-800">
+                            Utilisateurs
+                        </h3>
+                    </div>
+                    @can('upload')
+                        <button id="addUserButton"
+                            class="flex text-bg-color bg-secondary hover:bg-main border-0 py-2 px-6 text-tiny focus:outline-none transition ml-auto">
+                            Ajouter un utilisateur
+                        </button>
+                    @endcan
                 </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Statistics Cards -->
+    <div class="grid grid-cols-4 sm:grid-cols-4 lg:grid-cols-4 p-4 gap-4">
+        <div class="col-span-3">
+            <div class="flex flex-col text-center w-full">
+                <h1 class="sm:text-xl text-lg font-medium title-font mb-6 text-gray-800 text-center">Tous les utilisateurs
+                </h1>
                 <div class="w-full">
-                    <table class="table-auto w-full text-left bg-colorspace-no-wrap border border-bg-color">
+                    <table class="table-auto w-full text-left bg-colorspace-no-wrap border">
                         <thead>
                             <tr>
                                 <th
-                                    class="px-2 py-2 title-font tracking-wider text-bg-color text-base bg-main shadow-md">
+                                    class="px-2 py-3 title-font tracking-wider font-medium text-bg-color text-tiny bg-main shadow-md">
                                     Name
                                 </th>
                                 <th
-                                    class="px-2 py-2 title-font tracking-wider text-bg-color text-base bg-main shadow-md">
+                                    class="px-2 py-3 title-font tracking-wider font-medium text-bg-color text-tiny bg-main shadow-md">
                                     Role
                                 </th>
                                 <th
-                                    class="px-2 py-2 title-font tracking-wider text-bg-color text-base bg-main shadow-md">
+                                    class="px-2 py-3 title-font tracking-wider font-medium text-bg-color text-tiny bg-main shadow-md">
                                     Filiales
                                 </th>
                                 <th
-                                    class="px-2 py-2 title-font tracking-wider text-bg-color text-base bg-main shadow-md">
+                                    class="px-2 py-3 title-font tracking-wider font-medium text-bg-color text-tiny bg-main shadow-md">
                                     Department
                                 </th>
                                 <th
-                                    class="px-2 py-2 title-font tracking-wider text-bg-color text-base bg-main shadow-md">
+                                    class="px-2 py-3 title-font tracking-wider font-medium text-bg-color text-tiny bg-main shadow-md">
                                     Actions
                                 </th>
                             </tr>
@@ -79,15 +71,17 @@
 
                                             <td class="px-4 py-3 text-sm">
                                                 @foreach ($user->departments()->get() as $dept)
-                                                    @foreach ($dept->subsidiaries()->get() as $subs) 
-                                                        <div class="text-yellow-600 p-1 px-2 rounded mb-1">{{ $subs['subsName'] }}</div>
+                                                    @foreach ($dept->subsidiaries()->get() as $subs)
+                                                        <div class="text-yellow-600 p-1 px-2 rounded mb-1">
+                                                            {{ $subs['subsName'] }}</div>
                                                     @endforeach
                                                 @endforeach
                                             </td>
 
                                             <td class="px-4 py-3 text-sm">
                                                 @foreach ($user->departments()->get() as $dept)
-                                                     <div class="text-main bg-secondary p-1 px-2 rounded mb-1">{{ $dept['dptName'] }}</div>
+                                                    <div class="text-white bg-secondary p-1 px-2 rounded mb-1">
+                                                        {{ $dept['dptName'] }}</div>
                                                 @endforeach
                                             </td>
 
@@ -95,7 +89,7 @@
                                                 <!-- DELETE using link -->
                                                 {!! Form::open(['action' => ['UsersController@destroy', $user->id], 'method' => 'DELETE', 'id' => 'form-delete-users-' . $user->id, 'class' => 'flex']) !!}
                                                 <a href="#" class="left ">
-                                                    <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 m-1"
+                                                    <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 m-1"
                                                         fill="none" viewBox="0 0 24 24" stroke="currentColor">
                                                         <path stroke-linecap="round" stroke-linejoin="round"
                                                             stroke-width="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z" />
@@ -105,7 +99,7 @@
                                                     </svg>
                                                 </a>
                                                 <a href="/users/{{ $user->id }}/edit" class="center">
-                                                    <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 m-1"
+                                                    <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 m-1"
                                                         fill="none" viewBox="0 0 24 24" stroke="currentColor">
                                                         <path stroke-linecap="round" stroke-linejoin="round"
                                                             stroke-width="2"
@@ -113,7 +107,7 @@
                                                     </svg>
                                                 </a>
                                                 <a href="" class="right data-delete" data-form="users-{{ $user->id }}">
-                                                    <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 m-1"
+                                                    <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 m-1"
                                                         fill="none" viewBox="0 0 24 24" stroke="currentColor">
                                                         <path stroke-linecap="round" stroke-linejoin="round"
                                                             stroke-width="2"
@@ -137,8 +131,9 @@
                     </table>
                 </div>
             </div>
-            <div class="">
-
+        </div>
+        <div class="">
+            <button id="addUserButtonFileImg" class="bg-bg-color h-auto p-4" type="button">
                 <svg class="w-5/6 mx-auto" xmlns="http://www.w3.org/2000/svg" id="f080dbb7-9b2b-439b-a118-60b91c514f72"
                     data-name="Layer 1" viewBox="0 0 528.71721 699.76785">
                     <title>Connexion</title>
@@ -197,102 +192,13 @@
                         d="M786.797,157.64461s-11.5575-4.20273-27.31774,4.72807l8.40546,2.10136s-12.60819,1.05068-14.18421,17.8616h5.77875s-3.67739,14.70955,0,18.91228l2.364-4.4654,6.82943,13.65887,1.576-6.82944,3.15205,1.05069,2.10137-11.03217s5.25341,7.88012,9.45614,8.40546V195.2065s11.5575,13.13352,15.23489,12.60818l-5.25341-7.35477,7.35477,1.576-3.152-5.25341,18.91228,5.25341-4.20273-5.25341,13.13352,4.20273,6.3041,2.6267s8.9308-20.4883-3.67739-34.67251S798.61712,151.60318,786.797,157.64461Z"
                         transform="translate(-335.6414 -100.11607)" fill="#2f2e41" />
                 </svg>
-            </div>
-        </div>
-
-    </div>
-
-    <div id="modal"
-        class="fixed top-0 left-0 w-screen h-screen flex items-center justify-center bg-main bg-opacity-50 transform scale-0 transition-transform duration-300">
-        <div class="bg-bg-color w-1/2 p-4">
-            <button id="closebutton" type="button" class="focus:outline-none float-right">
-                <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 m-1" fill="none" viewBox="0 0 24 24"
-                    stroke="currentColor">
-                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                        d="M10 14l2-2m0 0l2-2m-2 2l-2-2m2 2l2 2m7-2a9 9 0 11-18 0 9 9 0 0118 0z" />
-                </svg>
             </button>
-            <div>
-                <h2 class="text-gray-800 text-xl mb-8 font-medium title-font">
-                    Ajouter un utilisateur
-                </h2>
-
-
-                <div class="mb-2 relative">
-                    <label for="name" class="text-xs opacity-75 scale-75">
-                        Nom</label>
-                    {{ Form::text('name', '', ['autocomplete' => 'off','id' => 'name','class' =>'peer border border-main focus:outline-none focus:border-secondary shadow focus:shadow-sm w-full py-1 px-2 h-10 text-sm']) }}
-
-                </div>
-
-                <div class="mb-2 relative">
-                    <label for="email" class="text-xs opacity-75 scale-75">
-                        Adresse e-mail</label>
-                    {{ Form::email('email', '', ['id' => 'email','class' =>'peer border border-main focus:outline-none focus:border-secondary shadow focus:shadow-sm w-full py-1 px-2 h-10 text-sm']) }}
-
-                </div>
-
-                <div class="mb-2 relative">
-                    <label for="email" class="text-xs opacity-75 scale-75">Department</label>
-                    <select name="department_id" id="department_id"
-                        class="peer border border-main focus:outline-none focus:border-secondary shadow focus:shadow-sm w-full py-1 px-2 h-10 text-sm">
-                        <option value="" disabled selected>Choisissez le département</option>
-                        @if (count($depts) > 0)
-                            @if (Auth::user()->hasRole('Root'))
-                                @foreach ($depts as $dept)
-                                    <option value="{{ $dept->id }}">{{ $dept->dptName }}</option>
-                                @endforeach
-                            @elseif(Auth::user()->hasRole('Admin'))
-                                <option value="{{ Auth::user()->department_id }}">
-                                    {{ Auth::user()->departments()->get() }}
-                                </option>
-                            @endif
-                        @endif
-                    </select>
-                </div>
-
-                <div class="mb-2 relative">
-                    <label for="email" class="text-xs opacity-75 scale-75">Role</label>
-                    <select name="role" id="role"
-                        class="peer border border-main focus:outline-none focus:border-secondary shadow focus:shadow-sm w-full py-1 px-2 h-10 text-sm">
-                        <option value="" disabled selected>Attribuer un rôle</option>
-                        @if (count($roles) > 0)
-                            @foreach ($roles as $role)
-                                <option value="{{ $role->id }}">{{ $role->name }}</option>
-                            @endforeach
-                        @endif
-                    </select>
-                </div>
-
-
-                <div class="mb-2 relative">
-                    <label for="password" class="text-xs opacity-75 scale-75">Password</label>
-                    {{ Form::password('password', ['id' => 'password','class' =>'peer border border-main focus:outline-none focus:border-secondary shadow focus:shadow-sm w-full py-1 px-2 h-10 text-sm']) }}
-                </div>
-
-                <div class="mb-2 relative">
-                    <label for="password-confirm" class="text-xs opacity-75 scale-75">Confirm
-                        Mot de passe
-                    </label>
-                    {{ Form::password('password_confirmation', ['id' => 'password-confirm','class' =>'peer border border-main focus:outline-none focus:border-secondary shadow focus:shadow-sm w-full py-1 px-2 h-10 text-sm']) }}
-                </div>
-
-            </div>
         </div>
-        <div class="flex">
-            {{ Form::submit('Envoyer', ['class' => 'flex text-bg-color bg-secondary hover:bg-main border-0 py-2 px-6 text-tiny focus:outline-none hover:bg-main ml-2']) }}
-        </div>
-        {!! Form::close() !!}
     </div>
 
+    @include('inc.sidebar-footer')
 
+    @include('popups.addUser')
+    @include('popups.scripts')
 
-    <script>
-        const button = document.getElementById('buttonmodal')
-        const closebutton = document.getElementById('closebutton')
-        const modal = document.getElementById('modal')
-
-        button.addEventListener('click', () => modal.classList.add('scale-100'))
-        closebutton.addEventListener('click', () => modal.classList.remove('scale-100'))
-    </script>
 @endsection
