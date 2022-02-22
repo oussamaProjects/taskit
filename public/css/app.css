@@ -33325,7 +33325,8 @@ ul.pagination li.page-item > a.page-link:hover {
   transform-style: preserve-3d;
   perspective: 600;
   transform: perspective(600);
-  border: 2px solid rgba(0,0,0,0.2)
+  border: 2px solid rgba(0,0,0,0.2);
+  cursor: pointer;
 }
 
 .icon-folder {
@@ -33338,7 +33339,8 @@ ul.pagination li.page-item > a.page-link:hover {
   transform-style: preserve-3d;
   perspective: 600;
   transform: perspective(600);
-  border: 2px solid rgba(0,0,0,0.2)
+  border: 2px solid rgba(0,0,0,0.2);
+  cursor: pointer;
 }
 
 .icon-folder:before {

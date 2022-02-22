@@ -80,7 +80,7 @@
 
                                             <td class="px-2 py-3 text-sm">
                                                 @foreach ($user->departments()->get() as $dept)
-                                                    <div class="text-white bg-secondary p-1 px-2 rounded mb-1">
+                                                    <div class="text-white bg-secondary mr-1 mb-1 p-1 px-2 rounded mb-1 inline-block">
                                                         {{ $dept['dptName'] }}</div>
                                                 @endforeach
                                             </td>

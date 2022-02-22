@@ -9,7 +9,7 @@
     <td class="px-2 py-3 text-sm">
         @foreach ($current_folder->department()->get() as $department)
             @if (isset($department->pivot->permission_for) && $department->pivot->permission_for == 1)
-                <span class="text-xs leading-5 text-bg-color bg-secondary py-1 px-2 rounded ml-1 mb-1">
+                <span class="text-xs leading-5 text-bg-color bg-secondary py-1 px-2 rounded ml-1 mb-1 inline-block">
                     {{ $department->dptName }}
                 </span>
             @endif
@@ -18,7 +18,7 @@
     <td class="px-2 py-3 text-sm">
         @foreach ($current_folder->department()->get() as $department)
             @if (isset($department->pivot->permission_for) && ($department->pivot->permission_for == 1 || $department->pivot->permission_for == 0))
-                <span class="text-xs leading-5 text-bg-color bg-secondary py-1 px-2 rounded ml-1 mb-1">
+                <span class="text-xs leading-5 text-bg-color bg-secondary py-1 px-2 rounded ml-1 mb-1 inline-block">
                     {{ $department->dptName }}
                 </span>
             @endif
