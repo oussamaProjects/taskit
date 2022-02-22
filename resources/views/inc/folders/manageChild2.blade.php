@@ -5,7 +5,6 @@ $active = isset($currentFolder) && ($currentFolder->id == $folderParent->id || $
 
 <ul
     class="nested mt-1 -mb-1 currentFolder-{{ isset($currentFolder) ? $currentFolder->id : 0 }} folderParent-{{ $folderParent->id }} {{ $active ? '' : 'hide' }}">
-    >
     @foreach ($folderParent->children as $child)
         <li>
             <a href="/folder/{{ $child->id }}/child"
