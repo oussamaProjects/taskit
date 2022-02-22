@@ -30,7 +30,7 @@
         </div>
 
         <!-- Statistics Cards -->
-        <div class="grid grid-cols-1 sm:grid-cols-1 lg:grid-cols-1 p-4 ml-4 bg-bg-color shadow">
+        <div class="grid grid-cols-1 py-4 ml-4 bg-bg-color shadow-sm">
 
             @if ($doc->isExpire == 2)
                 <h5 class="text-amber text-xs">
@@ -139,7 +139,7 @@
                             <div class="flex mt-6">
 
                                 <a href="/documents"
-                                    class="mr-auto flex text-bg-color bg-secondary hover:bg-main border-0 py-2 px-6 text-tiny focus:outline-none transition hover:bg-main ml-2">
+                                    class="mr-auto flex text-bg-color bg-secondary hover:bg-main border py-2 px-6 text-tiny focus:outline-none transition hover:no-underline ml-2">
                                     <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 m-1" fill="none"
                                         viewBox="0 0 24 24" stroke="currentColor">
                                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
@@ -151,7 +151,7 @@
                                 {!! Form::open() !!}
                                 @can('edit')
                                     <a href="/documents/{{ $doc->id }}/edit"
-                                        class="ml-auto rounded-full w-10 h-10 bg-bg-color p-0 border-0 inline-flex items-center justify-center text-bg-color ml-4"
+                                        class="ml-auto rounded-full w-10 h-10 bg-bg-color p-0 border inline-flex items-center justify-center text-bg-color ml-4"
                                         data-position="left" data-delay="50" data-tooltip="Edit this">
                                         <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 m-1" fill="none"
                                             viewBox="0 0 24 24" stroke="currentColor">
@@ -161,7 +161,7 @@
                                     </a>
                                 @endcan
                                 <a href="/documents/open/{{ $doc->id }}"  target="_blank"
-                                    class="rounded-full w-10 h-10 bg-bg-color p-0 border-0 inline-flex items-center justify-center text-bg-color ml-4"
+                                    class="rounded-full w-10 h-10 bg-bg-color p-0 border inline-flex items-center justify-center text-bg-color ml-4"
                                     data-position="top" data-delay="50" data-tooltip="Open this">
                                     <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 m-1" fill="none"
                                         viewBox="0 0 24 24" stroke="currentColor">
@@ -176,7 +176,7 @@
                                 {!! Form::open(['action' => ['ShareController@update', $doc->id], 'method' => 'PATCH', 'id' => 'form-share-documents-' . $doc->id]) !!}
                                 @can('shared')
                                     <a href="#"
-                                        class="data-share rounded-full w-10 h-10 bg-bg-color p-0 border-0 inline-flex items-center justify-center text-bg-color ml-4"
+                                        class="data-share rounded-full w-10 h-10 bg-bg-color p-0 border inline-flex items-center justify-center text-bg-color ml-4"
                                         data-position="top" data-delay="50" data-tooltip="Share this"
                                         data-form="documents-{{ $doc->id }}">
                                         <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 m-1" fill="none"
@@ -191,7 +191,7 @@
                                 {!! Form::open(['action' => ['DocumentsController@destroy', $doc->id], 'method' => 'DELETE', 'id' => 'form-delete-documents-' . $doc->id]) !!}
                                 @can('delete')
                                     <a href="#"
-                                        class="rounded-full w-10 h-10 bg-bg-color p-0 border-0 inline-flex items-center justify-center text-bg-color ml-4"
+                                        class="rounded-full w-10 h-10 bg-bg-color p-0 border inline-flex items-center justify-center text-bg-color ml-4"
                                         data-position="right" data-delay="50" data-tooltip="Delete this"
                                         data-form="documents-{{ $doc->id }}">
                                         <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 m-1" fill="none"

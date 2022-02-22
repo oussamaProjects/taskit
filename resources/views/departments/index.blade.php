@@ -9,9 +9,9 @@
     <!-- Statistics Cards -->
     <div class="grid grid-cols-4 sm:grid-cols-4 lg:grid-cols-4 p-4 gap-4">
         <div class="col-span-3">
-            <div class="grid grid-cols-1 sm:grid-cols-1 lg:grid-cols-1 p-4 gap-4 bg-bg-color shadow">
+            <div class="grid grid-cols-1 sm:grid-cols-1 lg:grid-cols-1 p-4 gap-4 bg-bg-color shadow-sm">
                 <div class="flex flex-col text-center w-full">
-                    <h1 class="sm:text-xl text-lg font-medium title-font mb-6 text-gray-800 text-center">Départements</h1>
+                    <h1 class="sm:text-xl text-lg font-medium title-font my-2 text-gray-800 text-center p-2 uppercase">Départements</h1>
                     <p class="lg:w-2/3 mx-auto leading-relaxed text-base">Tous les départements
                     </p>
                 </div>
@@ -22,15 +22,15 @@
                             <tr>
 
                                 <th
-                                    class="px-2 py-3 title-font tracking-wider font-medium text-bg-color text-tiny bg-main shadow-md">
+                                    class="px-2 py-3 title-font tracking-wider font-medium text-bg-color text-sm bg-main shadow-sm">
                                     Name
                                 </th>
                                 <th
-                                    class="px-2 py-3 title-font tracking-wider font-medium text-bg-color text-tiny bg-main shadow-md">
+                                    class="px-2 py-3 title-font tracking-wider font-medium text-bg-color text-sm bg-main shadow-sm">
                                     Filials
                                 </th>
                                 <th
-                                    class="w-40 px-2 py-3 title-font tracking-wider font-medium text-bg-color text-tiny bg-main shadow-md">
+                                    class="w-40 px-2 py-3 title-font tracking-wider font-medium text-bg-color text-sm bg-main shadow-sm">
                                     Actions
                                 </th>
                             </tr>
@@ -40,22 +40,22 @@
                             @if (count($departments) > 0)
                                 @foreach ($departments as $dept)
                                     <tr class="border-b">
-                                        <td class="px-4 py-3 text-sm">{{ $dept->dptName }}</td>
-                                        <td class="px-4 py-3 text-sm">
+                                        <td class="px-2 py-3 text-sm">{{ $dept->dptName }}</td>
+                                        <td class="px-2 py-3 text-sm">
                                             @foreach ($dept->subsidiaries()->get() as $suds)
                                                 {{ $suds->subsName }} <br />
                                             @endforeach
                                         </td>
-                                        <td class="px-4 py-3 text-sm">
+                                        <td class="px-2 py-3 text-sm">
                                             <!-- DELETE using link -->
                                             {!! Form::open(['action' => ['DepartmentsController@destroy', $dept->id], 'method' => 'DELETE', 'id' => 'form-delete-departments-' . $dept->id, 'class' => 'flex']) !!}
                                             <a href="#" class="left"><i class="material-icons"></i></a>
                                             <a href="/departments/{{ $dept->id }}/edit"
-                                                class="center text-xs p-1 text-main bg-green-100 hover:text-bg-color hover:bg-main rounded-lg shadow-md hover:shadow-sm cursor-pointer transition">
+                                                class="center text-xs p-1 text-main bg-green-100 hover:text-bg-color hover:bg-main rounded-lg shadow-sm hover:shadow-sm-sm cursor-pointer transition">
                                                 Modifier
                                             </a>
                                             <a href=""
-                                                class="right data-delete ml-2 text-xs p-1 text-red-800 bg-red-100 hover:text-bg-color hover:bg-amber rounded-lg shadow-md hover:shadow-sm cursor-pointer transition"
+                                                class="right data-delete ml-2 text-xs p-1 text-red-800 bg-red-100 hover:text-bg-color hover:bg-amber rounded-lg shadow-sm hover:shadow-sm-sm cursor-pointer transition"
                                                 data-form="departments-{{ $dept->id }}">
                                                 Supprimer
                                             </a>
@@ -122,7 +122,7 @@
                         @endforeach
 
                         <a href="#"
-                            class="update_dept flex text-bg-color bg-secondary hover:bg-main border-0 py-2 px-6 text-tiny focus:outline-none transition hover:bg-main ml-2"
+                            class="update_dept flex text-bg-color bg-secondary hover:bg-main border py-2 px-6 text-tiny focus:outline-none transition hover:no-underline ml-2"
                             data-deptid="{{ $dept->id }}">Sauvgarder</a>
 
                     </div>
@@ -138,7 +138,7 @@
 
             $(document).on("click", ".update_dept", function(e) {
                 e.preventDefault();
-                $('#ajaxShadow').show();
+                $('#ajaxshadow-sm').show();
                 $('#ajaxloader').show();
                 var id = $(this).data('deptid');
                 var subs = [];
@@ -169,13 +169,13 @@
                         //     alert("Internal Server Error");
                         // }
 
-                        $('#ajaxShadow').hide();
+                        $('#ajaxshadow-sm').hide();
                         $('#ajaxloader').hide();
                     },
                     error: function(error) {
                         console.log(error);
                         // location.reload(true);
-                        $('#ajaxShadow').hide();
+                        $('#ajaxshadow-sm').hide();
                         $('#ajaxloader').hide();
                     }
                 });

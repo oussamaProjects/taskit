@@ -1,10 +1,10 @@
     <div data-id="{{ $folder->id }}" class="doc-folder-container icon-folder self-start bg-bg-color"
-        style="background-color:{{ $folder->color ?? 'red' }}">
+        style="background-color:{{ (!isset($folder->color) || $folder->color == "#FFFFFF") ? '#fffdf3' : $folder->color }}">
 
-        <div class="flex flex-col px-2 py-1 absolute inset-0 items-start">
+        <div class="flex flex-col py-2 pl-2 pr-4 absolute inset-0 items-start">
 
             <div class="flex flex-col name">
-                <a href="/folders/{{ $folder->id }}" class="block text-sm font-bold capitalize">
+                <a href="/folders/{{ $folder->id }}" class="block text-xs font-bold capitalize m-0">
                     {{ $folder->name }}
                 </a>
                 <div class="text-xs font-medium mt-auto">
@@ -28,7 +28,7 @@
                 </div>
 
                 <div
-                    class="other-actions absolute z-20 w-32 -right-32 -bottom-20 text-gray-800 bg-bg-color p-1 pb-0 flex flex-col border hidden">
+                    class="other-actions absolute z-20 w-32 -right-28 -bottom-14 text-gray-800 bg-bg-color p-1 pb-0 flex flex-col border hidden">
                     <div class="top">
                         <div class="h-5 flex ">
                             <!-- DELETE using link -->

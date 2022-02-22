@@ -8,12 +8,12 @@
     <div class="grid grid-cols-3 sm:grid-cols-3 lg:grid-cols-3 p-4 gap-4">
         <div class="col-span-2">
 
-            <div class="flex items-center p-4 gap-4 bg-bg-color shadow">
+            <div class="flex items-center p-4 gap-4 bg-bg-color shadow-sm">
                 {!! Form::open(['action' => ['DepartmentsController@update', $dept->id], 'method' => 'PATCH', 'class' => 'w-full']) !!}
                 <div class="mb-2 relative">
                     <label for="department" class="text-xs opacity-75 scale-75">Nom
                         du département</label>
-                    {{ Form::text('dptName', $dept->dptName, ['autocomplete' => 'off','class' =>'peer border border-main focus:outline-none focus:border-secondary shadow focus:shadow-sm w-full py-1 px-2 h-10 text-sm','id' => 'department']) }}
+                    {{ Form::text('dptName', $dept->dptName, ['autocomplete' => 'off','class' =>'peer border border-main focus:outline-none focus:border-secondary shadow-sm focus:shadow-sm-sm w-full py-1 px-2 h-10 text-sm','id' => 'department']) }}
                 </div>
 
                 <div class="dept mb-4 flex flex-wrap items-start">
@@ -29,8 +29,8 @@
                     @endforeach
 
                 </div>
-                <div class="flex items-end justify-end">
-                    {{ Form::submit('Sauvegarder', ['class' =>'flex text-bg-color bg-secondary hover:bg-main border-0 py-2 px-6 text-tiny focus:outline-none transition hover:bg-main ml-2']) }}
+                <div class="flex items-end justify-end mt-4">
+                    {{ Form::submit('Sauvegarder', ['class' =>'flex text-bg-color bg-secondary hover:bg-main border py-2 px-6 text-tiny focus:outline-none transition hover:no-underline ml-2']) }}
                 </div>
                 {!! Form::close() !!}
 

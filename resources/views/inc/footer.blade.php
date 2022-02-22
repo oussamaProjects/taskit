@@ -1,6 +1,6 @@
 <footer class="">
 </footer> 
 
-<div id="ajaxShadow">
+<div id="ajaxshadow-sm">
     <div id="ajaxloader"></div>
 </div>

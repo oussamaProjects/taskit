@@ -7,17 +7,17 @@
     @include('documents.inc.head')
 
 
-    <div class="flex flex-row flex-wrap p-4 mb-4 mt-2 ml-4 gap-4 bg-bg-color shadow">
+    <div class="flex gap-4 my-2 mx-4">
 
         <div class="flex-initial w-52">
-            @include('inc.docs.folders-tree')
+            @include('inc.docs.folders-tree', ['currentFolder' => $folder ?? null])
         </div>
 
-        <div class="flex-1 border shadow">
-            <div class="sm:text-xl text-lg font-medium title-font my-4 text-gray-800 text-center text-center p-2">
+        <div class="flex-1 border bg-bg-color shadow-md">
+            <div class="sm:text-xl text-lg font-medium title-font my-2 text-gray-800 text-center p-2 uppercase">
                 Les documents dans <span class="text-secondary">{{ isset($folder) ? $folder->name : 'Root' }}</span>
             </div>
-            <div class="flex flex-row h-full">
+            <div class="flex flex-row flex-wrap gap-4 p-4">
                 @if (isset($docs) && count($docs) > 0)
                     @foreach ($docs as $doc)
                         @include('inc.docs.doc',['doc' => $doc])

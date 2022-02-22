@@ -5,9 +5,9 @@
     @include('inc.sidebar')
 
     <div class="grid grid-cols-1 lg:grid-cols-1 p-4 gap-4">
-        <div class="relative flex flex-col min-w-0 mb-4 lg:mb-0 break-words bg-bg-color w-full shadow-md rounded">
-            <div class="rounded-t mb-0 px-0 border-0">
-                <div class="flex flex-wrap items-center px-4 py-4">
+        <div class="relative flex flex-col break-words bg-bg-color w-full shadow-sm rounded">
+            <div class="rounded-t mb-0 px-0 border">
+                <div class="flex flex-wrap items-center px-2 py-3">
                     <div class="relative w-full max-w-full flex-grow flex-1">
                         <h3 class="font-semibold uppercase text-xl text-gray-800">
                             Utilisateurs
@@ -15,7 +15,7 @@
                     </div>
                     @can('upload')
                         <button id="addUserButton"
-                            class="flex text-bg-color bg-secondary hover:bg-main border-0 py-2 px-6 text-tiny focus:outline-none transition ml-auto">
+                            class="flex text-bg-color bg-secondary hover:bg-main border py-2 px-6 text-tiny focus:outline-none transition hover:no-underline ml-auto">
                             Ajouter un utilisateur
                         </button>
                     @endcan
@@ -28,30 +28,30 @@
     <div class="grid grid-cols-4 sm:grid-cols-4 lg:grid-cols-4 p-4 gap-4">
         <div class="col-span-3">
             <div class="flex flex-col text-center w-full">
-                <h1 class="sm:text-xl text-lg font-medium title-font mb-6 text-gray-800 text-center">Tous les utilisateurs
+                <h1 class="sm:text-xl text-lg font-medium title-font my-2 text-gray-800 text-center p-2 uppercase">Tous les utilisateurs
                 </h1>
                 <div class="w-full">
                     <table class="table-auto w-full text-left bg-colorspace-no-wrap border">
                         <thead>
                             <tr>
                                 <th
-                                    class="px-2 py-3 title-font tracking-wider font-medium text-bg-color text-tiny bg-main shadow-md">
+                                    class="px-2 py-3 title-font tracking-wider font-medium text-bg-color text-sm bg-main shadow-sm">
                                     Name
                                 </th>
                                 <th
-                                    class="px-2 py-3 title-font tracking-wider font-medium text-bg-color text-tiny bg-main shadow-md">
+                                    class="px-2 py-3 title-font tracking-wider font-medium text-bg-color text-sm bg-main shadow-sm">
                                     Role
                                 </th>
                                 <th
-                                    class="px-2 py-3 title-font tracking-wider font-medium text-bg-color text-tiny bg-main shadow-md">
+                                    class="px-2 py-3 title-font tracking-wider font-medium text-bg-color text-sm bg-main shadow-sm">
                                     Filiales
                                 </th>
                                 <th
-                                    class="px-2 py-3 title-font tracking-wider font-medium text-bg-color text-tiny bg-main shadow-md">
+                                    class="px-2 py-3 title-font tracking-wider font-medium text-bg-color text-sm bg-main shadow-sm">
                                     Department
                                 </th>
                                 <th
-                                    class="px-2 py-3 title-font tracking-wider font-medium text-bg-color text-tiny bg-main shadow-md">
+                                    class="px-2 py-3 title-font tracking-wider font-medium text-bg-color text-sm bg-main shadow-sm">
                                     Actions
                                 </th>
                             </tr>
@@ -63,13 +63,13 @@
                                     @if (!$user->hasRole('Root'))
                                         <tr>
 
-                                            <td class="px-4 py-3 text-sm">{{ $user->name }}</td>
+                                            <td class="px-2 py-3 text-sm">{{ $user->name }}</td>
 
-                                            <td class="px-4 py-3 text-sm">
+                                            <td class="px-2 py-3 text-sm">
                                                 {{ $user->roles()->pluck('name')->implode(' ') }}
                                             </td>
 
-                                            <td class="px-4 py-3 text-sm">
+                                            <td class="px-2 py-3 text-sm">
                                                 @foreach ($user->departments()->get() as $dept)
                                                     @foreach ($dept->subsidiaries()->get() as $subs)
                                                         <div class="text-yellow-600 p-1 px-2 rounded mb-1">
@@ -78,14 +78,14 @@
                                                 @endforeach
                                             </td>
 
-                                            <td class="px-4 py-3 text-sm">
+                                            <td class="px-2 py-3 text-sm">
                                                 @foreach ($user->departments()->get() as $dept)
                                                     <div class="text-white bg-secondary p-1 px-2 rounded mb-1">
                                                         {{ $dept['dptName'] }}</div>
                                                 @endforeach
                                             </td>
 
-                                            <td class="px-4 py-3 text-sm">
+                                            <td class="px-2 py-3 text-sm">
                                                 <!-- DELETE using link -->
                                                 {!! Form::open(['action' => ['UsersController@destroy', $user->id], 'method' => 'DELETE', 'id' => 'form-delete-users-' . $user->id, 'class' => 'flex']) !!}
                                                 <a href="#" class="left ">

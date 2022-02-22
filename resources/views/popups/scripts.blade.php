@@ -39,10 +39,10 @@
     if (closebuttonCategorie)
         closebuttonCategorie.addEventListener('click', () => modalCategorie.classList.remove('scale-100'))
 
-    const closebutton2 = document.getElementById('closebutton2')
-    const modal2 = document.getElementById('modal2')
-    if (closebutton2)
-        closebutton2.addEventListener('click', () => modal2.classList.remove('scale-100'))
+    const closeSubFolder = document.getElementById('closeSubFolder')
+    const modalSubFolder = document.getElementById('modalSubFolder')
+    if (closeSubFolder)
+        closeSubFolder.addEventListener('click', () => modalSubFolder.classList.remove('scale-100'))
 
     const add_folder_main = document.getElementById('add_folder_main')
     if (add_folder_main)
@@ -50,7 +50,7 @@
 
     const add_folder = document.getElementById('add_folder')
     if (add_folder)
-        add_folder.addEventListener('click', () => modal2.classList.add('scale-100'))
+        add_folder.addEventListener('click', () => modalSubFolder.classList.add('scale-100'))
 
     const link_add_categorie = document.getElementById('link_add_categorie')
     if (link_add_categorie)
@@ -127,7 +127,7 @@
         }
 
         if (elm.value == 'add_folder') {
-            modal2.classList.add('scale-100')
+            modalSubFolder.classList.add('scale-100')
         }
 
         if (elm.value == 'add_categorie') {

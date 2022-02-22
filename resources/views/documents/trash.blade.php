@@ -7,7 +7,7 @@
     <div class="flex items-end p-4 gap-1">
         @can('upload')
             <a href="/documents/create"
-                class="flex text-bg-color bg-secondary border-0 py-2 px-6 text-tiny focus:outline-none hover:bg-main ml-auto">
+                class="flex text-bg-color bg-secondary border py-2 px-6 text-tiny focus:outline-none hover:bg-main ml-auto">
                 <svg xmlns="http://www.w3.org/2000/svg" class="h-3 w-3 m-1" fill="none" viewBox="0 0 24 24"
                     stroke="currentColor">
                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
@@ -18,9 +18,9 @@
         @endcan
     </div>
 
-    <div class="grid grid-cols-1 sm:grid-cols-1 lg:grid-cols-1 p-4 ml-4 bg-bg-color shadow">
+    <div class="grid grid-cols-1 py-4 ml-4 bg-bg-color shadow-sm">
         <div class="flex flex-col text-center w-full">
-            <h1 class="sm:text-xl text-lg font-medium title-font mb-6 text-gray-800 text-center">Documents</h1>
+            <h1 class="sm:text-xl text-lg font-medium title-font my-2 text-gray-800 text-center p-2 uppercase">Documents</h1>
             <p class="lg:w-2/3 mx-auto leading-relaxed text-base">{{ count($trash) }} à été supprimer
             </p>
         </div>
@@ -29,29 +29,29 @@
                 <thead>
                     <tr>
                         <th
-                            class="w-10 px-2 py-2 title-font tracking-wider font-medium text-bg-color text-base bg-main shadow-md">
+                            class="w-10 px-2 py-2 title-font tracking-wider font-medium text-bg-color text-base bg-main shadow-sm">
                         </th>
                         <th
-                            class="px-2 py-2 title-font tracking-wider font-medium text-bg-color text-base bg-main shadow-md">
+                            class="px-2 py-2 title-font tracking-wider font-medium text-bg-color text-base bg-main shadow-sm">
                             Nom du document
                         </th>
                         <th
-                            class="px-2 py-2 title-font tracking-wider font-medium text-bg-color text-base bg-main shadow-md">
+                            class="px-2 py-2 title-font tracking-wider font-medium text-bg-color text-base bg-main shadow-sm">
                             Propriétaire
                         </th>
-                        {{-- <th class="px-2 py-2 title-font tracking-wider font-medium text-bg-color text-base bg-main shadow-md">
+                        {{-- <th class="px-2 py-2 title-font tracking-wider font-medium text-bg-color text-base bg-main shadow-sm">
                                     Département
                                 </th> --}}
                         <th
-                            class="px-2 py-2 title-font tracking-wider font-medium text-bg-color text-base bg-main shadow-md">
+                            class="px-2 py-2 title-font tracking-wider font-medium text-bg-color text-base bg-main shadow-sm">
                             Date Insertion
                         </th>
                         <th
-                            class="px-2 py-2 title-font tracking-wider font-medium text-bg-color text-base bg-main shadow-md">
+                            class="px-2 py-2 title-font tracking-wider font-medium text-bg-color text-base bg-main shadow-sm">
                             Expire le
                         </th>
                         <th
-                            class="px-2 py-2 title-font tracking-wider font-medium text-bg-color text-base bg-main shadow-md">
+                            class="px-2 py-2 title-font tracking-wider font-medium text-bg-color text-base bg-main shadow-sm">
                             Actions
                         </th>
                     </tr>
@@ -67,13 +67,13 @@
                                             data-id="{{ $t->id }}">
                                         <label for="chk_{{ $t->id }}"></label>
                                     </td>
-                                    <td class="px-4 py-3 text-sm">{{ $t->name }}</td>
-                                    <td class="px-4 py-3 text-sm">{{ $t->user->name }}</td>
-                                    {{-- <td class="px-4 py-3 text-sm">{{ $t->user->department['dptName'] }}</td> --}}
-                                    <td class="px-4 py-3 text-sm">
+                                    <td class="px-2 py-3 text-sm">{{ $t->name }}</td>
+                                    <td class="px-2 py-3 text-sm">{{ $t->user->name }}</td>
+                                    {{-- <td class="px-2 py-3 text-sm">{{ $t->user->department['dptName'] }}</td> --}}
+                                    <td class="px-2 py-3 text-sm">
                                         {{ \Carbon\Carbon::createFromTimeStamp($t->created_at->toDayDateTimeString())->formatLocalized('%d %B %Y, %H:%M') }}
                                     </td>
-                                    <td class="px-4 py-3 text-sm">
+                                    <td class="px-2 py-3 text-sm">
                                         @if ($t->isExpire)
                                             {{ $t->expires_at }}
                                         @else
@@ -154,7 +154,7 @@
                         @endforeach
                     @else
                         <tr>
-                            <td colspan="9">
+                            <td colspan="11">
                                 <h5 class="p-6 text-center">Aucun document n'a été téléchargé</h5>
                             </td>
                         </tr>

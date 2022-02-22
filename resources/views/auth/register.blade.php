@@ -9,9 +9,9 @@
             <div class="flex content-center items-center justify-center h-full">
                 <div class="w-full lg:w-1/2 px-4">
                     <div
-                        class="relative flex flex-col min-w-0 break-words w-full mb-6 shadow-md rounded-lg bg-bg-color border-0">
+                        class="relative flex flex-col min-w-0 break-words w-full mb-6 shadow-sm bg-bg-color border">
                         <div class="flex-auto px-4 lg:px-10 py-8 pt-8">
-                            <div class="text-main text-3xl text-center mb-6 font-bold">
+                            <div class="text-main text-3xl text-center mb-4 font-bold">
                                 <small>S'inscrire</small>
                             </div>
 
@@ -24,7 +24,7 @@
                                         <label class="block uppercase text-gray-800 text-xs font-bold mb-2"
                                             for="name">Nom</label>
                                         <input type="text" name="name" id="name" value="{{ old('name') }}" autofocus
-                                            class="peer border border-main focus:outline-none focus:border-secondary shadow focus:shadow-sm w-full py-1 px-2 h-10 text-sm"
+                                            class="peer border border-main focus:outline-none focus:border-secondary shadow-sm focus:shadow-sm-sm w-full py-1 px-2 h-10 text-sm"
                                             placeholder="Nom" style="transition: all 0.15s ease 0s;">
                                         @if ($errors->has('name'))
                                             <span class="text-amber text-xs">{{ $errors->first('name') }}</span>
@@ -37,7 +37,7 @@
                                             e-mail</label>
                                         <input id="email" type="email" name="email" value="{{ old('email') }}" required
                                             autofocus
-                                            class="peer border border-main focus:outline-none focus:border-secondary shadow focus:shadow-sm w-full py-1 px-2 h-10 text-sm"
+                                            class="peer border border-main focus:outline-none focus:border-secondary shadow-sm focus:shadow-sm-sm w-full py-1 px-2 h-10 text-sm"
                                             placeholder="Email" style="transition: all 0.15s ease 0s;">
                                         @if ($errors->has('email'))
                                             <span class="text-amber text-xs">{{ $errors->first('email') }}</span>
@@ -53,7 +53,7 @@
                                             Mot de passe
                                         </label>
                                         <input id="password" type="password" name="password" required
-                                            class="peer border border-main focus:outline-none focus:border-secondary shadow focus:shadow-sm w-full py-1 px-2 h-10 text-sm"
+                                            class="peer border border-main focus:outline-none focus:border-secondary shadow-sm focus:shadow-sm-sm w-full py-1 px-2 h-10 text-sm"
                                             placeholder="Mot de passe" style="transition: all 0.15s ease 0s;">
                                         @if ($errors->has('password'))
                                             <span class="text-amber text-xs">{{ $errors->first('password') }}</span>
@@ -64,14 +64,14 @@
                                         <label class="block uppercase text-gray-800 text-xs font-bold mb-2"
                                             for="password-confirm">Confirmez le mot de passe</label>
                                         <input type="password" name="password_confirmation" id="password-confirm" required
-                                            class="peer border border-main focus:outline-none focus:border-secondary shadow focus:shadow-sm w-full py-1 px-2 h-10 text-sm"
+                                            class="peer border border-main focus:outline-none focus:border-secondary shadow-sm focus:shadow-sm-sm w-full py-1 px-2 h-10 text-sm"
                                             placeholder="Mot de passe" style="transition: all 0.15s ease 0s;">
                                     </div>
                                 </div>
 
-                                <div class="text-center mt-6">
+                                <div class="text-center mt-4">
                                     <button name="register"
-                                        class="bg-main text-bg-color active:bg-main text-sm font-bold uppercase px-6 py-3 rounded shadow hover:shadow-md outline-none focus:outline-none mr-1 mb-1 w-full"
+                                        class="bg-main text-bg-color active:bg-main text-sm font-bold uppercase px-6 py-3 rounded shadow-sm hover:shadow-sm outline-none focus:outline-none mr-1 mb-1 w-full"
                                         type="submit" style="transition: all 0.15s ease 0s;">
                                         S'inscrire
                                     </button>

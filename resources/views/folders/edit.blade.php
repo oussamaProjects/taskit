@@ -5,9 +5,9 @@
 
 
     <div class="grid grid-cols-1 lg:grid-cols-1 p-4 gap-4">
-        <div class="relative flex flex-col min-w-0 mb-4 lg:mb-0 break-words bg-bg-color w-full shadow-md rounded">
-            <div class="rounded-t mb-0 px-0 border-0">
-                <div class="flex flex-wrap items-center px-4 py-4">
+        <div class="relative flex flex-col break-words bg-bg-color w-full shadow-sm rounded">
+            <div class="rounded-t mb-0 px-0 border">
+                <div class="flex flex-wrap items-center px-2 py-3">
                     <div class="relative w-full max-w-full flex-grow flex-1">
                         <h3 class="font-semibold uppercase text-xl text-gray-800 capitalize">
                             Mdifier le dossier
@@ -25,13 +25,13 @@
 
             <div class="mb-8 relative">
                 <label for="name" class="text-xs opacity-75 scale-75">Nom de dossier</label>
-                {{ Form::text('name', $folder->name, ['id' => 'name','autocomplete' => 'off','class' =>'peer border border-main focus:outline-none focus:border-secondary shadow focus:shadow-sm w-full py-1 px-2 h-10 text-sm']) }}
+                {{ Form::text('name', $folder->name, ['id' => 'name','autocomplete' => 'off','class' =>'peer border border-main focus:outline-none focus:border-secondary shadow-sm focus:shadow-sm-sm w-full py-1 px-2 h-10 text-sm']) }}
             </div>
 
             @include('inc.folders.autorisation', ['subs' => $subs])
 
-            <div class="flex items-end justify-end">
-                {{ Form::submit('Sauvegarder', ['class' =>'flex text-bg-color bg-secondary hover:bg-main border-0 py-2 px-6 text-tiny focus:outline-none transition hover:bg-main ml-2']) }}
+            <div class="flex items-end justify-end mt-4">
+                {{ Form::submit('Sauvegarder', ['class' =>'flex text-bg-color bg-secondary hover:bg-main border py-2 px-6 text-tiny focus:outline-none transition hover:no-underline ml-2']) }}
                 {!! Form::close() !!}
             </div>
 

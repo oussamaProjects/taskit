@@ -5,9 +5,9 @@
 
     
     <div class="grid grid-cols-1 lg:grid-cols-1">
-        <div class="relative flex flex-col min-w-0 mb-2 break-words bg-bg-color w-full shadow rounded">
-            <div class="rounded-t mb-0 px-0 border-0">
-                <div class="flex flex-wrap items-center px-4 py-4">
+        <div class="relative flex flex-col min-w-0 mb-2 break-words bg-bg-color w-full shadow-sm rounded">
+            <div class="rounded-t mb-0 px-0 border">
+                <div class="flex flex-wrap items-center px-2 py-3">
                     <div class="relative w-full max-w-full flex-grow flex-1">
                         <h3 class="font-semibold uppercase text-xl text-gray-800 capitalize">
                             Mdifier le document
@@ -34,7 +34,7 @@
                     <label for="name" class="text-xs opacity-75 scale-75">
                         Nom du document
                     </label>
-                    {{ Form::text('name', $doc->name, ['id' => 'name','autocomplete' => 'off','class' =>'peer border border-main focus:outline-none focus:border-secondary shadow focus:shadow-sm w-full py-1 px-2 h-10 text-sm']) }}
+                    {{ Form::text('name', $doc->name, ['id' => 'name','autocomplete' => 'off','class' =>'peer border border-main focus:outline-none focus:border-secondary shadow-sm focus:shadow-sm-sm w-full py-1 px-2 h-10 text-sm']) }}
                     @if ($errors->has('name'))
                         <span class="text-amber text-xs">{{ $errors->first('name') }}</span>
                     @endif
@@ -43,7 +43,7 @@
                     <label for="ref" class="text-xs opacity-75 scale-75">
                         Réference
                     </label>
-                    {{ Form::text('ref', $doc->ref, ['id' => 'ref','autocomplete' => 'off','class' =>'peer border border-main focus:outline-none focus:border-secondary shadow focus:shadow-sm w-full py-1 px-2 h-10 text-sm']) }}
+                    {{ Form::text('ref', $doc->ref, ['id' => 'ref','autocomplete' => 'off','class' =>'peer border border-main focus:outline-none focus:border-secondary shadow-sm focus:shadow-sm-sm w-full py-1 px-2 h-10 text-sm']) }}
                     @if ($errors->has('ref'))
                         <span class="text-amber text-xs">{{ $errors->first('ref') }}</span>
                     @endif
@@ -52,7 +52,7 @@
                     <label for="name" class="text-xs opacity-75 scale-75">
                         Version
                     </label>
-                    {{ Form::text('version', $doc->version, ['id' => 'version','autocomplete' => 'off','class' =>'peer border border-main focus:outline-none focus:border-secondary shadow focus:shadow-sm w-full py-1 px-2 h-10 text-sm']) }}
+                    {{ Form::text('version', $doc->version, ['id' => 'version','autocomplete' => 'off','class' =>'peer border border-main focus:outline-none focus:border-secondary shadow-sm focus:shadow-sm-sm w-full py-1 px-2 h-10 text-sm']) }}
                     @if ($errors->has('version'))
                         <span class="text-amber text-xs">{{ $errors->first('version') }}</span>
                     @endif
@@ -61,7 +61,7 @@
 
             <div class="mb-2 relative">
                 <label for="name" class="text-xs opacity-75 scale-75">Description</label>
-                {{ Form::textarea('description', $doc->description, ['id' => 'description','class' =>'peer border border-main focus:outline-none focus:border-secondary shadow focus:shadow-sm w-full py-1 px-2 h-16 text-sm']) }}
+                {{ Form::textarea('description', $doc->description, ['id' => 'description','class' =>'peer border border-main focus:outline-none focus:border-secondary shadow-sm focus:shadow-sm-sm w-full py-1 px-2 h-16 text-sm']) }}
                 @if ($errors->has('description'))
                     <span class="text-amber text-xs">{{ $errors->first('description') }}</span>
                 @endif
@@ -84,11 +84,11 @@
                                 Catégorie (Optional)
                             </label>
                             <select name="category_id" id="category" onchange="javascript:handleSelect(this)"
-                                class="peer border border-main focus:outline-none focus:border-secondary shadow focus:shadow-sm w-full py-1 px-2 h-10 text-sm">
+                                class="peer border border-main focus:outline-none focus:border-secondary shadow-sm focus:shadow-sm-sm w-full py-1 px-2 h-10 text-sm">
                                 @foreach ($categories as $id => $name)
                                     <option value="{{ $id }}">{{ $name }}</option>
                                 @endforeach
-                                <option value="add_categorie"> --- Ajouter une autre categorie</option>
+                                <option class="add_folder" value="add_categorie"> --- Ajouter une autre categorie</option>
                             </select>
                             {{-- <div class="absolute inset-y-0 right-0 flex items-center px-2 pointer-events-none">
                                 <svg class="w-4 h-4 fill-current" viewBox="0 0 20 20">
@@ -116,11 +116,11 @@
                             <label for="folder" class="text-xs opacity-75 scale-75">Dans
                                 le dossier</label>
                             <select name="folder_id" id="folder" onchange="javascript:handleSelect(this)"
-                                class="peer border border-main focus:outline-none focus:border-secondary shadow focus:shadow-sm w-full py-1 px-2 h-10 text-sm">
+                                class="peer border border-main focus:outline-none focus:border-secondary shadow-sm focus:shadow-sm-sm w-full py-1 px-2 h-10 text-sm">
                                 @foreach ($folders_input as $id => $name)
                                     <option value="{{ $id }}">{{ $name }}</option>
                                 @endforeach
-                                <option value="add_folder_main"> --- Ajouter un autre dossier</option>
+                                <option class="add_folder" value="add_folder_main"> --- Ajouter un autre dossier</option>
                             </select>
                             {{-- <div class="absolute inset-y-0 right-0 flex items-center px-2 pointer-events-none">
                                 <svg class="w-4 h-4 fill-current" viewBox="0 0 20 20">
@@ -149,7 +149,7 @@
             @include('inc.docs.autorisation', ['subs' => $subs])
 
             <div class="flex">
-                {{ Form::submit('Sauvegarder', ['class' =>'flex text-bg-color bg-secondary hover:bg-main border-0 py-2 px-6 text-tiny focus:outline-none transition hover:bg-main ml-2']) }}
+                {{ Form::submit('Sauvegarder', ['class' =>'flex text-bg-color bg-secondary hover:bg-main border py-2 px-6 text-tiny focus:outline-none transition hover:no-underline ml-2']) }}
             </div>
 
             {!! Form::close() !!}

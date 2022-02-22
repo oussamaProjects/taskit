@@ -9,41 +9,41 @@
     <div class="grid grid-cols-3 sm:grid-cols-3 lg:grid-cols-3 p-4 gap-4">
         <div class="col-span-2">
             {{-- {{ dd($subs->departments()->get()) }} --}}
-            <div class="flex items-center p-4 gap-4 bg-bg-color shadow">
+            <div class="flex items-center p-4 gap-4 bg-bg-color shadow-sm">
                 {!! Form::open(['action' => ['SubsidiaryController@update', $subs->id], 'method' => 'PATCH', 'class' => 'w-full']) !!}
                 <div class="mb-2 relative">
                     <label for="department" class="text-xs opacity-75 scale-75">Nom
                         du filiale</label>
-                    {{ Form::text('subsName', $subs->subsName, ['autocomplete' => 'off','class' =>'peer border border-main focus:outline-none focus:border-secondary shadow focus:shadow-sm w-full py-1 px-2 h-10 text-sm','id' => 'department']) }}
+                    {{ Form::text('subsName', $subs->subsName, ['autocomplete' => 'off','class' =>'peer border border-main focus:outline-none focus:border-secondary shadow-sm focus:shadow-sm-sm w-full py-1 px-2 h-10 text-sm','id' => 'department']) }}
                 </div>
-                <div class="flex items-end justify-end">
+                <div class="flex items-end justify-end mt-4">
 
-                    {{ Form::submit(' Sauvegarder', ['class' =>'flex text-bg-color bg-secondary hover:bg-main border-0 py-2 px-6 text-tiny focus:outline-none transition hover:bg-main ml-2']) }}
+                    {{ Form::submit(' Sauvegarder', ['class' =>'flex text-bg-color bg-secondary hover:bg-main border py-2 px-6 text-tiny focus:outline-none transition hover:no-underline ml-2']) }}
                 </div>
                 {!! Form::close() !!}
 
             </div>
 
-            <div class="flex items-center p-4 gap-4 bg-bg-color shadow">
+            <div class="flex items-center p-4 gap-4 bg-bg-color shadow-sm">
                 {!! Form::open(['action' => 'DepartmentsController@store', 'method' => 'POST', 'class' => 'w-full']) !!}
                 <div class="mb-2 relative">
                     <label for="dptName" class="text-xs opacity-75 scale-75">Nom
                         du département</label>
-                    {{ Form::text('dptName', '', ['autocomplete' => 'off','class' =>'peer border border-main focus:outline-none focus:border-secondary shadow focus:shadow-sm w-full py-1 px-2 h-10 text-sm','id' => 'dptName']) }}
+                    {{ Form::text('dptName', '', ['autocomplete' => 'off','class' =>'peer border border-main focus:outline-none focus:border-secondary shadow-sm focus:shadow-sm-sm w-full py-1 px-2 h-10 text-sm','id' => 'dptName']) }}
                 </div>
 
                 {!! Form::hidden('subs_id', $subs->id) !!}
-                <div class="flex items-end justify-end">
+                <div class="flex items-end justify-end mt-4">
 
-                    {{ Form::submit('Sauvegarder', ['class' =>'flex text-bg-color bg-secondary hover:bg-main border-0 py-2 px-6 text-tiny focus:outline-none transition hover:bg-main ml-2']) }}
+                    {{ Form::submit('Sauvegarder', ['class' =>'flex text-bg-color bg-secondary hover:bg-main border py-2 px-6 text-tiny focus:outline-none transition hover:no-underline ml-2']) }}
                 </div>
                 {!! Form::close() !!}
             </div>
 
 
-            <div class="grid grid-cols-1 sm:grid-cols-1 lg:grid-cols-1 p-4 gap-4 mt-4 bg-bg-color shadow">
+            <div class="grid grid-cols-1 sm:grid-cols-1 lg:grid-cols-1 p-4 gap-4 mt-4 bg-bg-color shadow-sm">
                 <div class="flex flex-col text-center w-full">
-                    <h1 class="sm:text-xl text-lg font-medium title-font mb-6 text-gray-800 text-center">Départements</h1>
+                    <h1 class="sm:text-xl text-lg font-medium title-font my-2 text-gray-800 text-center p-2 uppercase">Départements</h1>
                     <p class="lg:w-2/3 mx-auto leading-relaxed text-base">Tous les départements
                     </p>
                 </div>
@@ -52,16 +52,16 @@
                         <thead>
                             <tr>
                                 <th
-                                    class="px-2 py-2 title-font tracking-wider font-medium text-bg-color text-base bg-main shadow-md">
+                                    class="px-2 py-2 title-font tracking-wider font-medium text-bg-color text-base bg-main shadow-sm">
                                     Name
                                 </th>
 
                                 <th
-                                    class="px-2 py-2 title-font tracking-wider font-medium text-bg-color text-base bg-main shadow-md">
+                                    class="px-2 py-2 title-font tracking-wider font-medium text-bg-color text-base bg-main shadow-sm">
                                     Filias
                                 </th>
                                 <th
-                                    class="px-2 py-2 title-font tracking-wider font-medium text-bg-color text-base bg-main shadow-md">
+                                    class="px-2 py-2 title-font tracking-wider font-medium text-bg-color text-base bg-main shadow-sm">
                                     Actions
                                 </th>
                             </tr>
@@ -71,13 +71,13 @@
                             @if (count($departments) > 0)
                                 @foreach ($departments as $dept)
                                     <tr>
-                                        <td class="px-4 py-3 text-sm">{{ $dept->dptName }}</td>
-                                        <td class="px-4 py-3 text-sm">
+                                        <td class="px-2 py-3 text-sm">{{ $dept->dptName }}</td>
+                                        <td class="px-2 py-3 text-sm">
                                             @foreach ($dept->subsidiaries()->get() as $suds)
                                                 {{ $suds->subsName }} <br />
                                             @endforeach
                                         </td>
-                                        <td class="px-4 py-3 text-sm">
+                                        <td class="px-2 py-3 text-sm">
                                             <!-- DELETE using link -->
                                             {!! Form::open(['action' => ['DepartmentsController@destroy', $dept->id], 'method' => 'DELETE', 'id' => 'form-delete-departments-' . $dept->id, 'class' => 'flex']) !!}
                                             <a href="#" class="left"><i class="material-icons"></i></a>

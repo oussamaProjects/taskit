@@ -4,9 +4,9 @@
     @include('inc.sidebar')
 
 
-    <div class="relative flex flex-col min-w-0 mb-4 lg:mb-0 break-words bg-bg-color w-full shadow">
-        <div class="rounded-t mb-0 px-0 border-0">
-            <div class="flex flex-wrap items-center px-4 py-4">
+    <div class="relative flex flex-col min-w-0 mb-4 lg:mb-0 break-words bg-bg-color w-full shadow-sm">
+        <div class="rounded-t mb-0 px-0 border">
+            <div class="flex flex-wrap items-center px-2 py-3">
                 <div class="relative w-full max-w-full flex-grow flex-1">
                     <h3 class="font-semibold text-base text-gray-800 ">
                         Profile
@@ -27,16 +27,16 @@
         <h2 class="text-gray-800 text-xl mb-2 font-medium title-font">Informations d'identification actuelles</h2>
         <div class="mb-4 relative">
             <label class="text-xs opacity-75 scale-75">Nom</label>
-            {{ Form::text('name', $acc->name, ['id' => 'Name','autocomplete' => 'off','class' =>'peer border border-main focus:outline-none focus:border-secondary shadow focus:shadow-sm w-full py-1 px-2 h-10 text-sm']) }}
+            {{ Form::text('name', $acc->name, ['id' => 'Name','autocomplete' => 'off','class' =>'peer border border-main focus:outline-none focus:border-secondary shadow-sm focus:shadow-sm-sm w-full py-1 px-2 h-10 text-sm']) }}
         </div>
 
         <div class="mb-4 relative">
             <label class="text-xs opacity-75 scale-75">Email</label>
-            {{ Form::email('email', $acc->email, ['id' => 'Email','autocomplete' => 'off','class' =>'peer border border-main focus:outline-none focus:border-secondary shadow focus:shadow-sm w-full py-1 px-2 h-10 text-sm']) }}
+            {{ Form::email('email', $acc->email, ['id' => 'Email','autocomplete' => 'off','class' =>'peer border border-main focus:outline-none focus:border-secondary shadow-sm focus:shadow-sm-sm w-full py-1 px-2 h-10 text-sm']) }}
         </div>
 
         <div class="mb-4 relative">
-            {{ Form::submit(' Sauvegarder', ['class' =>'flex text-bg-color bg-secondary hover:bg-main border-0 py-2 px-6 text-tiny focus:outline-none transition hover:bg-main ml-2 ml-auto']) }}
+            {{ Form::submit(' Sauvegarder', ['class' =>'flex text-bg-color bg-secondary hover:bg-main border py-2 px-6 text-tiny focus:outline-none transition hover:no-underline ml-2 ml-auto']) }}
             <button id="changePasswordButton" type="button">Changer le mot de passe ?</button>
         </div>
 

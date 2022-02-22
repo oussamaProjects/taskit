@@ -4,8 +4,7 @@
 
     @if (!Auth::guest())
         <div class="flex items-center justify-start md:justify-center w-14 md:w-56 h-14 bg-main  border-none">
-            <span class="hidden md:block font-bold text-2xl">
-               
+            <span class="md:block font-bold text-2xl">
                 @include('logo')
             </span>
         </div>
@@ -25,7 +24,7 @@
                     </svg>
                 </button>
                 <input type="search" name="search" id="search" placeholder="Recherche ..."
-                    class="peer border border-main focus:outline-none focus:border-secondary shadow focus:shadow-sm w-full py-1 px-2 h-10 text-sm" />
+                    class="peer border border-main focus:outline-none focus:border-secondary shadow-sm focus:shadow-sm-sm w-full py-1 px-2 h-10 text-sm" />
             </form>
         @endif
 

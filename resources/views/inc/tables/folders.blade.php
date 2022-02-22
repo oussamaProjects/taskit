@@ -1,10 +1,10 @@
 @hasanyrole('Root|Admin')
-    <div class="grid grid-cols-4 lg:grid-cols-4 ml-4 p-4 gap-4 bg-bg-color shadow">
+    <div class="grid grid-cols-4 ml-4 bg-bg-color">
         <div class="col-span-4">
             <div class="relative flex flex-col min-w-0 mb-4 lg:mb-0 break-words w-full">
-                <div class="rounded-t mb-0 px-0 border-0">
+                <div class="rounded-t mb-0">
                     <div class="flex flex-col text-center w-full">
-                        <h1 class="sm:text-xl text-lg font-medium title-font mb-6 text-gray-800 text-center">
+                        <h1 class="sm:text-xl text-lg font-medium title-font my-2 text-gray-800 text-center p-4">
                             <span class="text-secondary"> Tous les dossiers</span>
                         </h1>
                     </div>
@@ -20,7 +20,7 @@
                                     @endforeach
                                 @else
                                     <tr>
-                                        <td colspan="3">
+                                        <td colspan="5">
                                             @include('inc.no-records.folders' )
                                         </td>
                                     </tr>

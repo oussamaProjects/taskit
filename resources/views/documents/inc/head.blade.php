@@ -1,7 +1,7 @@
 <div class="grid grid-cols-1 lg:grid-cols-1 p-4 gap-4">
-    <div class="relative flex flex-col min-w-0 mb-4 lg:mb-0 break-words bg-bg-color w-full shadow-md rounded">
-        <div class="rounded-t mb-0 px-0 border-0">
-            <div class="flex flex-wrap items-center px-4 py-4">
+    <div class="relative flex flex-col break-words bg-bg-color w-full shadow-sm rounded">
+        <div class="rounded-t mb-0 px-0 border">
+            <div class="flex flex-wrap items-center px-2 py-3">
 
                 <div class="relative w-full max-w-full flex-grow flex-1">
                     <form action="/search" method="post" id="search-form" class="relative w-60">
@@ -13,7 +13,7 @@
                             </svg>
                         </button>
                         <input type="text" autocomplete="off" name="search" id="search" placeholder="Recherche"
-                            class="peer border border-main focus:outline-none focus:border-secondary shadow focus:shadow-sm w-full py-1 px-2 h-10 text-sm" />
+                            class="peer border border-main focus:outline-none focus:border-secondary shadow-sm focus:shadow-sm-sm w-full py-1 px-2 h-10 text-sm" />
                     </form>
                 </div>
 
@@ -21,7 +21,7 @@
                     {{ csrf_field() }}
                     <div class="input-field col m2 s12">
                         <select name="filetype" id="sort"
-                            class="peer border border-main focus:outline-none focus:border-secondary shadow focus:shadow-sm w-full py-1 px-2 h-10 text-sm">
+                            class="peer border border-main focus:outline-none focus:border-secondary shadow-sm focus:shadow-sm-sm w-full py-1 px-2 h-10 text-sm">
                             <option value="" disabled selected>Choisir</option>
                             <option value="image/jpeg" @if ($filetype === 'image/jpeg') selected @endif>Image
                             </option>

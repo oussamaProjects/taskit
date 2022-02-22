@@ -17,7 +17,7 @@
                     <div class="mb-2 relative">
                         <label for="name" class="text-xs opacity-75 scale-75">Nom
                             du document</label>
-                        {{ Form::text('name', '', ['id' => 'name','autocomplete' => 'off','class' =>'peer border border-main focus:outline-none focus:border-secondary shadow focus:shadow-sm w-full py-1 px-2 h-10 text-sm']) }}
+                        {{ Form::text('name', '', ['id' => 'name','autocomplete' => 'off','class' =>'peer border border-main focus:outline-none focus:border-secondary shadow-sm focus:shadow-sm-sm w-full py-1 px-2 h-10 text-sm']) }}
                         @if ($errors->has('name'))
                             <span class="text-amber text-xs">{{ $errors->first('name') }}</span>
                         @endif
@@ -25,7 +25,7 @@
 
                     <div class="mb-2 relative">
                         <label for="name" class="text-xs opacity-75 scale-75">Description</label>
-                        {{ Form::textarea('description', '', ['id' => 'description','class' =>'peer border border-main focus:outline-none focus:border-secondary shadow focus:shadow-sm w-full py-1 px-2 h-16 text-sm']) }}
+                        {{ Form::textarea('description', '', ['id' => 'description','class' =>'peer border border-main focus:outline-none focus:border-secondary shadow-sm focus:shadow-sm-sm w-full py-1 px-2 h-16 text-sm']) }}
                         @if ($errors->has('description'))
                             <span class="text-amber text-xs">{{ $errors->first('description') }}</span>
                         @endif
@@ -39,7 +39,7 @@
                         <label for="ref" class="text-xs opacity-75 scale-75">
                             Réference
                         </label>
-                        {{ Form::text('ref', '', ['id' => 'ref','autocomplete' => 'off','class' =>'peer border border-main focus:outline-none focus:border-secondary shadow focus:shadow-sm w-full py-1 px-2 h-10 text-sm']) }}
+                        {{ Form::text('ref', '', ['id' => 'ref','autocomplete' => 'off','class' =>'peer border border-main focus:outline-none focus:border-secondary shadow-sm focus:shadow-sm-sm w-full py-1 px-2 h-10 text-sm']) }}
                         @if ($errors->has('ref'))
                             <span class="text-amber text-xs">{{ $errors->first('ref') }}</span>
                         @endif
@@ -49,7 +49,7 @@
                         <label for="name" class="text-xs opacity-75 scale-75">
                             Version
                         </label>
-                        {{ Form::text('version', '', ['id' => 'version','autocomplete' => 'off','class' =>'peer border border-main focus:outline-none focus:border-secondary shadow focus:shadow-sm w-full py-1 px-2 h-10 text-sm']) }}
+                        {{ Form::text('version', '', ['id' => 'version','autocomplete' => 'off','class' =>'peer border border-main focus:outline-none focus:border-secondary shadow-sm focus:shadow-sm-sm w-full py-1 px-2 h-10 text-sm']) }}
                         @if ($errors->has('version'))
                             <span class="text-amber text-xs">{{ $errors->first('version') }}</span>
                         @endif
@@ -67,7 +67,7 @@
                         <label class="text-xs opacity-75 scale-75">
                             Catégorie (Optional)
                         </label>
-                        {{ Form::select('category_id[]', $categories, null, ['multiple' => 'multiple','id' => 'category','class' =>'form-multiselect peer border border-bg-color focus:outline-none rounded focus:border-bg-color0 focus:shadow-sm block w-full py-2']) }}
+                        {{ Form::select('category_id[]', $categories, null, ['multiple' => 'multiple','id' => 'category','class' =>'form-multiselect peer border border-bg-color focus:outline-none rounded focus:border-bg-color0 focus:shadow-sm-sm block w-full py-2']) }}
                         @if ($errors->has('category'))
                             <span class="text-amber text-xs">{{ $errors->first('category') }}</span>
                         @endif
@@ -77,7 +77,7 @@
                         <label class="text-xs opacity-75 scale-75">
                             Folder (Optional)
                         </label>
-                        {{ Form::select('folder_id[]', $folders, null, ['multiple' => 'multiple','id' => 'folder','class' =>'form-multiselect peer border border-bg-color focus:outline-none rounded focus:border-bg-color0 focus:shadow-sm block w-full py-2']) }}
+                        {{ Form::select('folder_id[]', $folders, null, ['multiple' => 'multiple','id' => 'folder','class' =>'form-multiselect peer border border-bg-color focus:outline-none rounded focus:border-bg-color0 focus:shadow-sm-sm block w-full py-2']) }}
                         @if ($errors->has('folder'))
                             <span class="text-amber text-xs">{{ $errors->first('folder') }}</span>
                         @endif
@@ -96,8 +96,8 @@
                     </div>
                 </div>
 
-                <div class="flex items-end justify-end">
-                    {{ Form::submit('Sauvegarder', ['class' => 'text-bg-color bg-main border-0 py-2 px-6 focus:outline-none hover:bg-main text-lg']) }}
+                <div class="flex items-end justify-end mt-4">
+                    {{ Form::submit('Sauvegarder', ['class' => 'text-bg-color bg-main border py-2 px-6 focus:outline-none hover:bg-main text-lg']) }}
                 </div>
             </div>
 

@@ -7,8 +7,8 @@
         <div class="grid grid-cols-1 lg:grid-cols-1 p-4 gap-4 mt-14">
 
             <!-- Roles -->
-            <div class="relative flex flex-col min-w-0 mb-4 lg:mb-0 break-words bg-bg-color w-full shadow-md rounded">
-                <div class="rounded-t mb-0 px-0 border-0">
+            <div class="relative flex flex-col break-words bg-bg-color w-full shadow-sm rounded">
+                <div class="rounded-t mb-0 px-0 border">
                     <div class="flex flex-wrap items-center px-4 py-2">
                         <div class="relative w-full max-w-full flex-grow flex-1">
                             <h3 class="font-semibold text-base text-gray-800 ">Roles &amp; Permissions</h3>
@@ -21,13 +21,13 @@
                             <thead>
                                 <tr>
                                     <th
-                                        class="px-2 py-3 title-font tracking-wider font-medium text-bg-color text-tiny bg-main shadow-md">
+                                        class="px-2 py-3 title-font tracking-wider font-medium text-bg-color text-sm bg-main shadow-sm">
                                         ID.</th>
                                     <th
-                                        class="px-2 py-3 title-font tracking-wider font-medium text-bg-color text-tiny bg-main shadow-md">
+                                        class="px-2 py-3 title-font tracking-wider font-medium text-bg-color text-sm bg-main shadow-sm">
                                         Permissions</th>
                                     <th
-                                        class="px-2 py-3 title-font tracking-wider font-medium text-bg-color text-tiny bg-main shadow-md">
+                                        class="px-2 py-3 title-font tracking-wider font-medium text-bg-color text-sm bg-main shadow-sm">
                                     </th>
                                 </tr>
                             </thead>
@@ -67,8 +67,8 @@
         <div class="grid grid-cols-1 lg:grid-cols-2 p-4 gap-4">
 
             <!-- Roles -->
-            <div class="relative flex flex-col min-w-0 mb-4 lg:mb-0 break-words bg-bg-color w-full shadow-md rounded">
-                <div class="rounded-t mb-0 px-0 border-0">
+            <div class="relative flex flex-col break-words bg-bg-color w-full shadow-sm rounded">
+                <div class="rounded-t mb-0 px-0 border">
                     <div class="flex flex-wrap items-center px-4 py-2">
                         <div class="relative w-full max-w-full flex-grow flex-1">
                             <h3 class="font-semibold text-base text-gray-800 ">Roles</h3>
@@ -81,10 +81,10 @@
                             <thead>
                                 <tr>
                                     <th
-                                        class="px-2 py-3 title-font tracking-wider font-medium text-bg-color text-tiny bg-main shadow-md">
+                                        class="px-2 py-3 title-font tracking-wider font-medium text-bg-color text-sm bg-main shadow-sm">
                                         ID.</th>
                                     <th
-                                        class="px-2 py-3 title-font tracking-wider font-medium text-bg-color text-tiny bg-main shadow-md">
+                                        class="px-2 py-3 title-font tracking-wider font-medium text-bg-color text-sm bg-main shadow-sm">
                                         Role</th>
                                 </tr>
                             </thead>
@@ -112,8 +112,8 @@
             <!-- ./Roles -->
 
             <!-- Permissions -->
-            <div class="relative flex flex-col min-w-0 mb-4 lg:mb-0 break-words bg-bg-color w-full shadow-md rounded">
-                <div class="rounded-t mb-0 px-0 border-0">
+            <div class="relative flex flex-col break-words bg-bg-color w-full shadow-sm rounded">
+                <div class="rounded-t mb-0 px-0 border">
                     <div class="flex flex-wrap items-center px-4 py-2">
                         <div class="relative w-full max-w-full flex-grow flex-1">
                             <h3 class="font-semibold text-base text-gray-800 ">Permissions</h3>
@@ -126,10 +126,10 @@
                             <thead>
                                 <tr>
                                     <th
-                                        class="px-2 py-3 title-font tracking-wider font-medium text-bg-color text-tiny bg-main shadow-md">
+                                        class="px-2 py-3 title-font tracking-wider font-medium text-bg-color text-sm bg-main shadow-sm">
                                         ID.</th>
                                     <th
-                                        class="px-2 py-3 title-font tracking-wider font-medium text-bg-color text-tiny bg-main shadow-md">
+                                        class="px-2 py-3 title-font tracking-wider font-medium text-bg-color text-sm bg-main shadow-sm">
                                         Permission</th>
                                 </tr>
                             </thead>

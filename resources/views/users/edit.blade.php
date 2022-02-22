@@ -5,9 +5,9 @@
     @include('inc.sidebar')
 
     <div class="grid grid-cols-1 lg:grid-cols-1 p-4 gap-4">
-        <div class="relative flex flex-col min-w-0 mb-4 lg:mb-0 break-words bg-bg-color w-full shadow-md rounded">
-            <div class="rounded-t mb-0 px-0 border-0">
-                <div class="flex flex-wrap items-center px-4 py-4">
+        <div class="relative flex flex-col break-words bg-bg-color w-full shadow-sm rounded">
+            <div class="rounded-t mb-0 px-0 border">
+                <div class="flex flex-wrap items-center px-2 py-3">
                     <div class="relative w-full max-w-full flex-grow flex-1">
                         <h3 class="font-semibold uppercase text-xl text-gray-800">
                             Utilisateurs
@@ -15,7 +15,7 @@
                     </div>
                     @can('upload')
                         <button id="addUserButton"
-                            class="flex text-bg-color bg-secondary hover:bg-main border-0 py-2 px-6 text-tiny focus:outline-none transition ml-auto">
+                            class="flex text-bg-color bg-secondary hover:bg-main border py-2 px-6 text-tiny focus:outline-none transition hover:no-underline hover:no-underline ml-auto">
                             Ajouter un utilisateur
                         </button>
                     @endcan
@@ -34,7 +34,7 @@
             <label for="name" class="text-xs opacity-75 scale-75">
                 Current Name
             </label>
-            {{ Form::text('name', $user->name, ['autocomplete' => 'off','class' =>'peer border border-main focus:outline-none focus:border-secondary shadow focus:shadow-sm w-full py-1 px-2 h-10 text-sm','id' => 'name']) }}
+            {{ Form::text('name', $user->name, ['autocomplete' => 'off','class' =>'peer border border-main focus:outline-none focus:border-secondary shadow-sm focus:shadow-sm-sm w-full py-1 px-2 h-10 text-sm','id' => 'name']) }}
 
         </div>
 
@@ -42,14 +42,14 @@
             <label for="email" class="text-xs opacity-75 scale-75">
                 Current Adresse e-mail
             </label>
-            {{ Form::email('email', $user->email, ['class' =>'peer border border-main focus:outline-none focus:border-secondary shadow focus:shadow-sm w-full py-1 px-2 h-10 text-sm','id' => 'email']) }}
+            {{ Form::email('email', $user->email, ['class' =>'peer border border-main focus:outline-none focus:border-secondary shadow-sm focus:shadow-sm-sm w-full py-1 px-2 h-10 text-sm','id' => 'email']) }}
         </div>
 
         {{-- <div class="mb-2 relative">
                         <label for="subs_id" class="text-xs opacity-75 scale-75">Subsidiaries</label>
                         @php($subsidiary = $user->department()->first()->subsidiaries()->get())
                         <select name="subs_id" id="subs_id"
-                            class="peer border border-main focus:outline-none focus:border-secondary shadow focus:shadow-sm w-full py-1 px-2 h-10 text-sm">
+                            class="peer border border-main focus:outline-none focus:border-secondary shadow-sm focus:shadow-sm-sm w-full py-1 px-2 h-10 text-sm">
                             <option value="--">--</option>
                             @if (count($subs) > 0)
                                 @if (Auth::user()->hasRole('Root'))
@@ -72,7 +72,7 @@
                         <label for="department_id" class="text-xs opacity-75 scale-75">Département
                             actuel</label>
                         <select name="department_id" id="department_id"
-                            class="peer border border-main focus:outline-none focus:border-secondary shadow focus:shadow-sm w-full py-1 px-2 h-10 text-sm">
+                            class="peer border border-main focus:outline-none focus:border-secondary shadow-sm focus:shadow-sm-sm w-full py-1 px-2 h-10 text-sm">
                             <option value="--">--</option>
                             @if (count($depts) > 0)
                                 @if (Auth::user()->hasRole('Root'))
@@ -94,7 +94,7 @@
             <label for="role" class="text-xs opacity-75 scale-75">Rôle
                 actuel</label>
             <select name="role" id="role"
-                class="peer border border-main focus:outline-none focus:border-secondary shadow focus:shadow-sm w-full py-1 px-2 h-10 text-sm">
+                class="peer border border-main focus:outline-none focus:border-secondary shadow-sm focus:shadow-sm-sm w-full py-1 px-2 h-10 text-sm">
                 <option value="" disabled selected>Attribuer un rôle</option>
                 @if (count($roles) > 0)
                     @foreach ($roles as $role)
@@ -132,8 +132,8 @@
             <button id="changePasswordButton" type="button">Changer le mot de passe ?</button>
         </div>
 
-        <div class="flex items-end justify-end">
-            {{ Form::submit(' Sauvegarder', ['class' =>'flex text-bg-color bg-secondary hover:bg-main border-0 py-2 px-6 text-tiny focus:outline-none transition hover:bg-main ml-2']) }}
+        <div class="flex items-end justify-end mt-4">
+            {{ Form::submit(' Sauvegarder', ['class' =>'flex text-bg-color bg-secondary hover:bg-main border py-2 px-6 text-tiny focus:outline-none transition hover:no-underline ml-2']) }}
         </div>
 
         {!! Form::close() !!}

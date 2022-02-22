@@ -6,16 +6,16 @@
 
 
     <div class="grid grid-cols-1 lg:grid-cols-1 p-4 gap-4">
-        <div class="relative flex flex-col min-w-0 mb-4 lg:mb-0 break-words bg-bg-color w-full shadow-md rounded">
-            <div class="rounded-t mb-0 px-0 border-0">
-                <div class="flex flex-wrap items-center px-4 py-4">
+        <div class="relative flex flex-col break-words bg-bg-color w-full shadow-sm rounded">
+            <div class="rounded-t mb-0 px-0 border">
+                <div class="flex flex-wrap items-center px-2 py-3">
                     <div class="relative w-full max-w-full flex-grow flex-1">
                         <h3 class="font-semibold uppercase text-xl text-gray-800">
                             Results
                         </h3>
                     </div>
                     {{-- <button
-                        class="flex text-bg-color bg-secondary hover:bg-main border-0 py-2 px-6 text-tiny focus:outline-none transition hover:bg-main ml-2 ml-auto"
+                        class="flex text-bg-color bg-secondary hover:bg-main border py-2 px-6 text-tiny focus:outline-none transition hover:no-underline ml-2 ml-auto"
                         data-url="{{ url('documentsDeleteMulti') }}">
                         <svg xmlns="http://www.w3.org/2000/svg" class="h-3 w-3 m-1" fill="none" viewBox="0 0 24 24"
                             stroke="currentColor">
@@ -29,7 +29,7 @@
                     &nbsp;
                     @can('upload')
                         <a href="/documents/create"
-                            class="flex text-bg-color bg-secondary hover:bg-main border-0 py-2 px-6 text-tiny focus:outline-none transition hover:bg-main ml-2">
+                            class="flex text-bg-color bg-secondary hover:bg-main border py-2 px-6 text-tiny focus:outline-none transition hover:no-underline ml-2">
                             <svg xmlns="http://www.w3.org/2000/svg" class="h-3 w-3 m-1" fill="none" viewBox="0 0 24 24"
                                 stroke="currentColor">
                                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
@@ -43,9 +43,9 @@
         </div>
     </div>
 
-    <div class="grid grid-cols-1 sm:grid-cols-1 lg:grid-cols-1 p-4 ml-4 bg-bg-color shadow">
+    <div class="grid grid-cols-1 py-4 ml-4 bg-bg-color shadow-sm">
         <div class="flex flex-col text-center w-full">
-            <h1 class="sm:text-xl text-lg font-medium title-font mb-6 text-gray-800 text-center">Documents</h1>
+            <h1 class="sm:text-xl text-lg font-medium title-font my-2 text-gray-800 text-center p-2 uppercase">Documents</h1>
             <p class="lg:w-2/3 mx-auto leading-relaxed text-base">{{ count($results) }} Résultats
             </p>
         </div>
@@ -54,29 +54,29 @@
                 <thead>
                     <tr>
                         <th
-                            class="w-10 px-2 py-2 title-font tracking-wider font-medium text-bg-color text-base bg-main shadow-md">
+                            class="w-10 px-2 py-2 title-font tracking-wider font-medium text-bg-color text-base bg-main shadow-sm">
                         </th>
                         <th
-                            class="px-2 py-2 title-font tracking-wider font-medium text-bg-color text-base bg-main shadow-md">
+                            class="px-2 py-2 title-font tracking-wider font-medium text-bg-color text-base bg-main shadow-sm">
                             Nom du document
                         </th>
                         <th
-                            class="px-2 py-2 title-font tracking-wider font-medium text-bg-color text-base bg-main shadow-md">
+                            class="px-2 py-2 title-font tracking-wider font-medium text-bg-color text-base bg-main shadow-sm">
                             Propriétaire
                         </th>
-                        {{-- <th class="px-2 py-2 title-font tracking-wider font-medium text-bg-color text-base bg-main shadow-md">
+                        {{-- <th class="px-2 py-2 title-font tracking-wider font-medium text-bg-color text-base bg-main shadow-sm">
                                     Département
                                 </th> --}}
                         <th
-                            class="px-2 py-2 title-font tracking-wider font-medium text-bg-color text-base bg-main shadow-md">
+                            class="px-2 py-2 title-font tracking-wider font-medium text-bg-color text-base bg-main shadow-sm">
                             Date Insertion
                         </th>
                         <th
-                            class="px-2 py-2 title-font tracking-wider font-medium text-bg-color text-base bg-main shadow-md">
+                            class="px-2 py-2 title-font tracking-wider font-medium text-bg-color text-base bg-main shadow-sm">
                             Expire le
                         </th>
                         <th
-                            class="px-2 py-2 title-font tracking-wider font-medium text-bg-color text-base bg-main shadow-md">
+                            class="px-2 py-2 title-font tracking-wider font-medium text-bg-color text-base bg-main shadow-sm">
                             Actions
                         </th>
                     </tr>
@@ -92,13 +92,13 @@
                                             data-id="{{ $doc->id }}">
                                         <label for="chk_{{ $doc->id }}"></label> --}}
                                     </td>
-                                    <td class="px-4 py-3 text-sm">{{ $doc->name }}</td>
-                                    <td class="px-4 py-3 text-sm">{{ $doc->user->name }}</td>
-                                    {{-- <td class="px-4 py-3 text-sm">{{ $doc->user->department['dptName'] }}</td> --}}
-                                    <td class="px-4 py-3 text-sm">
+                                    <td class="px-2 py-3 text-sm">{{ $doc->name }}</td>
+                                    <td class="px-2 py-3 text-sm">{{ $doc->user->name }}</td>
+                                    {{-- <td class="px-2 py-3 text-sm">{{ $doc->user->department['dptName'] }}</td> --}}
+                                    <td class="px-2 py-3 text-sm">
                                         {{ \Carbon\Carbon::createFromTimeStamp($doc->created_at->toDayDateTimeString())->formatLocalized('%d %B %Y, %H:%M') }}
                                     </td>
-                                    <td class="px-4 py-3 text-sm">
+                                    <td class="px-2 py-3 text-sm">
                                         @if ($doc->isExpire)
                                             {{ $doc->expires_at }}
                                         @else
@@ -179,7 +179,7 @@
                         @endforeach
                     @else
                         <tr>
-                            <td colspan="9">
+                            <td colspan="11">
                                 <h5 class="p-6 text-center">Aucun document n'a été téléchargé</h5>
                             </td>
                         </tr>

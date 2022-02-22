@@ -12,7 +12,7 @@
                        @include('logo-login')
                     </div>
                     <div
-                        class="relative flex flex-col min-w-0 break-words w-full mb-6 shadow-md rounded bg-secondary border-0">
+                        class="relative flex flex-col min-w-0 break-words w-full mb-6 shadow-sm bg-bg-color border">
                             
                         <div class="rounded-t mb-0 px-6 py-6 hidden">
                             <div class="text-center mb-3">
@@ -22,10 +22,10 @@
                             </div> 
                             <div class="btn-wrapper text-center">
                                 <button
-                                    class="bg-bg-color active:bg-bg-color text-gray-800 font-normal px-4 py-2 rounded outline-none focus:outline-none mr-2 mb-1 uppercase shadow hover:shadow-md inline-flex items-center font-bold text-xs"
+                                    class="bg-bg-color active:bg-bg-color text-gray-800 font-normal px-4 py-2 rounded outline-none focus:outline-none mr-2 mb-1 uppercase shadow-sm hover:shadow-sm inline-flex items-center font-bold text-xs"
                                     type="button" style="transition: all 0.15s ease 0s;">
                                     <img alt="..." class="w-5 mr-1" src="./assets/img/github.svg">Github</button><button
-                                    class="bg-bg-color active:bg-bg-color text-gray-800 font-normal px-4 py-2 rounded outline-none focus:outline-none mr-1 mb-1 uppercase shadow hover:shadow-md inline-flex items-center font-bold text-xs"
+                                    class="bg-bg-color active:bg-bg-color text-gray-800 font-normal px-4 py-2 rounded outline-none focus:outline-none mr-1 mb-1 uppercase shadow-sm hover:shadow-sm inline-flex items-center font-bold text-xs"
                                     type="button" style="transition: all 0.15s ease 0s;">
                                     <img alt="..." class="w-5 mr-1" src="./assets/img/google.svg">Google
                                 </button>
@@ -33,7 +33,7 @@
                             <hr class="mt-6 border-b-1 border-main">
                         </div>
                         <div class="flex-auto px-4 lg:px-8 lg:py-4 py-6 pt-6">
-                            <div class=" text-center mb-6 font-bold">
+                            <div class=" text-center mb-4 font-bold">
                                 <small>Connectez-vous avec des informations d'identification</small>
                             </div>
 
@@ -46,7 +46,7 @@
                                         e-mail</label>
                                     <input id="email" type="email" name="email" value="{{ old('email') }}" required
                                         autofocus
-                                        class="peer border border-main focus:outline-none focus:border-secondary shadow focus:shadow-sm w-full py-1 px-2 h-10 text-sm"
+                                        class="peer border border-main focus:outline-none focus:border-secondary shadow-sm focus:shadow-sm-sm w-full py-1 px-2 h-10 text-sm"
                                         placeholder="Email" style="transition: all 0.15s ease 0s;">
                                     @if ($errors->has('email'))
                                         <span class="text-amber text-xs">{{ $errors->first('email') }}</span>
@@ -57,7 +57,7 @@
                                     <label class="block text-gray-800 text-xs font-bold mb-2" for="password">Mot
                                         de passe</label>
                                     <input id="password" type="password" name="password" required
-                                        class="peer border border-main focus:outline-none focus:border-secondary shadow focus:shadow-sm w-full py-1 px-2 h-10 text-sm"
+                                        class="peer border border-main focus:outline-none focus:border-secondary shadow-sm focus:shadow-sm-sm w-full py-1 px-2 h-10 text-sm"
                                         placeholder="Mot de passe" style="transition: all 0.15s ease 0s;">
                                     @if ($errors->has('password'))
                                         <span class="text-amber text-xs">{{ $errors->first('password') }}</span>
@@ -67,14 +67,14 @@
                                     <label class="inline-flex items-center cursor-pointer">
                                         <input type="checkbox" name="remember" id="remember"
                                             {{ old('remember') ? 'checked' : '' }}
-                                            class="form-checkbox border-0 rounded text-gray-800 ml-1 w-4 h-4"
+                                            class="form-checkbox border rounded text-gray-800 ml-1 w-4 h-4"
                                             style="transition: all 0.15s ease 0s;">
                                         <span class="ml-2 text-sm font-semibold text-gray-800">Rester connecté</span>
                                     </label>
                                 </div>
-                                <div class="text-center mt-6">
+                                <div class="text-center mt-4">
                                     <button name="login"
-                                        class="bg-main text-bg-color active:bg-main text-sm font-bold uppercase px-6 py-3 rounded shadow hover:shadow-md hover:bg-main outline-none focus:outline-none mr-1 mb-1 w-full"
+                                        class="bg-main text-bg-color active:bg-main text-sm font-bold uppercase px-6 py-3 rounded shadow-sm hover:shadow-sm hover:bg-main outline-none focus:outline-none mr-1 mb-1 w-full"
                                         type="submit" style="transition: all 0.15s ease 0s;">
                                         Connexion
                                     </button>

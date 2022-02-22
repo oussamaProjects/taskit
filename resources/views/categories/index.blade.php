@@ -10,7 +10,7 @@
         
         <div class="col-span-3">
             <div class="flex flex-col text-center w-full">
-                <h1 class="sm:text-xl text-lg font-medium title-font mb-6 text-gray-800 text-center">Tous les utilisateurs</h1>
+                <h1 class="sm:text-xl text-lg font-medium title-font my-2 text-gray-800 text-center p-2 uppercase">Tous les utilisateurs</h1>
                 <div class="w-full overflow-x-auto">
                     <table
                         class="table-auto w-full text-left whitespace-no-wrap border border-bg-color border border-bg-color">
@@ -18,10 +18,10 @@
                             <tr>
 
                                 <th
-                                    class="px-2 py-3 title-font tracking-wider font-medium text-bg-color text-tiny bg-main shadow-md">
+                                    class="px-2 py-3 title-font tracking-wider font-medium text-bg-color text-sm bg-main shadow-sm">
                                     Nom de catégorie</th>
                                 <th
-                                    class="px-2 py-3 title-font tracking-wider font-medium text-bg-color text-tiny bg-main shadow-md min-w-140-px">
+                                    class="px-2 py-3 title-font tracking-wider font-medium text-bg-color text-sm bg-main shadow-sm min-w-140-px">
                                     Actions
                                 </th>
                             </tr>
@@ -31,9 +31,9 @@
                                 @foreach ($categories as $category)
                                     <tr id="tr_{{ $category->id }}" class="text-gray-800 ">
 
-                                        <td class="px-4 py-3 text-sm">
+                                        <td class="px-2 py-3 text-sm">
                                             {{ $category->name }}</td>
-                                        <td class="flex px-4 py-3 text-sm">
+                                        <td class="flex px-2 py-3 text-sm">
 
                                             <!-- DELETE using link -->
                                             {!! Form::open(['action' => ['CategoriesController@destroy', $category->id], 'method' => 'DELETE', 'id' => 'form-delete-categories-' . $category->id, 'class' => 'flex items-center']) !!}

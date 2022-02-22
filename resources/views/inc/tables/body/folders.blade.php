@@ -1,25 +1,32 @@
-<tr id="tr_{{ $current_folder->id }}" class="text-gray-800 ">
-    <td class="px-4 py-2 text-sm text-gray-800">
+<tr id="tr_{{ $current_folder->id }}" class="text-gray-800 border-b">
+    <td>
+        {{-- <input type="checkbox" id="chk_{{ $current_doc->id }}" class="sub_chk" data-id="{{ $current_doc->id }}"><label for="chk_{{ $current_doc->id }}"></label> --}}
+    </td>
+    <td class="px-2 py-3 text-sm">
         {{ $current_folder->name }}
     </td>
 
-    <td class="px-4 py-2 text-sm text-gray-800">
-
+    <td class="px-2 py-3 text-sm">
         @foreach ($current_folder->department()->get() as $department)
-            <div class="ml-auto mb-1 text-gray-800 text-xs leading-5">
-                <strong class="text-main mr-1">{{ $department->dptName }}</strong>
-                <span class="text-bg-color bg-secondary p-1 rounded">
-                    @if (isset($department->pivot->permission_for))
-                        {{ $department->pivot->permission_for == 0 ? 'Tous' : ' Admins' }}
-                    @else
-                        {{ 'All' }}
-                    @endif
+            @if (isset($department->pivot->permission_for) && $department->pivot->permission_for == 1)
+                <span class="text-xs leading-5 text-bg-color bg-secondary py-1 px-2 rounded ml-1 mb-1">
+                    {{ $department->dptName }}
                 </span>
-            </div>
+            @endif
+        @endforeach
+    </td>
+    <td class="px-2 py-3 text-sm">
+        @foreach ($current_folder->department()->get() as $department)
+            @if (isset($department->pivot->permission_for) && ($department->pivot->permission_for == 1 || $department->pivot->permission_for == 0))
+                <span class="text-xs leading-5 text-bg-color bg-secondary py-1 px-2 rounded ml-1 mb-1">
+                    {{ $department->dptName }}
+                </span>
+            @endif
         @endforeach
     </td>
 
-    <td class="px-4 py-2 text-sm text-gray-800">
+
+    <td class="px-2 py-3 text-sm">
 
         <!-- DELETE using link -->
         {!! Form::open(['action' => ['FolderController@destroy', $current_folder->id], 'method' => 'DELETE', 'id' => 'form-delete-folders-' . $current_folder->id, 'class' => 'flex items-center']) !!}

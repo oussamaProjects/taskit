@@ -4,7 +4,7 @@
     @include('inc.sidebar')
  
         <!-- Statistics Cards -->
-        <div class="grid grid-cols-1 sm:grid-cols-1 lg:grid-cols-1 p-4 ml-4 bg-bg-color shadow">
+        <div class="grid grid-cols-1 py-4 ml-4 bg-bg-color shadow-sm">
 
             <div class="flex mb-4">
                 <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 m-1" fill="none" viewBox="0 0 24 24"
@@ -16,10 +16,10 @@
             </div>
 
 
-            <div class="rounded-t mb-0 px-0 border-0">
+            <div class="rounded-t mb-0 px-0 border">
                 <div
-                    class="relative flex flex-col min-w-0 mb-4 lg:mb-0 break-words bg-bg-color w-full shadow-md rounded p-4">
-                    <div class="rounded-t mb-0 px-0 border-0">
+                    class="relative flex flex-col break-words bg-bg-color w-full shadow-sm rounded p-4">
+                    <div class="rounded-t mb-0 px-0 border">
                         {!! Form::open(['action' => ['RolesController@update', $role->id], 'method' => 'PUT']) !!}
 
                         <div class="mb-4">
@@ -27,7 +27,7 @@
 
                             <div class="mb-2 relative">
                                 <label for="role" class="text-xs opacity-75 scale-75">Role</label>
-                                {{ Form::text('name', $role->name, ['id' => 'role','autocomplete' => 'off', 'class' => 'peer border border-main focus:outline-none focus:border-secondary shadow focus:shadow-sm w-full py-1 px-2 h-10 text-sm']) }}
+                                {{ Form::text('name', $role->name, ['id' => 'role','autocomplete' => 'off', 'class' => 'peer border border-main focus:outline-none focus:border-secondary shadow-sm focus:shadow-sm-sm w-full py-1 px-2 h-10 text-sm']) }}
                             </div>
                         </div>
 
@@ -43,7 +43,7 @@
                         </div>
 
                         <div class="flex">
-                            {{ Form::submit('Assign', ['class' => 'flex text-bg-color bg-secondary hover:bg-main border-0 py-2 px-6 text-tiny focus:outline-none transition hover:bg-main ml-2']) }}
+                            {{ Form::submit('Assign', ['class' => 'flex text-bg-color bg-secondary hover:bg-main border py-2 px-6 text-tiny focus:outline-none transition hover:no-underline ml-2']) }}
                         </div>
 
                         {!! Form::close() !!}

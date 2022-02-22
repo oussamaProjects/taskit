@@ -1,8 +1,8 @@
-<div id="tr_{{ $doc->id }}">
+<div id="tr_{{ $doc->id }}" class="relative z-10">
     <div data-id="{{ $doc->id }}" class="doc-folder-container icon-doc"
-        style="background-color: {{ $doc->color ?? 'red' }}">
+        style="background-color:{{ (!isset($doc->color) || $doc->color == "#FFFFFF") ? '#fffdf3' : $doc->color }}">
 
-        <div class="flex flex-row px-2 py-3 absolute inset-0 items-start">
+        <div class="flex flex-row px-2 py-3 relative z-10 inset-0 items-start">
 
             <div class="image mr-1">
                 @include('inc.mime-type-icon', ['doc'=>$doc])
@@ -10,7 +10,7 @@
 
             <div class="flex flex-col name">
 
-                <a href="/documents/{{ $doc->id }}" class="block text-sm font-bold capitalize">
+                <a href="/documents/{{ $doc->id }}" class="block text-xs font-bold capitalize m-0">
                     {{ $doc->name }}
                 </a>
                 <span class="text-xs mt-auto">
@@ -30,7 +30,7 @@
                 </div>
 
                 <div
-                    class="other-actions absolute z-20 w-32 -right-32 -bottom-20 text-gray-800 bg-bg-color p-1 pb-0 flex flex-col border hidden">
+                    class="other-actions absolute z-20 w-32 -right-28 -bottom-14 text-gray-800 bg-bg-color p-1 pb-0 flex flex-col border hidden">
                     <div class="top"> 
                         <div class="h-5 flex">
 

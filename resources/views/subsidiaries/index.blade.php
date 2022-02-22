@@ -8,10 +8,10 @@
 
     <div class="grid grid-cols-4 sm:grid-cols-4 lg:grid-cols-4 p-4 gap-4">
         <div class="col-span-3">
-            <div class="grid grid-cols-1 sm:grid-cols-1 lg:grid-cols-1 p-4 gap-4 bg-bg-color shadow">
+            <div class="grid grid-cols-1 sm:grid-cols-1 lg:grid-cols-1 p-4 gap-4 bg-bg-color shadow-sm">
                 <div class="flex flex-col text-center w-full">
-                    <h1 class="sm:text-xl text-lg font-medium title-font mb-6 text-gray-800 text-center">Subsidiaries</h1>
-                    <p class="lg:w-2/3 mx-auto leading-relaxed text-base">Tous les susbsidiaries
+                    <h1 class="sm:text-xl text-lg font-medium title-font my-2 text-gray-800 text-center p-2 uppercase">Filiales</h1>
+                    <p class="lg:w-2/3 mx-auto leading-relaxed text-base">Toutes les filiales
                     </p>
                 </div>
                 <div class="w-full">
@@ -19,11 +19,11 @@
                         <thead>
                             <tr>
                                 <th
-                                    class="px-2 py-2 title-font tracking-wider font-medium text-bg-color text-base bg-main shadow-md">
+                                    class="px-2 py-2 title-font tracking-wider font-medium text-bg-color text-base bg-main shadow-sm">
                                     Name
                                 </th>
                                 <th
-                                    class="px-2 py-2 title-font tracking-wider font-medium text-bg-color text-base bg-main shadow-md">
+                                    class="px-2 py-2 title-font tracking-wider font-medium text-bg-color text-base bg-main shadow-sm">
                                     Actions
                                 </th>
                             </tr>
@@ -33,8 +33,8 @@
                             @if (count($subsidiaries) > 0)
                                 @foreach ($subsidiaries as $subs)
                                     <tr>
-                                        <td class="px-4 py-3 text-sm">{{ $subs->subsName }}</td>
-                                        <td class="px-4 py-3 text-sm">
+                                        <td class="px-2 py-3 text-sm">{{ $subs->subsName }}</td>
+                                        <td class="px-2 py-3 text-sm">
                                             <!-- DELETE using link -->
                                             {!! Form::open(['action' => ['SubsidiaryController@destroy', $subs->id], 'method' => 'DELETE', 'id' => 'form-delete-subsidiaries-' . $subs->id, 'class' => 'flex']) !!}
                                             <a href="#" class="left"><i class="material-icons"></i></a>
@@ -60,7 +60,7 @@
                             @else
                                 <tr>
                                     <td colspan="2">
-                                        <h5 class="p-4 text-center">No Subsidiary has been added</h5>
+                                        <h5 class="p-4 text-center">Aucune filiale n'a été ajoutée</h5>
                                     </td>
                                 </tr>
                             @endif
