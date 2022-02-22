@@ -33085,6 +33085,10 @@ html {
   scroll-behavior: smooth;
 }
 
+a:hover {
+  text-decoration: none;
+}
+
 .header-right {
   width: calc(100% - 14rem);
 }
@@ -33321,6 +33325,7 @@ ul.pagination li.page-item > a.page-link:hover {
   transform-style: preserve-3d;
   perspective: 600;
   transform: perspective(600);
+  border: 2px solid rgba(0,0,0,0.2)
 }
 
 .icon-folder {
@@ -33333,6 +33338,7 @@ ul.pagination li.page-item > a.page-link:hover {
   transform-style: preserve-3d;
   perspective: 600;
   transform: perspective(600);
+  border: 2px solid rgba(0,0,0,0.2)
 }
 
 .icon-folder:before {
