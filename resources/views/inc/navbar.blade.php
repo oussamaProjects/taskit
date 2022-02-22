@@ -18,7 +18,7 @@
                 {{ csrf_field() }}
 
                 <button class="outline-none focus:outline-none absolute top-2 right-2">
-                    <svg class="w-6 text-gray-800 h-6 cursor-pointer" fill="none" stroke-linecap="round"
+                    <svg class="w-8 text-gray-800 h-8 cursor-pointer" fill="none" stroke-linecap="round"
                         stroke-linejoin="round" stroke-width="2" stroke="currentColor" viewBox="0 0 24 24">
                         <path d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"></path>
                     </svg>

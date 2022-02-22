@@ -1,167 +1,172 @@
 @extends('layouts.app')
 
 @section('content')
-
     @include('inc.sidebar')
- 
 
-        <div class="flex items-center p-4 font-bold text-lg">
 
-            @if ($previous)
-                <a href="{{ URL::to('documents/' . $previous) }}" class="flex items-center justify-center">
-                    <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" fill="none" viewBox="0 0 24 24"
-                        stroke="currentColor">
-                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7" />
-                    </svg>
-                    Previous
-                </a>
-            @endif
+    <div class="flex items-center p-4 font-bold text-lg">
 
-            @if ($next)
-                <a href="{{ URL::to('documents/' . $next) }}" class="ml-auto flex items-center justify-center">
-                    Next
-                    <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" fill="none" viewBox="0 0 24 24"
-                        stroke="currentColor">
-                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7" />
-                    </svg>
-                </a>
-            @endif
+        @if ($previous)
+            <a href="{{ URL::to('documents/' . $previous) }}" class="flex items-center justify-center">
+                <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" fill="none" viewBox="0 0 24 24"
+                    stroke="currentColor">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7" />
+                </svg>
+                Previous
+            </a>
+        @endif
 
-        </div>
+        @if ($next)
+            <a href="{{ URL::to('documents/' . $next) }}" class="ml-auto flex items-center justify-center">
+                Next
+                <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" fill="none" viewBox="0 0 24 24"
+                    stroke="currentColor">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7" />
+                </svg>
+            </a>
+        @endif
 
-        <!-- Statistics Cards -->
-        <div class="grid grid-cols-1 py-4 ml-4 bg-bg-color shadow-sm">
+    </div>
 
-            @if ($doc->isExpire == 2)
-                <h5 class="text-amber text-xs">
-                    <i class="material-icons">error_outline</i> This Document Has Expired!
-                </h5>
-                <p class="text-amber text-xs">Please consider disposal or restoration of this document.</p>
-            @endif
+    <!-- Statistics Cards -->
+    <div class="grid grid-cols-1 py-4 ml-4 bg-bg-color shadow-sm">
 
-            <section class="text-gray-800 body-font overflow-hidden">
-                <div class="container px-5 py-24 mx-auto">
-                    <div class="lg:w-4/5 mx-auto flex flex-wrap">
-                        <div class="lg:w-1/2 w-full lg:pr-10 lg:py-6 mb-6 lg:mb-0 relative">
-                            <h1 class="text-gray-800 text-3xl title-font font-medium mb-4">Document Information</h1>
+        @if ($doc->isExpire == 2)
+            <h5 class="text-amber text-xs">
+                <i class="material-icons">error_outline</i> This Document Has Expired!
+            </h5>
+            <p class="text-amber text-xs">Please consider disposal or restoration of this document.</p>
+        @endif
 
-                            <div class="flex border-t border-bg-color py-2 text-xs">
-                                <span class="text-bg-color0">Document Name</span>
-                                <span class="ml-auto text-gray-800">{{ $doc->name }}</span>
+        <section class="text-gray-800 body-font overflow-hidden">
+            <div class="container px-5 py-24 mx-auto">
+                <div class="lg:w-4/5 mx-auto flex flex-wrap">
+                    <div class="lg:w-1/2 w-full lg:pr-10 lg:py-6 mb-6 lg:mb-0 relative">
+                        <h1 class="text-gray-800 text-3xl title-font font-medium mb-4">Document Information</h1>
+
+                        <div class="flex border-t border-bg-color py-2 text-xs">
+                            <span class="text-bg-color0">Document Name</span>
+                            <span class="ml-auto text-gray-800">{{ $doc->name }}</span>
+                        </div>
+
+                        <div class="flex border-t border-bg-color py-2 text-xs">
+                            <span class="text-bg-color0">Description</span>
+                            <span class="ml-auto text-gray-800">{{ $doc->description }}</span>
+                        </div>
+
+                        <div class="flex border-t border-bg-color py-2 text-xs">
+                            <span class="text-bg-color0">Propriétaire</span>
+                            <span class="ml-auto text-gray-800">{{ $doc->user['name'] }}</span>
+                        </div>
+
+                        <div class="flex border-t border-bg-color py-2 text-xs">
+                            <span class="text-bg-color0">Department</span>
+                            <span class="ml-auto text-gray-800">{{ $doc->user->department['dptName'] ?? '' }}</span>
+                        </div>
+
+                        <div class="flex border-t border-bg-color py-2 text-xs">
+                            <span class="text-bg-color0">Category</span>
+                            <div class="flex flex-col ml-auto ">
+                                @foreach ($doc->categories()->get() as $cate)
+                                    <span class="ml-auto text-gray-800">{{ $cate->name }} </span><br />
+                                @endforeach
                             </div>
+                        </div>
 
-                            <div class="flex border-t border-bg-color py-2 text-xs">
-                                <span class="text-bg-color0">Description</span>
-                                <span class="ml-auto text-gray-800">{{ $doc->description }}</span>
+                        <div class="flex border-t border-bg-color py-2 text-xs">
+                            <span class="text-bg-color0">Folder</span>
+                            <div class="flex flex-col ml-auto ">
+                                @foreach ($doc->folders()->get() as $folder)
+                                    <span class="ml-auto text-gray-800">{{ $folder->name }} </span><br />
+                                @endforeach
                             </div>
+                        </div>
 
-                            <div class="flex border-t border-bg-color py-2 text-xs">
-                                <span class="text-bg-color0">Propriétaire</span>
-                                <span class="ml-auto text-gray-800">{{ $doc->user['name'] }}</span>
+                        <div class="flex border-t border-bg-color py-2 text-xs">
+                            <span class="text-bg-color0">Expires At</span>
+                            <span class="ml-auto text-gray-800">
+                                @if ($doc->isExpire)
+                                    {{ $doc->expires_at }}
+                                @else
+                                    No Expiration is set
+                                @endif
+                            </span>
+                        </div>
+
+                        <div class="flex border-t border-bg-color py-2 text-xs">
+                            <span class="text-bg-color0">Uploaded At</span>
+                            <span
+                                class="ml-auto text-gray-800">{{ \Carbon\Carbon::createFromTimeStamp($doc->created_at->toDayDateTimeString())->formatLocalized('%d %B %Y, %H:%M') }}
+                            </span>
+                        </div>
+
+                        <div class="flex border-t border-bg-color py-2 text-xs">
+                            <span class="text-bg-color0">Updated At</span>
+                            <span class="ml-auto text-gray-800">{{ $doc->updated_at->toDayDateTimeString() }} </span>
+                        </div>
+
+                        <div class="flex border-t border-bg-color py-2 text-xs">
+                            <span class="text-bg-color0">MetaData</span>
+                            <span class="ml-auto text-right text-gray-800">
+                                Taille des documents : {{ $doc->filesize }} <br />
+                                Type de document : {{ $doc->mimetype }}<br />
+                                Dernière modification :
+                                {{ \Carbon\Carbon::createFromTimeStamp(Storage::lastModified($doc->file))->formatLocalized('%d %B %Y, %H:%M') }}
+                            </span>
+                        </div>
+
+                        <div class="flex border-t border-bg-color py-2 text-xs">
+                            <div class="text-bg-color0">Autorisation</div>
+                            <div class="ml-auto text-right text-gray-800">
+
+
+                                @foreach ($doc->department()->get() as $department)
+                                    <div class="ml-auto text-gray-800">
+                                        <strong>{{ $department->dptName }}</strong>
+                                        @if (isset($department->pivot->permission_for))
+                                            -
+                                            {{ $department->pivot->permission_for == 0 ? 'Tous' : ' Admins' }}
+
+                                        @else
+                                            -
+                                            {{ 'All' }}
+                                        @endif
+                                    </div>
+                                @endforeach
                             </div>
-
-                            <div class="flex border-t border-bg-color py-2 text-xs">
-                                <span class="text-bg-color0">Department</span>
-                                <span class="ml-auto text-gray-800">{{ $doc->user->department['dptName']?? '' }}</span>
-                            </div>
-
-                            <div class="flex border-t border-bg-color py-2 text-xs">
-                                <span class="text-bg-color0">Category</span>
-                                <div class="flex flex-col ml-auto ">
-                                    @foreach ($doc->categories()->get() as $cate)
-                                        <span class="ml-auto text-gray-800">{{ $cate->name }} </span><br />
-                                    @endforeach
-                                </div>
-                            </div>
-
-                            <div class="flex border-t border-bg-color py-2 text-xs">
-                                <span class="text-bg-color0">Folder</span>
-                                <div class="flex flex-col ml-auto ">
-                                    @foreach ($doc->folders()->get() as $folder)
-                                        <span class="ml-auto text-gray-800">{{ $folder->name }} </span><br />
-                                    @endforeach
-                                </div>
-                            </div>
-
-                            <div class="flex border-t border-bg-color py-2 text-xs">
-                                <span class="text-bg-color0">Expires At</span>
-                                <span class="ml-auto text-gray-800">
-                                    @if ($doc->isExpire)
-                                        {{ $doc->expires_at }}
-                                    @else
-                                        No Expiration is set
-                                    @endif
-                                </span>
-                            </div>
-
-                            <div class="flex border-t border-bg-color py-2 text-xs">
-                                <span class="text-bg-color0">Uploaded At</span>
-                                <span class="ml-auto text-gray-800">{{ \Carbon\Carbon::createFromTimeStamp($doc->created_at->toDayDateTimeString())->formatLocalized('%d %B %Y, %H:%M') }} </span>
-                            </div>
-
-                            <div class="flex border-t border-bg-color py-2 text-xs">
-                                <span class="text-bg-color0">Updated At</span>
-                                <span class="ml-auto text-gray-800">{{ $doc->updated_at->toDayDateTimeString() }} </span>
-                            </div>
-
-                            <div class="flex border-t border-bg-color py-2 text-xs">
-                                <span class="text-bg-color0">MetaData</span>
-                                <span class="ml-auto text-right text-gray-800">
-                                    Taille des documents : {{ $doc->filesize }} <br />
-                                    Type de document : {{ $doc->mimetype }}<br />
-                                    Dernière modification :
-                                    {{ \Carbon\Carbon::createFromTimeStamp(Storage::lastModified($doc->file))->formatLocalized('%d %B %Y, %H:%M') }}
-                                </span>
-                            </div>
-
-                            <div class="flex border-t border-bg-color py-2 text-xs">
-                                <div class="text-bg-color0">Autorisation</div>
-                                <div class="ml-auto text-right text-gray-800">
+                        </div>
 
 
-                                    @foreach ($doc->department()->get() as $department)
-                                        <div class="ml-auto text-gray-800">
-                                            <strong>{{ $department->dptName }}</strong>
-                                            @if (isset($department->pivot->permission_for))
-                                                -
-                                                {{ $department->pivot->permission_for == 0 ? 'Tous' : ' Admins' }}
+                        <div class="flex mt-6">
 
-                                            @else
-                                                -
-                                                {{ 'All' }}
-                                            @endif
-                                        </div>
-                                    @endforeach
-                                </div>
-                            </div>
+                            <a href="/documents"
+                                class="flex text-bg-color bg-secondary hover:bg-main border py-2 px-6 text-tiny focus:outline-none transition hover:no-underline ml-2">
+                                <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 m-1" fill="none"
+                                    viewBox="0 0 24 24" stroke="currentColor">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                        d="M11 17l-5-5m0 0l5-5m-5 5h12" />
+                                </svg>
+                                Retour en arrière
+                            </a>
 
+                            {!! Form::open() !!}
+                            <div class="flex">
+                                @hasanyrole('Root|Admin')
+                                    @can('edit')
+                                        <a href="/documents/{{ $doc->id }}/edit"
+                                            class="rounded-full w-10 h-10 bg-bg-color p-0 border border-main inline-flex items-center justify-center text-main ml-2"
+                                            data-position="left" data-delay="50" data-tooltip="Edit this">
+                                            <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 m-1" fill="none"
+                                                viewBox="0 0 24 24" stroke="currentColor">
+                                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                                    d="M11 5H6a2 2 0 00-2 2v11a2 2 0 002 2h11a2 2 0 002-2v-5m-1.414-9.414a2 2 0 112.828 2.828L11.828 15H9v-2.828l8.586-8.586z" />
+                                            </svg>
+                                        </a>
+                                    @endcan
+                                @endhasanyrole
 
-                            <div class="flex mt-6">
-
-                                <a href="/documents"
-                                    class="mr-auto flex text-bg-color bg-secondary hover:bg-main border py-2 px-6 text-tiny focus:outline-none transition hover:no-underline ml-2">
-                                    <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 m-1" fill="none"
-                                        viewBox="0 0 24 24" stroke="currentColor">
-                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                                            d="M11 17l-5-5m0 0l5-5m-5 5h12" />
-                                    </svg>
-                                    Retour en arrière
-                                </a>
-
-                                {!! Form::open() !!}
-                                @can('edit')
-                                    <a href="/documents/{{ $doc->id }}/edit"
-                                        class="ml-auto rounded-full w-10 h-10 bg-bg-color p-0 border inline-flex items-center justify-center text-bg-color ml-4"
-                                        data-position="left" data-delay="50" data-tooltip="Edit this">
-                                        <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 m-1" fill="none"
-                                            viewBox="0 0 24 24" stroke="currentColor">
-                                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                                                d="M11 5H6a2 2 0 00-2 2v11a2 2 0 002 2h11a2 2 0 002-2v-5m-1.414-9.414a2 2 0 112.828 2.828L11.828 15H9v-2.828l8.586-8.586z" />
-                                        </svg>
-                                    </a>
-                                @endcan
-                                <a href="/documents/open/{{ $doc->id }}"  target="_blank"
-                                    class="rounded-full w-10 h-10 bg-bg-color p-0 border inline-flex items-center justify-center text-bg-color ml-4"
+                                <a href="/documents/open/{{ $doc->id }}" target="_blank"
+                                    class="rounded-full w-10 h-10 bg-bg-color p-0 border border-main inline-flex items-center justify-center text-main ml-2"
                                     data-position="top" data-delay="50" data-tooltip="Open this">
                                     <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 m-1" fill="none"
                                         viewBox="0 0 24 24" stroke="currentColor">
@@ -171,12 +176,15 @@
                                             d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z" />
                                     </svg>
                                 </a>
-                                {!! Form::close() !!}
-                                <!-- SHARE using link -->
-                                {!! Form::open(['action' => ['ShareController@update', $doc->id], 'method' => 'PATCH', 'id' => 'form-share-documents-' . $doc->id]) !!}
+                            </div>
+                            {!! Form::close() !!}
+
+                            <!-- SHARE using link -->
+                            {!! Form::open(['action' => ['ShareController@update', $doc->id], 'method' => 'PATCH', 'id' => 'form-share-documents-' . $doc->id]) !!}
+                            @hasanyrole('Root|Admin')
                                 @can('shared')
                                     <a href="#"
-                                        class="data-share rounded-full w-10 h-10 bg-bg-color p-0 border inline-flex items-center justify-center text-bg-color ml-4"
+                                        class="data-share rounded-full w-10 h-10 bg-bg-color p-0 border border-main inline-flex items-center justify-center text-main ml-2"
                                         data-position="top" data-delay="50" data-tooltip="Share this"
                                         data-form="documents-{{ $doc->id }}">
                                         <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 m-1" fill="none"
@@ -186,12 +194,14 @@
                                         </svg>
                                     </a>
                                 @endcan
-                                {!! Form::close() !!}
-                                <!-- DELETE using link -->
-                                {!! Form::open(['action' => ['DocumentsController@destroy', $doc->id], 'method' => 'DELETE', 'id' => 'form-delete-documents-' . $doc->id]) !!}
+                            @endhasanyrole
+                            {!! Form::close() !!}
+                            <!-- DELETE using link -->
+                            {!! Form::open(['action' => ['DocumentsController@destroy', $doc->id], 'method' => 'DELETE', 'id' => 'form-delete-documents-' . $doc->id]) !!}
+                            @hasanyrole('Root|Admin')
                                 @can('delete')
                                     <a href="#"
-                                        class="rounded-full w-10 h-10 bg-bg-color p-0 border inline-flex items-center justify-center text-bg-color ml-4"
+                                        class="rounded-full w-10 h-10 bg-bg-color p-0 border border-main inline-flex items-center justify-center text-main ml-2"
                                         data-position="right" data-delay="50" data-tooltip="Delete this"
                                         data-form="documents-{{ $doc->id }}">
                                         <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 m-1" fill="none"
@@ -201,30 +211,29 @@
                                         </svg>
                                     </a>
                                 @endcan
-                                {!! Form::close() !!}
-                            </div>
-
+                            @endhasanyrole
+                            {!! Form::close() !!}
                         </div>
-                        <div class="lg:w-1/2 w-full lg:pr-10 lg:py-6 mb-6 lg:mb-0 relative">
-                            @if ($doc->mimetype == 'application/pdf')
-                                <embed src="{{ $path }}" type="application/pdf" class="w-full h-full">
-                            @elseif ($doc->mimetype ==
-                                'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet')
-                                <iframe
-                                    src="https://docs.google.com/gview?url=http://ieee802.org/secmail/docIZSEwEqHFr.doc&embedded=true"
-                                    frameborder="0" class="w-full h-full">
-                                </iframe>
-                            @else
-                                <img alt="" src="{{ $path }}" class="w-full h-full">
-                            @endif
 
-                        </div>
+                    </div>
+                    <div class="lg:w-1/2 w-full lg:pr-10 lg:py-6 mb-6 lg:mb-0 relative">
+                        @if ($doc->mimetype == 'application/pdf')
+                            <embed src="{{ $path }}" type="application/pdf" class="w-full h-full">
+                        @elseif ($doc->mimetype == 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet')
+                            <iframe
+                                src="https://docs.google.com/gview?url=http://ieee802.org/secmail/docIZSEwEqHFr.doc&embedded=true"
+                                frameborder="0" class="w-full h-full">
+                            </iframe>
+                        @else
+                            <img alt="" src="{{ $path }}" class="w-full h-full">
+                        @endif
+
                     </div>
                 </div>
-            </section>
+            </div>
+        </section>
 
-        </div>
-   
-        @include('inc.sidebar-footer')
+    </div>
 
+    @include('inc.sidebar-footer')
 @endsection

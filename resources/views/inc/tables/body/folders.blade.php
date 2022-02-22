@@ -25,9 +25,7 @@
         @endforeach
     </td>
 
-
     <td class="px-2 py-3 text-sm">
-
         <!-- DELETE using link -->
         {!! Form::open(['action' => ['FolderController@destroy', $current_folder->id], 'method' => 'DELETE', 'id' => 'form-delete-folders-' . $current_folder->id, 'class' => 'flex items-center']) !!}
         <a href="\folders\{{ $current_folder->id }}">
