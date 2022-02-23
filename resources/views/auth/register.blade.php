@@ -71,7 +71,7 @@
 
                                 <div class="text-center mt-4">
                                     <button name="register"
-                                        class="bg-main text-bg-color active:bg-main text-sm font-bold uppercase px-6 py-3 rounded shadow-sm hover:shadow-sm outline-none focus:outline-none mr-1 mb-1 w-full"
+                                        class="flex text-bg-color bg-secondary hover:text-main hover:bg-tertiary border py-2 px-6 text-tiny focus:outline-none transition hover:no-underline w-full justify-center"
                                         type="submit" style="transition: all 0.15s ease 0s;">
                                         S'inscrire
                                     </button>

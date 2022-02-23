@@ -11,9 +11,6 @@ html {
 a:hover {
     text-decoration: none;
 }
-.header-right {
-    width: calc(100% - 14rem);
-}
 
 body {
     font-size: 1rem;

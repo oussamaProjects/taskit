@@ -3,14 +3,14 @@
 
 
     @if (!Auth::guest())
-        <div class="flex items-center justify-start md:justify-center w-14 md:w-56 h-14 bg-main  border-none">
+        <div class="flex items-center justify-start md:justify-center w-14 md:w-64 h-14 bg-main  border-none">
             <span class="md:block font-bold text-2xl">
                 @include('logo')
             </span>
         </div>
     @endif
 
-    <div class="flex justify-between items-center h-14 text-tiny bg-main header-right">
+    <div class="flex justify-between items-center h-14 text-tiny bg-main w-full">
 
         @if (!Auth::guest())
             <form action="/search" method="post" id="search-form"
