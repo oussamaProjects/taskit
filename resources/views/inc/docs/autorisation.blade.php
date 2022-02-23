@@ -20,7 +20,7 @@
                                             id="docs_sub_{{ $sub['id'] }}_{{ $dept['id'] }}_none"
                                             value="{{ $dept['id'] }}_none" checked>
                                         <label
-                                            class="select-none inline-block text-sm font-medium text-bg-color bg-secondary hover:text-bg-color hover:bg-main transition text-center px-2 py-1 mb-1 rounded-sm w-30 cursor-pointer w-full"
+                                            class="select-none inline-block text-xs font-light text-bg-color bg-secondary hover:text-main hover:bg-tertiary transition text-center px-2 py-1 mb-1 rounded-sm w-30 cursor-pointer w-full"
                                             for="docs_sub_{{ $sub['id'] }}_{{ $dept['id'] }}_none">Aucun
                                             utilisateur</label>
                                     </div>
@@ -30,7 +30,7 @@
                                             class="opacity-0 absolute" value="{{ $dept['id'] }}_all"
                                             id="docs_sub_{{ $sub['id'] }}_{{ $dept['id'] }}_all">
                                         <label
-                                            class="select-none inline-block text-sm font-medium text-bg-color bg-secondary hover:text-bg-color hover:bg-main transition text-center px-2 py-1 mb-1 rounded-sm w-30 cursor-pointer w-full"
+                                            class="select-none inline-block text-xs font-light text-bg-color bg-secondary hover:text-main hover:bg-tertiary transition text-center px-2 py-1 mb-1 rounded-sm w-30 cursor-pointer w-full"
                                             for="docs_sub_{{ $sub['id'] }}_{{ $dept['id'] }}_all">Tous les
                                             utilisateurs</label>
                                     </div>
@@ -41,7 +41,7 @@
                                             id="docs_sub_{{ $sub['id'] }}_{{ $dept['id'] }}_admins"
                                             value="{{ $dept['id'] }}_admins">
                                         <label
-                                            class="select-none inline-block text-sm font-medium text-bg-color bg-secondary hover:text-bg-color hover:bg-main transition text-center px-2 py-1 mb-1 rounded-sm w-30 cursor-pointer w-full"
+                                            class="select-none inline-block text-xs font-light text-bg-color bg-secondary hover:text-main hover:bg-tertiary transition text-center px-2 py-1 mb-1 rounded-sm w-30 cursor-pointer w-full"
                                             for="docs_sub_{{ $sub['id'] }}_{{ $dept['id'] }}_admins">les
                                             administrateurs</label>
                                     </div>

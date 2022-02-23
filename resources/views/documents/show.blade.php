@@ -32,10 +32,10 @@
     <div class="grid grid-cols-1 py-4 ml-4 bg-bg-color shadow-sm">
 
         @if ($doc->isExpire == 2)
-            <h5 class="text-amber text-xs">
+            <h5 class=" text-red-500 text-xs">
                 <i class="material-icons">error_outline</i> This Document Has Expired!
             </h5>
-            <p class="text-amber text-xs">Please consider disposal or restoration of this document.</p>
+            <p class=" text-red-500 text-xs">Please consider disposal or restoration of this document.</p>
         @endif
 
         <section class="text-gray-800 body-font overflow-hidden">
@@ -140,7 +140,7 @@
                         <div class="flex mt-6">
 
                             <a href="/documents"
-                                class="flex text-bg-color bg-secondary hover:bg-main border py-2 px-6 text-tiny focus:outline-none transition hover:no-underline ml-2">
+                                class="flex text-bg-color bg-secondary hover:text-main hover:bg-tertiary border py-2 px-6 text-tiny focus:outline-none transition hover:no-underline ml-2">
                                 <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 m-1" fill="none"
                                     viewBox="0 0 24 24" stroke="currentColor">
                                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"

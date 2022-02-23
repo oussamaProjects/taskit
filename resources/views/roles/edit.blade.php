@@ -27,7 +27,7 @@
 
                             <div class="mb-2 relative">
                                 <label for="role" class="text-xs opacity-75 scale-75">Role</label>
-                                {{ Form::text('name', $role->name, ['id' => 'role','autocomplete' => 'off', 'class' => 'peer border border-main focus:outline-none focus:border-secondary shadow-sm focus:shadow-sm-sm w-full py-1 px-2 h-10 text-sm']) }}
+                                {{ Form::text('name', $role->name, ['id' => 'role','autocomplete' => 'off', 'class' => 'peer border border-main focus:outline-none focus:border-secondary shadow-sm focus:shadow-sm-sm w-full py-1 px-2 h-8 text-sm bg-bg-color']) }}
                             </div>
                         </div>
 
@@ -43,7 +43,7 @@
                         </div>
 
                         <div class="flex">
-                            {{ Form::submit('Assign', ['class' => 'flex text-bg-color bg-secondary hover:bg-main border py-2 px-6 text-tiny focus:outline-none transition hover:no-underline ml-2']) }}
+                            {{ Form::submit('Assign', ['class' => 'flex text-bg-color bg-secondary hover:text-main hover:bg-tertiary border py-2 px-6 text-tiny focus:outline-none transition hover:no-underline ml-2']) }}
                         </div>
 
                         {!! Form::close() !!}

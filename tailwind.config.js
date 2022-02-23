@@ -8,6 +8,7 @@ module.exports = {
     darkMode: false, // or 'media' or 'class'
     theme: {
         fontSize: {
+            xxs: ".5rem",
             xs: ".6rem",
             sm: ".75rem",
             tiny: ".875rem",
@@ -25,19 +26,29 @@ module.exports = {
         extend: {
             fontFamily: {
                 sans: [
+                    "Arimo",
                     "Poppins",
                     "Libre Baskerville",
                     ...defaultTheme.fontFamily.sans
                 ]
             },
             colors: {
-                'bg-color': "#FEFEFE",
-                // blue: "#407986",
-                main: "#1f2937",
                 lime: "#b7b063",
-                secondary: "#0091D5",
+                amber: "#d8c7bf",
+                // blue: "#407986",
                 // cyan: "#6384a2",
-                amber: "#d8c7bf"
+                // main: "#1f2937",
+                // secondary: "#0091D5",
+                // "bg-color": "#FEFEFE",
+                main: "#000000",
+                secondary: "#2D1E8A",
+                tertiary: "#FDC910",
+                "bg-color": "#ECF3FE",
+            },
+            maxHeight: {
+                "1/3": "33.333334%",
+                "1/2": "50%",
+                "2/3": "66.666667%"
             }
         }
     },

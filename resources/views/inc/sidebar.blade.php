@@ -37,7 +37,7 @@
                     </span>
                     <span class="ml-2 text-sm tracking-wide truncate">Documents</span> 
                         <span
-                            class="px-2 py-0.5 ml-auto text-xs font-medium tracking-wide text-white bg-secondary rounded-full">{{ $docs_count }}</span>
+                            class="px-2 py-0.5 ml-auto text-xs font-medium tracking-wide text-main bg-tertiary rounded-full">{{ $docs_count }}</span>
                 </a>
             </li>
 
@@ -72,7 +72,7 @@
                     </span>
                     <span class="ml-2 text-sm tracking-wide truncate">Dossiers</span>
                     <span
-                        class="px-2 py-0.5 ml-auto text-xs font-medium tracking-wide text-white bg-secondary rounded-full">{{ $folders_count }}</span>
+                        class="px-2 py-0.5 ml-auto text-xs font-medium tracking-wide text-main bg-tertiary rounded-full">{{ $folders_count }}</span>
                 </a>
             </li>
 
@@ -90,7 +90,7 @@
                     </span>
                     <span class="ml-2 text-sm tracking-wide truncate">Utilisateurs</span>
                     <span
-                        class="px-2 py-0.5 ml-auto text-xs font-medium tracking-wide text-white bg-secondary rounded-full">{{ $users_count }}</span>
+                        class="px-2 py-0.5 ml-auto text-xs font-medium tracking-wide text-main bg-tertiary rounded-full">{{ $users_count }}</span>
                 </a>
             </li>
 
@@ -108,7 +108,7 @@
                     </span>
                     <span class="ml-2 text-sm tracking-wide truncate">Départments</span>
                     <span
-                        class="px-2 py-0.5 ml-auto text-xs font-medium tracking-wide text-white bg-secondary rounded-full">{{ $dept_count }}</span>
+                        class="px-2 py-0.5 ml-auto text-xs font-medium tracking-wide text-main bg-tertiary rounded-full">{{ $dept_count }}</span>
                 </a>
             </li>
 
@@ -125,7 +125,7 @@
                     </span>
                     <span class="ml-2 text-sm tracking-wide truncate">Filiales</span>
                     <span
-                        class="px-2 py-0.5 ml-auto text-xs font-medium tracking-wide text-white bg-secondary rounded-full">{{ $subs_count }}</span>
+                        class="px-2 py-0.5 ml-auto text-xs font-medium tracking-wide text-main bg-tertiary rounded-full">{{ $subs_count }}</span>
                 </a>
             </li>
             @endhasrole

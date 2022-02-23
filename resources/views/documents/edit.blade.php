@@ -3,24 +3,7 @@
 @section('content')
     @include('inc.sidebar')
 
-    
-    <div class="grid grid-cols-1 lg:grid-cols-1">
-        <div class="relative flex flex-col min-w-0 mb-2 break-words bg-bg-color w-full shadow-sm rounded">
-            <div class="rounded-t mb-0 px-0 border">
-                <div class="flex flex-wrap items-center px-2 py-3">
-                    <div class="relative w-full max-w-full flex-grow flex-1">
-                        <h3 class="font-semibold uppercase text-xl text-gray-800 capitalize">
-                            Mdifier le document
-                        </h3>
-                    </div>
-
-                    @include('documents.inc.action-buttons')
-
-                </div>
-            </div>
-        </div>
-    </div>
-
+    @include('documents.inc.head')
 
     <div class="grid grid-cols-3 sm:grid-cols-3 md:grid-cols-3 lg:grid-cols-3 gap-4">
         <div class="col-span-2">
@@ -34,27 +17,27 @@
                     <label for="name" class="text-xs opacity-75 scale-75">
                         Nom du document
                     </label>
-                    {{ Form::text('name', $doc->name, ['id' => 'name','autocomplete' => 'off','class' =>'peer border border-main focus:outline-none focus:border-secondary shadow-sm focus:shadow-sm-sm w-full py-1 px-2 h-10 text-sm']) }}
+                    {{ Form::text('name', $doc->name, ['id' => 'name','autocomplete' => 'off','class' =>'peer border border-main focus:outline-none focus:border-secondary shadow-sm focus:shadow-sm-sm w-full py-1 px-2 h-8 text-sm bg-bg-color']) }}
                     @if ($errors->has('name'))
-                        <span class="text-amber text-xs">{{ $errors->first('name') }}</span>
+                        <span class="text-red-500 text-xs">{{ $errors->first('name') }}</span>
                     @endif
                 </div>
                 <div class="mr-4 relative flex-1">
                     <label for="ref" class="text-xs opacity-75 scale-75">
                         Réference
                     </label>
-                    {{ Form::text('ref', $doc->ref, ['id' => 'ref','autocomplete' => 'off','class' =>'peer border border-main focus:outline-none focus:border-secondary shadow-sm focus:shadow-sm-sm w-full py-1 px-2 h-10 text-sm']) }}
+                    {{ Form::text('ref', $doc->ref, ['id' => 'ref','autocomplete' => 'off','class' =>'peer border border-main focus:outline-none focus:border-secondary shadow-sm focus:shadow-sm-sm w-full py-1 px-2 h-8 text-sm bg-bg-color']) }}
                     @if ($errors->has('ref'))
-                        <span class="text-amber text-xs">{{ $errors->first('ref') }}</span>
+                        <span class="text-red-500 text-xs">{{ $errors->first('ref') }}</span>
                     @endif
                 </div>
                 <div class="relative flex-1">
                     <label for="name" class="text-xs opacity-75 scale-75">
                         Version
                     </label>
-                    {{ Form::text('version', $doc->version, ['id' => 'version','autocomplete' => 'off','class' =>'peer border border-main focus:outline-none focus:border-secondary shadow-sm focus:shadow-sm-sm w-full py-1 px-2 h-10 text-sm']) }}
+                    {{ Form::text('version', $doc->version, ['id' => 'version','autocomplete' => 'off','class' =>'peer border border-main focus:outline-none focus:border-secondary shadow-sm focus:shadow-sm-sm w-full py-1 px-2 h-8 text-sm bg-bg-color']) }}
                     @if ($errors->has('version'))
-                        <span class="text-amber text-xs">{{ $errors->first('version') }}</span>
+                        <span class="text-red-500 text-xs">{{ $errors->first('version') }}</span>
                     @endif
                 </div>
             </div>
@@ -63,7 +46,7 @@
                 <label for="name" class="text-xs opacity-75 scale-75">Description</label>
                 {{ Form::textarea('description', $doc->description, ['id' => 'description','class' =>'peer border border-main focus:outline-none focus:border-secondary shadow-sm focus:shadow-sm-sm w-full py-1 px-2 h-16 text-sm']) }}
                 @if ($errors->has('description'))
-                    <span class="text-amber text-xs">{{ $errors->first('description') }}</span>
+                    <span class="text-red-500 text-xs">{{ $errors->first('description') }}</span>
                 @endif
             </div>
 
@@ -75,39 +58,24 @@
 
             <div class="mb-2 relative">
                 <div class="flex">
-
-
-
                     <div class="mb-4 pr-2 relative flex-1 flex items-end">
                         <div class="w-full relative">
                             <label for="category" class="text-xs opacity-75 scale-75">
                                 Catégorie (Optional)
                             </label>
                             <select name="category_id" id="category" onchange="javascript:handleSelect(this)"
-                                class="peer border border-main focus:outline-none focus:border-secondary shadow-sm focus:shadow-sm-sm w-full py-1 px-2 h-10 text-sm">
+                                class="peer border border-main focus:outline-none focus:border-secondary shadow-sm focus:shadow-sm-sm w-full py-1 px-2 h-8 text-sm bg-bg-color">
                                 @foreach ($categories as $id => $name)
                                     <option value="{{ $id }}">{{ $name }}</option>
                                 @endforeach
                                 <option class="add_folder" value="add_categorie"> --- Ajouter une autre categorie</option>
-                            </select>
-                            {{-- <div class="absolute inset-y-0 right-0 flex items-center px-2 pointer-events-none">
-                                <svg class="w-4 h-4 fill-current" viewBox="0 0 20 20">
-                                    <path
-                                        d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z"
-                                        clip-rule="evenodd" fill-rule="evenodd">
-                                    </path>
-                                </svg>
-                            </div> --}}
+                            </select> 
                         </div>
-                        <div class="w-6 ml-4">
-                            <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24"
-                                id="add_categorie" stroke="currentColor">
-                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                                    d="M9 13h6m-3-3v6m-9 1V7a2 2 0 012-2h6l2 2h6a2 2 0 012 2v8a2 2 0 01-2 2H5a2 2 0 01-2-2z" />
-                            </svg>
+                        <div class="w-6 ml-3">
+                            <svg id="add_categorie" class="h-6 w-6 cursor-pointer" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16" width="16" height="16"><path fill-rule="evenodd" d="M13.25 2.5H2.75a.25.25 0 00-.25.25v10.5c0 .138.112.25.25.25h10.5a.25.25 0 00.25-.25V2.75a.25.25 0 00-.25-.25zM2.75 1h10.5c.966 0 1.75.784 1.75 1.75v10.5A1.75 1.75 0 0113.25 15H2.75A1.75 1.75 0 011 13.25V2.75C1 1.784 1.784 1 2.75 1zM8 4a.75.75 0 01.75.75v2.5h2.5a.75.75 0 010 1.5h-2.5v2.5a.75.75 0 01-1.5 0v-2.5h-2.5a.75.75 0 010-1.5h2.5v-2.5A.75.75 0 018 4z"></path></svg>
                         </div>
                         @if ($errors->has('folder'))
-                            <span class="text-amber text-xs">{{ $errors->first('folder') }}</span>
+                            <span class="text-red-500 text-xs">{{ $errors->first('folder') }}</span>
                         @endif
                     </div>
 
@@ -116,30 +84,18 @@
                             <label for="folder" class="text-xs opacity-75 scale-75">Dans
                                 le dossier</label>
                             <select name="folder_id" id="folder" onchange="javascript:handleSelect(this)"
-                                class="peer border border-main focus:outline-none focus:border-secondary shadow-sm focus:shadow-sm-sm w-full py-1 px-2 h-10 text-sm">
+                                class="peer border border-main focus:outline-none focus:border-secondary shadow-sm focus:shadow-sm-sm w-full py-1 px-2 h-8 text-sm bg-bg-color">
                                 @foreach ($folders_input as $id => $name)
                                     <option value="{{ $id }}">{{ $name }}</option>
                                 @endforeach
                                 <option class="add_folder" value="add_folder_main"> --- Ajouter un autre dossier</option>
-                            </select>
-                            {{-- <div class="absolute inset-y-0 right-0 flex items-center px-2 pointer-events-none">
-                                <svg class="w-4 h-4 fill-current" viewBox="0 0 20 20">
-                                    <path
-                                        d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z"
-                                        clip-rule="evenodd" fill-rule="evenodd">
-                                    </path>
-                                </svg>
-                            </div> --}}
+                            </select> 
                         </div>
-                        <div class="w-6 ml-4">
-                            <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24"
-                                id="add_folder_main" stroke="currentColor">
-                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                                    d="M9 13h6m-3-3v6m-9 1V7a2 2 0 012-2h6l2 2h6a2 2 0 012 2v8a2 2 0 01-2 2H5a2 2 0 01-2-2z" />
-                            </svg>
+                        <div class="w-6 ml-3">
+                            <svg id="add_folder_main" class="h-6 w-6 cursor-pointer" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16" width="16" height="16"><path fill-rule="evenodd" d="M13.25 2.5H2.75a.25.25 0 00-.25.25v10.5c0 .138.112.25.25.25h10.5a.25.25 0 00.25-.25V2.75a.25.25 0 00-.25-.25zM2.75 1h10.5c.966 0 1.75.784 1.75 1.75v10.5A1.75 1.75 0 0113.25 15H2.75A1.75 1.75 0 011 13.25V2.75C1 1.784 1.784 1 2.75 1zM8 4a.75.75 0 01.75.75v2.5h2.5a.75.75 0 010 1.5h-2.5v2.5a.75.75 0 01-1.5 0v-2.5h-2.5a.75.75 0 010-1.5h2.5v-2.5A.75.75 0 018 4z"></path></svg>
                         </div>
                         @if ($errors->has('folder'))
-                            <span class="text-amber text-xs">{{ $errors->first('folder') }}</span>
+                            <span class="text-red-500 text-xs">{{ $errors->first('folder') }}</span>
                         @endif
                     </div>
 
@@ -149,7 +105,7 @@
             @include('inc.docs.autorisation', ['subs' => $subs])
 
             <div class="flex">
-                {{ Form::submit('Sauvegarder', ['class' =>'flex text-bg-color bg-secondary hover:bg-main border py-2 px-6 text-tiny focus:outline-none transition hover:no-underline ml-2']) }}
+                {{ Form::submit('Sauvegarder', ['class' =>'flex text-bg-color bg-secondary hover:text-main hover:bg-tertiary border py-2 px-6 text-tiny focus:outline-none transition hover:no-underline ml-2']) }}
             </div>
 
             {!! Form::close() !!}

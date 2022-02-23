@@ -33,47 +33,7 @@ class DocumentsController extends Controller
     $subs  = Subsidiary::all();
     $docs = Document::where('isExpire', '!=', 2)->get();
     $folders  = Folder::where('parent_id', '=', '0')->get();
-    $folders_input = Folder::pluck('name', 'id')->all();
-
-    // if ($user->hasRole('Root')) {
-    // $folders  = Folder::where('parent_id', '=', '0')->get();
-    // $folders_input = Folder::pluck('name', 'id')->all();
-    // $docs = Document::where('isExpire', '!=', 2)->get();
-    // } else {
-    //   $dept_id = $user->department_id;
-    //   $docs = Document::where('isExpire', '!=', 2)->where('department_id', $dept_id)->get();
-    //   $docs = DB::table('departments')
-    //     ->select('document.*')
-    //     ->leftJoin('document_departement', 'document_departement.department_id', 'departments.id')
-    //     ->leftJoin('document', 'document_departement.document_id', 'document.id')
-    //     ->where('document_departement.department_id', '=', $dept_id)
-    //     ->where('document.isExpire', '!=', 2)
-    //     ->distinct()
-    //     ->get();
-
-    //   // $docs = Document::where('isExpire', '!=', 2)->where('department_id', $dept_id)->where('user_id', '!=', $user->id)->get();
-    //   $folders_sql = DB::table('departments')
-    //     ->select('folders.*')
-    //     ->leftJoin('folder_departement', 'folder_departement.department_id', 'departments.id')
-    //     ->leftJoin('folders', 'folder_departement.folder_id', 'folders.id')
-    //     ->where('folder_departement.department_id', '=', $dept_id)
-    //     ->where('folders.parent_id', '=', 0)
-    //     ->distinct()
-    //     ->get();
-
-
-    //   $folders_input_sql = DB::table('departments')
-    //     ->select('folders.*')
-    //     ->leftJoin('folder_departement', 'folder_departement.department_id', 'departments.id')
-    //     ->leftJoin('folders', 'folder_departement.folder_id', 'folders.id')
-    //     ->where('folder_departement.department_id', '=', $dept_id)
-    //     ->distinct()
-    //     ->get();
-
-    //   $folders_input = $folders_input_sql->pluck('name', 'id')->all();
-    //   $folders = Folder::hydrate($folders_sql->toArray());
-    //   $docs = Document::hydrate($docs->toArray());
-    // }
+    $folders_input = Folder::pluck('name', 'id')->all(); 
 
     return view('documents.index', compact('docs', 'filetype', 'folders', 'folders_input', 'categories', 'depts', 'subs'));
   }
@@ -84,9 +44,9 @@ class DocumentsController extends Controller
    * @return \Illuminate\Http\Response
    */
   public function all()
-  {  
+  {
     $filetype = null;
-    $docs = Document::where('isExpire', '!=', 2)->get(); 
+    $docs = Document::where('isExpire', '!=', 2)->get();
     $folders_input = Folder::pluck('name', 'id')->all();
     $categories = Category::pluck('name', 'id')->all();
     $subs  = Subsidiary::all();
@@ -97,11 +57,11 @@ class DocumentsController extends Controller
 
   // my documents
   public function mydocuments()
-  { 
+  {
     $filetype = null;
     $folders_input = Folder::pluck('name', 'id')->all();
     $categories = Category::pluck('name', 'id')->all();
-    $subs  = Subsidiary::all(); 
+    $subs  = Subsidiary::all();
     $depts = Department::all();
     // get user's docs
     $user_id = auth()->user()->id;
@@ -189,15 +149,15 @@ class DocumentsController extends Controller
       return redirect()->back()->with('failure', 'Le nom du fichier exist deja !');
     }
 
-    $check_ref = Document::where('ref', 'like', $request->input('ref'))->first();
-    if ($check_ref !== null) {
-      return redirect()->back()->with('failure', 'La réference exist deja !');
-    }
+    // $check_ref = Document::where('ref', 'like', $request->input('ref'))->first();
+    // if ($check_ref !== null) {
+    //   return redirect()->back()->with('failure', 'La réference exist deja !');
+    // }
 
-    $check_ver = Document::where('version', 'like', $request->input('version'))->first();
-    if ($check_ver !== null) {
-      return redirect()->back()->with('failure', 'Le version exist deja !');
-    }
+    // $check_ver = Document::where('version', 'like', $request->input('version'))->first();
+    // if ($check_ver !== null) {
+    //   return redirect()->back()->with('failure', 'Le version exist deja !');
+    // }
 
     $doc->name = $request->input('name');
     $doc->description = $request->input('description');
@@ -301,85 +261,44 @@ class DocumentsController extends Controller
    */
   public function edit($id)
   {
-    $filetype = null;
-    $doc                = Document::findOrFail($id);
-    $selectedCategories = $doc->categories->pluck('id');
-    $selectedFolders    = $doc->folders->pluck('id');
-
-    $subs    = Subsidiary::all();
-    $depts   = Department::all();
-
-
-    $docs = Document::where('isExpire', '!=', 2)->get();
-    $folders  = Folder::where('parent_id', '=', '0')->get();
-    $folders_input = Folder::pluck('name', 'id')->all();
-
-
-    foreach ($depts as $key => $dept) {
-
-      $dp = DB::table('document_departement')
-        ->select('document_departement.document_id', 'document_departement.department_id', 'document_departement.permission_for')
-        ->where('document_departement.document_id', '=', $id)
-        ->where('document_departement.department_id', '=', $dept['id'])
-        ->get()
-        ->toArray();
-
-      if (isset($dp) && !empty($dp)) {
-        $document_departement = $dp[0];
-        $dept['permission_for'] = isset($document_departement->permission_for) ? $document_departement->permission_for : 0;
-      }
-    }
-
-    $categories = Category::pluck('name', 'id')->all();
-
+    
     $user = auth()->user();
-    // if ($user->hasRole('Root')) {
+    if ($user->hasRole('Root') || $user->hasRole('Admin')) {
 
-    //   $subs       = Subsidiary::all();
-    //   $folders    = Folder::pluck('name', 'id')->all();
+      $filetype = null;
+      $doc                = Document::findOrFail($id);
+      $selectedCategories = $doc->categories->pluck('id');
+      $selectedFolders    = $doc->folders->pluck('id');
 
-    //   $depts = Department::all();
-    //   $document_departement = 0;
+      $subs    = Subsidiary::all();
+      $depts   = Department::all();
 
-    //   foreach ($depts as $key => $dept) {
+      $docs = Document::where('isExpire', '!=', 2)->get();
+      $folders  = Folder::where('parent_id', '=', '0')->get();
+      $folders_input = Folder::pluck('name', 'id')->all();
 
-    //     $dp = DB::table('document_departement')
-    //       ->select('document_departement.document_id', 'document_departement.department_id', 'document_departement.permission_for')
-    //       ->where('document_departement.document_id', '=', $id)
-    //       ->where('document_departement.department_id', '=', $dept['id'])
-    //       ->get()
-    //       ->toArray();
+      foreach ($depts as $key => $dept) {
 
-    //     if (isset($dp) && !empty($dp)) {
-    //       $document_departement = $dp[0];
-    //       $dept['permission_for'] = isset($document_departement->permission_for) ? $document_departement->permission_for : 0;
-    //     }
-    //   }
-    // } else {
+        $dp = DB::table('document_departement')
+          ->select('document_departement.document_id', 'document_departement.department_id', 'document_departement.permission_for')
+          ->where('document_departement.document_id', '=', $id)
+          ->where('document_departement.department_id', '=', $dept['id'])
+          ->get()
+          ->toArray();
 
-    //   $department_id = auth()->user()->department_id;
-    //   $department    = Department::findOrFail($department_id);
-    //   $subs    = $department->subsidiaries()->get();
+        if (isset($dp) && !empty($dp)) {
+          $document_departement = $dp[0];
+          $dept['permission_for'] = isset($document_departement->permission_for) ? $document_departement->permission_for : 0;
+        }
+      }
 
-    //   $dept_id = $user->department_id;
-    //   $folders_sql = DB::table('departments')
-    //     ->select('folders.*')
-    //     ->leftJoin('folder_departement', 'folder_departement.department_id', 'departments.id')
-    //     ->leftJoin('folders', 'folder_departement.folder_id', 'folders.id')
-    //     ->where('folder_departement.department_id', '=', $dept_id)
-    //     ->where('folders.parent_id', '=', 0)
-    //     ->distinct()
-    //     ->get();
+      $categories = Category::pluck('name', 'id')->all();
 
-    //   $folders = $folders_sql->toArray();
-    //   $folders_input = $folders_sql->pluck('name', 'id')->all();
-    //   $folders = $folders_table = Folder::hydrate($folders);
-    // }
-
-    // dd($depts);
-    if (UtilityController::has_permission_for_doc($id, $user))
-      return view('documents.edit', compact('filetype','doc', 'categories', 'folders', 'folders_input', 'depts', 'subs', 'selectedCategories', 'selectedFolders'));
-    else
+      if (UtilityController::has_permission_for_doc($id, $user))
+        return view('documents.edit', compact('filetype', 'doc', 'categories', 'folders', 'folders_input', 'depts', 'subs', 'selectedCategories', 'selectedFolders'));
+      else
+        return redirect('/documents')->with('failure', 'Vous ne pouvez pas voir ce document');
+    } else
       return redirect('/documents')->with('failure', 'Vous ne pouvez pas voir ce document');
   }
 

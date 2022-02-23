@@ -17,9 +17,9 @@
                     <div class="mb-2 relative">
                         <label for="name" class="text-xs opacity-75 scale-75">Nom
                             du document</label>
-                        {{ Form::text('name', '', ['id' => 'name','autocomplete' => 'off','class' =>'peer border border-main focus:outline-none focus:border-secondary shadow-sm focus:shadow-sm-sm w-full py-1 px-2 h-10 text-sm']) }}
+                        {{ Form::text('name', '', ['id' => 'name','autocomplete' => 'off','class' =>'peer border border-main focus:outline-none focus:border-secondary shadow-sm focus:shadow-sm-sm w-full py-1 px-2 h-8 text-sm bg-bg-color']) }}
                         @if ($errors->has('name'))
-                            <span class="text-amber text-xs">{{ $errors->first('name') }}</span>
+                            <span class=" text-red-500 text-xs">{{ $errors->first('name') }}</span>
                         @endif
                     </div>
 
@@ -27,7 +27,7 @@
                         <label for="name" class="text-xs opacity-75 scale-75">Description</label>
                         {{ Form::textarea('description', '', ['id' => 'description','class' =>'peer border border-main focus:outline-none focus:border-secondary shadow-sm focus:shadow-sm-sm w-full py-1 px-2 h-16 text-sm']) }}
                         @if ($errors->has('description'))
-                            <span class="text-amber text-xs">{{ $errors->first('description') }}</span>
+                            <span class=" text-red-500 text-xs">{{ $errors->first('description') }}</span>
                         @endif
                     </div>
 
@@ -39,9 +39,9 @@
                         <label for="ref" class="text-xs opacity-75 scale-75">
                             Réference
                         </label>
-                        {{ Form::text('ref', '', ['id' => 'ref','autocomplete' => 'off','class' =>'peer border border-main focus:outline-none focus:border-secondary shadow-sm focus:shadow-sm-sm w-full py-1 px-2 h-10 text-sm']) }}
+                        {{ Form::text('ref', '', ['id' => 'ref','autocomplete' => 'off','class' =>'peer border border-main focus:outline-none focus:border-secondary shadow-sm focus:shadow-sm-sm w-full py-1 px-2 h-8 text-sm bg-bg-color']) }}
                         @if ($errors->has('ref'))
-                            <span class="text-amber text-xs">{{ $errors->first('ref') }}</span>
+                            <span class=" text-red-500 text-xs">{{ $errors->first('ref') }}</span>
                         @endif
                     </div>
 
@@ -49,9 +49,9 @@
                         <label for="name" class="text-xs opacity-75 scale-75">
                             Version
                         </label>
-                        {{ Form::text('version', '', ['id' => 'version','autocomplete' => 'off','class' =>'peer border border-main focus:outline-none focus:border-secondary shadow-sm focus:shadow-sm-sm w-full py-1 px-2 h-10 text-sm']) }}
+                        {{ Form::text('version', '', ['id' => 'version','autocomplete' => 'off','class' =>'peer border border-main focus:outline-none focus:border-secondary shadow-sm focus:shadow-sm-sm w-full py-1 px-2 h-8 text-sm bg-bg-color']) }}
                         @if ($errors->has('version'))
-                            <span class="text-amber text-xs">{{ $errors->first('version') }}</span>
+                            <span class=" text-red-500 text-xs">{{ $errors->first('version') }}</span>
                         @endif
                     </div>
                     <div class="mb-2 relative hidden">
@@ -69,7 +69,7 @@
                         </label>
                         {{ Form::select('category_id[]', $categories, null, ['multiple' => 'multiple','id' => 'category','class' =>'form-multiselect peer border border-bg-color focus:outline-none rounded focus:border-bg-color0 focus:shadow-sm-sm block w-full py-2']) }}
                         @if ($errors->has('category'))
-                            <span class="text-amber text-xs">{{ $errors->first('category') }}</span>
+                            <span class=" text-red-500 text-xs">{{ $errors->first('category') }}</span>
                         @endif
                     </div>
 
@@ -79,7 +79,7 @@
                         </label>
                         {{ Form::select('folder_id[]', $folders, null, ['multiple' => 'multiple','id' => 'folder','class' =>'form-multiselect peer border border-bg-color focus:outline-none rounded focus:border-bg-color0 focus:shadow-sm-sm block w-full py-2']) }}
                         @if ($errors->has('folder'))
-                            <span class="text-amber text-xs">{{ $errors->first('folder') }}</span>
+                            <span class=" text-red-500 text-xs">{{ $errors->first('folder') }}</span>
                         @endif
                     </div>
                 </div>
@@ -91,7 +91,7 @@
                         <span class="black-text">Sélectionner votre fichier (Max: 50MB)</span>
                         {{ Form::file('file') }}
                         @if ($errors->has('file'))
-                            <span class="text-amber text-xs">{{ $errors->first('file') }}</span>
+                            <span class=" text-red-500 text-xs">{{ $errors->first('file') }}</span>
                         @endif
                     </div>
                 </div>

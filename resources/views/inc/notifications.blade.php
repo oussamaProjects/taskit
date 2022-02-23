@@ -1,6 +1,6 @@
 @if (session('success') || session('failure'))
     <div id="notification"
-        class="text-bg-color px-6 pt-2 pb-3 border rounded mb-4 {{ !is_null(session('success')) ? 'bg-secondary' : 'bg-amber' }} absolute top-16 right-4 z-50">
+        class="text-bg-color pl-2 pr-6 py-2 pb-3 border rounded mb-4 absolute top-16 right-4 z-50 {{ !is_null(session('success')) ? 'bg-green-700' : 'bg-red-500' }}">
         <span class="text-xl inline-block mr-5 align-middle">
             <i class="fas fa-bell"></i>
         </span>

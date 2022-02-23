@@ -1,8 +1,8 @@
-<div id="tr_{{ $doc->id }}" class="relative z-10">
+<div id="tr_{{ $doc->id }}" class="relative">
     <div data-id="{{ $doc->id }}" class="doc-folder-container icon-doc"
         style="background-color:{{ (!isset($doc->color) || $doc->color == "#FFFFFF") ? '#fffdf3' : $doc->color }}">
 
-        <div class="flex flex-row px-2 py-3 relative z-10 inset-0 items-start">
+        <div class="flex flex-row px-2 py-3 relative inset-0 items-start">
 
             <div class="image mr-1">
                 @include('inc.mime-type-icon', ['doc'=>$doc])

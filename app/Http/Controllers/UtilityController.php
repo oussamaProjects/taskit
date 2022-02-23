@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Document;
 use App\Folder;
 use Illuminate\Http\Request;
+use Illuminate\Support\Collection;
 use Illuminate\Support\Facades\DB;
 
 class UtilityController extends Controller
@@ -162,5 +163,33 @@ class UtilityController extends Controller
         }
 
         return true;
+    }
+    static function put_folders_size($folders)
+    {
+        $filesize = 0;
+        $folder = $folders;
+        if ($folders instanceof Collection) { 
+            foreach ($folders as $key => $folder) {
+                $filesize = 0;
+                foreach ($folder->documents()->get() as $key => $doc) {
+                    $filesize += (int) filter_var($doc->filesize, FILTER_SANITIZE_NUMBER_INT); 
+                }
+                $folder->foldersize = $filesize;
+            }
+        } else{ 
+            foreach ($folder->documents()->get() as $key => $doc) {
+                $filesize += (int) filter_var($doc->filesize, FILTER_SANITIZE_NUMBER_INT);
+                // echo '<pre>';
+                // echo $folder->id . ' - ';
+                // echo $doc->id . ' - ';
+                // echo $doc->filesize ;
+                // echo '</pre>';
+            }
+        }
+
+        $folder->foldersize = $filesize;
+
+        $folders = $folder;
+        return $folders;
     }
 }

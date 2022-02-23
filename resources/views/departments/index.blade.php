@@ -122,7 +122,7 @@
                         @endforeach
 
                         <a href="#"
-                            class="update_dept flex text-bg-color bg-secondary hover:bg-main border py-2 px-6 text-tiny focus:outline-none transition hover:no-underline ml-2"
+                            class="update_dept flex text-bg-color bg-secondary hover:text-main hover:bg-tertiary border py-2 px-6 text-tiny focus:outline-none transition hover:no-underline ml-2"
                             data-deptid="{{ $dept->id }}">Sauvgarder</a>
 
                     </div>

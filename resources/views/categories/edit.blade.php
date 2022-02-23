@@ -16,12 +16,12 @@
                     <label for="name" class="text-xs opacity-75 scale-75">
                         Nom de catégorie
                     </label>
-                    {{ Form::text('name', $category->name, ['autocomplete' => 'off','class' =>'peer border border-main focus:outline-none focus:border-secondary shadow-sm focus:shadow-sm-sm w-full py-1 px-2 h-10 text-sm','id' => 'category']) }}
+                    {{ Form::text('name', $category->name, ['autocomplete' => 'off','class' =>'peer border border-main focus:outline-none focus:border-secondary shadow-sm focus:shadow-sm-sm w-full py-1 px-2 h-8 text-sm bg-bg-color','id' => 'category']) }}
                 </div>
 
 
                 <div class="flex items-end justify-end mt-4">
-                    {{ Form::submit('Sauvegarder les modifications', ['class' =>'flex text-bg-color bg-secondary hover:bg-main border py-2 px-6 text-tiny focus:outline-none transition hover:no-underline ml-2']) }}
+                    {{ Form::submit('Sauvegarder les modifications', ['class' =>'flex text-bg-color bg-secondary hover:text-main hover:bg-tertiary border py-2 px-6 text-tiny focus:outline-none transition hover:no-underline ml-2']) }}
                 </div>
 
                 {!! Form::close() !!}

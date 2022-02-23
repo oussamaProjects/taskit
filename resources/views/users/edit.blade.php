@@ -34,7 +34,7 @@
             <label for="name" class="text-xs opacity-75 scale-75">
                 Current Name
             </label>
-            {{ Form::text('name', $user->name, ['autocomplete' => 'off','class' =>'peer border border-main focus:outline-none focus:border-secondary shadow-sm focus:shadow-sm-sm w-full py-1 px-2 h-10 text-sm','id' => 'name']) }}
+            {{ Form::text('name', $user->name, ['autocomplete' => 'off','class' =>'peer border border-main focus:outline-none focus:border-secondary shadow-sm focus:shadow-sm-sm w-full py-1 px-2 h-8 text-sm bg-bg-color','id' => 'name']) }}
 
         </div>
 
@@ -42,14 +42,14 @@
             <label for="email" class="text-xs opacity-75 scale-75">
                 Current Adresse e-mail
             </label>
-            {{ Form::email('email', $user->email, ['class' =>'peer border border-main focus:outline-none focus:border-secondary shadow-sm focus:shadow-sm-sm w-full py-1 px-2 h-10 text-sm','id' => 'email']) }}
+            {{ Form::email('email', $user->email, ['class' =>'peer border border-main focus:outline-none focus:border-secondary shadow-sm focus:shadow-sm-sm w-full py-1 px-2 h-8 text-sm bg-bg-color','id' => 'email']) }}
         </div>
 
         {{-- <div class="mb-2 relative">
                         <label for="subs_id" class="text-xs opacity-75 scale-75">Subsidiaries</label>
                         @php($subsidiary = $user->department()->first()->subsidiaries()->get())
                         <select name="subs_id" id="subs_id"
-                            class="peer border border-main focus:outline-none focus:border-secondary shadow-sm focus:shadow-sm-sm w-full py-1 px-2 h-10 text-sm">
+                            class="peer border border-main focus:outline-none focus:border-secondary shadow-sm focus:shadow-sm-sm w-full py-1 px-2 h-8 text-sm bg-bg-color">
                             <option value="--">--</option>
                             @if (count($subs) > 0)
                                 @if (Auth::user()->hasRole('Root'))
@@ -72,7 +72,7 @@
                         <label for="department_id" class="text-xs opacity-75 scale-75">Département
                             actuel</label>
                         <select name="department_id" id="department_id"
-                            class="peer border border-main focus:outline-none focus:border-secondary shadow-sm focus:shadow-sm-sm w-full py-1 px-2 h-10 text-sm">
+                            class="peer border border-main focus:outline-none focus:border-secondary shadow-sm focus:shadow-sm-sm w-full py-1 px-2 h-8 text-sm bg-bg-color">
                             <option value="--">--</option>
                             @if (count($depts) > 0)
                                 @if (Auth::user()->hasRole('Root'))
@@ -94,7 +94,7 @@
             <label for="role" class="text-xs opacity-75 scale-75">Rôle
                 actuel</label>
             <select name="role" id="role"
-                class="peer border border-main focus:outline-none focus:border-secondary shadow-sm focus:shadow-sm-sm w-full py-1 px-2 h-10 text-sm">
+                class="peer border border-main focus:outline-none focus:border-secondary shadow-sm focus:shadow-sm-sm w-full py-1 px-2 h-8 text-sm bg-bg-color">
                 <option value="" disabled selected>Attribuer un rôle</option>
                 @if (count($roles) > 0)
                     @foreach ($roles as $role)
@@ -133,7 +133,7 @@
         </div>
 
         <div class="flex items-end justify-end mt-4">
-            {{ Form::submit(' Sauvegarder', ['class' =>'flex text-bg-color bg-secondary hover:bg-main border py-2 px-6 text-tiny focus:outline-none transition hover:no-underline ml-2']) }}
+            {{ Form::submit(' Sauvegarder', ['class' =>'flex text-bg-color bg-secondary hover:text-main hover:bg-tertiary border py-2 px-6 text-tiny focus:outline-none transition hover:no-underline ml-2']) }}
         </div>
 
         {!! Form::close() !!}

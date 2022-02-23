@@ -7,10 +7,10 @@
                 <a href="/folders/{{ $folder->id }}" class="block text-xs font-bold capitalize m-0">
                     {{ $folder->name }}
                 </a>
-                <div class="text-xs font-medium mt-auto">
+                <div class="text-xxs font-medium mt-auto">
                     ({{ count($folder->documents()->get()) }}) documents
                 </div>
-                <div class="text-xs mt-auto">
+                <div class="text-xxs mt-auto">
                     {{ \Carbon\Carbon::createFromTimeStamp($folder->created_at->toDayDateTimeString())->formatLocalized('%d %B %Y, %H:%M') }}
                 </div>
             </div>

@@ -16,7 +16,7 @@
                         </button>
                         <input type="text" autocomplete="off" name="search" id="search"
                             placeholder="Cherche des dossiers"
-                            class="peer border border-main focus:outline-none focus:border-secondary shadow-sm focus:shadow-sm-sm w-full py-1 px-2 h-10 text-sm" />
+                            class="peer border border-main focus:outline-none focus:border-secondary shadow-sm focus:shadow-sm-sm w-full py-1 px-2 h-8 text-sm bg-bg-color" />
                     </form>
                 </div>
 

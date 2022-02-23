@@ -24,10 +24,10 @@
             {{-- Expire le --}}
         </th>
         <th class="px-2 py-3 title-font tracking-wider font-medium text-bg-color text-sm bg-main shadow-sm">
-            Accès aux adminstrateurs des départements
+            Accès aux adminstrateurs 
         </th>
         <th class="px-2 py-3 title-font tracking-wider font-medium text-bg-color text-sm bg-main shadow-sm">
-            Accès aux utilisateurs des départements
+            Accès aux utilisateurs 
         </th>
         <th class="px-2 py-3 title-font tracking-wider font-medium text-bg-color text-sm bg-main shadow-sm">
             Actions

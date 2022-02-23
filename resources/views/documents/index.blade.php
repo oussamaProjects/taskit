@@ -9,7 +9,7 @@
 
     <div class="flex gap-4 my-2 mx-4">
 
-        <div class="flex-initial w-52">
+        <div class="flex-initial border font-light">
             @include('inc.docs.folders-tree', ['currentFolder' => $folder ?? null])
         </div>
 

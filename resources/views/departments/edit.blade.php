@@ -13,7 +13,7 @@
                 <div class="mb-2 relative">
                     <label for="department" class="text-xs opacity-75 scale-75">Nom
                         du département</label>
-                    {{ Form::text('dptName', $dept->dptName, ['autocomplete' => 'off','class' =>'peer border border-main focus:outline-none focus:border-secondary shadow-sm focus:shadow-sm-sm w-full py-1 px-2 h-10 text-sm','id' => 'department']) }}
+                    {{ Form::text('dptName', $dept->dptName, ['autocomplete' => 'off','class' =>'peer border border-main focus:outline-none focus:border-secondary shadow-sm focus:shadow-sm-sm w-full py-1 px-2 h-8 text-sm bg-bg-color','id' => 'department']) }}
                 </div>
 
                 <div class="dept mb-4 flex flex-wrap items-start">
@@ -22,7 +22,7 @@
                         <div class="flex items-center mr-2 w-28">
                             {!! Form::radio('subs_id[]', $suds->id, null, ['id' => 'subs_' . $suds->id, 'class' => 'subs_id opacity-0 absolute']) !!}
                             <label for="subs_{{ $suds->id }}"
-                                class="select-none inline-block text-sm font-medium text-bg-color bg-secondary hover:text-bg-color hover:bg-main transition text-center px-2 py-1 mb-1 rounded-sm w-30 cursor-pointer w-full">
+                                class="select-none inline-block text-xs font-light text-bg-color bg-secondary hover:text-main hover:bg-tertiary transition text-center px-2 py-1 mb-1 rounded-sm w-30 cursor-pointer w-full">
                                 {{ $suds->subsName }} <br />
                             </label>
                         </div>
@@ -30,7 +30,7 @@
 
                 </div>
                 <div class="flex items-end justify-end mt-4">
-                    {{ Form::submit('Sauvegarder', ['class' =>'flex text-bg-color bg-secondary hover:bg-main border py-2 px-6 text-tiny focus:outline-none transition hover:no-underline ml-2']) }}
+                    {{ Form::submit('Sauvegarder', ['class' =>'flex text-bg-color bg-secondary hover:text-main hover:bg-tertiary border py-2 px-6 text-tiny focus:outline-none transition hover:no-underline ml-2']) }}
                 </div>
                 {!! Form::close() !!}
 

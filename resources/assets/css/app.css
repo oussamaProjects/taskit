@@ -87,8 +87,7 @@ body {
     text-decoration: none;
 }
 .tree ul a.active {
-    color: #000000;
-    font-weight: bold;
+    color: #000000; 
 }
 .nested {
     display: block;
@@ -103,8 +102,13 @@ body {
 }
 
 input:checked + label {
-    color: rgba(255, 255, 255, var(--tw-text-opacity));
-    background-color: #1f2937;
+    color: rgba(0, 0, 0, var(--tw-text-opacity));
+    background-color: rgba(253, 201, 16, var(--tw-bg-opacity));
+}
+
+input[name="color"]:checked + label { 
+    border: 1px solid  rgba(255, 255, 255, var(--tw-text-opacity));
+    box-shadow: 1px 0px 3px  rgba(255, 255, 255, var(--tw-text-opacity));
 }
 
 .add_folder{
@@ -230,8 +234,8 @@ ul.pagination li.page-item > a.page-link:hover {
 /* you simply need to change the color of the background of each div - these are at the bottom of the css */
 
 .icon-doc { 
-    width: 140px;
-    height: 58px;
+    width: 124px;
+    height: 56px;
     background: #000;
     border-radius: 4px;
     -webkit-transition: all 150ms ease-in-out;
@@ -254,8 +258,8 @@ ul.pagination li.page-item > a.page-link:hover {
 
 .icon-folder {
     margin: 8px;
-    width: 140px;
-    height: 68px;
+    width: 120px;
+    height: 62px;
     background: #000;
     border-radius: 4px;
     -webkit-transition: all 150ms ease-in-out;
@@ -272,7 +276,7 @@ ul.pagination li.page-item > a.page-link:hover {
     -ms-transform: perspective(600);
     -o-transform: perspective(600);
     transform: perspective(600);
-    border: 2px solid rgba(0,0,0,0.2);
+    /* border: 2px solid rgba(0,0,0,0.2); */
     cursor: pointer;
 }
 .icon-folder:before {

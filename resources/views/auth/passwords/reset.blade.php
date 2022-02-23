@@ -33,10 +33,10 @@
                                         e-mail</label>
                                     <input id="email" type="email" name="email" value="{{ old('email') }}" required
                                         autofocus
-                                        class="peer border border-main focus:outline-none focus:border-secondary shadow-sm focus:shadow-sm-sm w-full py-1 px-2 h-10 text-sm"
+                                        class="peer border border-main focus:outline-none focus:border-secondary shadow-sm focus:shadow-sm-sm w-full py-1 px-2 h-8 text-sm bg-bg-color"
                                         placeholder="Email" style="transition: all 0.15s ease 0s;">
                                     @if ($errors->has('email'))
-                                        <span class="text-amber text-xs">{{ $errors->first('email') }}</span>
+                                        <span class=" text-red-500 text-xs">{{ $errors->first('email') }}</span>
                                     @endif
 
                                 </div>
@@ -45,10 +45,10 @@
                                     <label class="block uppercase text-gray-800 text-xs font-bold mb-2" for="password">Mot
                                         de passe</label>
                                     <input id="password" type="password" name="password" required
-                                        class="peer border border-main focus:outline-none focus:border-secondary shadow-sm focus:shadow-sm-sm w-full py-1 px-2 h-10 text-sm"
+                                        class="peer border border-main focus:outline-none focus:border-secondary shadow-sm focus:shadow-sm-sm w-full py-1 px-2 h-8 text-sm bg-bg-color"
                                         placeholder="Mot de passe" style="transition: all 0.15s ease 0s;">
                                     @if ($errors->has('password'))
-                                        <span class="text-amber text-xs">{{ $errors->first('password') }}</span>
+                                        <span class=" text-red-500 text-xs">{{ $errors->first('password') }}</span>
                                     @endif
                                 </div>
 
@@ -56,11 +56,11 @@
                                     <label class="block uppercase text-gray-800 text-xs font-bold mb-2"
                                         for="password-confirm">Password</label>
                                     <input id="password-confirm" type="password" name="password_confirmation" required
-                                        class="peer border border-main focus:outline-none focus:border-secondary shadow-sm focus:shadow-sm-sm w-full py-1 px-2 h-10 text-sm"
+                                        class="peer border border-main focus:outline-none focus:border-secondary shadow-sm focus:shadow-sm-sm w-full py-1 px-2 h-8 text-sm bg-bg-color"
                                         placeholder="Mot de passe" style="transition: all 0.15s ease 0s;">
                                     @if ($errors->has('password_confirmation'))
                                         <span
-                                            class="text-amber text-xs">{{ $errors->first('password_confirmation') }}</span>
+                                            class=" text-red-500 text-xs">{{ $errors->first('password_confirmation') }}</span>
                                     @endif
                                 </div>
 

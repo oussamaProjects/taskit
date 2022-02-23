@@ -1,4 +1,4 @@
-<div class="colors flex flex-wrap items-center justify-center items-center justify-center" data-id="{{ $doc->id }}">
+<div class="colors flex flex-wrap mt-1 items-center justify-center" data-id="{{ $doc->id }}">
     <a href="" class="update_color" data-color="#fdf4d0">
         <div class="color mb-1 mr-1 w-4 h-3 bg-white"></div>
     </a>
