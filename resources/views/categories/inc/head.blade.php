@@ -9,7 +9,7 @@
                 </div>
                 <div class="relative w-full max-w-full flex-grow flex-1 text-right">
                     <button id="add_categorie" 
-                        class="flex text-bg-color bg-secondary hover:text-main hover:bg-tertiary border py-2 px-6 text-tiny focus:outline-none transition hover:no-underline ml-2 ml-auto"
+                        class="flex text-bg-color bg-secondary hover:text-main hover:bg-tertiary border py-2 px-6 text-tiny focus:outline-none transition hover:no-underline ml-auto"
                         type="button">Ajouter une catégorie</button>
                 </div>
             </div>

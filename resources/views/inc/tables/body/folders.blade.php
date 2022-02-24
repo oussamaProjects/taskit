@@ -1,4 +1,4 @@
-<tr id="tr_{{ $current_folder->id }}" class="text-gray-800 border-b">
+<tr id="tr_{{ $current_folder->id }}" class="text-gray-800 border-b hover:bg-white transition">
     <td>
         {{-- <input type="checkbox" id="chk_{{ $current_doc->id }}" class="sub_chk" data-id="{{ $current_doc->id }}"><label for="chk_{{ $current_doc->id }}"></label> --}}
     </td>

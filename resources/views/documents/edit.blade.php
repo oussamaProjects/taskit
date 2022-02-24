@@ -8,7 +8,7 @@
     <div class="grid grid-cols-3 sm:grid-cols-3 md:grid-cols-3 lg:grid-cols-3 gap-4">
         <div class="col-span-2">
 
-            {!! Form::open(['action' => ['DocumentsController@update', $doc->id], 'method' => 'PATCH', 'enctype' => 'multipart/form-data', 'class' => 'col ml-4 s12']) !!}
+            {!! Form::open(['action' => ['DocumentsController@update', $doc->id], 'method' => 'PATCH', 'enctype' => 'multipart/form-data', 'class' => 'ml-4 p-4 border shadow']) !!}
 
             {{ csrf_field() }}
 
@@ -44,7 +44,7 @@
 
             <div class="mb-2 relative">
                 <label for="name" class="text-xs opacity-75 scale-75">Description</label>
-                {{ Form::textarea('description', $doc->description, ['id' => 'description','class' =>'peer border border-main focus:outline-none focus:border-secondary shadow-sm focus:shadow-sm-sm w-full py-1 px-2 h-16 text-sm']) }}
+                {{ Form::textarea('description', $doc->description, ['id' => 'description','class' =>'peer border border-main focus:outline-none focus:border-secondary shadow-sm focus:shadow-sm-sm w-full py-1 px-2 h-16 text-sm bg-bg-color']) }}
                 @if ($errors->has('description'))
                     <span class="text-red-500 text-xs">{{ $errors->first('description') }}</span>
                 @endif
@@ -103,8 +103,8 @@
             </div>
 
             @include('inc.docs.autorisation', ['subs' => $subs])
-
-            <div class="flex">
+ 
+                <div class="flex items-end justify-end mt-4">
                 {{ Form::submit('Sauvegarder', ['class' =>'flex text-bg-color bg-secondary hover:text-main hover:bg-tertiary border py-2 px-6 text-tiny focus:outline-none transition hover:no-underline ml-2']) }}
             </div>
 

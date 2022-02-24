@@ -16,7 +16,7 @@
             </div>
 
             @hasanyrole('Root|Admin')
-                <div class="absolute w-2 right-3 bottom-1">
+                <div class="absolute w-2 right-0 bottom-0">
                     <a href="#" class="right ml-auto show-action" data-form="folders-{{ $folder->id }}"
                         class="flex items-center flex-1">
                         <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 m-1" fill="none" viewBox="0 0 24 24"

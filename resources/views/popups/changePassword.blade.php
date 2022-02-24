@@ -37,7 +37,7 @@
 
         </div>
         <div class="flex items-end justify-end mt-4">
-            {{ Form::submit(' Sauvegarder', ['class' =>'flex text-bg-color bg-secondary hover:text-main hover:bg-tertiary border py-2 px-6 text-tiny focus:outline-none transition hover:no-underline ml-2 ml-auto']) }}
+            {{ Form::submit(' Sauvegarder', ['class' =>'flex text-bg-color bg-secondary hover:text-main hover:bg-tertiary border py-2 px-6 text-tiny focus:outline-none transition hover:no-underline ml-auto']) }}
         </div>
         {!! Form::close() !!}
     </div>

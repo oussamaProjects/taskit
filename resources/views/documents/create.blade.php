@@ -25,7 +25,7 @@
 
                     <div class="mb-2 relative">
                         <label for="name" class="text-xs opacity-75 scale-75">Description</label>
-                        {{ Form::textarea('description', '', ['id' => 'description','class' =>'peer border border-main focus:outline-none focus:border-secondary shadow-sm focus:shadow-sm-sm w-full py-1 px-2 h-16 text-sm']) }}
+                        {{ Form::textarea('description', '', ['id' => 'description','class' =>'peer border border-main focus:outline-none focus:border-secondary shadow-sm focus:shadow-sm-sm w-full py-1 px-2 h-16 text-sm bg-bg-color']) }}
                         @if ($errors->has('description'))
                             <span class=" text-red-500 text-xs">{{ $errors->first('description') }}</span>
                         @endif

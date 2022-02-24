@@ -36,7 +36,7 @@
         </div>
 
         <div class="mb-4 relative">
-            {{ Form::submit(' Sauvegarder', ['class' =>'flex text-bg-color bg-secondary hover:text-main hover:bg-tertiary border py-2 px-6 text-tiny focus:outline-none transition hover:no-underline ml-2 ml-auto']) }}
+            {{ Form::submit(' Sauvegarder', ['class' =>'flex text-bg-color bg-secondary hover:text-main hover:bg-tertiary border py-2 px-6 text-tiny focus:outline-none transition hover:no-underline ml-auto']) }}
             <button id="changePasswordButton" type="button">Changer le mot de passe ?</button>
         </div>
 

@@ -45,45 +45,55 @@
                         <h1 class="text-gray-800 text-3xl title-font font-medium mb-4">Document Information</h1>
 
                         <div class="flex border-t border-bg-color py-2 text-xs">
-                            <span class="text-bg-color0">Document Name</span>
+                            <span class="text-main">Document Name</span>
                             <span class="ml-auto text-gray-800">{{ $doc->name }}</span>
                         </div>
 
                         <div class="flex border-t border-bg-color py-2 text-xs">
-                            <span class="text-bg-color0">Description</span>
+                            <span class="text-main">Description</span>
                             <span class="ml-auto text-gray-800">{{ $doc->description }}</span>
                         </div>
 
                         <div class="flex border-t border-bg-color py-2 text-xs">
-                            <span class="text-bg-color0">Propriétaire</span>
+                            <span class="text-main">Propriétaire</span>
                             <span class="ml-auto text-gray-800">{{ $doc->user['name'] }}</span>
                         </div>
 
                         <div class="flex border-t border-bg-color py-2 text-xs">
-                            <span class="text-bg-color0">Department</span>
-                            <span class="ml-auto text-gray-800">{{ $doc->user->department['dptName'] ?? '' }}</span>
+                            <span class="text-main">Department</span>
+
+                            <span class="ml-auto text-gray-800">
+                                @foreach (Auth::user()->departments()->get() as $department)
+                                    <div class="ml-auto text-gray-800">
+                                        {{ $department->dptName }}
+                                    </div>
+                                @endforeach
+                            </span>
                         </div>
 
                         <div class="flex border-t border-bg-color py-2 text-xs">
-                            <span class="text-bg-color0">Category</span>
+                            <span class="text-main">Category</span>
                             <div class="flex flex-col ml-auto ">
                                 @foreach ($doc->categories()->get() as $cate)
-                                    <span class="ml-auto text-gray-800">{{ $cate->name }} </span><br />
+                                    {{-- <span href="/folders/{{ $folder->id }}" class="ml-auto text-secondary underline">{{ $cate->name }} </span><br /> --}}
+                                    <a href="/categories/{{ $cate->id }}"
+                                        class="ml-auto text-secondary underline">{{ $cate->name }} </a><br />
                                 @endforeach
                             </div>
                         </div>
 
                         <div class="flex border-t border-bg-color py-2 text-xs">
-                            <span class="text-bg-color0">Folder</span>
+                            <span class="text-main">Folder</span>
                             <div class="flex flex-col ml-auto ">
                                 @foreach ($doc->folders()->get() as $folder)
-                                    <span class="ml-auto text-gray-800">{{ $folder->name }} </span><br />
+                                    <a href="/folders/{{ $folder->id }}"
+                                        class="ml-auto text-secondary underline">{{ $folder->name }} </a><br />
                                 @endforeach
                             </div>
                         </div>
 
                         <div class="flex border-t border-bg-color py-2 text-xs">
-                            <span class="text-bg-color0">Expires At</span>
+                            <span class="text-main">Expires At</span>
                             <span class="ml-auto text-gray-800">
                                 @if ($doc->isExpire)
                                     {{ $doc->expires_at }}
@@ -94,19 +104,19 @@
                         </div>
 
                         <div class="flex border-t border-bg-color py-2 text-xs">
-                            <span class="text-bg-color0">Uploaded At</span>
+                            <span class="text-main">Uploaded At</span>
                             <span
                                 class="ml-auto text-gray-800">{{ \Carbon\Carbon::createFromTimeStamp($doc->created_at->toDayDateTimeString())->formatLocalized('%d %B %Y, %H:%M') }}
                             </span>
                         </div>
 
                         <div class="flex border-t border-bg-color py-2 text-xs">
-                            <span class="text-bg-color0">Updated At</span>
+                            <span class="text-main">Updated At</span>
                             <span class="ml-auto text-gray-800">{{ $doc->updated_at->toDayDateTimeString() }} </span>
                         </div>
 
                         <div class="flex border-t border-bg-color py-2 text-xs">
-                            <span class="text-bg-color0">MetaData</span>
+                            <span class="text-main">MetaData</span>
                             <span class="ml-auto text-right text-gray-800">
                                 Taille des documents : {{ $doc->filesize }} <br />
                                 Type de document : {{ $doc->mimetype }}<br />
@@ -116,7 +126,7 @@
                         </div>
 
                         <div class="flex border-t border-bg-color py-2 text-xs">
-                            <div class="text-bg-color0">Autorisation</div>
+                            <div class="text-main">Autorisation</div>
                             <div class="ml-auto text-right text-gray-800">
 
 

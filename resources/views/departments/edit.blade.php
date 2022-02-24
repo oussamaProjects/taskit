@@ -22,7 +22,7 @@
                         <div class="flex items-center mr-2 w-28">
                             {!! Form::radio('subs_id[]', $suds->id, null, ['id' => 'subs_' . $suds->id, 'class' => 'subs_id opacity-0 absolute']) !!}
                             <label for="subs_{{ $suds->id }}"
-                                class="select-none inline-block text-xs font-light text-bg-color bg-secondary hover:text-main hover:bg-tertiary transition text-center px-2 py-1 mb-1 rounded-sm w-30 cursor-pointer w-full">
+                                class="select-none inline-block text-xs font-light text-bg-color bg-secondary hover:text-main hover:bg-tertiary transition text-center px-2 py-1 rounded-sm w-32 cursor-pointer w-full">
                                 {{ $suds->subsName }} <br />
                             </label>
                         </div>

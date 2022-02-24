@@ -3,12 +3,15 @@
 namespace App;
 
 use Illuminate\Database\Eloquent\Model;
+use Overtrue\LaravelFavorite\Traits\Favoriteable;
 
 class Document extends Model
 {
     protected $table = 'document';
 
     protected $fillable = ['name', 'description'];
+    
+    use Favoriteable;
 
     public function user()
     {

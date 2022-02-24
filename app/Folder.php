@@ -3,9 +3,12 @@
 namespace App;
 
 use Illuminate\Database\Eloquent\Model;
+use Overtrue\LaravelFavorite\Traits\Favoriteable;
 
 class Folder extends Model
 {
+    use Favoriteable;
+
     protected $fillable = ['name'];
 
     public function user()

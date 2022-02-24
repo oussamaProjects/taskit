@@ -5,11 +5,13 @@ namespace App;
 use Illuminate\Notifications\Notifiable;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Spatie\Permission\Traits\HasRoles;
+use Overtrue\LaravelFavorite\Traits\Favoriter;
 
 class User extends Authenticatable
 {
     use Notifiable;
     use HasRoles;
+    use Favoriter;
 
     /**
      * The attributes that are mass assignable.
@@ -50,4 +52,5 @@ class User extends Authenticatable
     public function documents() {
         return $this->hasMany('App\Document');
     }
+
 }

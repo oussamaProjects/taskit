@@ -135,31 +135,52 @@ class UtilityController extends Controller
 
     static function has_permission_for_folder($id, $user)
     {
-        $permission = DB::table('departments')
+        $depts = $user->departments()->get();
+        $dept_array = array();
+
+        foreach ($depts as $key => $dept) {
+            $dept_array[] = $dept->id;
+        }
+
+        $permissions = DB::table('departments')
             ->leftJoin('folder_departement', 'folder_departement.department_id', 'departments.id')
             ->where('folder_departement.folder_id', '=', $id)
-            ->where('folder_departement.department_id', '=', $user->department_id)
+            ->whereIn('folder_departement.department_id', $dept_array)
             ->distinct()
             ->get();
 
+        // dd($dept_array);
+        // dd($id);
+        // dd($permissions);
+
         if (!$user->hasRole('Root')) {
+
             // var_dump($user->department_id);
             // var_dump($id);
-            if (isset($permission[0]) && !is_null($permission[0])) {
+            // var_dump($permission[0]->permission_for);
+
+            $permissions_array = array();
+
+            foreach ($permissions as $key => $permission) {
+                $permissions_array[] = $permission->permission_for;
+            }
+
+            // dd($permissions_array);
+
+            if (isset($permissions_array) && !is_null($permissions_array)) {
                 if ($user->hasRole('Admin')) {
-                    if ($permission[0]->permission_for == 1 || $permission[0]->permission_for == 0)
+                    if (in_array(array(1, 0), $permissions_array) || in_array(0, $permissions_array))
                         return true;
                     else
                         return false;
                 } else if ($user->hasRole('User')) {
-                    if ($permission[0]->permission_for == 0)
+                    if (in_array(0, $permissions_array))
                         return true;
                     else
                         return false;
                 } else
                     return false;
             }
-            return false;
         }
 
         return true;
