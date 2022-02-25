@@ -17,18 +17,18 @@ class DashboardController extends Controller
         // return $this->middleware(['auth']);
     }
 
-    public function favoriteDocument(Document $document)
+    public function favoriteDocument(int $id)
     {
-        // dd($document);
-        $user = Auth::user();
-        $user->attachFavoriteStatus($document);
+        $document = Document::findOrFail($id); 
+        auth()->user()->toggleFavorite($document); 
+        // return redirect()->back()->with('success', 'Added to favories');
     }
-    
-    public function favoriteFolder(Folder $folder)
+
+    public function favoriteFolder(int $id)
     {
-        dd($folder);
-        $user = Auth::user();
-        $user->attachFavoriteStatus($folder);
+        $folder = Folder::findOrFail($id); 
+        auth()->user()->toggleFavorite($folder);
+        // return redirect()->back()->with('success', 'Added to favories');
     }
 
     /**
@@ -46,13 +46,8 @@ class DashboardController extends Controller
         $folders = Folder::count();
         $departments = Department::count();
         $user = Auth::user();
-        // with type
-        $favorites_docs = $user->favorites()->withType(Document::class)->count();
-        dd($favorites_docs);
 
-        if (auth()->user()->hasRole('Admin')) {
-            return view('dashboard', compact('users', 'documents', 'folders', 'departments'));
-        } elseif (auth()->user()->hasRole('Root')) {
+        if ($user->hasRole('Root') || $user->hasRole('Admin')) {
             return view('dashboard', compact('users', 'documents', 'folders', 'departments'));
         }
 

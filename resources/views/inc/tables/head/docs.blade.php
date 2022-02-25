@@ -1,7 +1,6 @@
 <thead>
     <tr>
-        <th class="w-10 px-2 py-3 title-font tracking-wider font-medium text-bg-color text-sm bg-main shadow-sm">
-        </th>
+        {{-- <th class="w-10 px-2 py-3 title-font tracking-wider font-medium text-bg-color text-sm bg-main shadow-sm"></th> --}}
         <th class="px-2 py-3 title-font tracking-wider font-medium text-bg-color text-sm bg-main shadow-sm">
             Nom du document
         </th>

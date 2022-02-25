@@ -6,6 +6,7 @@ use App\Folder;
 use App\Category;
 use App\Department;
 use App\Document;
+use App\Helpers\Log;
 use App\Subsidiary;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
@@ -114,7 +115,7 @@ class FolderController extends Controller
 
         UtilityController::attachFolderToDept($folder, $permissions);
 
-        \Log::addToLog('New folder ' . $request->input('name') . ' was added');
+        Log::addToLog('New folder ' . $request->input('name') . ' was added');
 
         return redirect('/folders')->with('success', 'Le dossier a été ajouté avec succès !');
     }
@@ -264,7 +265,7 @@ class FolderController extends Controller
 
         UtilityController::attachFolderToDept($folder, $permissions);
 
-        \Log::addToLog('Folder ID ' . $id . ' was edited');
+        Log::addToLog('Folder ID ' . $id . ' was edited');
 
         return redirect('folders')->with('success', 'Le dossier a été mis à jour avec succès !');
     }
@@ -283,7 +284,7 @@ class FolderController extends Controller
             $folder = Folder::find($id);
             $folder->delete();
             $folder->documents()->detach();
-            \Log::addToLog('Folder ID ' . $id . ' was deleted');
+            Log::addToLog('Folder ID ' . $id . ' was deleted');
 
             return redirect()->back()->with('success', 'Le dossier a été supprimé avec succès !');
         } else
@@ -297,7 +298,7 @@ class FolderController extends Controller
         $folder->color =  $request->input('color');
         $folder->save();
 
-        \Log::addToLog('The color of the folder ID ' . $id . ' was changed');
+        Log::addToLog('The color of the folder ID ' . $id . ' was changed');
 
         return redirect()->back()->with('success', 'La couleur du fichier a été modifie avec succès !');
     }

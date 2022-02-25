@@ -21,7 +21,7 @@
             <span class=" text-red-500 text-xs">{{ $errors->first('ref') }}</span>
         @endif
     </div>
-    <div class="relative flex-1">
+    {{-- <div class="relative flex-1">
         <label for="name" class="text-xs opacity-75 scale-75">
             Version
         </label>
@@ -29,7 +29,7 @@
         @if ($errors->has('version'))
             <span class=" text-red-500 text-xs">{{ $errors->first('version') }}</span>
         @endif
-    </div>
+    </div> --}}
 </div>
 
 @include('inc.color-container',['location' => 'file'])

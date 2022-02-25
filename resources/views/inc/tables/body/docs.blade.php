@@ -1,8 +1,8 @@
 <tr id="tr_{{ $current_doc->id }}" class="text-gray-800 border-b hover:bg-white transition">
-    <td>
-        {{-- <input type="checkbox" id="chk_{{ $current_doc->id }}" class="sub_chk" data-id="{{ $current_doc->id }}"><label for="chk_{{ $current_doc->id }}"></label> --}}
-    </td>
-    <td class="px-2 py-3 text-sm">{{ $current_doc->name }}</td>
+    {{-- <td>
+       <input type="checkbox" id="chk_{{ $current_doc->id }}" class="sub_chk" data-id="{{ $current_doc->id }}"><label for="chk_{{ $current_doc->id }}"></label> 
+    </td> --}}
+    <td class="px-2 py-3 text-sm">{{ $current_doc->name }} V-{{ $current_doc->version }}</td>
     <td class="px-2 py-3 text-sm">{{ $current_doc->user->name }}</td>
     <td class="px-2 py-3 text-sm">{{ $current_doc->filesize }}</td>
     <td class="px-2 py-3 text-sm">
@@ -102,6 +102,16 @@
                 </a>
                 {!! Form::close() !!}
             @endcan
+
+            <a href="/favorites/document/{{ $current_doc->id }}/">
+                <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 m-1 text-red-500"
+                    fill="{{ $current_doc->hasBeenFavoritedBy(auth()->user()) ? 'red' : 'none' }}"
+                    viewBox="0 0 24 24" stroke="currentColor">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                        d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z" />
+                </svg>
+            </a>
+
         </div>
     </td>
 </tr>

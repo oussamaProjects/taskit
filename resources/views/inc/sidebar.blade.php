@@ -201,12 +201,25 @@
 
         </ul>
         <div class="flex flex-col m-2 space-y-1 text-main bg-bg-color">
-            <div class="font-medium p-2">Favoris</div>
-            <div class="flex flex-col px-2 pb-2">
-                <div class="font-light text-xs"> <a href="#">doc 1</a></div>
-                {{-- @foreach ($favoris as $favorie)
-                    <div class="font-light text-xs"></div>
-                @endforeach --}}
+            <div class="font-medium text-sm p-2">Favoris documents {{ $favorites_docs_count }}</div>
+            <div class="flex flex-col px-2 pb-2 m-0"> 
+                @if (!is_null($favorites_docs))
+                    @foreach ($favorites_docs as $document)
+                        <a href="/documents/{{ $document->id }}"
+                            class="font-light text-xs" target="_blank">{{ $document->name }}</a>
+                    @endforeach
+                @endif
+            </div>
+        </div>
+
+        <div class="flex flex-col m-2 space-y-1 text-main bg-bg-color">
+            <div class="font-medium text-sm p-2">Favoris folders {{ $favorites_folders_count }}</div>
+            <div class="flex flex-col px-2 pb-2 m-0"> 
+                @if (!is_null($favorites_folders))
+                    @foreach ($favorites_folders as $folder)
+                        <a href="/folders/{{ $folder->id }}" class="font-light text-xs" target="_blank">{{ $folder->name }}</a>
+                    @endforeach
+                @endif
             </div>
         </div>
         <p class="mb-14 px-5 py-3 hidden md:block text-center text-xs">Copyright @2021</p>

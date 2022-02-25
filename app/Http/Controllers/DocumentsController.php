@@ -7,10 +7,12 @@ use App\Document;
 use App\Category;
 use App\Department;
 use App\Folder;
+use App\Helpers\Log;
 use App\Subsidiary;
 use Illuminate\Support\Facades\Storage;
 use DB;
 use Illuminate\Support\Arr;
+use ViKon\Diff\Diff;
 
 class DocumentsController extends Controller
 {
@@ -31,9 +33,9 @@ class DocumentsController extends Controller
     $categories = Category::pluck('name', 'id')->all();
     $depts = Department::all();
     $subs  = Subsidiary::all();
-    $docs = Document::where('isExpire', '!=', 2)->get();
+    $docs = Document::where('isExpire', '!=', 2)->where('archived', '!=', 1)->get();
     $folders  = Folder::where('parent_id', '=', '0')->get();
-    $folders_input = Folder::pluck('name', 'id')->all(); 
+    $folders_input = Folder::pluck('name', 'id')->all();
 
     return view('documents.index', compact('docs', 'filetype', 'folders', 'folders_input', 'categories', 'depts', 'subs'));
   }
@@ -46,7 +48,7 @@ class DocumentsController extends Controller
   public function all()
   {
     $filetype = null;
-    $docs = Document::where('isExpire', '!=', 2)->get();
+    $docs = Document::where('isExpire', '!=', 2)->where('archived', '!=', 1)->get();
     $folders_input = Folder::pluck('name', 'id')->all();
     $categories = Category::pluck('name', 'id')->all();
     $subs  = Subsidiary::all();
@@ -111,6 +113,12 @@ class DocumentsController extends Controller
   public function store(Request $request)
   {
 
+    $this->validate($request, [
+      'name' => 'required|string|max:255',
+      'ref' => 'required|string|max:255',
+      'file' => 'required|max:50000',
+    ]);
+
     $depts = Department::all();
     $permissions = [];
 
@@ -118,17 +126,11 @@ class DocumentsController extends Controller
       $permissions[] = $request->input('permissions_' . $dep->id);
     }
 
-    $this->validate($request, [
-      'name' => 'required|string|max:255',
-      // 'description' => 'required|string|max:255',
-      'file' => 'required|max:50000',
-    ]);
-
     // get the data of uploaded user
-
     $user = auth()->user();
     $user_id = $user->id;
     $department_id = $user->department_id;
+
     // handle file upload
     if ($request->hasFile('file')) {
       // filename with extension
@@ -144,31 +146,30 @@ class DocumentsController extends Controller
     }
 
     $doc = new Document;
+
     $check_name = Document::where('name', 'like', $request->input('name'))->first();
     if ($check_name !== null) {
       return redirect()->back()->with('failure', 'Le nom du fichier exist deja !');
     }
 
-    // $check_ref = Document::where('ref', 'like', $request->input('ref'))->first();
-    // if ($check_ref !== null) {
-    //   return redirect()->back()->with('failure', 'La réference exist deja !');
-    // }
-
-    // $check_ver = Document::where('version', 'like', $request->input('version'))->first();
-    // if ($check_ver !== null) {
-    //   return redirect()->back()->with('failure', 'Le version exist deja !');
-    // }
+    $check_ref = Document::where('ref', 'like', $request->input('ref'))->first();
+    if ($check_ref !== null) {
+      return redirect()->back()->with('failure', 'La ref du fichier exist deja !');
+    }
 
     $doc->name = $request->input('name');
     $doc->description = $request->input('description');
     $doc->ref = $request->input('ref');
-    $doc->version = $request->input('version');
+    $doc->version = 1;
+    $doc->archived = 0;
+    $doc->validated = 0;
     $doc->user_id = $user_id;
     $doc->department_id = $department_id;
     $doc->file = $path;
-    $doc->color = '#fdf4d0';
+    $doc->color = $request->input('color') ?? '#fdf4d0';
     $doc->mimetype = Storage::mimeType($path);
     $size = Storage::size($path);
+
     if ($size >= 1000000) {
       $doc->filesize = round($size / 1000000) . 'MB';
     } elseif ($size >= 1000) {
@@ -176,6 +177,7 @@ class DocumentsController extends Controller
     } else {
       $doc->filesize = $size;
     }
+
     // determine whether it expires
     if ($request->input('isExpire') == true) {
       $doc->isExpire = false;
@@ -193,7 +195,7 @@ class DocumentsController extends Controller
     // dd($permissions);
     UtilityController::attachDocToDept($doc, $permissions);
 
-    \Log::addToLog('New Document, ' . $request->input('name') . ' was uploaded');
+    Log::addToLog('New Document, ' . $request->input('name') . ' was uploaded');
 
     return redirect()->back()->with('success', 'Le fichier a été téléchargé avec succès !');
   }
@@ -261,7 +263,7 @@ class DocumentsController extends Controller
    */
   public function edit($id)
   {
-    
+
     $user = auth()->user();
     if ($user->hasRole('Root') || $user->hasRole('Admin')) {
 
@@ -314,7 +316,6 @@ class DocumentsController extends Controller
 
     $this->validate($request, [
       'name' => 'required|string|max:255',
-      'description' => 'required|string|max:255'
     ]);
 
     $depts = Department::all();
@@ -324,54 +325,135 @@ class DocumentsController extends Controller
     $user_id = $user->id;
     $department_id = $user->department_id;
 
-    $doc = Document::findOrFail($id);
+    $oldDoc = Document::findOrFail($id);
 
-    $check_name = Document::where('name', 'like', $request->input('name'))->where('id', '!=', $id)->first();
-    if ($check_name !== null) {
-      return redirect()->back()->with('failure', 'Le nom du fichier exist deja !');
-    }
+    // handle file upload
+    if ($request->hasFile('file')) {
 
-    $check_ref = Document::where('ref', 'like', $request->input('ref'))->where('id', '!=', $id)->first();
-    if ($check_ref !== null) {
-      return redirect()->back()->with('failure', 'La réference exist deja !');
-    }
+      $oldFile = $oldDoc->file;
+      $oldFileMimeType = Storage::mimeType($oldFile);
+      $newFileMimeType = $request->file('file')->getMimeType();
 
-    $check_ver = Document::where('version', 'like', $request->input('version'))->where('id', '!=', $id)->first();
-    if ($check_ver !== null) {
-      return redirect()->back()->with('failure', 'Le version exist deja !');
-    }
+      if ($oldFileMimeType === $newFileMimeType) {
 
-    $doc->name = $request->input('name');
-    $doc->description = $request->input('description');
-    // determine whether it expires
-    if ($request->input('isExpire') == true) {
-      $doc->isExpire = false;
-      $doc->expires_at = null;
+        // filename with extension
+        $fileNameWithExt = $request->file('file')->getClientOriginalName();
+        // filename
+        $filename = pathinfo($fileNameWithExt, PATHINFO_FILENAME);
+        // extension
+        $extension = $request->file('file')->getClientOriginalExtension();
+        // filename to store
+        $fileNameToStore = $filename . '_' . time() . '.' . $extension;
+
+        // upload file
+        $path = $request->file('file')->storeAs('public/files/' . $user_id, $fileNameToStore);
+
+        $oldFilePath =   Storage::disk()->path($oldFile);
+        $newFilePath =   Storage::disk()->path($path);
+
+        $oldFileHash = sha1_file($oldFilePath);
+        $newFileHash = sha1_file($newFilePath);
+
+        // if ($oldFileHash !== $newFileHash) {
+
+        $doc = new Document;
+        // $check_name = Document::where('name', 'like', $request->input('name'))->where('id', '!=', $oldDoc->id)->first();
+        // if ($check_name !== null) {
+        //   return redirect()->back()->with('failure', 'Le nom du fichier exist deja !');
+        // }
+
+        // $check_ref = Document::where('ref', 'like', $request->input('ref'))->where('id', '!=', $oldDoc->id)->first();
+        // if ($check_ref !== null) {
+        //   return redirect()->back()->with('failure', 'La ref du fichier exist deja !');
+        // }
+
+        $doc->name = $request->input('name');
+        $doc->description = $request->input('description');
+        $doc->ref = $request->input('ref');
+        $doc->version = intval($oldDoc->version) + 1;
+        $doc->archived = 0;
+        $doc->validated = 0;
+        $doc->user_id = $user_id;
+        $doc->department_id = $department_id;
+        $doc->file = $path;
+        $doc->color = $request->input('color') ?? '#fdf4d0';
+        $doc->mimetype = Storage::mimeType($path);
+        $size = Storage::size($path);
+
+        if ($size >= 1000000) {
+          $doc->filesize = round($size / 1000000) . 'MB';
+        } elseif ($size >= 1000) {
+          $doc->filesize = round($size / 1000) . 'KB';
+        } else {
+          $doc->filesize = $size;
+        }
+
+        // save to db
+        $doc->save();
+        // add Category
+        $doc->categories()->sync($request->category_id);
+        // add Folder
+        $doc->folders()->sync($request->folder_id);
+        // dd($permissions);
+        UtilityController::attachDocToDept($doc, $permissions);
+
+
+        $oldDoc->archived = 1;
+        $oldDoc->archive_of = $doc->id;
+        $oldDoc->save();
+
+        Log::addToLog('New version of the Document (' . $oldDoc->id . ') ' . $oldDoc->name . ' V-' .  $oldDoc->version . ' is (' . $doc->id . ') ' . $doc->name . ' V-' .  $doc->version . ' ');
+
+        return redirect('/documentس/' . $doc->id)->with('success', 'Le fichier a été Mofifier avec succès !');
+        // Log::addToLog('New version of the Document <a href="/document/' . $oldDoc->id . '">' . $oldDoc->name . ' version ' .  $oldDoc->version . '</a><br>is <a href="/document/' . $doc->id . '">' . $doc->name . ' version ' .  $doc->version . '</a>');
+      } else {
+        return $this->updatedDocument($request, $oldDoc, $permissions);
+      }
+      // } else {
+      //   return redirect()->back()->with('failure', 'Not the same extension');
+      // }
     } else {
-      $doc->isExpire = true;
-      $doc->expires_at = $request->input('expires_at');
+      return $this->updatedDocument($request, $oldDoc, $permissions);
     }
-    $doc->save();
-
-    // add Category
-    $doc->categories()->sync($request->category_id);
-
-    // add Folder
-    $doc->folders()->sync($request->folder_id);
-
-    foreach ($depts as $dep) {
-      $permissions[] = $request->input('permissions_' . $dep->id);
-    }
-
-    $doc->department()->detach();
-
-    UtilityController::attachDocToDept($doc, $permissions);
-
-    \Log::addToLog('Document ID ' . $id . ' was edited');
-
-    return redirect('/documents')->with('success', 'Le fichier a été mis à jour avec succès !');
   }
 
+  public function updatedDocument(Request $request, $document, $permissions = [])
+  {
+
+    $user = auth()->user();
+    $user_id = $user->id;
+    $department_id = $user->department_id;
+
+    // $check_name = Document::where('name', 'like', $request->input('name'))->where('id', '!=', $document->id)->first();
+    // if ($check_name !== null) {
+    //   return redirect()->back()->with('failure', 'Le nom du fichier exist deja !');
+    // }
+
+    // $check_ref = Document::where('ref', 'like', $request->input('ref'))->where('id', '!=', $document->id)->first();
+    // if ($check_ref !== null) {
+    //   return redirect()->back()->with('failure', 'La réference exist deja !');
+    // }
+
+    $document->name = $request->input('name');
+    $document->description = $request->input('description');
+    $document->ref = $request->input('ref');
+    $document->user_id = $user_id;
+    $document->department_id = $department_id;
+    $document->color = $request->input('color') ?? '#fdf4d0';
+
+    // save to db
+    $document->save();
+    // add Category
+    $document->categories()->sync($request->category_id);
+    // add Folder
+    $document->folders()->sync($request->folder_id);
+    // dd($permissions);
+    UtilityController::attachDocToDept($document, $permissions);
+
+    Log::addToLog('The Document $document->name was updated');
+
+    return redirect('/documents/' . $document->id)->with('success', 'Le Document a été Modifier avec succès !');
+  }
   /**
    * Remove the specified resource from storage.
    *
@@ -390,11 +472,11 @@ class DocumentsController extends Controller
       // delete associated categories
       $doc->categories()->detach();
 
-      \Log::addToLog('Document ID ' . $id . ' was deleted');
+      Log::addToLog('Document ID ' . $id . ' was deleted');
 
-      return redirect('/documents')->with('success', 'Le fichier a été supprimé avec succès !');
+      return redirect('/documents/' . $id)->with('success', 'Le fichier a été supprimé avec succès !');
     } else
-      return redirect('/documents')->with('failure', 'Vous ne pouvez pas supprimé ce document');
+      return redirect('/documents/' . $id)->with('failure', 'Vous ne pouvez pas supprimé ce document');
   }
 
   // delete multiple docs selected
@@ -405,7 +487,7 @@ class DocumentsController extends Controller
       $ids = $request->ids;
       DB::table('document')->whereIn('id', explode(',', $ids))->delete();
 
-      \Log::addToLog('Selected Documents Are Deleted!');
+      Log::addToLog('Selected Documents Are Deleted!');
 
       return redirect('/documents')->with('success', 'Les documents sélectionnés ont été supprimés !');
     } else
@@ -424,7 +506,7 @@ class DocumentsController extends Controller
       $path = Storage::disk('local')->getDriver()->getAdapter()->applyPathPrefix($doc->file);
       $type = $doc->mimetype;
 
-      \Log::addToLog('Document ID ' . $id . ' was viewed');
+      Log::addToLog('Document ID ' . $id . ' was viewed');
 
       if (
         $type == 'application/pdf' || $type == 'image/jpeg' ||
@@ -453,12 +535,12 @@ class DocumentsController extends Controller
       $path = Storage::disk('local')->getDriver()->getAdapter()->applyPathPrefix($doc->file);
       $type = $doc->mimetype;
 
-      \Log::addToLog('Document ID ' . $id . ' was downloaded');
+      Log::addToLog('Document ID ' . $id . ' was downloaded');
 
       // return response()->download($path, $doc->name, ['Content-Type:' . $type]);
       return response()->download($path);
     }
-    return redirect()->back()->with('failure', 'Vous ne pouvez pas telecharger ce document');
+    return redirect()->back()->with('failure', 'Vous ne pouvez pas telecharge ce document');
   }
 
   // searching

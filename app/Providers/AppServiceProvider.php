@@ -25,25 +25,27 @@ class AppServiceProvider extends ServiceProvider
         // requests number
         $numReq = count(User::where('status', false)->get());
         View::share('requests', $numReq);
-        
+
         $users_count = count(User::all());
-        View::share('users_count', $users_count); 
+        View::share('users_count', $users_count);
 
         $dept_count = count(Department::all());
-        View::share('dept_count', $dept_count); 
-        
+        View::share('dept_count', $dept_count);
+
         $docs_count = count(Document::all());
-        View::share('docs_count', $docs_count); 
-        
+        View::share('docs_count', $docs_count);
+
         $folders_count = count(Folder::all());
-        View::share('folders_count', $folders_count); 
+        View::share('folders_count', $folders_count);
 
         $subs_count = count(Subsidiary::all());
-        View::share('subs_count', $subs_count); 
+        View::share('subs_count', $subs_count);
 
         // trash noti
         $trash = count(Document::where('isExpire', 2)->get());
         View::share('trashfull', $trash);
+
+
     }
 
     /**

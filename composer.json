@@ -18,7 +18,8 @@
         "laravelcollective/html": "^6.2",
         "overtrue/laravel-favorite": "^4.0",
         "spatie/laravel-backup": "^6.16",
-        "spatie/laravel-permission": "^4.1"
+        "spatie/laravel-permission": "^4.1",
+        "vi-kon/laravel-diff": "^1.0"
     },
     "require-dev": {
         "barryvdh/laravel-debugbar": "^3.6",

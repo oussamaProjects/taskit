@@ -50,6 +50,12 @@
                         </div>
 
                         <div class="flex border-t border-bg-color py-2 text-xs">
+                            <span class="text-main">Archive of</span>
+                            <a href="/documents/{{ $doc->archive_of }}"
+                                class="ml-auto text-secondary underline">{{ $doc->name }} </a>
+                        </div>
+
+                        <div class="flex border-t border-bg-color py-2 text-xs">
                             <span class="text-main">Description</span>
                             <span class="ml-auto text-gray-800">{{ $doc->description }}</span>
                         </div>
@@ -136,7 +142,6 @@
                                         @if (isset($department->pivot->permission_for))
                                             -
                                             {{ $department->pivot->permission_for == 0 ? 'Tous' : ' Admins' }}
-
                                         @else
                                             -
                                             {{ 'All' }}

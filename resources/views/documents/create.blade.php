@@ -13,7 +13,7 @@
 
                 {{ csrf_field() }}
 
-                <div class="grid grid-cols-2 sm:grid-cols-2 lg:grid-cols-2 p-4 gap-4">
+                <div class="grid grid-cols-3 sm:grid-cols-3 lg:grid-cols-3 p-4 gap-4">
                     <div class="mb-2 relative">
                         <label for="name" class="text-xs opacity-75 scale-75">Nom
                             du document</label>
@@ -31,10 +31,7 @@
                         @endif
                     </div>
 
-                </div>
-
-
-                <div class="grid grid-cols-2 sm:grid-cols-2 lg:grid-cols-2 p-4 gap-4">
+               
                     <div class="mb-2 relative">
                         <label for="ref" class="text-xs opacity-75 scale-75">
                             Réference
@@ -45,7 +42,7 @@
                         @endif
                     </div>
 
-                    <div class="mb-2 relative">
+                    {{-- <div class="mb-2 relative">
                         <label for="name" class="text-xs opacity-75 scale-75">
                             Version
                         </label>
@@ -58,7 +55,7 @@
                         {{ Form::checkbox('isExpire', 1, true, ['id' => 'isExpire']) }}
                         <label for="name" class="text-xs opacity-75 scale-75">Does
                             Not Expire</label>
-                    </div>
+                    </div> --}}
                 </div>
 
                 <div class="grid grid-cols-2 sm:grid-cols-2 lg:grid-cols-2 p-4 gap-4">

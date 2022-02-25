@@ -11,7 +11,7 @@
             <div class="flex flex-col name">
 
                 <a href="/documents/{{ $doc->id }}" class="block text-xs font-bold capitalize m-0">
-                    {{ $doc->name }}
+                    {{ $doc->name }}  V-{{ $doc->version }}
                 </a>
                 <span class="text-xs mt-auto">
                     {{ $doc->filesize }}
