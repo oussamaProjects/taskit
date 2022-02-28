@@ -4,7 +4,6 @@
 {{-- <script src="{{ asset('materialize-css/js/materialize.min.js') }}" charset="utf-8"></script> --}}
 
 <script type="text/javascript">
-    
     // DELETE using link
     $(function() {
         $('.data-delete').on('click', function(e) {
@@ -15,10 +14,15 @@
 
         $('.show-action').on('click', function(e) {
             e.preventDefault();
-            $('.other-actions').not($(this).parents('.doc-folder-container').find('.other-actions')).addClass('hidden');  
-             $(this).parents('.doc-folder-container').find('.other-actions').toggleClass('hidden');
+            // $('.other-actions').not($(this).parents('.doc-folder-container').find('.other-actions'))
+            //     .addClass('hidden');
+            // $(this).parents('.doc-folder-container').find('.other-actions').toggleClass('hidden');
+            console.log('show');
+            $('.card').not($(this).parents('.doc-folder-container').find('.card'))
+                .removeClass('is-flipped');
+            $(this).parents('.doc-folder-container').find('.card').toggleClass('is-flipped');
         });
-         
+
         // SHARE using link
         $('.data-share').on('click', function(e) {
             if (!confirm('Are you sure you want to share?')) return;

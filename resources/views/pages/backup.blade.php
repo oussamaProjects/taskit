@@ -4,8 +4,8 @@
 
     @include('inc.sidebar')
 
-    <div class="grid grid-cols-1 lg:grid-cols-1 p-4 gap-4">
-        <div class="relative flex flex-col break-words bg-bg-color w-full shadow-sm rounded">
+    <div class="grid grid-cols-1 lg:grid-cols-1 px-4 pt-4 pb-3 gap-4">
+        <div class="relative flex flex-col break-words bg-white w-full shadow-sm rounded">
             <div class="rounded-t mb-0 px-0 border">
                 <div class="flex flex-wrap items-center px-2 py-3">
                     <div class="relative w-full max-w-full flex-grow flex-1">
@@ -33,8 +33,8 @@
 
     <div class="grid grid-cols-4 lg:grid-cols-4">
         <div class="col-span-3">
-            <div class="grid grid-cols-1 lg:grid-cols-1 p-4 gap-4">
-                <div class="relative flex flex-col break-words bg-bg-color w-full shadow-sm rounded">
+            <div class="grid grid-cols-1 lg:grid-cols-1 px-4 pt-4 pb-3 gap-4">
+                <div class="relative flex flex-col break-words bg-white w-full shadow-sm rounded">
                     <div class="rounded-t mb-0 px-0 border">
                         <div class="block w-full overflow-x-auto">
                             <table
@@ -103,7 +103,7 @@
             </div>
         </div>
 
-        <button id="buttonmodalFileImg" class="bg-bg-color h-auto p-4" type="button">
+        <button id="buttonmodalFileImg" class="bg-white h-auto p-4" type="button">
             <img src="{{ asset('img/undraw_Transfer_files_re_a2a9.svg') }}" alt="">
         </button>
     </div>

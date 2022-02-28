@@ -4,7 +4,7 @@
     @include('inc.sidebar')
 
 
-    <div class="relative flex flex-col min-w-0 mb-4 lg:mb-0 break-words bg-bg-color w-full shadow-sm">
+    <div class="relative flex flex-col min-w-0 mb-4 lg:mb-0 break-words bg-white w-full shadow-sm">
         <div class="rounded-t mb-0 px-0 border">
             <div class="flex flex-wrap items-center px-2 py-3">
                 <div class="relative w-full max-w-full flex-grow flex-1">

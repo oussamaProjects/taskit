@@ -8,7 +8,7 @@
         </button>
 
         <div class="overflow-y-scroll py-4 px-8">
-            <h2 class="text-gray-800 text-xl mb-2 font-medium title-font">Ajouter une categorie</h2>
+            <h2 class="text-gray-800 text-xl mb-2 font-medium title-font">Ajouter une activité</h2>
             {!! Form::open(['action' => 'CategoriesController@store', 'method' => 'POST', 'class' => '']) !!}
             <div class="mb-2 relative">
                 <label for="name" class="text-xs opacity-75 scale-75">Nom

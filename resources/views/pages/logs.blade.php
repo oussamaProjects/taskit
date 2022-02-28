@@ -4,36 +4,39 @@
     @include('inc.sidebar')
 
 
+    <div class="grid grid-cols-1 lg:grid-cols-1 px-4 pt-4 pb-3 gap-4">
+        <div class="relative flex flex-col break-words bg-white w-full shadow-sm rounded">
+            <div class="rounded-t mb-0 px-0 border">
+                <div class="flex flex-wrap items-center px-2 py-3">
 
-    <div class="relative flex flex-col min-w-0 mb-4 lg:mb-0 break-words bg-bg-color w-full shadow-sm">
-        <div class="rounded-t mb-0 px-0 border">
-            <div class="flex flex-wrap items-center px-4 py-2">
-                <div class="relative w-full max-w-full flex-grow flex-1">
-                    <h3 class="font-semibold text-base text-gray-800 ">
-                        Activités des utilisateurs
-                    </h3>
-                </div>
-                <div class="flex items-end justify-end mt-4">
-                    @can('root')
-                    <a href="logsdel" data-position="left" data-delay="50" data-tooltip="Tout effacer"
-                        class="flex text-bg-color bg-secondary hover:text-main hover:bg-tertiary border py-2 px-6 text-tiny focus:outline-none transition hover:no-underline ml-auto">
-                        <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 m-1" fill="none" viewBox="0 0 24 24"
-                            stroke="currentColor">
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                                d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16" />
-                        </svg>
-                        <span class="ml-1 font-semibold">Tout effacer</span>
-                    </a>
-                @endcan
+                    <div class="relative w-full max-w-full flex flex-grow flex-1">
+                        <h3 class="font-semibold text-base text-gray-800 ">
+                            Activités des utilisateurs
+                        </h3>
+                    </div>
+
+                    <div class="flex items-end justify-end">
+                        @can('root')
+                            <a href="logsdel" data-position="left" data-delay="50" data-tooltip="Tout effacer"
+                                class="flex text-bg-color bg-secondary hover:text-main hover:bg-tertiary border py-2 px-6 text-tiny focus:outline-none transition hover:no-underline ml-auto">
+                                <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 m-1" fill="none" viewBox="0 0 24 24"
+                                    stroke="currentColor">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                        d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16" />
+                                </svg>
+                                <span class="ml-1 font-semibold">Tout effacer</span>
+                            </a>
+                        @endcan
+                    </div>
+
                 </div>
             </div>
         </div>
     </div>
 
-
     @if (count($logs) > 0)
-        <div class="grid grid-cols-1 lg:grid-cols-1 gap-4 mt-4 p-4">
-            <div class="relative flex flex-col min-w-0 mb-4 lg:mb-0 break-words bg-bg-color w-full shadow-sm">
+        <div class="grid grid-cols-1 lg:grid-cols-1 gap-4 p-4">
+            <div class="relative flex flex-col min-w-0 mb-4 lg:mb-0 break-words bg-white w-full shadow-sm">
                 <div class="rounded-t mb-0 px-0 border">
 
                     <div class="block w-full overflow-x-auto">

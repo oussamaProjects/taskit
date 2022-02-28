@@ -126,7 +126,7 @@
                         </svg>
                     </div>
                     <div class="text-right">
-                        <p class="text-2xl">Catégories</p>
+                        <p class="text-2xl">activités</p>
                         <p> </p>
                     </div>
                 </div>

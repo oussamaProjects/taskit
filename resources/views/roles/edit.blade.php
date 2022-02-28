@@ -4,7 +4,7 @@
     @include('inc.sidebar')
 
     <!-- Statistics Cards -->
-    <div class="grid grid-cols-1 py-4 ml-4 bg-bg-color shadow-sm">
+    <div class="grid grid-cols-1 pb-4 px-3 mx-4 bg-white shadow-sm">
 
         <div class="flex mb-4">
             <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 m-1" fill="none" viewBox="0 0 24 24"

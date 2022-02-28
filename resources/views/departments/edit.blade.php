@@ -37,7 +37,7 @@
             </div>
         </div>
 
-        <button id="addDeptButtonFileImg" class="bg-bg-color h-auto p-4" type="button">
+        <button id="addDeptButtonFileImg" class="bg-white h-auto p-4" type="button">
             <img src="{{ asset('img/undraw_Add_files_re_v09g.svg') }}" alt="">
         </button>
     </div>

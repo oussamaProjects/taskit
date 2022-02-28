@@ -8,7 +8,7 @@
     <div class="grid grid-cols-3 sm:grid-cols-3 md:grid-cols-3 lg:grid-cols-3 gap-4">
         <div class="col-span-2">
 
-            {!! Form::open(['action' => ['DocumentsController@update', $doc->id], 'method' => 'PATCH', 'enctype' => 'multipart/form-data', 'class' => 'ml-4 p-4 border shadow']) !!}
+            {!! Form::open(['action' => ['DocumentsController@update', $doc->id], 'method' => 'PATCH', 'enctype' => 'multipart/form-data', 'class' => 'ml-4 p-4 border shadow bg-white']) !!}
 
             {{ csrf_field() }}
 
@@ -22,7 +22,7 @@
                         <span class="text-red-500 text-xs">{{ $errors->first('name') }}</span>
                     @endif
                 </div>
-                <div class="mr-4 relative flex-1">
+                <div class="relative flex-1">
                     <label for="ref" class="text-xs opacity-75 scale-75">
                         Réference
                     </label>
@@ -61,7 +61,7 @@
                     <div class="mb-4 pr-2 relative flex-1 flex items-end">
                         <div class="w-full relative">
                             <label for="category" class="text-xs opacity-75 scale-75">
-                                Catégorie (Optional)
+                                Activité (Optional)
                             </label>
                             <select name="category_id" id="category" onchange="javascript:handleSelect(this)"
                                 class="peer border border-main focus:outline-none focus:border-secondary shadow-sm focus:shadow-sm-sm w-full py-1 px-2 h-8 text-sm bg-bg-color">
@@ -114,7 +114,7 @@
                 </div>
             </div>
 
-            @include('inc.docs.autorisation', ['subs' => $subs])
+            @include('inc.docs.autorisation', ['subs' => $subs,'doc' => $doc])
 
             <div class="mb-2 relative">
                 <div class="btn bg-color">
@@ -135,7 +135,7 @@
 
 
         @can('upload')
-            <button id="buttonmodalFileImg" class="bg-bg-color h-auto p-4" type="button">
+            <button id="buttonmodalFileImg" class="bg-white h-auto p-4" type="button">
                 <img src="{{ asset('img/undraw_Add_files_re_v09g.svg') }}" alt="">
             </button>
         @endcan

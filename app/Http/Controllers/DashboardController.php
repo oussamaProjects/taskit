@@ -21,14 +21,14 @@ class DashboardController extends Controller
     {
         $document = Document::findOrFail($id); 
         auth()->user()->toggleFavorite($document); 
-        // return redirect()->back()->with('success', 'Added to favories');
+        return redirect()->back()->with('success', 'Added to favories');
     }
 
     public function favoriteFolder(int $id)
     {
         $folder = Folder::findOrFail($id); 
         auth()->user()->toggleFavorite($folder);
-        // return redirect()->back()->with('success', 'Added to favories');
+        return redirect()->back()->with('success', 'Added to favories');
     }
 
     /**

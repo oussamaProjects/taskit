@@ -11,14 +11,9 @@
 
             <li>
                 <a href="/shared"
-                    class="relative flex flex-row items-center h-8 focus:outline-none hover:bg-secondary text-bg-color-600 hover:text-bg-color-800 border-l-4 border-transparent hover:border-main pr-6">
+                    class="{{ request()->is('shared*') ? 'bg-secondary text-bg-color-800' : '' }} relative flex flex-row items-center h-7 focus:outline-none hover:bg-secondary text-bg-color-600 hover:text-bg-color-800 border-l-4 border-transparent hover:border-main pr-6">
                     <span class="inline-flex justify-center items-center ml-4">
-                        <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"
-                            xmlns="http://www.w3.org/2000/svg">
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                                d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6">
-                            </path>
-                        </svg>
+                        @include('inc.icons.document')
                     </span>
                     <span class="ml-2 text-sm tracking-wide truncate">Documents partagés</span>
                 </a>
@@ -26,14 +21,9 @@
 
             <li>
                 <a href="/documents"
-                    class="relative flex flex-row items-center h-8 focus:outline-none hover:bg-secondary text-bg-color-600 hover:text-bg-color-800 border-l-4 border-transparent hover:border-main pr-6">
+                    class="{{ request()->is('documents*') ? 'bg-secondary text-bg-color-800' : '' }} relative flex flex-row items-center h-7 focus:outline-none hover:bg-secondary text-bg-color-600 hover:text-bg-color-800 border-l-4 border-transparent hover:border-main pr-6">
                     <span class="inline-flex justify-center items-center ml-4">
-                        <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"
-                            xmlns="http://www.w3.org/2000/svg">
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                                d="M20 13V6a2 2 0 00-2-2H6a2 2 0 00-2 2v7m16 0v5a2 2 0 01-2 2H6a2 2 0 01-2-2v-5m16 0h-2.586a1 1 0 00-.707.293l-2.414 2.414a1 1 0 01-.707.293h-3.172a1 1 0 01-.707-.293l-2.414-2.414A1 1 0 006.586 13H4">
-                            </path>
-                        </svg>
+                        @include('inc.icons.document')
                     </span>
                     <span class="ml-2 text-sm tracking-wide truncate">Documents</span>
                     <span
@@ -41,33 +31,12 @@
                 </a>
             </li>
 
-            @hasanyrole('Root|Admin')
-                <li>
-                    <a href="/categories"
-                        class="relative flex flex-row items-center h-8 focus:outline-none hover:bg-secondary text-bg-color-600 hover:text-bg-color-800 border-l-4 border-transparent hover:border-main pr-6">
-                        <span class="inline-flex justify-center items-center ml-4">
-                            <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"
-                                xmlns="http://www.w3.org/2000/svg">
-                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                                    d="M7 8h10M7 12h4m1 8l-4-4H5a2 2 0 01-2-2V6a2 2 0 012-2h14a2 2 0 012 2v8a2 2 0 01-2 2h-3l-4 4z">
-                                </path>
-                            </svg>
-                        </span>
-                        <span class="ml-2 text-sm tracking-wide truncate">Catégories</span>
-                    </a>
-                </li>
-            @endhasanyrole
-
             <li>
                 <a href="/folders"
-                    class="relative flex flex-row items-center h-8 focus:outline-none hover:bg-secondary text-bg-color-600 hover:text-bg-color-800 border-l-4 border-transparent hover:border-main pr-6">
+                    class="{{ request()->is('folders*') ? 'bg-secondary text-bg-color-800' : '' }} relative flex flex-row items-center h-7 focus:outline-none hover:bg-secondary hover:text-bg-color-800 text-bg-color-600 border-l-4 border-transparent hover:border-main pr-6">
                     <span class="inline-flex justify-center items-center ml-4">
-                        <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"
-                            xmlns="http://www.w3.org/2000/svg">
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                                d="M7 8h10M7 12h4m1 8l-4-4H5a2 2 0 01-2-2V6a2 2 0 012-2h14a2 2 0 012 2v8a2 2 0 01-2 2h-3l-4 4z">
-                            </path>
-                        </svg>
+                        @include('inc.icons.folder')
+
                     </span>
                     <span class="ml-2 text-sm tracking-wide truncate">Dossiers</span>
                     <span
@@ -75,17 +44,24 @@
                 </a>
             </li>
 
+            @hasanyrole('Root|Admin')
+                <li>
+                    <a href="/categories"
+                        class="{{ request()->is('categories*') ? 'bg-secondary text-bg-color-800' : '' }} relative flex flex-row items-center h-7 focus:outline-none hover:bg-secondary text-bg-color-600 hover:text-bg-color-800 border-l-4 border-transparent hover:border-main pr-6">
+                        <span class="inline-flex justify-center items-center ml-4">
+                            @include('inc.icons.tags')
+                        </span>
+                        <span class="ml-2 text-sm tracking-wide truncate">Activités</span>
+                    </a>
+                </li>
+            @endhasanyrole
+
             @hasrole('Root')
                 <li>
                     <a href="/users"
-                        class="relative flex flex-row items-center h-8 focus:outline-none hover:bg-secondary text-bg-color-600 hover:text-bg-color-800 border-l-4 border-transparent hover:border-main pr-6">
+                        class="{{ request()->is('users*') ? 'bg-secondary text-bg-color-800' : '' }} relative flex flex-row items-center h-7 focus:outline-none hover:bg-secondary text-bg-color-600 hover:text-bg-color-800 border-l-4 border-transparent hover:border-main pr-6">
                         <span class="inline-flex justify-center items-center ml-4">
-                            <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"
-                                xmlns="http://www.w3.org/2000/svg">
-                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                                    d="M7 8h10M7 12h4m1 8l-4-4H5a2 2 0 01-2-2V6a2 2 0 012-2h14a2 2 0 012 2v8a2 2 0 01-2 2h-3l-4 4z">
-                                </path>
-                            </svg>
+                            @include('inc.icons.users')
                         </span>
                         <span class="ml-2 text-sm tracking-wide truncate">Utilisateurs</span>
                         <span
@@ -95,14 +71,9 @@
 
                 <li>
                     <a href="/departments"
-                        class="relative flex flex-row items-center h-8 focus:outline-none hover:bg-secondary text-bg-color-600 hover:text-bg-color-800 border-l-4 border-transparent hover:border-main pr-6">
+                        class="{{ request()->is('departments*') ? 'bg-secondary text-bg-color-800' : '' }} relative flex flex-row items-center h-7 focus:outline-none hover:bg-secondary text-bg-color-600 hover:text-bg-color-800 border-l-4 border-transparent hover:border-main pr-6">
                         <span class="inline-flex justify-center items-center ml-4">
-                            <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"
-                                xmlns="http://www.w3.org/2000/svg">
-                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                                    d="M15 17h5l-1.405-1.405A2.032 2.032 0 0118 14.158V11a6.002 6.002 0 00-4-5.659V5a2 2 0 10-4 0v.341C7.67 6.165 6 8.388 6 11v3.159c0 .538-.214 1.055-.595 1.436L4 17h5m6 0v1a3 3 0 11-6 0v-1m6 0H9">
-                                </path>
-                            </svg>
+                            @include('inc.icons.bell')
                         </span>
                         <span class="ml-2 text-sm tracking-wide truncate">Départments</span>
                         <span
@@ -112,14 +83,9 @@
 
                 <li>
                     <a href="/subsidiaries"
-                        class="relative flex flex-row items-center h-8 focus:outline-none hover:bg-secondary text-bg-color-600 hover:text-bg-color-800 border-l-4 border-transparent hover:border-main pr-6">
+                        class="{{ request()->is('subsidiaries*') ? 'bg-secondary text-bg-color-800' : '' }} relative flex flex-row items-center h-7 focus:outline-none hover:bg-secondary text-bg-color-600 hover:text-bg-color-800 border-l-4 border-transparent hover:border-main pr-6">
                         <span class="inline-flex justify-center items-center ml-4">
-                            <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"
-                                xmlns="http://www.w3.org/2000/svg">
-                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                                    d="M15 17h5l-1.405-1.405A2.032 2.032 0 0118 14.158V11a6.002 6.002 0 00-4-5.659V5a2 2 0 10-4 0v.341C7.67 6.165 6 8.388 6 11v3.159c0 .538-.214 1.055-.595 1.436L4 17h5m6 0v1a3 3 0 11-6 0v-1m6 0H9">
-                                </path>
-                            </svg>
+                            @include('inc.icons.bell')
                         </span>
                         <span class="ml-2 text-sm tracking-wide truncate">Filiales</span>
                         <span
@@ -130,14 +96,9 @@
 
             <li>
                 <a href="/mydocuments"
-                    class="relative flex flex-row items-center h-8 focus:outline-none hover:bg-secondary text-bg-color-600 hover:text-bg-color-800 border-l-4 border-transparent hover:border-main pr-6">
+                    class="{{ request()->is('mydocuments*') ? 'bg-secondary text-bg-color-800' : '' }} relative flex flex-row items-center h-7 focus:outline-none hover:bg-secondary text-bg-color-600 hover:text-bg-color-800 border-l-4 border-transparent hover:border-main pr-6">
                     <span class="inline-flex justify-center items-center ml-4">
-                        <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"
-                            xmlns="http://www.w3.org/2000/svg">
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                                d="M15 17h5l-1.405-1.405A2.032 2.032 0 0118 14.158V11a6.002 6.002 0 00-4-5.659V5a2 2 0 10-4 0v.341C7.67 6.165 6 8.388 6 11v3.159c0 .538-.214 1.055-.595 1.436L4 17h5m6 0v1a3 3 0 11-6 0v-1m6 0H9">
-                            </path>
-                        </svg>
+                        @include('inc.icons.document')
                     </span>
                     <span class="ml-2 text-sm tracking-wide truncate">Mes documents</span>
                 </a>
@@ -155,13 +116,9 @@
 
                 <li>
                     <a href="/backup"
-                        class="relative flex flex-row items-center h-8 focus:outline-none hover:bg-secondary text-bg-color-600 hover:text-bg-color-800 border-l-4 border-transparent hover:border-main pr-6">
+                        class="{{ request()->is('backup*') ? 'bg-secondary text-bg-color-800' : '' }} relative flex flex-row items-center h-7 focus:outline-none hover:bg-secondary text-bg-color-600 hover:text-bg-color-800 border-l-4 border-transparent hover:border-main pr-6">
                         <span class="inline-flex justify-center items-center ml-4">
-                            <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"
-                                xmlns="http://www.w3.org/2000/svg">
-                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                                    d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z"></path>
-                            </svg>
+                            @include('inc.icons.settings')
                         </span>
                         <span class="ml-2 text-sm tracking-wide truncate">Backup Manager</span>
                     </a>
@@ -169,13 +126,9 @@
 
                 <li>
                     <a href="/roles"
-                        class="relative flex flex-row items-center h-8 focus:outline-none hover:bg-secondary text-bg-color-600 hover:text-bg-color-800 border-l-4 border-transparent hover:border-main pr-6">
+                        class="{{ request()->is('roles*') ? 'bg-secondary text-bg-color-800' : '' }} relative flex flex-row items-center h-7 focus:outline-none hover:bg-secondary text-bg-color-600 hover:text-bg-color-800 border-l-4 border-transparent hover:border-main pr-6">
                         <span class="inline-flex justify-center items-center ml-4">
-                            <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"
-                                xmlns="http://www.w3.org/2000/svg">
-                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                                    d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z"></path>
-                            </svg>
+                            @include('inc.icons.users')
                         </span>
                         <span class="ml-2 text-sm tracking-wide truncate">Les rôles</span>
                     </a>
@@ -183,16 +136,9 @@
 
                 <li>
                     <a href="/logs"
-                        class="relative flex flex-row items-center h-8 focus:outline-none hover:bg-secondary text-bg-color-600 hover:text-bg-color-800 border-l-4 border-transparent hover:border-main pr-6">
+                        class="{{ request()->is('logs*') ? 'bg-secondary text-bg-color-800' : '' }} relative flex flex-row items-center h-7 focus:outline-none hover:bg-secondary text-bg-color-600 hover:text-bg-color-800 border-l-4 border-transparent hover:border-main pr-6">
                         <span class="inline-flex justify-center items-center ml-4">
-                            <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"
-                                xmlns="http://www.w3.org/2000/svg">
-                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                                    d="M10.325 4.317c.426-1.756 2.924-1.756 3.35 0a1.724 1.724 0 002.573 1.066c1.543-.94 3.31.826 2.37 2.37a1.724 1.724 0 001.065 2.572c1.756.426 1.756 2.924 0 3.35a1.724 1.724 0 00-1.066 2.573c.94 1.543-.826 3.31-2.37 2.37a1.724 1.724 0 00-2.572 1.065c-.426 1.756-2.924 1.756-3.35 0a1.724 1.724 0 00-2.573-1.066c-1.543.94-3.31-.826-2.37-2.37a1.724 1.724 0 00-1.065-2.572c-1.756-.426-1.756-2.924 0-3.35a1.724 1.724 0 001.066-2.573c-.94-1.543.826-3.31 2.37-2.37.996.608 2.296.07 2.572-1.065z">
-                                </path>
-                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                                    d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"></path>
-                            </svg>
+                            @include('inc.icons.settings')
                         </span>
                         <span class="ml-2 text-sm tracking-wide truncate">Journaux d'accès</span>
                     </a>
@@ -200,25 +146,40 @@
             @endhasrole
 
         </ul>
-        <div class="flex flex-col m-2 space-y-1 text-main bg-bg-color">
-            <div class="font-medium text-sm p-2">Favoris documents {{ $favorites_docs_count }}</div>
-            <div class="flex flex-col px-2 pb-2 m-0"> 
+        <div class="flex flex-col m-2 space-y-1 text-secondary bg-tertiary font-medium rounded-sm">
+            <div class="flex font-medium text-sm px-2 py-1">Favoris documents <span
+                    class="px-2 py-0.5 ml-auto text-xs font-medium tracking-wide text-tertiary bg-main rounded-full">{{ $favorites_docs_count }}</span>
+            </div>
+            <div class="flex flex-col px-2 py-2 m-0 bg-white">
                 @if (!is_null($favorites_docs))
                     @foreach ($favorites_docs as $document)
                         <a href="/documents/{{ $document->id }}"
-                            class="font-light text-xs" target="_blank">{{ $document->name }}</a>
+                            class="flex items-center justify-start text-xxs capitalize m-0">
+                            @include('inc.mime-type-icon', ['doc'=>$document])
+                            <span class="ml-1">{{ $document->name }}</span>
+                        </a>
                     @endforeach
+                @else
+                    No favorites
                 @endif
             </div>
         </div>
 
-        <div class="flex flex-col m-2 space-y-1 text-main bg-bg-color">
-            <div class="font-medium text-sm p-2">Favoris folders {{ $favorites_folders_count }}</div>
-            <div class="flex flex-col px-2 pb-2 m-0"> 
+        <div class="flex flex-col m-2 space-y-1 text-secondary bg-tertiary font-medium rounded-sm">
+            <div class="flex font-medium text-sm px-2 py-1">Favoris folders <span
+                    class="px-2 py-0.5 ml-auto text-xs font-medium tracking-wide text-tertiary bg-main rounded-full">{{ $favorites_folders_count }}</span>
+            </div>
+            <div class="flex flex-col px-2 py-2 m-0 bg-white">
                 @if (!is_null($favorites_folders))
                     @foreach ($favorites_folders as $folder)
-                        <a href="/folders/{{ $folder->id }}" class="font-light text-xs" target="_blank">{{ $folder->name }}</a>
+                        <a href="/folders/{{ $folder->id }}"
+                            class="flex items-center justify-start text-xxs capitalize m-0">
+                            @include('inc.folder-icon', [ 'folder_icon'=> $folder])
+                            <span class="ml-1">{{ $folder->name }}</span>
+                        </a>
                     @endforeach
+                @else
+                    No favorites
                 @endif
             </div>
         </div>
@@ -228,4 +189,4 @@
 <!-- ./Sidebar -->
 
 
-<div class="h-full ml-14 mt-14 mb-10 md:ml-56">
+<div class="h-screen ml-14 mt-14 md:ml-56">

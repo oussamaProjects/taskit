@@ -21,6 +21,12 @@ class AppServiceProvider extends ServiceProvider
      */
     public function boot()
     {
+
+        \Validator::extend('email_domain', function ($attribute, $value, $parameters, $validator) {
+            $allowedEmailDomains = ['tawzerholding.com', 'geniworks.com', 'technicords.com'];
+            return in_array(explode('@', $parameters[0])[1], $allowedEmailDomains);
+        });
+
         Schema::defaultStringLength(191);
         // requests number
         $numReq = count(User::where('status', false)->get());
@@ -44,8 +50,6 @@ class AppServiceProvider extends ServiceProvider
         // trash noti
         $trash = count(Document::where('isExpire', 2)->get());
         View::share('trashfull', $trash);
-
-
     }
 
     /**

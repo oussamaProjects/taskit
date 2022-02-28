@@ -62,7 +62,7 @@
 
                     <div class="mb-2 relative">
                         <label class="text-xs opacity-75 scale-75">
-                            Catégorie (Optional)
+                            Activité (Optional)
                         </label>
                         {{ Form::select('category_id[]', $categories, null, ['multiple' => 'multiple','id' => 'category','class' =>'form-multiselect peer border border-bg-color focus:outline-none rounded focus:border-bg-color0 focus:shadow-sm-sm block w-full py-2']) }}
                         @if ($errors->has('category'))

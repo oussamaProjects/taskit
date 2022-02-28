@@ -9,11 +9,11 @@
     <div class="grid grid-cols-4 sm:grid-cols-4 lg:grid-cols-4 p-4 gap-4">
         
         <div class="col-span-3">
-            <div class="flex flex-col text-center w-full">
-                <h1 class="sm:text-xl text-lg font-medium title-font my-2 text-gray-800 text-center p-2 uppercase">Tous les utilisateurs</h1>
+            <div class="flex flex-col text-center w-full px-2 pb-2 bg-white">
+                <h1 class="sm:text-xl text-lg title-font my-2 text-gray-800 text-center p-2 uppercase">Tous les activités</h1>
                 <div class="w-full overflow-x-auto">
                     <table
-                        class="table-auto w-full text-left whitespace-no-wrap border border-bg-color border border-bg-color">
+                        class="table-auto w-full text-left whitespace-no-wrap border border-bg-color">
                         <thead>
                             <tr>
 
@@ -77,7 +77,7 @@
             </div>
         </div>
 
-        <button id="link_add_categorie" class="bg-bg-color h-auto p-4" type="button">
+        <button id="link_add_categorie" class="bg-white h-auto p-4" type="button">
             <img src="{{ asset('img/undraw_Filing_system_re_56h6.svg') }}" alt="">
         </button>
     </div>

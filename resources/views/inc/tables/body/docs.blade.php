@@ -1,4 +1,4 @@
-<tr id="tr_{{ $current_doc->id }}" class="text-gray-800 border-b hover:bg-white transition">
+<tr id="tr_{{ $current_doc->id }}" class="text-gray-800 border-b hover:bg-bg-color transition">
     {{-- <td>
        <input type="checkbox" id="chk_{{ $current_doc->id }}" class="sub_chk" data-id="{{ $current_doc->id }}"><label for="chk_{{ $current_doc->id }}"></label> 
     </td> --}}
@@ -6,13 +6,13 @@
     <td class="px-2 py-3 text-sm">{{ $current_doc->user->name }}</td>
     <td class="px-2 py-3 text-sm">{{ $current_doc->filesize }}</td>
     <td class="px-2 py-3 text-sm">
-        @include('inc.mime-type-icon', ['doc'=>$doc])
+        @include('inc.mime-type', ['doc'=>$doc])
     </td>
-    <td class="px-2 py-3 text-sm">
+    {{-- <td class="px-2 py-3 text-sm">
         {{ \Carbon\Carbon::createFromTimeStamp($current_doc->created_at->toDayDateTimeString())->formatLocalized('%d %B %Y, %H:%M') }}
+    </td> --}}
     <td class="px-2 py-3 text-sm">
         {{ \Carbon\Carbon::createFromTimeStamp(Storage::lastModified($current_doc->file))->formatLocalized('%d %B %Y, %H:%M') }}
-    </td>
     </td>
     <td class="px-2 py-3 text-sm">
         {{-- @if ($current_doc->isExpire)  {{ $current_doc->expires_at }} @else No Expiration @endif --}}
@@ -20,7 +20,7 @@
     <td class="px-2 py-3 text-sm">
         @foreach ($current_doc->department()->get() as $department)
             @if (isset($department->pivot->permission_for) && ($department->pivot->permission_for == 1 || $department->pivot->permission_for == 0))
-                <span class="text-xs leading-5 text-bg-color bg-secondary py-1 px-2 rounded ml-1 mb-1 inline-block ">
+                <span class="text-xs leading-5 text-bg-color bg-secondary px-2 rounded ml-1 mb-1 inline-block ">
                     {{ $department->dptName }}
                 </span>
             @endif
@@ -29,7 +29,7 @@
     <td class="px-2 py-3 text-sm">
         @foreach ($current_doc->department()->get() as $department)
             @if (isset($department->pivot->permission_for) && $department->pivot->permission_for == 0)
-                <span class="text-xs leading-5 text-bg-color bg-secondary py-1 px-2 rounded ml-1 mb-1 inline-block ">
+                <span class="text-xs leading-5 text-bg-color bg-secondary px-2 rounded ml-1 mb-1 inline-block ">
                     {{ $department->dptName }}
                 </span>
             @endif
@@ -82,7 +82,7 @@
                 {!! Form::close() !!}
             @endcan
             @can('edit')
-                <a href="/documents/{{ $current_doc->id }}/edit" class="text-secondary">
+                <a href="/documents/{{ $current_doc->id }}/edit" class="">
                     <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 m-1" fill="none" viewBox="0 0 24 24"
                         stroke="currentColor">
                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
@@ -93,7 +93,7 @@
             <!-- DELETE using link -->
             @can('delete')
                 {!! Form::open(['action' => ['DocumentsController@destroy', $current_doc->id], 'method' => 'DELETE', 'id' => 'form-delete-documents-' . $current_doc->id]) !!}
-                <a href="" class="data-delete text-amber" data-form="documents-{{ $current_doc->id }}">
+                <a href="" class="data-delete" data-form="documents-{{ $current_doc->id }}">
                     <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 m-1" fill="none" viewBox="0 0 24 24"
                         stroke="currentColor">
                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"

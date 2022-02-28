@@ -7,7 +7,7 @@
     @include('documents.inc.head')
 
 
-    <div class="flex flex-row flex-wrap my-2 mx-4 gap-4 p-4 bg-bg-color shadow-md">
+    <div class="flex flex-row flex-wrap mt-2 mb-3 mx-4 gap-4 bg-bg-color">
         @if (!is_null($docs))
             @foreach ($docs as $doc)
                 @include('inc.docs.doc',['doc' => $doc])

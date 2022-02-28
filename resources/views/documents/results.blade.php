@@ -5,8 +5,8 @@
     @include('inc.sidebar')
 
 
-    <div class="grid grid-cols-1 lg:grid-cols-1 p-4 gap-4">
-        <div class="relative flex flex-col break-words bg-bg-color w-full shadow-sm rounded">
+    <div class="grid grid-cols-1 lg:grid-cols-1 px-4 pt-4 pb-3 gap-4">
+        <div class="relative flex flex-col break-words bg-white w-full shadow-sm rounded">
             <div class="rounded-t mb-0 px-0 border">
                 <div class="flex flex-wrap items-center px-2 py-3">
                     <div class="relative w-full max-w-full flex-grow flex-1">
@@ -43,14 +43,14 @@
         </div>
     </div>
 
-    <div class="grid grid-cols-1 py-4 ml-4 bg-bg-color shadow-sm">
-        <div class="flex flex-col text-center w-full">
-            <h1 class="sm:text-xl text-lg font-medium title-font my-2 text-gray-800 text-center p-2 uppercase">Documents</h1>
+    <div class="grid grid-cols-1 pb-4 px-3 mx-4 bg-white shadow-sm">
+        <div class="flex flex-col text-center w-full px-2 pb-2 bg-white">
+            <h1 class="sm:text-xl text-lg title-font my-2 text-gray-800 text-center p-2 uppercase">Documents</h1>
             <p class="lg:w-2/3 mx-auto leading-relaxed text-base">{{ count($results) }} Résultats
             </p>
         </div>
         <div class="w-full">
-            <table class="table-auto w-full text-left bg-colorspace-no-wrap border">
+            <table class="table-auto w-full text-left bg-colorspace-no-wrap border bg-white px-2">
                 <thead>
                     <tr>
                         <th

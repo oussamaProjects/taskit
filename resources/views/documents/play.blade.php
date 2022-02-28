@@ -6,7 +6,7 @@
  
  
   <!-- Statistics Cards -->
-  <div class="grid grid-cols-1 py-4 ml-4 bg-bg-color shadow-sm">
+  <div class="grid grid-cols-1 pb-4 px-3 mx-4 bg-white shadow-sm">
         <video width="100%" height="500px" controls>
           <source src="{{ Storage::url($doc->file) }}" type="{{ $doc->mimetype }}">
           Your browser does not support the video tag.

@@ -1,5 +1,5 @@
-<div class="grid grid-cols-1 lg:grid-cols-1 p-4 gap-4">
-    <div class="relative flex flex-col break-words bg-bg-color w-full shadow-sm rounded">
+<div class="grid grid-cols-1 lg:grid-cols-1 px-4 pt-4 pb-3 gap-4">
+    <div class="relative flex flex-col break-words bg-white w-full shadow-sm rounded">
         <div class="rounded-t mb-0 px-0 border">
             <div class="flex flex-wrap items-center px-2 py-3">
 

@@ -42,13 +42,13 @@
 
 
             <div class="grid grid-cols-1 sm:grid-cols-1 lg:grid-cols-1 p-4 gap-4 mt-4 bg-bg-color shadow-sm">
-                <div class="flex flex-col text-center w-full">
-                    <h1 class="sm:text-xl text-lg font-medium title-font my-2 text-gray-800 text-center p-2 uppercase">Départements</h1>
+                <div class="flex flex-col text-center w-full px-2 pb-2 bg-white">
+                    <h1 class="sm:text-xl text-lg title-font my-2 text-gray-800 text-center p-2 uppercase">Départements</h1>
                     <p class="lg:w-2/3 mx-auto leading-relaxed text-base">Tous les départements
                     </p>
                 </div>
                 <div class="w-full">
-                    <table class="table-auto w-full text-left bg-colorspace-no-wrap border">
+                    <table class="table-auto w-full text-left bg-colorspace-no-wrap border bg-white px-2">
                         <thead>
                             <tr>
                                 <th
@@ -114,7 +114,7 @@
             </div>
         </div>
 
-        <button id="addSubsButtonImg" class="bg-bg-color h-auto p-4" type="button">
+        <button id="addSubsButtonImg" class="bg-white h-auto p-4" type="button">
             <img src="{{ asset('img/undraw_Add_files_re_v09g.svg') }}" alt="">
         </button>
     </div>

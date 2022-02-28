@@ -1,4 +1,4 @@
-<div class="colors flex flex-wrap mt-1 items-center justify-center" data-id="{{ $folder->id }}">
+<div class="colors flex flex-wrap mt-1 items-center justify-center bg-white" data-id="{{ $folder->id }}">
     <a href="" class="update_color_folder" data-color="#fdf4d0">
         <div class="color mb-1 mr-1 w-4 h-3 bg-white"></div>
     </a>

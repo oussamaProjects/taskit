@@ -1,4 +1,4 @@
-<tr id="tr_{{ $current_folder->id }}" class="text-gray-800 border-b hover:bg-white transition">
+<tr id="tr_{{ $current_folder->id }}" class="text-gray-800 border-b hover:bg-bg-color transition">
     <td>
         {{-- <input type="checkbox" id="chk_{{ $current_doc->id }}" class="sub_chk" data-id="{{ $current_doc->id }}"><label for="chk_{{ $current_doc->id }}"></label> --}}
     </td>
@@ -50,12 +50,15 @@
                     d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16" />
             </svg>
         </a>
-        
-        <a href="/favorites/folder/{{ $current_folder->id }}/" > 
-            <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 m-1 text-red-500"  fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z" />
+
+        <a href="/favorites/folder/{{ $current_folder->id }}/">
+            <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 m-1 text-red-500"
+                fill="{{ $current_doc->hasBeenFavoritedBy(auth()->user()) ? 'red' : 'none' }}" viewBox="0 0 24 24"
+                stroke="currentColor">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                    d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z" />
             </svg>
-        </a> 
+        </a>
         {!! Form::close() !!}
 
     </td>

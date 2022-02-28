@@ -53,7 +53,7 @@
         <div class="mb-4 pr-2 relative flex-1 flex items-end">
             <div class="w-full relative">
                 <label for="category" class="text-xs opacity-75 scale-75">
-                    Catégorie (Optional)
+                    Activité (Optional)
                 </label>
                 <select name="category_id" id="category" onchange="javascript:handleSelect(this)"
                     class="peer border border-main focus:outline-none focus:border-secondary shadow-sm focus:shadow-sm-sm w-full py-1 px-2 h-8 text-sm bg-bg-color">

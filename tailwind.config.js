@@ -40,7 +40,7 @@ module.exports = {
                 // main: "#1f2937",
                 // secondary: "#0091D5",
                 // "bg-color": "#FEFEFE",
-                main: "#000000",
+                main: "#201f1f",
                 secondary: "#2D1E8A",
                 tertiary: "#FDC910",
                 "bg-color": "#ECF3FE",
