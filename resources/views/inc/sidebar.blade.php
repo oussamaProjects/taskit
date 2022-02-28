@@ -146,6 +146,7 @@
             @endhasrole
 
         </ul>
+
         <div class="flex flex-col m-2 space-y-1 text-secondary bg-tertiary font-medium rounded-sm">
             <div class="flex font-medium text-sm px-2 py-1">Favoris documents <span
                     class="px-2 py-0.5 ml-auto text-xs font-medium tracking-wide text-tertiary bg-main rounded-full">{{ $favorites_docs_count }}</span>
@@ -183,7 +184,8 @@
                 @endif
             </div>
         </div>
-        <p class="mb-14 px-5 py-3 hidden md:block text-center text-xs">Copyright @2021</p>
+
+        <p class="mb-14 px-5 py-3 hidden md:block text-center text-xs">Copyright DocCenter @2022</p>
     </div>
 </div>
 <!-- ./Sidebar -->
