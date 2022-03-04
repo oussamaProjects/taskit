@@ -92,14 +92,13 @@
 
                 @include('inc.folders.colorFolder',['folder' => $folder])
 
-
             </div>
         @endrole
 
     </div>
 
-    <div class="absolute w-2 right-0 top-0">
-        <a href="#" class="right ml-auto show-action" data-form="folders-{{ $folder->id }}"
+    <div class="absolute w-2 right-0 -top-1">
+        <a href="#" class="right ml-auto show-action opacity-0" data-form="folders-{{ $folder->id }}"
             class="flex items-center flex-1">
             <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 m-1" fill="none" viewBox="0 0 24 24"
                 stroke="currentColor">
