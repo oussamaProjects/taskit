@@ -28,25 +28,25 @@ class AuthServiceProvider extends ServiceProvider
     {
         $this->registerPolicies();
 
-        view()->composer('*', function ($view) {
+        // view()->composer('*', function ($view) {
 
-            $favorites_docs = null;
-            $favorites_folders = null;
-            $favorites_docs_count = null;
-            $favorites_folders_count = null;
-            if (auth()->check()) {
+        //     $favorites_docs = null;
+        //     $favorites_folders = null;
+        //     $favorites_docs_count = null;
+        //     $favorites_folders_count = null;
+        //     if (auth()->check()) {
 
-                $user = auth()->user();
-                $favorites_docs = $user->getFavoriteItems(Document::class)->get();
-                $favorites_folders = $user->getFavoriteItems(Folder::class)->get();
-                $favorites_docs_count = $user->favorites()->withType(Document::class)->count();
-                $favorites_folders_count = $user->favorites()->withType(Folder::class)->count();
-            }
-            $view->with('favorites_docs', $favorites_docs);
-            $view->with('favorites_docs_count', $favorites_docs_count);
-            $view->with('favorites_docs', $favorites_docs);
-            $view->with('favorites_folders_count', $favorites_folders_count);
-            $view->with('favorites_folders', $favorites_folders);
-        });
+        //         $user = auth()->user();
+        //         $favorites_docs = $user->getFavoriteItems(Document::class)->get();
+        //         $favorites_folders = $user->getFavoriteItems(Folder::class)->get();
+        //         $favorites_docs_count = $user->favorites()->withType(Document::class)->count();
+        //         $favorites_folders_count = $user->favorites()->withType(Folder::class)->count();
+        //     }
+        //     $view->with('favorites_docs', $favorites_docs);
+        //     $view->with('favorites_docs_count', $favorites_docs_count);
+        //     $view->with('favorites_docs', $favorites_docs);
+        //     $view->with('favorites_folders_count', $favorites_folders_count);
+        //     $view->with('favorites_folders', $favorites_folders);
+        // });
     }
 }

@@ -11,7 +11,7 @@ class Document extends Model
 
     protected $fillable = ['name', 'description'];
     
-    use Favoriteable;
+    // use Favoriteable;
 
     public function user()
     {

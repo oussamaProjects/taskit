@@ -71,7 +71,7 @@
             </div>
         </div>
 
-        <button id="buttonmodalFileImg" class="bg-white h-auto p-4" type="button">
+        <button id="addSubsButtonImg" class="bg-white h-auto p-4" type="button">
             <img src="{{ asset('img/undraw_Add_files_re_v09g.svg') }}" alt="">
         </button>
     </div>

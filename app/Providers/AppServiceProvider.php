@@ -2,6 +2,8 @@
 
 namespace App\Providers;
 
+use App\Category;
+use App\Client;
 use App\Department;
 use Illuminate\Support\ServiceProvider;
 use Illuminate\Support\Facades\Schema;
@@ -9,7 +11,10 @@ use Illuminate\Support\Facades\Schema;
 use \App\User;
 use \App\Document;
 use App\Folder;
+use App\Group;
+use App\Project;
 use App\Subsidiary;
+use App\Task;
 use Illuminate\Support\Facades\View;
 
 class AppServiceProvider extends ServiceProvider
@@ -22,12 +27,12 @@ class AppServiceProvider extends ServiceProvider
     public function boot()
     {
 
-        \Validator::extend('email_domain', function ($attribute, $value, $parameters, $validator) {
-            $allowedEmailDomains = ['tawzerholding.com', 'geniworks.com', 'vandyser.com', 'vigi-protect.com', 'vigipros.com', 'technicordes.com','geniloyds.com','clickclack360.com','alwassite.com'];
-            return in_array(explode('@', $parameters[0])[1], $allowedEmailDomains);
-        });
+        // \Validator::extend('email_domain', function ($attribute, $value, $parameters, $validator) {
+        //     $allowedEmailDomains = ['tawzerholding.com', 'geniworks.com', 'vandyser.com', 'vigi-protect.com', 'vigipros.com', 'technicordes.com','geniloyds.com','clickclack360.com','alwassite.com'];
+        //     return in_array(explode('@', $parameters[0])[1], $allowedEmailDomains);
+        // });
 
-        Schema::defaultStringLength(191);
+         Schema::defaultStringLength(191);
         // requests number
         $numReq = count(User::where('status', false)->get());
         View::share('requests', $numReq);
@@ -46,6 +51,21 @@ class AppServiceProvider extends ServiceProvider
 
         $subs_count = count(Subsidiary::all());
         View::share('subs_count', $subs_count);
+
+        $Clients_count = count(Client::all());
+        View::share('Clients_count', $Clients_count);
+
+        $projects_count = count(Project::all());
+        View::share('projects_count', $projects_count);
+
+        $groups_count = count(Group::all());
+        View::share('groups_count', $groups_count);
+
+        $tasks_count = count(Task::all());
+        View::share('tasks_count', $tasks_count);
+       
+        $category_count=count( Category::all());
+        View::share('category_count', $category_count);
 
         // trash noti
         $trash = count(Document::where('isExpire', 2)->get());

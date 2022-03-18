@@ -92,6 +92,103 @@
     if (closebuttonUser)
         closebuttonUser.addEventListener('click', () => modalUser.classList.remove('scale-100'))
 
+    //addProject
+    const modelproject = document.getElementById('modelproject')
+
+    const addUprojectButton = document.getElementById('addUprojectButton')
+    if (addUprojectButton)
+        addUprojectButton.addEventListener('click', () => modelproject.classList.add('scale-100'))
+
+    const addprojectButtonLink = document.getElementById('addprojectButtonLink')
+    if (addprojectButtonLink)
+        addprojectButtonLink.addEventListener('click', () => modelproject.classList.add('scale-100'))
+
+    const addprojectButtonFileImg = document.getElementById('addprojectButtonFileImg')
+    if (addprojectButtonFileImg)
+        addprojectButtonFileImg.addEventListener('click', () => modelproject.classList.add('scale-100'))
+
+    const closebuttonproject = document.getElementById('closebuttonproject')
+    if (closebuttonproject)
+        closebuttonproject.addEventListener('click', () => modelproject.classList.remove('scale-100'))
+
+    //addclient
+    const modelclient = document.getElementById('modelclient')
+
+    const addClientButton = document.getElementById('addClientButton')
+    if (addClientButton)
+        addClientButton.addEventListener('click', () => modelclient.classList.add('scale-100'))
+
+    const addClientButtonLink = document.getElementById('addClientButtonLink')
+    if (addClientButtonLink)
+        addClientButtonLink.addEventListener('click', function(e) {
+            e.preventDefault();
+            modelclient.classList.add('scale-100');
+        });
+
+    const addClientButtonFileImg = document.getElementById('addClientButtonFileImg')
+    if (addClientButtonFileImg)
+        addClientButtonFileImg.addEventListener('click', () => modelclient.classList.add('scale-100'))
+
+    const closebuttonclient = document.getElementById('closebuttonclient')
+    if (closebuttonclient)
+        closebuttonclient.addEventListener('click', () => modelclient.classList.remove('scale-100'))
+
+    //addparametre
+    const modelparametre = document.getElementById('modelparametre')
+
+    const addUparametreButton = document.getElementById('addUparametreButton')
+    if (addUparametreButton)
+        addUparametreButton.addEventListener('click', () => modelparametre.classList.add('scale-100'))
+
+    const addUparametreButtonLink = document.getElementById('addUparametreButtonLink')
+    if (addUparametreButtonLink)
+        addUparametreButtonLink.addEventListener('click', () => modelparametre.classList.add('scale-100'))
+
+    const addparametreButtonFileImg = document.getElementById('addparametreButtonFileImg')
+    if (addparametreButtonFileImg)
+        addparametreButtonFileImg.addEventListener('click', () => modelparametre.classList.add('scale-100'))
+
+    const closebuttonparametre = document.getElementById('closebuttonparametre')
+    if (closebuttonparametre)
+        closebuttonparametre.addEventListener('click', () => modelparametre.classList.remove('scale-100'))
+
+    //addGoup
+    const modelgroup = document.getElementById('modelgroup')
+
+    const addGroupButton = document.getElementById('addGroupButton')
+    if (addGroupButton)
+        addGroupButton.addEventListener('click', () => modelgroup.classList.add('scale-100'))
+
+    const addGroupButtonLink = document.getElementById('addGroupButtonLink')
+    if (addGroupButtonLink)
+        addGroupButtonLink.addEventListener('click', () => modelgroup.classList.add('scale-100'))
+
+    const addGroupButtonFileImg = document.getElementById('addGroupButtonFileImg')
+    if (addGroupButtonFileImg)
+        addGroupButtonFileImg.addEventListener('click', () => modelgroup.classList.add('scale-100'))
+
+    const closebuttonGroup = document.getElementById('closebuttonGroup')
+    if (closebuttonGroup)
+        closebuttonGroup.addEventListener('click', () => modelgroup.classList.remove('scale-100'))
+
+    //addTask
+    const modeltask = document.getElementById('modeltask')
+
+    const addTaskButton = document.getElementById('addTaskButton')
+    if (addTaskButton)
+        addTaskButton.addEventListener('click', () => modeltask.classList.add('scale-100'))
+
+    const addTaskButtonLink = document.getElementById('addTaskButtonLink')
+    if (addTaskButtonLink)
+        addTaskButtonLink.addEventListener('click', () => modeltask.classList.add('scale-100'))
+
+    const addTaskButtonFileImg = document.getElementById('addTaskButtonFileImg')
+    if (addTaskButtonFileImg)
+        addTaskButtonFileImg.addEventListener('click', () => modeltask.classList.add('scale-100'))
+
+    const closebuttontask = document.getElementById('closebuttontask')
+    if (closebuttontask)
+        closebuttontask.addEventListener('click', () => modeltask.classList.remove('scale-100'))
 
     // changePassword
     const modalchangePassword = document.getElementById('modalchangePassword')

@@ -26,36 +26,40 @@
                 {{ Form::email('email', '', ['id' => 'email','class' =>'peer border border-main focus:outline-none focus:border-secondary shadow-sm focus:shadow-sm-sm w-full py-1 px-2 h-8 text-sm bg-bg-color']) }}
             </div>
 
-            <div class="mb-2 relative">
-                <label for="email" class="text-xs opacity-75 scale-75">Department</label>
-                <select name="department_id" id="department_id"
-                    class="peer border border-main focus:outline-none focus:border-secondary shadow-sm focus:shadow-sm-sm w-full py-1 px-2 h-8 text-sm bg-bg-color">
-                    <option value="" disabled selected>Choisissez le département</option>
-                    @if (count($depts) > 0)
-                        @if (Auth::user()->hasRole('Root'))
-                            @foreach ($depts as $dept)
-                                <option value="{{ $dept->id }}">{{ $dept->dptName }}</option>
-                            @endforeach
-                        @elseif(Auth::user()->hasRole('Admin'))
-                            <option value="{{ Auth::user()->department_id }}">
-                                {{ Auth::user()->departments()->get() }}
-                            </option>
-                        @endif
-                    @endif
+            {{-- <div class="mb-2 relative">
+                <label for="email" class="text-xs opacity-75 scale-75">Filiale</label>
+                <select name="filiale_id"  class="peer border border-main focus:outline-none focus:border-secondary shadow-sm focus:shadow-sm-sm w-full py-1 px-2 h-8 text-sm bg-bg-color">
+                   @if (count($filiale)>0)
+                   <option value="" >Attribuer un filiale</option>
+                        @foreach ($filiale as $filial)
+                            <option value="{{$filial->id}}" >{{$filial->name}}</option>
+                        @endforeach
+                   @endif
                 </select>
+            </div> --}}
+
+            <div class="mb-2 relative">
+                <label for="">les departments</label><br>
+                @foreach ($depts as $dept)
+                  <input type="checkbox" name="department_id[]" value="{{$dept->id}}">
+                  <label class="text-xs opacity-75 scale-75">{{$dept->dptName}}</label>
+                @endforeach
             </div>
 
             <div class="mb-2 relative">
-                <label for="email" class="text-xs opacity-75 scale-75">Role</label>
-                <select name="role" id="role"
-                    class="peer border border-main focus:outline-none focus:border-secondary shadow-sm focus:shadow-sm-sm w-full py-1 px-2 h-8 text-sm bg-bg-color">
-                    <option value="" disabled selected>Attribuer un rôle</option>
-                    @if (count($roles) > 0)
-                        @foreach ($roles as $role)
-                            <option value="{{ $role->id }}">{{ $role->name }}</option>
+                <label for="">les groups</label><br>
+                @foreach ($groups as $group)
+                  <input type="checkbox" name="group_id[]" value="{{$group->id}}">
+                  <label class="text-xs opacity-75 scale-75">{{$group->name}}</label>
+                @endforeach
+            </div>
+
+            <div class="mb-2 relative">
+                <label for="">les tasks</label><br>
+                        @foreach ($tasks as $task)
+                          <input type="checkbox" name="task_id[]" value="{{$task->id}}">
+                          <label class="text-xs opacity-75 scale-75">{{$task->name}}</label>
                         @endforeach
-                    @endif
-                </select>
             </div>
 
             <div class="mb-2 relative">

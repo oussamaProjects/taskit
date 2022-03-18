@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class AddColorColumnToFoldersTable extends Migration
+class CreateParametresTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,8 +13,11 @@ class AddColorColumnToFoldersTable extends Migration
      */
     public function up()
     {
-        Schema::table('folders', function (Blueprint $table) {
-            $table->string('color');
+        Schema::create('parametres', function (Blueprint $table) {
+            $table->increments('id');
+            $table->string('name')->nullable();
+            $table->string('value')->nullable();
+            $table->timestamps();
         });
     }
 
@@ -25,8 +28,6 @@ class AddColorColumnToFoldersTable extends Migration
      */
     public function down()
     {
-        Schema::table('folders', function (Blueprint $table) {
-            $table->dropColumn('color');
-        });
+        Schema::dropIfExists('parametres');
     }
 }

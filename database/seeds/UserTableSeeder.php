@@ -12,27 +12,27 @@ class UserTableSeeder extends Seeder
      */
     public function run()
     {
-        $root = new User();
-        $root->name = 'Wade Wilson';
-        $root->email = 'deadp00l@gmail.com';
-        $root->password = 'deadp00l';
-        $root->status = true;
-        $root->save();
+        // $root = new User();
+        // $root->name = 'Wade Wilson';
+        // $root->email = 'deadp00l@gmail.com';
+        // $root->password = 'deadp00l';
+        // $root->status = true;
+        // $root->save();
 
-        $admin = new User();
-        $admin->name = 'Tony Stark';
-        $admin->email = 'ir0nman@gmail.com';
-        $admin->password = 'ir0nman';
-        $admin->department_id = '1';
-        $admin->status = true;
-        $admin->save();
+        // $admin = new User();
+        // $admin->name = 'Tony Stark';
+        // $admin->email = 'ir0nman@gmail.com';
+        // $admin->password = 'ir0nman';
+        // $admin->department_id = '1';
+        // $admin->status = true;
+        // $admin->save();
 
-        $user = new User();
-        $user->name = 'Steve Rogers';
-        $user->email = 'captain@gmail.com';
-        $user->password = 'captain';
-        $user->department_id = '2';
-        $user->status = true;
-        $user->save();
+        // $user = new User();
+        // $user->name = 'Steve Rogers';
+        // $user->email = 'captain@gmail.com';
+        // $user->password = 'captain';
+        // $user->department_id = '2';
+        // $user->status = true;
+        // $user->save();
     }
 }

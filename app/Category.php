@@ -10,7 +10,7 @@ class Category extends Model
 
     protected $fillable = ['name'];
 
-    public function documents() {
-        return $this->belongsToMany('App\Document');
+    public function task() {
+        return $this->belongsToMany(Task::class,'tasks_category','category_id','task_id');
     }
 }

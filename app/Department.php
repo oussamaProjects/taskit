@@ -15,10 +15,6 @@ class Department extends Model
     return $this->hasMany('App\User');
   }
 
-  public function documents()
-  {
-    return $this->belongsToMany('App\Document', 'document_departement', 'department_id', 'document_id');
-  }
 
   public function folders()
   {
@@ -28,5 +24,10 @@ class Department extends Model
   public function subsidiaries()
   {
     return $this->belongsToMany('App\Subsidiary', 'subsidiaries_departement', 'departement_id', 'subs_id');
+  }
+
+  public function projects()
+  {
+    return $this->belongsToMany(Project::class, 'departments_projects', 'department_id', 'project_id');
   }
 }

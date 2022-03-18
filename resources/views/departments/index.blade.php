@@ -15,6 +15,14 @@
                     <p class="lg:w-2/3 mx-auto leading-relaxed text-base">Tous les départements
                     </p>
                 </div>
+               <div class="col-4">
+                <select class="form-select" aria-label="Default select example">
+                    <option value="1"><a href="{{'DepartmentsController@active'}}">Show active</a></option>
+                    <option value="2"><a href="">Show All</a></option>
+                    <option value="3"><a href="">Show archifed</a></option>
+                  </select>
+               </div>
+               {{-- <a href="{{view('index')}}">Show active</a> --}}
                 <div class="w-full">
                     <table
                         class="table-auto w-full text-left bg-colorspace-no-wrap border bg-white px-2">

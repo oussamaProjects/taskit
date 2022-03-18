@@ -9,7 +9,7 @@
                 </div>
             </li>
 
-            <li>
+            {{-- <li>
                 <a href="/shared"
                     class="{{ request()->is('shared*') ? 'bg-secondary text-bg-color-800' : '' }} relative flex flex-row items-center h-7 focus:outline-none hover:bg-secondary text-bg-color-600 hover:text-bg-color-800 border-l-4 border-transparent hover:border-main pr-6">
                     <span class="inline-flex justify-center items-center ml-4">
@@ -42,21 +42,23 @@
                     <span
                         class="px-2 py-0.5 ml-auto text-xs font-medium tracking-wide text-main bg-tertiary rounded-full">{{ $folders_count }}</span>
                 </a>
-            </li>
+            </li> --}}
 
-            @hasanyrole('Root|Admin')
-                <li>
-                    <a href="/categories"
-                        class="{{ request()->is('categories*') ? 'bg-secondary text-bg-color-800' : '' }} relative flex flex-row items-center h-7 focus:outline-none hover:bg-secondary text-bg-color-600 hover:text-bg-color-800 border-l-4 border-transparent hover:border-main pr-6">
-                        <span class="inline-flex justify-center items-center ml-4">
-                            @include('inc.icons.tags')
-                        </span>
-                        <span class="ml-2 text-sm tracking-wide truncate">Activités</span>
-                    </a>
-                </li>
-            @endhasanyrole
+         
 
             @hasrole('Root')
+            <li>
+                <a href="{{route('welcom.index')}}"
+                    class="{{ request()->is('subsidiaries*') ? 'bg-secondary text-bg-color-800' : '' }} relative flex flex-row items-center h-7 focus:outline-none hover:bg-secondary text-bg-color-600 hover:text-bg-color-800 border-l-4 border-transparent hover:border-main pr-6">
+                    <span class="inline-flex justify-center items-center ml-4">
+                        @include('inc.icons.bell')
+                    </span>
+                    <span class="ml-2 text-sm tracking-wide truncate">Time tracker</span>
+                    <span
+                        class="px-2 py-0.5 ml-auto text-xs font-medium tracking-wide text-main bg-tertiary rounded-full">{{ $subs_count }}</span>
+                </a>
+            </li>
+
                 <li>
                     <a href="/users"
                         class="{{ request()->is('users*') ? 'bg-secondary text-bg-color-800' : '' }} relative flex flex-row items-center h-7 focus:outline-none hover:bg-secondary text-bg-color-600 hover:text-bg-color-800 border-l-4 border-transparent hover:border-main pr-6">
@@ -66,6 +68,30 @@
                         <span class="ml-2 text-sm tracking-wide truncate">Utilisateurs</span>
                         <span
                             class="px-2 py-0.5 ml-auto text-xs font-medium tracking-wide text-main bg-tertiary rounded-full">{{ $users_count }}</span>
+                    </a>
+                </li>
+
+                <li>
+                    <a href="{{ route('task.index') }}"
+                        class="{{ request()->is('tasks*') ? 'bg-secondary text-bg-color-800' : '' }} relative flex flex-row items-center h-7 focus:outline-none hover:bg-secondary text-bg-color-600 hover:text-bg-color-800 border-l-4 border-transparent hover:border-main pr-6">
+                        <span class="inline-flex justify-center items-center ml-4">
+                            @include('inc.icons.users')
+                        </span>
+                        <span class="ml-2 text-sm tracking-wide truncate">Tasks</span>
+                        <span
+                            class="px-2 py-0.5 ml-auto text-xs font-medium tracking-wide text-main bg-tertiary rounded-full">{{ $tasks_count }}</span>
+                    </a>
+                </li>
+
+                <li>
+                    <a href="{{ route('project.index') }}"
+                        class="{{ request()->is('projects*') ? 'bg-secondary text-bg-color-800' : '' }} relative flex flex-row items-center h-7 focus:outline-none hover:bg-secondary text-bg-color-600 hover:text-bg-color-800 border-l-4 border-transparent hover:border-main pr-6">
+                        <span class="inline-flex justify-center items-center ml-4">
+                            @include('inc.icons.users')
+                        </span>
+                        <span class="ml-2 text-sm tracking-wide truncate">Projects</span>
+                        <span
+                            class="px-2 py-0.5 ml-auto text-xs font-medium tracking-wide text-main bg-tertiary rounded-full">{{ $projects_count }}</span>
                     </a>
                 </li>
 
@@ -92,7 +118,44 @@
                             class="px-2 py-0.5 ml-auto text-xs font-medium tracking-wide text-main bg-tertiary rounded-full">{{ $subs_count }}</span>
                     </a>
                 </li>
+
+                <li>
+                    <a href="{{ route('client.index') }}"
+                        class=" relative flex flex-row items-center h-7 focus:outline-none hover:bg-secondary text-bg-color-600 hover:text-bg-color-800 border-l-4 border-transparent hover:border-main pr-6">
+                        <span class="inline-flex justify-center items-center ml-4">
+                            @include('inc.icons.users')
+                        </span>
+                        <span class="ml-2 text-sm tracking-wide truncate">Client</span>
+                        <span
+                            class="px-2 py-0.5 ml-auto text-xs font-medium tracking-wide text-main bg-tertiary rounded-full">{{ $Clients_count }}</span>
+                    </a>
+                </li>
+                <li>
+                    <a href="{{ route('group.index') }}"
+                        class=" relative flex flex-row items-center h-7 focus:outline-none hover:bg-secondary text-bg-color-600 hover:text-bg-color-800 border-l-4 border-transparent hover:border-main pr-6">
+                        <span class="inline-flex justify-center items-center ml-4">
+                            @include('inc.icons.users')
+                        </span>
+                        <span class="ml-2 text-sm tracking-wide truncate">Group</span>
+                        <span
+                            class="px-2 py-0.5 ml-auto text-xs font-medium tracking-wide text-main bg-tertiary rounded-full">{{ $groups_count }}</span>
+                    </a>
+                </li>
             @endhasrole
+            @hasanyrole('Root|Admin')
+            <li>
+                <a href="/categories"
+                    class="{{ request()->is('categories*') ? 'bg-secondary text-bg-color-800' : '' }} relative flex flex-row items-center h-7 focus:outline-none hover:bg-secondary text-bg-color-600 hover:text-bg-color-800 border-l-4 border-transparent hover:border-main pr-6">
+                    <span class="inline-flex justify-center items-center ml-4">
+                        @include('inc.icons.tags')
+                    </span>
+                    <span class="ml-2 text-sm tracking-wide truncate">Activités</span>
+                    <span
+                    class="px-2 py-0.5 ml-auto text-xs font-medium tracking-wide text-main bg-tertiary rounded-full">{{ $category_count }}</span>
+           
+                </a>
+            </li>
+        @endhasanyrole
 
             <li>
                 <a href="/mydocuments"
@@ -105,6 +168,8 @@
             </li>
 
             @hasrole('User')
+
+           
             @endhasrole
 
             @hasrole('Root')
@@ -135,6 +200,16 @@
                 </li>
 
                 <li>
+                    <a href="/parametre"
+                        class="{{ request()->is('backup*') ? 'bg-secondary text-bg-color-800' : '' }} relative flex flex-row items-center h-7 focus:outline-none hover:bg-secondary text-bg-color-600 hover:text-bg-color-800 border-l-4 border-transparent hover:border-main pr-6">
+                        <span class="inline-flex justify-center items-center ml-4">
+                            @include('inc.icons.settings')
+                        </span>
+                        <span class="ml-2 text-sm tracking-wide truncate">Paramaitre</span>
+                    </a>
+                </li>
+
+                <li>
                     <a href="/logs"
                         class="{{ request()->is('logs*') ? 'bg-secondary text-bg-color-800' : '' }} relative flex flex-row items-center h-7 focus:outline-none hover:bg-secondary text-bg-color-600 hover:text-bg-color-800 border-l-4 border-transparent hover:border-main pr-6">
                         <span class="inline-flex justify-center items-center ml-4">
@@ -143,11 +218,12 @@
                         <span class="ml-2 text-sm tracking-wide truncate">Journaux d'accès</span>
                     </a>
                 </li>
+                
             @endhasrole
 
         </ul>
 
-        <div class="flex flex-col m-2 space-y-1 text-secondary bg-tertiary font-medium rounded-sm">
+        {{-- <div class="flex flex-col m-2 space-y-1 text-secondary bg-tertiary font-medium rounded-sm">
             <div class="flex font-medium text-sm px-2 py-1">Favoris documents <span
                     class="px-2 py-0.5 ml-auto text-xs font-medium tracking-wide text-tertiary bg-main rounded-full">{{ $favorites_docs_count }}</span>
             </div>
@@ -164,9 +240,9 @@
                     No favorites
                 @endif
             </div>
-        </div>
+        </div> --}}
 
-        <div class="flex flex-col m-2 space-y-1 text-secondary bg-tertiary font-medium rounded-sm">
+        {{-- <div class="flex flex-col m-2 space-y-1 text-secondary bg-tertiary font-medium rounded-sm">
             <div class="flex font-medium text-sm px-2 py-1">Favoris folders <span
                     class="px-2 py-0.5 ml-auto text-xs font-medium tracking-wide text-tertiary bg-main rounded-full">{{ $favorites_folders_count }}</span>
             </div>
@@ -183,7 +259,7 @@
                     No favorites
                 @endif
             </div>
-        </div>
+        </div> --}}
 
         <p class="mb-14 px-5 py-3 hidden md:block text-center text-xs">Copyright DocCenter @2022</p>
     </div>

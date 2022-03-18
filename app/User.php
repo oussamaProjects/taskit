@@ -11,15 +11,17 @@ class User extends Authenticatable
 {
     use Notifiable;
     use HasRoles;
-    use Favoriter;
+    
 
     /**
      * The attributes that are mass assignable.
      *
      * @var array
      */
+    protected $table='users';
+
     protected $fillable = [
-        'name', 'email', 'password', 'department_id'
+        'name', 'email', 'password','role','price','action'
     ];
 
     /**
@@ -49,8 +51,11 @@ class User extends Authenticatable
         return $this->belongsTo('App\Subsidiary');
     }
 
-    public function documents() {
-        return $this->hasMany('App\Document');
+    public function tasks() {
+        return $this->belongsToMany(Task::class,'tasks_users','user_id','task_id');
+    }
+    public function groups(){
+        return $this->BelongsToMany(Group::class,'users_groups','user_id','group_id');
     }
 
 }

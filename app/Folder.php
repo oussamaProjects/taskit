@@ -7,7 +7,6 @@ use Overtrue\LaravelFavorite\Traits\Favoriteable;
 
 class Folder extends Model
 {
-    use Favoriteable;
 
     protected $fillable = ['name'];
 
@@ -16,10 +15,6 @@ class Folder extends Model
         return $this->belongsTo('App\User');
     }
 
-    public function documents()
-    {
-        return $this->belongsToMany('App\Document');
-    }
 
     public function department()
     {

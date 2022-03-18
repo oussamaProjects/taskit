@@ -44,11 +44,15 @@
                                 </th>
                                 <th
                                     class="px-2 py-3 title-font tracking-wider font-medium text-bg-color text-sm bg-main shadow-sm">
-                                    Filiales
+                                    Department
                                 </th>
                                 <th
-                                    class="px-2 py-3 title-font tracking-wider font-medium text-bg-color text-sm bg-main shadow-sm">
-                                    Department
+                                class="px-2 py-3 title-font tracking-wider font-medium text-bg-color text-sm bg-main shadow-sm">
+                                    Group
+                                </th>
+                                <th
+                                class="px-2 py-3 title-font tracking-wider font-medium text-bg-color text-sm bg-main shadow-sm">
+                                    Task
                                 </th>
                                 <th
                                     class="px-2 py-3 title-font tracking-wider font-medium text-bg-color text-sm bg-main shadow-sm">
@@ -60,35 +64,44 @@
 
                             @if (count($users) > 0)
                                 @foreach ($users as $user)
-                                    @if (!$user->hasRole('Root'))
+                                    {{-- @if (!$user->hasRole('Root')) --}}
                                         <tr>
 
-                                            <td class="px-2 py-3 text-sm">{{ $user->name }}</td>
+                                            <td class="px-2 py-3 text-sm"><a href="">{{ $user->name }}</a></td>
 
                                             <td class="px-2 py-3 text-sm">
-                                                {{ $user->roles()->pluck('name')->implode(' ') }}
+                                                 {{ $user->roles()->pluck('name')->implode(' ') }}
+                                                 {{ $user->role}}
                                             </td>
 
                                             <td class="px-2 py-3 text-sm">
+                                                <select>
                                                 @foreach ($user->departments()->get() as $dept)
-                                                    @foreach ($dept->subsidiaries()->get() as $subs)
-                                                        <div class="text-yellow-600 p-1 px-2 rounded mb-1">
-                                                            {{ $subs['subsName'] }}</div>
+                                                 <option value=""> {{ $dept->dptName }}</option>
+                                                @endforeach
+                                            </select>
+                                            </td>
+
+                                            <td class="px-2 py-3 text-sm">
+                                                <select >
+                                                    @foreach ($user->groups()->get() as $group)
+                                                      <option > {{ $group->name }}</option>
                                                     @endforeach
-                                                @endforeach
+                                                </select>
                                             </td>
 
                                             <td class="px-2 py-3 text-sm">
-                                                @foreach ($user->departments()->get() as $dept)
-                                                    <div class="text-white bg-secondary mr-1 mb-1 p-1 px-2 rounded mb-1 inline-block">
-                                                        {{ $dept['dptName'] }}</div>
+                                                <select>
+                                                @foreach ($user->tasks()->get() as $task)
+                                                   <option> {{$task->name}}</option>
                                                 @endforeach
+                                            </select>
                                             </td>
 
                                             <td class="px-2 py-3 text-sm">
                                                 <!-- DELETE using link -->
                                                 {!! Form::open(['action' => ['UsersController@destroy', $user->id], 'method' => 'DELETE', 'id' => 'form-delete-users-' . $user->id, 'class' => 'flex']) !!}
-                                                <a href="#" class="left ">
+                                                <a href="{{route('users.show',$user->id)}}" class="left ">
                                                     <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 m-1"
                                                         fill="none" viewBox="0 0 24 24" stroke="currentColor">
                                                         <path stroke-linecap="round" stroke-linejoin="round"
@@ -106,7 +119,7 @@
                                                             d="M11 5H6a2 2 0 00-2 2v11a2 2 0 002 2h11a2 2 0 002-2v-5m-1.414-9.414a2 2 0 112.828 2.828L11.828 15H9v-2.828l8.586-8.586z" />
                                                     </svg>
                                                 </a>
-                                                <a href="" class="right data-delete" data-form="users-{{ $user->id }}">
+                                                <a href="{{route('users.show',$user->id)}}" class="right data-delete" data-form="users-{{ $user->id }}">
                                                     <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 m-1"
                                                         fill="none" viewBox="0 0 24 24" stroke="currentColor">
                                                         <path stroke-linecap="round" stroke-linejoin="round"
@@ -117,7 +130,7 @@
                                                 {!! Form::close() !!}
                                             </td>
                                         </tr>
-                                    @endif
+                                    {{-- @endif --}}
                                 @endforeach
                             @else
                                 <tr>

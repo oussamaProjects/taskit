@@ -1,7 +1,9 @@
 <?php
 
 use Illuminate\Support\Facades\Artisan;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
+
 
 /*
 |--------------------------------------------------------------------------
@@ -52,7 +54,6 @@ Route::resource('folders', 'FolderController');
 Route::get('allFolders', 'FolderController@all');
 Route::patch('folder/color/{id}', 'FolderController@changeColor');
 
-Route::get('folder/{id}/child', 'FolderController@child');
 
 // documents 
 Route::resource('documents', 'DocumentsController');
@@ -63,6 +64,26 @@ Route::get('mydocuments', 'DocumentsController@mydocuments')->name('mydocuments'
 Route::get('/trash', 'DocumentsController@trash');
 Route::get('documents/restore/{id}', 'DocumentsController@restore');
 Route::delete('documentsDeleteMulti', 'DocumentsController@deleteMulti');
+
+//project
+Route::resource('project','ProjectController');
+
+Route::get('project/{id}/tasks', 'ProjectController@tasks')->name('project.tasks');
+Route::get('project/{id}/edit-department', 'ProjectController@edit_department')->name('project.edit-department');
+//client
+Route::resource('client','ClientController');
+
+//group
+Route::resource('group','GroupController');
+
+//task
+Route::resource('task','TaskController');
+
+//paramaitre
+Route::resource('parametre','ParametreController');
+
+//time_tracker
+Route::resource('welcom','Time_tracker');
 
 Route::get('allDocuments', 'DocumentsController@all');
 // search

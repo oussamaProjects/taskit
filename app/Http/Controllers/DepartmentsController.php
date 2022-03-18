@@ -78,9 +78,14 @@ class DepartmentsController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show($id)
+  
+    public function active(Request $request)
     {
-        //
+        $department=new Department;
+        $department->users()->get();
+        dd($department);
+
+        return redirect()->back();
     }
 
     /**

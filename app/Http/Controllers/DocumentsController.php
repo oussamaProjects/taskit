@@ -9,6 +9,7 @@ use App\Department;
 use App\Folder;
 use App\Helpers\Log;
 use App\Subsidiary;
+use App\User;
 use Illuminate\Support\Facades\Storage;
 use DB;
 use Illuminate\Support\Arr;
@@ -33,7 +34,7 @@ class DocumentsController extends Controller
     $categories = Category::pluck('name', 'id')->all();
     $depts = Department::all();
     $subs  = Subsidiary::all();
-    $docs = Document::where('isExpire', '!=', 2)->where('archived', '!=', 1)->get();
+    $docs = Document::all();
     $folders  = Folder::where('parent_id', '=', '0')->get();
     $folders_input = Folder::pluck('name', 'id')->all();
 
