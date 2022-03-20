@@ -163,14 +163,14 @@ class ProjectController extends Controller
         return view('project.project.tasks', compact('project', 'clients'));
     }
    
-    public function edit_department($id)
-    {
-        $user = $this->chart->pieChart()
-            ->setTitle('Top 3 scorers of the team.')
-            ->setSubtitle('Season 2021.')
-            ->addData([20000, 24000, 30000])
-            ->setLabels(['Player 7', 'Player 10', 'Player 9']);
+    // public function edit_department($id)
+    // {
+    //     $user = $this->chart->pieChart()
+    //         ->setTitle('Top 3 scorers of the team.')
+    //         ->setSubtitle('Season 2021.')
+    //         ->addData([20000, 24000, 30000])
+    //         ->setLabels(['Player 7', 'Player 10', 'Player 9']);
 
-        return view('project.project.edit', compact('user'));
-    }
+    //     return view('project.project.edit', compact('user'));
+    // }
 }

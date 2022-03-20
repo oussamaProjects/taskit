@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Charts\MonthlyUsersChart;
 use App\Client;
 use Illuminate\Http\Request;
 use App\User;
@@ -11,6 +12,7 @@ use App\Group;
 use App\Log;
 use App\Subsidiary;
 use App\Task;
+use ArielMejiaDev\LarapexCharts\LarapexChart;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 // for assigning roles
@@ -44,11 +46,11 @@ class UsersController extends Controller
     // get all dept
     $depts = Department::all();
     //get task all
-    $tasks=Task::all();
+    $tasks = Task::all();
     //Group
-    $groups=Group::all();
-    $user=new User;
-    
+    $groups = Group::all();
+    $user = new User;
+
     // get roles
     if (auth()->user()->hasRole('Root')) {
       $roles = Role::where('name', '!=', 'Root')->get();
@@ -56,7 +58,7 @@ class UsersController extends Controller
       $roles = Role::where('name', '!=', 'Root')->where('name', '!=', 'Admin')->get();
     }
     // dd($roles);
-    return view('users.index', compact('users', 'depts', 'roles','groups','tasks'));
+    return view('users.index', compact('users', 'depts', 'roles', 'groups', 'tasks'));
   }
 
   /**
@@ -64,11 +66,14 @@ class UsersController extends Controller
    *
    * @return \Illuminate\Http\Response
    */
-  public function create()
+  public function create( MonthlyUsersChart $chart)
   {
-    //
+    return view('users.home', [
+      'chartPie' => $chart->buildPie(),
+      'chartLine' => $chart->buildLine(),
+      'chartBar' => $chart->buildBar()
+    ]);
   }
-
   /**
    * Store a newly created resource in storage.
    *
@@ -76,7 +81,7 @@ class UsersController extends Controller
    * @return \Illuminate\Http\Response
    */
   public function store(Request $request)
-  { 
+  {
     $this->validate($request, [
       'name' => 'required',
       'email' => 'required',
@@ -87,28 +92,28 @@ class UsersController extends Controller
     $user = new User;
     $user->name = $request->input('name');
     $user->email = $request->input('email');
-    $user->password = $request->input('password'); 
+    $user->password = $request->input('password');
     $user->status = true;
 
-  
+
     $user->save();
 
-    $group=$user->groups()->sync($request->group_id);
-    $department=$user->departments()->sync($request->department_id);
-    $task=$user->tasks()->sync($request->task_id);
-    
-   
-   
+    $group = $user->groups()->sync($request->group_id);
+    $department = $user->departments()->sync($request->department_id);
+    $task = $user->tasks()->sync($request->task_id);
+
+
+
     // $user->departments()->detach();
     // foreach ($request->input('dept') as $dep) {
     //   $user->departments()->attach($dep);
     // }
-    
+
     // $role = $request->input('role');
     // $role_r = Role::where('id', $role)->firstOrFail();
     // $user->assignRole($role_r);
 
-   
+
     return redirect('/users')->with('success', 'User Added');
   }
 
@@ -122,7 +127,7 @@ class UsersController extends Controller
   {
     $user = User::find($id);
     $clients = Client::all();
-    return view('users.show',compact('user','clients'));
+    return view('users.show', compact('user', 'clients'));
   }
 
   /**
@@ -137,8 +142,8 @@ class UsersController extends Controller
     $user = User::findOrFail($id);
     $depts = Department::all();
     $subsidiaries = Subsidiary::all();
-    $tasks=Task::all();
-    $groups=Group::all();
+    $tasks = Task::all();
+    $groups = Group::all();
     // get roles
     if (auth()->user()->hasRole('Root')) {
       $roles = Role::where('name', '!=', 'Root')->get();
@@ -146,7 +151,7 @@ class UsersController extends Controller
       $roles = Role::where('name', '!=', 'Root')->where('name', '!=', 'Admin')->get();
     }
 
-    return view('users.edit', compact('user', 'depts', 'subsidiaries', 'roles','tasks','groups'));
+    return view('users.edit', compact('user', 'depts', 'subsidiaries', 'roles', 'tasks', 'groups'));
   }
 
   /**
@@ -158,13 +163,13 @@ class UsersController extends Controller
    */
   public function update(Request $request, $id)
   {
-   
+
     $this->validate($request, [
       'name' => 'required|string|max:255',
       'email' => 'required|string|email|max:255',
       'dept' => 'required'
-    ]); 
-  dd($request);
+    ]);
+    dd($request);
     $user = User::findOrFail($id);
     $user->name = $request->input('name');
     $user->email = $request->input('email');
@@ -172,39 +177,39 @@ class UsersController extends Controller
     // $user->status = true;
     dd($request);
     $user_p = Auth::getUser();
-        if (Hash::check($request->get('current_password'), $user_p->password)) {
-            // if the current password is correct
-            $user_p->password = $request->input('new_password');
-            $user_p->save();
+    if (Hash::check($request->get('current_password'), $user_p->password)) {
+      // if the current password is correct
+      $user_p->password = $request->input('new_password');
+      $user_p->save();
 
-            return redirect()->route('users.edit')->with('success','Le profil a été changé avec succès !');
-        } else {
-            return redirect()->back()->withErrors('Current Password is incorrect!');
-        }
+      return redirect()->route('users.edit')->with('success', 'Le profil a été changé avec succès !');
+    } else {
+      return redirect()->back()->withErrors('Current Password is incorrect!');
+    }
 
     if ($request->input('status')) {
       $user->status = true;
     } else {
       $user->status = false;
     }
-    
-    $user->save(); 
-    
-    if($request->group_id!=null){
+
+    $user->save();
+
+    if ($request->group_id != null) {
       $user->groups()->detach($request->group_id);
       $user->groups()->sync($request->group_id);
     }
 
-    if($request->task_id!=null){
+    if ($request->task_id != null) {
       $user->tasks()->detach($request->group_id);
       $user->tasks()->sync($request->task_id);
     }
-    
+
     $user->departments()->detach();
     foreach ($request->input('dept') as $dep) {
       $user->departments()->attach($dep);
     }
-    
+
 
     // $role_id = $request->input('role');
     //
@@ -216,7 +221,7 @@ class UsersController extends Controller
     // $user->removeRole($curr_role);
     // // then assign the new role
     // $user->assignRole($new_role);
- 
+
     // if ($request->input('role') !== $user->roles->pluck('name')->implode(' ')) {
     //   // first remove current role
     //   $user->removeRole($user->roles->pluck('name')->implode(' '));
@@ -246,12 +251,18 @@ class UsersController extends Controller
   }
 
   public function tasks(Int $id)
-    {
-        
-        $user = User::find($id); 
-        $tasks = $user->tasks()->get();
+  {
 
-        return view('task.project.tasks', compact('tasks'));
-    }
+    $user = User::find($id);
+    $tasks = $user->tasks()->get();
+
+    return view('task.project.tasks', compact('tasks'));
+  }
+  public function dashboard()
+  {
+    //   $chart=(new LarapexChart) ->setTitle('example')
+    //   ->setXAxis(['active example','blocked example'])
+    //   ->setDataset([100,60]);
+    // return view('users.home')->with($chart);
+  }
 }
-

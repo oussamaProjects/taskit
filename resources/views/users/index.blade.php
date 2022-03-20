@@ -67,7 +67,7 @@
                                     {{-- @if (!$user->hasRole('Root')) --}}
                                         <tr>
 
-                                            <td class="px-2 py-3 text-sm"><a href="">{{ $user->name }}</a></td>
+                                            <td class="px-2 py-3 text-sm"><a href="{{route('users.create')}}">{{ $user->name }}</a></td>
 
                                             <td class="px-2 py-3 text-sm">
                                                  {{ $user->roles()->pluck('name')->implode(' ') }}
