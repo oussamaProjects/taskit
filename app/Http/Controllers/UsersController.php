@@ -71,7 +71,8 @@ class UsersController extends Controller
     return view('users.home', [
       'chartPie' => $chart->buildPie(),
       'chartLine' => $chart->buildLine(),
-      'chartBar' => $chart->buildBar()
+      'chartBar' => $chart->buildBar(),
+      'chartH_bar' => $chart->horizontalBar()
     ]);
   }
   /**
@@ -169,13 +170,13 @@ class UsersController extends Controller
       'email' => 'required|string|email|max:255',
       'dept' => 'required'
     ]);
-    dd($request);
+   
     $user = User::findOrFail($id);
     $user->name = $request->input('name');
     $user->email = $request->input('email');
     // $user->department_id = 0;
     // $user->status = true;
-    dd($request);
+   
     $user_p = Auth::getUser();
     if (Hash::check($request->get('current_password'), $user_p->password)) {
       // if the current password is correct
@@ -192,7 +193,7 @@ class UsersController extends Controller
     } else {
       $user->status = false;
     }
-
+    dd($request);
     $user->save();
 
     if ($request->group_id != null) {
