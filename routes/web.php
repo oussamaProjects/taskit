@@ -5,6 +5,7 @@ use Illuminate\Support\Facades\Artisan;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 
+use Inertia\Inertia;
 
 /*
 |--------------------------------------------------------------------------
@@ -19,7 +20,7 @@ use Illuminate\Support\Facades\Route;
 
 Route::get('/', 'DashboardController@index');
 
-Route::get('/clear-cache', function() {
+Route::get('/clear-cache', function () {
     Artisan::call('cache:clear');
     Artisan::call('route:clear');
     Artisan::call('config:clear');
@@ -68,24 +69,28 @@ Route::get('documents/restore/{id}', 'DocumentsController@restore');
 Route::delete('documentsDeleteMulti', 'DocumentsController@deleteMulti');
 
 //project
-Route::resource('project','ProjectController');
+Route::resource('project', 'ProjectController');
 
 Route::get('project/{id}/tasks', 'ProjectController@tasks')->name('project.tasks');
 Route::get('project/{id}/edit-department', 'ProjectController@edit_department')->name('project.edit-department');
 //client
-Route::resource('client','ClientController');
+Route::resource('client', 'ClientController');
 
 //group
-Route::resource('group','GroupController');
+Route::resource('group', 'GroupController');
 
 //task
-Route::resource('task','TaskController');
+Route::resource('task', 'TaskController');
+
+Route::get('taskTimeTracker', 'TimeTrackerController@index')->name('taskTimeTracker');
+Route::post('task/start/{task}', 'TaskController@startTask');
+Route::post('task/end/{task}', 'TaskController@endsTask');
 
 //paramaitre
-Route::resource('parametre','ParametreController');
+Route::resource('parametre', 'ParametreController');
 
 //time_tracker
-Route::resource('welcom','Time_tracker');
+Route::resource('welcom', 'Time_tracker');
 
 Route::get('allDocuments', 'DocumentsController@all');
 // search

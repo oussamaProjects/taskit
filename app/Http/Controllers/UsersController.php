@@ -139,9 +139,9 @@ class UsersController extends Controller
    */
   public function show($id)
   {
-    $user = User::find($id);
-    $clients = Client::all();
-    return view('users.show', compact('user', 'clients'));
+    // $user = User::find($id);
+    // $clients = Client::all();
+    // return view('users.show', compact('user', 'clients'));
   }
 
   /**

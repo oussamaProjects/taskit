@@ -693,6 +693,7 @@ video {
 }
 
 .sticky {
+  position: -webkit-sticky;
   position: sticky;
 }
 
@@ -10055,7 +10056,6 @@ video {
 .select-all {
   -webkit-user-select: all;
      -moz-user-select: all;
-      -ms-user-select: all;
           user-select: all;
 }
 
@@ -34164,6 +34164,7 @@ ul.pagination li.page-item > a.page-link:hover {
   }
 
   .sm\:sticky {
+    position: -webkit-sticky;
     position: sticky;
   }
 
@@ -43460,7 +43461,6 @@ ul.pagination li.page-item > a.page-link:hover {
   .sm\:select-all {
     -webkit-user-select: all;
        -moz-user-select: all;
-        -ms-user-select: all;
             user-select: all;
   }
 
@@ -66383,6 +66383,7 @@ ul.pagination li.page-item > a.page-link:hover {
   }
 
   .md\:sticky {
+    position: -webkit-sticky;
     position: sticky;
   }
 
@@ -75679,7 +75680,6 @@ ul.pagination li.page-item > a.page-link:hover {
   .md\:select-all {
     -webkit-user-select: all;
        -moz-user-select: all;
-        -ms-user-select: all;
             user-select: all;
   }
 
@@ -98602,6 +98602,7 @@ ul.pagination li.page-item > a.page-link:hover {
   }
 
   .lg\:sticky {
+    position: -webkit-sticky;
     position: sticky;
   }
 
@@ -107898,7 +107899,6 @@ ul.pagination li.page-item > a.page-link:hover {
   .lg\:select-all {
     -webkit-user-select: all;
        -moz-user-select: all;
-        -ms-user-select: all;
             user-select: all;
   }
 
@@ -130821,6 +130821,7 @@ ul.pagination li.page-item > a.page-link:hover {
   }
 
   .xl\:sticky {
+    position: -webkit-sticky;
     position: sticky;
   }
 
@@ -140117,7 +140118,6 @@ ul.pagination li.page-item > a.page-link:hover {
   .xl\:select-all {
     -webkit-user-select: all;
        -moz-user-select: all;
-        -ms-user-select: all;
             user-select: all;
   }
 
@@ -163040,6 +163040,7 @@ ul.pagination li.page-item > a.page-link:hover {
   }
 
   .\32xl\:sticky {
+    position: -webkit-sticky;
     position: sticky;
   }
 
@@ -172336,7 +172337,6 @@ ul.pagination li.page-item > a.page-link:hover {
   .\32xl\:select-all {
     -webkit-user-select: all;
        -moz-user-select: all;
-        -ms-user-select: all;
             user-select: all;
   }
 
@@ -195121,3 +195121,4 @@ ul.pagination li.page-item > a.page-link:hover {
     transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
   }
 }
+

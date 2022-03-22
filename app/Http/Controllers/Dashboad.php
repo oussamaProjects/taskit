@@ -9,6 +9,8 @@ use App\Project;
 use App\User;
 use ArielMejiaDev\LarapexCharts\LarapexChart;
 
+use App\User;
+use ArielMejiaDev\LarapexCharts\Facades\LarapexChart;
 use Illuminate\Http\Request;
 
 class Dashboad extends Controller
@@ -81,5 +83,8 @@ class Dashboad extends Controller
     $task=$user->tasks()->get();
 
        return view('rapport.weekly',compact('user','task','dpt'));
+   public function index(LarapexChart $chart){
+  
+    return view('users.home',compact('chartBar','time_total','chartH_bar'));
    }
 }

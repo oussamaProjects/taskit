@@ -7,6 +7,7 @@ use App\Client;
 use App\Project;
 use App\Task;
 use App\User;
+use Carbon\Carbon;
 use Illuminate\Http\Request;
 
 class TaskController extends Controller
@@ -18,16 +19,26 @@ class TaskController extends Controller
      */
     public function index()
     {
-        $tasks=Task::all();
-        $users=User::all();
-        $projects=Project::all();
-        $categorys=Category::all();
+        $tasks = Task::all();
+        $users = User::all();
+        $projects = Project::all();
+        $categorys = Category::all();
 
-      
+
         // $task_p=$tasks->project->name;
         // $task_c=$tasks->category()->name;
 
-        return view('task.index',compact('users','tasks','projects','categorys'));
+        return view('task.index', compact('users', 'tasks', 'projects', 'categorys'));
+    }
+
+    public function startTask(Task $task)
+    {
+        dd($task);
+        $task->start_time = Carbon::now();
+    }
+    public function endTask(Task $task)
+    {
+        $task->end_time = Carbon::now();
     }
 
     public function create()
@@ -43,30 +54,30 @@ class TaskController extends Controller
      */
     public function store(Request $request)
     {
-      
 
-        $this->validate($request,[
-            'name'=>'required',
-            'start_time'=>'required',
-            'end_time'=>'required',
-            'estimate_time'=>'required',
-            'active'=>'required'
+
+        $this->validate($request, [
+            'name' => 'required',
+            'start_time' => 'required',
+            'end_time' => 'required',
+            'estimate_time' => 'required',
+            // 'active' => 'required'
         ]);
 
 
-        $task=new Task;
-        $task->name=$request->name;
-        $task->start_time=$request->start_time;
-        $task->end_time=$request->end_time;
-        $task->estimate_time=$request->estimate_time;
-        $task->active=$request->active;
-        
+        $task = new Task;
+        $task->name = $request->name;
+        $task->start_time = $request->start_time;
+        $task->end_time = $request->end_time;
+        $task->estimate_time = $request->estimate_time;
+        $task->active = $request->active ?? 1;
+
         $task->save();
 
         $task->users()->sync($request->user_id);
         $task->projects()->sync($request->project_id);
         $task->categorys()->sync($request->category_id);
-       
+
         return redirect()->route('task.index');
     }
 
@@ -78,13 +89,13 @@ class TaskController extends Controller
      */
     public function show($id)
     {
-       $task = Task::find($id);
-       $clients = Client::all();
+        $task = Task::find($id);
+        $clients = Client::all();
 
-       return view('task.show',compact('task','clients'));
+        return view('task.show', compact('task', 'clients'));
     }
 
-    
+
     /**
      * Show the form for editing the specified resource.
      *
@@ -93,13 +104,13 @@ class TaskController extends Controller
      */
     public function edit($id)
     {
-        $projects=Project::all();
-        $categorys=Category::all();
-        $users=User::all();
+        $projects = Project::all();
+        $categorys = Category::all();
+        $users = User::all();
 
-       $task=Task::find($id);
+        $task = Task::find($id);
 
-       return view('task.edit',compact('task','projects','categorys','users'));
+        return view('task.edit', compact('task', 'projects', 'categorys', 'users'));
     }
 
     /**
@@ -111,40 +122,39 @@ class TaskController extends Controller
      */
     public function update(Request $request, int $id)
     {
-        $this->validate($request,[
-            'name'=>'required',
-            'start_time'=>'required',
-            'end_time'=>'required',
-            'estimate_time'=>'required',
-            'active'=>'required',
+        $this->validate($request, [
+            'name' => 'required',
+            'start_time' => 'required',
+            'end_time' => 'required',
+            'estimate_time' => 'required',
+            'active' => 'required',
         ]);
-        
-        $task=Task::find($id);
-        $task->name=$request->name;
-        $task->start_time=$request->start_time;
-        $task->end_time=$request->end_time;
-        $task->estimate_time=$request->estimate_time;
-        $task->active=$request->active;
+
+        $task = Task::find($id);
+        $task->name = $request->name;
+        $task->start_time = $request->start_time;
+        $task->end_time = $request->end_time;
+        $task->estimate_time = $request->estimate_time;
+        $task->active = $request->active;
 
 
         $task->save();
-       
-        if($request->user_id!=null){
+
+        if ($request->user_id != null) {
             $task->users()->detach($request->user_id);
             $task->users()->sync($request->user_id);
         }
-        if($request->category_id!=null){
+        if ($request->category_id != null) {
             $task->categorys()->detach($request->category_id);
             $task->categorys()->sync($request->category_id);
         }
-       if($request->project_id!=null){
+        if ($request->project_id != null) {
             $task->projects()->detach($request->project_id);
             $task->projects()->sync($request->project_id);
-       }
-     
-        
-        return redirect()->route('task.index');
+        }
 
+
+        return redirect()->route('task.index');
     }
 
     /**
@@ -155,7 +165,7 @@ class TaskController extends Controller
      */
     public function destroy($id)
     {
-        $task=Task::find($id);
+        $task = Task::find($id);
         $task->delete($id);
 
         return redirect()->back();
