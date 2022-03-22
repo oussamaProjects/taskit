@@ -5,6 +5,7 @@
     <button @click="pause()" class="text-custom_green uppercase">Pause</button>
     <button @click="reset()" class="text-custom_green uppercase">Reset</button>
     <select id="taskSelected" v-model="task.id">
+      <option value="0">--</option>
       <option v-for="task in tasks" :key="task.id" :value="task.id">
         {{ task.name }}
       </option>

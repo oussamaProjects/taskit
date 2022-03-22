@@ -61,7 +61,7 @@ class TaskController extends Controller
             'start_time' => 'required',
             'end_time' => 'required',
             'estimate_time' => 'required',
-            'active' => 'required'
+            // 'active' => 'required'
         ]);
 
 
@@ -70,7 +70,7 @@ class TaskController extends Controller
         $task->start_time = $request->start_time;
         $task->end_time = $request->end_time;
         $task->estimate_time = $request->estimate_time;
-        $task->active = $request->active;
+        $task->active = $request->active ?? 1;
 
         $task->save();
 

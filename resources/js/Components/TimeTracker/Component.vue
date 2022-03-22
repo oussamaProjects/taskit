@@ -1,25 +1,38 @@
 <template>
-  <div>
-    <div class="w-full relative p-4 border-b border-tertiary">
-      <div class="uppercase font-medium text-custom_blue my-4">Counter</div>
-      <!-- <ch-timer-component></ch-timer-component> -->
-      <ch-time-tracker-component
-        :projects="projects"
-        :categories="categories"
-        :tasks="tasks"
-      ></ch-time-tracker-component>
+  <div class="ng-star-inserted">
+    <div class=" page-wrapper  px-0  px-lg-2  pt-0">
+      <div class=" tracker-wrapper ng-star-inserted">
+        <div class=" container-fluid  px-0  px-lg-2">
+          <div class=" tracker-entries-wrapper ng-star-inserted">
+
+            <ts-time-tracker-component
+              :projects="projects"
+              :categories="categories"
+              :tasks="tasks"
+            />
+
+            <ts-tasks :tasks="tasks" />
+
+            <ts-entry-group />
+
+          </div>
+        </div>
+      </div>
     </div>
   </div>
 </template>
 
 <script>
-import ChTimerComponent from "../Timer/TimerComponent.vue";
-import ChTimeTrackerComponent from "../Timer/TimeTrackerComponent.vue";
+
+import TsTasks from "../Tasks/Component.vue";
+import TsTimeTrackerComponent from "../Timer/TimeTrackerComponent.vue";
+import TsEntryGroup from "./EntryGroup.vue";
 
 export default {
   components: {
-    ChTimerComponent,
-    ChTimeTrackerComponent,
+    TsTasks,
+    TsTimeTrackerComponent,
+    TsEntryGroup,
   },
 
   data() {},

@@ -82,7 +82,7 @@ Route::resource('group', 'GroupController');
 //task
 Route::resource('task', 'TaskController');
 
-Route::get('taskTimeTracker', 'TimeTrackerController@index');
+Route::get('taskTimeTracker', 'TimeTrackerController@index')->name('taskTimeTracker');
 Route::post('task/start/{task}', 'TaskController@startTask');
 Route::post('task/end/{task}', 'TaskController@endsTask');
 

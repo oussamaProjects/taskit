@@ -1,23 +1,13 @@
 <template>
-  <div class="py-12">
-    <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
-      <div class="flex flex-col bg-white overflow-hidden shadow-sm">
-        <ch-time-tracker-component
-          :projects="projects"
-          :categories="categories"
-          :tasks="tasks"
-        />
-      </div>
-    </div>
+  <div class="task w-full p-2 shadow-sm rounded-sm my-1" :id="task.id">
+    <div class="flex flex-row">{{ task.name }}</div>
   </div>
 </template>
 
 <script>
-import ChTimeTrackerComponent from "../Components/TimeTracker/Component.vue";
-
 export default {
   components: {
-    ChTimeTrackerComponent,
+    // AppLayout,
   },
 
   data() {
@@ -36,6 +26,9 @@ export default {
 
   mounted() {},
 
-  props: ["projects", "categories", "tasks"],
+  props: ["task"],
 };
 </script>
+
+<style>
+</style>

@@ -1,23 +1,16 @@
 <template>
-  <div class="py-12">
-    <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
-      <div class="flex flex-col bg-white overflow-hidden shadow-sm">
-        <ch-time-tracker-component
-          :projects="projects"
-          :categories="categories"
-          :tasks="tasks"
-        />
-      </div>
-    </div>
+  <div class="tasks task w-full p-2 shadow-sm rounded-sm my-1">
+    <ts-task v-for="task in tasks" :key="task.id" :task="task" class="task" />
+
+    
   </div>
 </template>
 
 <script>
-import ChTimeTrackerComponent from "../Components/TimeTracker/Component.vue";
-
+import TsTask from "./Task.vue";
 export default {
   components: {
-    ChTimeTrackerComponent,
+    TsTask,
   },
 
   data() {
@@ -39,3 +32,6 @@ export default {
   props: ["projects", "categories", "tasks"],
 };
 </script>
+
+<style>
+</style>
