@@ -19,17 +19,21 @@ use Illuminate\Support\Facades\Hash;
 use Spatie\Permission\Models\Role;
 
 class UsersController extends Controller
-{
+{ 
   /**
    * Display a listing of the resource.
    *
    * @return \Illuminate\Http\Response
    */
 
-  public function __construct()
+  // public function __construct()
+  // {
+  //   return $this->middleware(['auth','permission:manage']);
+  //   $this->middleware(['auth','admin']);
+  // }
+  public function __construct(LarapexChart $chart)
   {
-    // return $this->middleware(['auth','permission:manage']);
-    // $this->middleware(['auth','admin']);
+    $this->chart=$chart;
   }
 
   public function index()
@@ -61,20 +65,29 @@ class UsersController extends Controller
     return view('users.index', compact('users', 'depts', 'roles', 'groups', 'tasks'));
   }
 
+  
   /**
    * Show the form for creating a new resource.
    *
    * @return \Illuminate\Http\Response
    */
-  public function create( MonthlyUsersChart $chart)
+  public function create($id)
   {
-    return view('users.home', [
-      'chartPie' => $chart->buildPie(),
-      'chartLine' => $chart->buildLine(),
-      'chartBar' => $chart->buildBar(),
-      'chartH_bar' => $chart->horizontalBar()
-    ]);
+    $user=User::find($id);
+    dd($user);
+    $user->tasks()->get();
+
+    // return view('users.home', [
+    //   'chartPie' => $chart->buildPie(),
+    //   'chartLine' => $chart->buildLine(),
+    //   'chartBar' => $chart->buildBar($user->id),
+    //   'chartH_bar' => $chart->horizontalBar(),
+    //   'donutChart' =>$chart->donutChart(),
+    //   'user' => $user
+    // ]);
+    
   }
+ 
   /**
    * Store a newly created resource in storage.
    *
@@ -124,11 +137,11 @@ class UsersController extends Controller
    * @param  int  $id
    * @return \Illuminate\Http\Response
    */
-  public function show(int $id)
+  public function show($id)
   {
-    $user = User::find($id);
-    $clients = Client::all();
-    return view('users.show', compact('user', 'clients'));
+    // $user = User::find($id);
+    // $clients = Client::all();
+    // return view('users.show', compact('user', 'clients'));
   }
 
   /**
@@ -241,7 +254,7 @@ class UsersController extends Controller
    * @param  int  $id
    * @return \Illuminate\Http\Response
    */
-  public function destroy($id)
+  public function destroy(int $id)
   {
     $user = User::findOrFail($id);
     $user->delete();
@@ -259,11 +272,14 @@ class UsersController extends Controller
 
     return view('task.project.tasks', compact('tasks'));
   }
-  public function dashboard()
+  public function dashboad(Int $id)
   {
-    //   $chart=(new LarapexChart) ->setTitle('example')
-    //   ->setXAxis(['active example','blocked example'])
-    //   ->setDataset([100,60]);
-    // return view('users.home')->with($chart);
+
+    $user = User::find($id);
+    dd($user);
+    $tasks = $user->tasks()->get();
+
+    return view('task.project.tasks', compact('tasks'));
   }
+ 
 }

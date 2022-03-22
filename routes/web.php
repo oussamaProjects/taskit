@@ -117,3 +117,6 @@ Route::get('backup/delete', 'BackupController@delete');
 // log
 Route::get('logs', 'LogController@log');
 Route::get('logsdel', 'LogController@logdel');
+
+// dashboad
+Route::get('users/home','Dashboad@index')->name('users.dashboad');
