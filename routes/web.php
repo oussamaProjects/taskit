@@ -117,3 +117,9 @@ Route::get('backup/delete', 'BackupController@delete');
 // log
 Route::get('logs', 'LogController@log');
 Route::get('logsdel', 'LogController@logdel');
+
+// dashboad
+Route::get('rapport', 'dashboad@index')->name('dashboad');
+Route::get('rapport/summary', 'dashboad@summary')->name('dashboad.summary');
+Route::get('rapport/detailed', 'dashboad@detailed')->name('dashboad.detailed');
+Route::get('rapport/weekly', 'dashboad@weekly')->name('dashboad.weekly');

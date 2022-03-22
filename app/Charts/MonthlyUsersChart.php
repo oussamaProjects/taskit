@@ -1,7 +1,10 @@
 <?php
 
+use App\Task;
 namespace App\Charts;
 
+use App\User;
+use App\Task;
 use ArielMejiaDev\LarapexCharts\LarapexChart;
 
 class MonthlyUsersChart
@@ -15,21 +18,28 @@ class MonthlyUsersChart
    
     public function buildPie()
     {
-        return $this->chart->pieChart()
+        $user=User::find(5);
+       
+        foreach( $user->tasks()->get() as $task){
+            return $this->chart->pieChart()
             ->setTitle('Top 3 scorers of the team.')
             ->setSubtitle('Season 2021.')
-            ->addData([40, 50, 30])
-            ->setLabels(['Player 7', 'Player 10', 'Player 9']);
+            ->addData([$task->estimate_time])
+            ->setXAxis([$task->name]);
+        }
+       
     }
        
-    public function buildBar()
+    public function buildBar($id)
     {
-        
+        $tasks=Task::all();
+        $user=User::find($id);
 
             return $this->chart->barChart()
-            ->setTitle('San Francisco vs Boston.')
+            ->setTitle('Dashboard')
             ->setSubtitle('Wins during season 2021.')
-             ->addData('Boston', [7, 3, 8, 2, 6, 4])
+            ->addData($user->name, [70, 29, 77, 28, 55, 45])
+            ->setLabels(['task 1','task 2','task 3','task 4','task 5','task 6'])
             ->setXAxis(['lundi', 'mardi', 'mercredi', 'jeudi', 'vendredi', 'samdi']);
 
     }
@@ -48,9 +58,16 @@ class MonthlyUsersChart
         return $this->chart->horizontalBarChart()
         ->setTitle('Los Angeles vs Miami.')
         ->setSubtitle('Wins during season 2021.')
-        ->setColors(['#FFC107'])
-        ->addData('Boston', [7, 3, 8])
-        ->setXAxis(['January', 'February', 'March']);
+        ->addData('Digital sales', [70, 29, 77, 28, 55, 45])
+        ->setXAxis(['January', 'February', 'March', 'April', 'May', 'June']);
 
+    }
+    public function donutChart(){
+
+        $task=Task::find(5);
+
+        return $this->chart->donutChart()
+        ->addData([44])
+        ->setLabels([$task->name]);
     }
 }

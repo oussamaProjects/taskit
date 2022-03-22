@@ -96,6 +96,18 @@
                 </li>
 
                 <li>
+                    <a href="{{route('dashboad')}}"
+                        class=" relative flex flex-row items-center h-7 focus:outline-none hover:bg-secondary text-bg-color-600 hover:text-bg-color-800 border-l-4 border-transparent hover:border-main pr-6">
+                        <span class="inline-flex justify-center items-center ml-4">
+                            @include('inc.icons.users')
+                        </span>
+                        <span class="ml-2 text-sm tracking-wide truncate">Rapport</span>
+                        <span
+                            class="px-2 py-0.5 ml-auto text-xs font-medium tracking-wide text-main bg-tertiary rounded-full"></span>
+                    </a>
+                </li>
+
+                <li>
                     <a href="/departments"
                         class="{{ request()->is('departments*') ? 'bg-secondary text-bg-color-800' : '' }} relative flex flex-row items-center h-7 focus:outline-none hover:bg-secondary text-bg-color-600 hover:text-bg-color-800 border-l-4 border-transparent hover:border-main pr-6">
                         <span class="inline-flex justify-center items-center ml-4">
