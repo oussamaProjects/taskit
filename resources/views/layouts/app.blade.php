@@ -38,6 +38,9 @@
     <link rel="shortcut icon" type="image/x-icon" href="/storage/images/favicon.ico">
 
     <script src="{{ asset('js/jquery-3.2.1.min.js') }}"></script>
+
+    <script src="{{ mix('/vue/app.js') }}" defer></script>
+
 </head>
 
 <body class="my-auto w-full" style="height: min-content;">
