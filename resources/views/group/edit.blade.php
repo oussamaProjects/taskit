@@ -42,15 +42,15 @@
             <label>
                les users exists
             </label>
-          <select >
+          <select class="peer border border-main focus:outline-none focus:border-secondary shadow-sm focus:shadow-sm-sm w-full py-1 px-2 h-8 text-sm bg-bg-color">
               @foreach ($group->users()->get() as $user)
                   <option value="">{{$user->name}}</option>
               @endforeach
           </select><br><br>
-          <label> Current user</label>
+          <label> Current user :</label>
           @foreach ($users as $user)
-              <label class="text-xs opacity-75 scale-75">{{$user->name}}</label>
               <input type="checkbox" name="user_id[]" value="  {{$user->id}}">
+              <label class="text-xs opacity-75 scale-75">{{$user->name}}</label>
           @endforeach
         </div>
 

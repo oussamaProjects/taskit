@@ -18,8 +18,8 @@ class CreateTasksTable extends Migration
             $table->string('name');
             $table->time('start_time');
             $table->time('end_time');
-            $table->time('estimate_time');
-            $table->boolean('active');
+            $table->integer('estimate_time');
+            $table->boolean('active')->nullable();
             $table->timestamps();
         });
     }

@@ -55,7 +55,6 @@ class ProjectController extends Controller
 
         $this->validate($request, [
             'name' => 'required',
-            'description' => 'required',
             'estimate_time' => 'required',
             'estimate_value' => 'required',
             'client_id' => 'required',
@@ -71,7 +70,7 @@ class ProjectController extends Controller
             'client_id' => $request->client_id,
             'color' => $request->color
         ]);
-        $project->departments()->sync($request->department_id);
+        $project->departments()->sync($request->department);
         return redirect()->back();
     }
 
@@ -119,8 +118,7 @@ class ProjectController extends Controller
         $this->validate($request, [
             'name' => 'required',
             'description' => 'required',
-            'estimate_time' => 'required',
-            'estimate_value' => 'required'
+            'client_id' => 'required'
         ]);
 
         $project->name = $request->name;
@@ -130,7 +128,13 @@ class ProjectController extends Controller
         $project->color = $request->color;
         $project->client_id = $request->client_id;
 
+        if($request->department != null){
+            $project->departments()->detach($request->department);
+            $project->departments()->sync($request->department);
+        }
+        
         $project->save();
+       
 
         return redirect()->route('project.index');
     }

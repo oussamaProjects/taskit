@@ -8,9 +8,6 @@ use App\Group;
 use App\Project;
 use App\User;
 use ArielMejiaDev\LarapexCharts\LarapexChart;
-
-use App\User;
-use ArielMejiaDev\LarapexCharts\Facades\LarapexChart;
 use Illuminate\Http\Request;
 
 class Dashboad extends Controller
@@ -22,24 +19,23 @@ class Dashboad extends Controller
     }
 
 
-    public function index(LarapexChart $chart){
-       
-        $users=User::all();
+    public function index(LarapexChart $chart)
+    {
+        $user_p=User::where('role','=','user')->first();
         $projects=Project::all();
         $departments=Department::all();
         $categorys=Category::all();
         $groups=Group::all();
-
-       
-    return view('rapport.home',compact('users','projects','departments','categorys','groups'));
+  
+    return view('rapport.home',compact('groups','user_p','projects','departments','categorys'));
    }
 
    public function summary()
    {
-    $user=User::find(7);
+    $user=User::find(2);
     foreach($user->tasks()->get() as $task){
         
-        $time_total=$task->sum('start_time');
+        $time_total=$task->sum('estimate_time');
         
           $chartBar=$this->chart->Barchart()
             ->setTitle('Dashboard')
@@ -67,7 +63,7 @@ class Dashboad extends Controller
    public function detailed()
    {
        $projects=Project::all();
-       $user=User::find(5);
+       $user=User::find(2);
        $dpt=$user->departments()->get();
        $task=$user->tasks()->get();
        
@@ -77,14 +73,10 @@ class Dashboad extends Controller
    public function weekly()
    {
 
-    
-    $user=User::find(5);
-    $dpt=$user->departments()->get();
-    $task=$user->tasks()->get();
+        $user=User::find(2);
+        $dpt=$user->departments()->get();
+        $task=$user->tasks()->get();
 
        return view('rapport.weekly',compact('user','task','dpt'));
-   public function index(LarapexChart $chart){
-  
-    return view('users.home',compact('chartBar','time_total','chartH_bar'));
    }
 }

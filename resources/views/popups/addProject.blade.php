@@ -39,7 +39,7 @@
             <div class="mb-2 relative">
                 <label for="estimate_value" class="text-xs opacity-75 scale-75">
                     Estimate value</label>
-                {{ Form::number('estimate_value', '', ['id' => 'estimate_value','class' =>'peer border border-main focus:outline-none focus:border-secondary shadow-sm focus:shadow-sm-sm w-full py-1 px-2 h-8 text-sm bg-bg-color']) }}
+                {{ Form::text('estimate_value', '', ['id' => 'estimate_value','class' =>'peer border border-main focus:outline-none focus:border-secondary shadow-sm focus:shadow-sm-sm w-full py-1 px-2 h-8 text-sm bg-bg-color']) }}
             </div>
 
             <div class="mb-2 relative">
@@ -64,16 +64,13 @@
             </div>
 
             <div class="mb-2 relative">
-                <label for="email" class="text-xs opacity-75 scale-75">Department</label>
-                <select name="department_id" id="role"
-                    class="peer border border-main focus:outline-none focus:border-secondary shadow-sm focus:shadow-sm-sm w-full py-1 px-2 h-8 text-sm bg-bg-color">
-                    <option value="" disabled selected>Attribuer un depatment</option>
-                    @if (count($departments) > 0)
+                <label>Department :</label><br>
+                   @if (count($departments) > 0)
                         @foreach ($departments as $department)
-                            <option value="{{ $department->id }}">{{ $department->dptName }}</option>
+                        <input type="checkbox" name="department[]" value="{{$department->id}}" > <label class="text-xs opacity-75 scale-75">{{$department->dptName}}</label>
                         @endforeach
                     @endif
-                </select>
+                
             </div>
 
             <div class="flex items-end justify-end mt-4  ">

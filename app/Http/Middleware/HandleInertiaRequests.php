@@ -2,6 +2,7 @@
 
 namespace App\Http\Middleware;
 
+use GuzzleHttp\Middleware as GuzzleHttpMiddleware;
 use Illuminate\Http\Request;
 use Inertia\Middleware;
 
@@ -21,7 +22,7 @@ class HandleInertiaRequests extends Middleware
      * @see https://inertiajs.com/asset-versioning
      * @param  \Illuminate\Http\Request  $request
      * @return string|null
-     */
+     */          
     public function version(Request $request): ?string
     {
         return parent::version($request);

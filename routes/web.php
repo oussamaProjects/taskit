@@ -32,9 +32,9 @@ Auth::routes();
 
 
 // dashboard
-Route::get('dashboard', 'DashboardController@index');
-Route::get('favorites/document/{id}', 'DashboardController@favoriteDocument');
-Route::get('favorites/folder/{id}', 'DashboardController@favoriteFolder');
+// Route::get('dashboard', 'DashboardController@index');
+// Route::get('favorites/document/{id}', 'DashboardController@favoriteDocument');
+// Route::get('favorites/folder/{id}', 'DashboardController@favoriteFolder');
 
 // users
 Route::resource('users', 'UsersController');

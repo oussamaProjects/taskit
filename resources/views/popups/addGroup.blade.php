@@ -21,11 +21,10 @@
             </div>
 
             <div class="mb-2 relative">
-                <label for="name" > Name user</label>
+                <label for="name" > Name user :</label>
                     @foreach ($users as $user)
-                        <label class="text-xs opacity-75 scale-75">{{$user->name}}</label>
                         <input type="checkbox" name="user_id[]" value="{{$user->id}}">
-                        {{-- {{ Form::checkbox('user_id', $user->id, ['autocomplete' => 'off','id' => 'name']) }} --}}
+                        <label class="text-xs opacity-75 scale-75">{{$user->name}}</label>
                     @endforeach
                 
             </div>

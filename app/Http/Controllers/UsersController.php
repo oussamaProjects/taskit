@@ -31,10 +31,7 @@ class UsersController extends Controller
   //   return $this->middleware(['auth','permission:manage']);
   //   $this->middleware(['auth','admin']);
   // }
-  public function __construct(LarapexChart $chart)
-  {
-    $this->chart=$chart;
-  }
+ 
 
   public function index()
   {
@@ -139,9 +136,9 @@ class UsersController extends Controller
    */
   public function show($id)
   {
-    // $user = User::find($id);
-    // $clients = Client::all();
-    // return view('users.show', compact('user', 'clients'));
+    $user = User::find($id);
+    $clients = Client::all();
+    return view('users.show', compact('user', 'clients'));
   }
 
   /**

@@ -94,7 +94,7 @@
                                         </td>
 
                                         <td class="px-2 py-3 text-sm">
-                                            <select>
+                                            <select class="peer border border-main focus:outline-none focus:border-secondary shadow-sm focus:shadow-sm-sm w-full py-1 px-2 h-8 text-sm bg-bg-color">
                                                 @foreach ($task->users()->get() as $user)
                                                     <option > {{ $user->name }}</option>
                                                 @endforeach
@@ -102,7 +102,7 @@
                                         </td>
 
                                         <td class="px-2 py-3 text-sm">
-                                            <select name="" id="">
+                                            <select class="peer border border-main focus:outline-none focus:border-secondary shadow-sm focus:shadow-sm-sm w-full py-1 px-2 h-8 text-sm bg-bg-color">
                                                 @foreach ($task->projects()->get() as $project)
                                                    <option> {{$project->name}}</option>
                                                 @endforeach
@@ -110,7 +110,7 @@
                                         </td>
 
                                         <td class="px-2 py-3 text-sm">
-                                            <select>
+                                            <select class="peer border border-main focus:outline-none focus:border-secondary shadow-sm focus:shadow-sm-sm w-full py-1 px-2 h-8 text-sm bg-bg-color">
                                                 @foreach ($task->categorys()->get() as $category)
                                                    <option>{{ $category->name }}</option>
                                                 @endforeach

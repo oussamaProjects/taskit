@@ -75,7 +75,8 @@
            <label >Current user :</label>
 
                  @foreach ($users as $user)
-                <input type="checkbox" name="user_id[]" value="{{$user->id}} "> {{ $user->name }} 
+                <input type="checkbox" name="user_id[]" value="{{$user->id}} ">
+                <label class="text-xs opacity-75 scale-75">{{ $user->name }} </label> 
                  @endforeach
         </div>
 
@@ -93,7 +94,8 @@
            <label >Current project :</label>
 
                  @foreach ($projects as $project)
-                <input type="checkbox" name="project_id[]" value="{{$project->id}} "> {{ $project->name }} 
+                <input type="checkbox" name="project_id[]" value="{{$project->id}} ">
+                <label class="text-xs opacity-75 scale-75"> {{ $project->name }} </label> 
                  @endforeach
         </div>
 
@@ -103,7 +105,7 @@
            @foreach ($task->categorys()->get() as $category)
               
                     @if ($category->name!=null)
-                       <option value="{{$category->id}}">{{$category->name}} </option>
+                       <option value="{{$category->id}}"> {{$category->name}} </option>
                      @endif
 
             @endforeach
@@ -111,7 +113,8 @@
            <label >Current catégory :</label>
 
                  @foreach ($categorys as $category)
-                <input type="checkbox" name="category_id[]" value="{{$category->id}} "> {{ $category->name }} 
+                <input type="checkbox" name="category_id[]" value="{{$category->id}} "> 
+                <label class="text-xs opacity-75 scale-75"> {{ $category->name }} </label>
                  @endforeach
         </div>
 

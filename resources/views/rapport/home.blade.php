@@ -5,6 +5,7 @@
 <div class="container">
     <div class="row align-items-start">
         <div class="col-6">
+         
             <ul class="nav">
                 <li class="nav-item">
                   <a aria-current="page" href="#" class="nav-link disabled">Rapport</a>
@@ -19,25 +20,22 @@
                   <a class="nav-link" href="{{route('dashboad.weekly')}}">Weekly</a>
                 </li>
               </ul>
+
             </div>
         </div>
 
-        {{-- <div style="margin: 22px">
-            <ul class="nav nav-tabs">
+        <div style="margin: 22px">
+            {{-- <ul class="nav nav-tabs">
                 <li class="nav-item">
                 <select>
-                    @foreach ($groups as $group)
-                      <option value="">{{$group->name}}</option>
-                    @endforeach
+                  @if (count($groups)>0)
+                      @foreach ($groups as $group)
+                        <option value="">{{$group->name}}</option>
+                      @endforeach
+                  @endif
                 </select>
                 </li>
-                <li class="nav-item dropdown">
-                  <select>
-                    @foreach ($users as $user)
-                        <option value="">{{$user->name}}</option>
-                    @endforeach
-                </select>
-                </li>
+               
                 <li class="nav-item">
                  <select>
                      @foreach ($projects as $project)
@@ -52,8 +50,8 @@
                       @endforeach
                   </select>
                 </li>
-              </ul>
-        </div> --}}
+              </ul> --}}
+        </div>
    @yield('context')
 </div>
 

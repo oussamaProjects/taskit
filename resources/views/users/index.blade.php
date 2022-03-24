@@ -74,7 +74,7 @@
                                             </td>
 
                                             <td class="px-2 py-3 text-sm">
-                                                <select>
+                                                <select class="peer border border-main focus:outline-none focus:border-secondary shadow-sm focus:shadow-sm-sm w-full py-1 px-2 h-8 text-sm bg-bg-color">
                                                 @foreach ($user->departments()->get() as $dept)
                                                  <option value=""> {{ $dept->dptName }}</option>
                                                 @endforeach
@@ -82,7 +82,7 @@
                                             </td>
 
                                             <td class="px-2 py-3 text-sm">
-                                                <select >
+                                                <select class="peer border border-main focus:outline-none focus:border-secondary shadow-sm focus:shadow-sm-sm w-full py-1 px-2 h-8 text-sm bg-bg-color">
                                                     @foreach ($user->groups()->get() as $group)
                                                       <option > {{ $group->name }}</option>
                                                     @endforeach
@@ -90,7 +90,7 @@
                                             </td>
 
                                             <td class="px-2 py-3 text-sm">
-                                                <select>
+                                                <select class="peer border border-main focus:outline-none focus:border-secondary shadow-sm focus:shadow-sm-sm w-full py-1 px-2 h-8 text-sm bg-bg-color">
                                                     @foreach ($user->tasks()->get() as $task)
                                                       <option> {{$task->name}}</option>
                                                     @endforeach

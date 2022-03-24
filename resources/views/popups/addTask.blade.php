@@ -49,8 +49,8 @@
                
                     @if (count($users) > 0)
                         @foreach ($users as $user)
-                        <label class="text-xs opacity-75 scale-75">{{$user->name}}</label>
-                           <input type="checkbox" name="user_id[]" value="{{$user->id}}">
+                          <input type="checkbox" name="user_id[]" value="{{$user->id}}">
+                          <label class="text-xs opacity-75 scale-75">{{$user->name}}</label>
                         @endforeach
                     @endif
                 
@@ -61,8 +61,8 @@
                
                     @if (count($projects) > 0)
                         @foreach ($projects as $project)
-                        <label class="text-xs opacity-75 scale-75">{{$project->name}}</label>
-                           <input type="checkbox" name="project_id[]" value="{{$project->id}}">
+                            <input type="checkbox" name="project_id[]" value="{{$project->id}}">
+                            <label class="text-xs opacity-75 scale-75">{{$project->name}}</label>
                         @endforeach
                     @endif
                 
@@ -73,8 +73,8 @@
                
                     @if (count($categorys) > 0)
                         @foreach ($categorys as $category)
-                        <label class="text-xs opacity-75 scale-75">{{$category->name}}</label>
-                           <input type="checkbox" name="category_id[]" value="{{$category->id}}">
+                            <input type="checkbox" name="category_id[]" value="{{$category->id}}">
+                            <label class="text-xs opacity-75 scale-75">{{$category->name}}</label>
                         @endforeach
                     @endif
                 

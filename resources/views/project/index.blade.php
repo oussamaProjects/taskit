@@ -74,10 +74,11 @@
 
                                         <td class="px-2 py-3 text-sm"><a href="{{route('project.tasks',$project->id)}}">{{ $project->name }}</a></td>
                                         <td>
+                                            <select class="peer border border-main focus:outline-none focus:border-secondary shadow-sm focus:shadow-sm-sm w-full py-1 px-2 h-8 text-sm bg-bg-color">
                                                 @foreach ( $project->departments()->get() as $department)
-                                                   <a href="{{route('project.edit-department',$department->id)}}"> {{$department->dptName}}</a>
+                                                  <option value="">{{$department->dptName}}</option>
                                                 @endforeach
-
+                                            </select>
                                         </td>
 
                                         <td class="px-2 py-3 text-sm">
