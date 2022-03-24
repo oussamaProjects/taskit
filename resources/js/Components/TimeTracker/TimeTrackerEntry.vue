@@ -1,17 +1,14 @@
 <template>
   <div tabrow="" class="flex tracker-entry">
-    <div class="flex flex-col description-col flex-grow-0">
-      <span class="flex align-items-center mr-2">
-        <div class="fake-input-wrapper cut-text w-full">
+    <div class="flex flex-col ">
+      <span class="flex align-middle mr-2">
+        <div class="hidden w-full">
           <input
             type="text"
-             
             autocomplete="off"
             spellcheck="true"
             class="
-              form-control
-              input-description
-              ng-untouched ng-pristine ng-valid
+              form-control 
             "
             placeholder="Add description"
             title="Salat alasr"
@@ -20,19 +17,16 @@
         </div></span
       >
     </div>
-    <div class="flex flex-col project-col">
-      <div   class="dropdown dropdown-large flex w-full">
+    <div class="flex flex-col ">
+      <div class="dropdown dropdown-large flex w-full">
         <div class="cut-text w-full">
           <ts-project-picker-label />
         </div>
-        <span    ></span>
+        <span></span>
       </div>
     </div>
     <div class="flex flex-col tag-col">
-      <div
-         
-        class="dropdown flex w-full cut-text-wrapper justify-content-end"
-      >
+      <div class="dropdown flex w-full cut-text-wrapper justify-content-end">
         <ts-tag-names />
       </div>
     </div>
@@ -53,30 +47,21 @@
           <ts-input-duration />
         </div>
         <div
-           
           class="component-divided-left icon-play pointer non-selectable px-1"
           title="Continue timer for this activity"
         >
           <img
             src="https://app.clockify.me/assets/images/ui-icons/play.svg"
-            class="px-1 pr-lg-2"
+            class="px-1 pr-2"
           />
         </div>
-        <div
-           
-           
-          class="dropdown tree-dots flex ng-star-inserted"
-        >
+        <div class="dropdown tree-dots flex ng-star-inserted">
           <div
-            dropdownkeybutton=""
-             
             class="
-              pointer
-              non-selectable
-              component-divided-left
-              d-flex
-              dropdown-toggle
-              no-arrow
+              
+              flex
+
+              cursor-pointer
             "
           >
             <img
@@ -84,7 +69,7 @@
               class="px-2"
             />
           </div>
-          <span    ></span>
+          <span></span>
         </div>
       </div>
     </div>

@@ -9,6 +9,7 @@
               :projects="projects"
               :categories="categories"
               :tasks="tasks"
+              :globalClass="globalClass"
             />
 
             <ts-tasks :tasks="tasks" />
@@ -37,7 +38,7 @@ export default {
 
   data() {},
 
-  props: ["projects", "categories", "tasks"],
+  props: ["projects", "categories", "tasks","globalClass"],
 
   mounted() {},
 

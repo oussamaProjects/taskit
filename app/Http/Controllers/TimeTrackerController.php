@@ -21,8 +21,15 @@ class TimeTrackerController extends Controller
         $projects = Project::all();
         $categories = Category::all();
 
+        $taskArray = array();
+
+        foreach ($tasks as $key => $task) {
+            $taskArray[$key]  = $task ;
+            $taskArray[$key]['project'] = $task->projects()->get();
+        }
+
         return Inertia::render('TimeTracker', [
-            'tasks' => $tasks,
+            'tasks' => $taskArray,
             'projects' => $projects,
             'categories' => $categories,
         ]);

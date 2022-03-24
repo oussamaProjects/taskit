@@ -20245,7 +20245,7 @@ __webpack_require__.r(__webpack_exports__);
     TsEntryGroup: _EntryGroup_vue__WEBPACK_IMPORTED_MODULE_2__["default"]
   },
   data: function data() {},
-  props: ["projects", "categories", "tasks"],
+  props: ["projects", "categories", "tasks", "globalClass"],
   mounted: function mounted() {},
   methods: {}
 });
@@ -20408,7 +20408,7 @@ __webpack_require__.r(__webpack_exports__);
     return {
       task: {
         id: 1,
-        name: 'test'
+        name: "test"
       },
       isRunning: false,
       hours: 0,
@@ -20463,7 +20463,7 @@ __webpack_require__.r(__webpack_exports__);
       this.hours = 0;
     }
   },
-  props: ["projects", "categories", "tasks"]
+  props: ["projects", "categories", "tasks", "globalClass"]
 });
 
 /***/ }),
@@ -20487,30 +20487,25 @@ __webpack_require__.r(__webpack_exports__);
   },
   computed: {
     prettify: function prettify() {
-      console.log(this.time);
+      var _data$, _data$2, _data$3, _data$4;
+
+      var days = "0";
+      var hours = "0";
+      var minutes = "0";
+      var secondes = "0";
       var data = this.time.split(":");
-      var days = data[0];
-      var hours = data[1];
-      var minutes = data[2];
-      var secondes = data[3];
-
-      if (days < 10) {
-        days = "0" + days;
-      }
-
-      if (hours < 10) {
-        hours = "0" + hours;
-      }
-
-      if (minutes < 10) {
-        minutes = "0" + minutes;
-      }
-
-      if (secondes < 10) {
-        secondes = "0" + secondes;
-      }
-
-      return days + ":" + hours + ":" + minutes + ":" + secondes;
+      days = (_data$ = data[0]) !== null && _data$ !== void 0 ? _data$ : 0;
+      hours = (_data$2 = data[1]) !== null && _data$2 !== void 0 ? _data$2 : 0;
+      minutes = (_data$3 = data[2]) !== null && _data$3 !== void 0 ? _data$3 : 0;
+      secondes = (_data$4 = data[3]) !== null && _data$4 !== void 0 ? _data$4 : 0;
+      if (days < 10) days = "0" + days;
+      if (hours < 10) hours = "0" + hours;
+      if (hours == 0) hours = "00";
+      if (minutes < 10) minutes = "0" + minutes;
+      if (minutes == 0) minutes = "00";
+      if (secondes < 10) secondes = "0" + secondes;
+      if (secondes == 0) secondes = "00";
+      return hours + ":" + minutes + ":" + secondes;
     }
   },
   props: ["time"]
@@ -20568,8 +20563,8 @@ __webpack_require__.r(__webpack_exports__);
   data: function data() {
     return {
       globalClass: {
-        inputTextForm: "appearance-none border border-gray-400 hover:border-gray-300 rounded-sm w-full p-2 text-gray-700 leading-tight focus:outline-none shadow bg-white hover:bg-main text-xs transition-all duration-300 transform",
-        buttonForm: "appearance-none border border-main hover:border-main rounded-sm w-full p-2 text-custom_blue leading-tight focus:outline-none shadow bg-white hover:bg-main text-xs transition-all duration-300 transform",
+        inputTextForm: "appearance-none border border-gray-400 hover:border-gray-300 rounded-sm w-full p-2 text-gray-700 leading-tight focus:outline-none shadow bg-white text-xs transition-all duration-300 transform",
+        buttonForm: "appearance-none border border-main hover:border-main rounded-sm py-3 px-6 text-custom_blue leading-tight focus:outline-none shadow text-xs transition-all duration-300 transform",
         link: "text-xs text-custom_blue hover:text-custom_blue transition-all duration-300 transform cursor-pointer",
         textError: "text-error text-xs bg-error p-1 rounded-xs mt-1",
         textSucces: "text-custom_blue text-xs bg-success p-1 rounded-xs mt-1"
@@ -20715,10 +20710,11 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
   return (0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("div", _hoisted_1, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_2, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_3, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_4, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_5, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_ts_time_tracker_component, {
     projects: $props.projects,
     categories: $props.categories,
-    tasks: $props.tasks
+    tasks: $props.tasks,
+    globalClass: $props.globalClass
   }, null, 8
   /* PROPS */
-  , ["projects", "categories", "tasks"]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_ts_tasks, {
+  , ["projects", "categories", "tasks", "globalClass"]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_ts_tasks, {
     tasks: $props.tasks
   }, null, 8
   /* PROPS */
@@ -20925,10 +20921,10 @@ var _hoisted_1 = {
   "class": "flex tracker-entry"
 };
 
-var _hoisted_2 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createStaticVNode)("<div class=\"flex flex-col description-col flex-grow-0\"><span class=\"flex align-items-center mr-2\"><div class=\"fake-input-wrapper cut-text w-full\"><input type=\"text\" autocomplete=\"off\" spellcheck=\"true\" class=\"form-control input-description ng-untouched ng-pristine ng-valid\" placeholder=\"Add description\" title=\"Salat alasr\"><div class=\"form-control fake-input\">Salat alasr</div></div></span></div>", 1);
+var _hoisted_2 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createStaticVNode)("<div class=\"flex flex-col\"><span class=\"flex align-middle mr-2\"><div class=\"hidden w-full\"><input type=\"text\" autocomplete=\"off\" spellcheck=\"true\" class=\"form-control\" placeholder=\"Add description\" title=\"Salat alasr\"><div class=\"form-control fake-input\">Salat alasr</div></div></span></div>", 1);
 
 var _hoisted_3 = {
-  "class": "flex flex-col project-col"
+  "class": "flex flex-col"
 };
 var _hoisted_4 = {
   "class": "dropdown dropdown-large flex w-full"
@@ -20957,27 +20953,7 @@ var _hoisted_11 = {
   "class": "component-divided-left d-md-inline-flex input-time-wrapper entry-duration m-abs remove-divider-mob"
 };
 
-var _hoisted_12 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", {
-  "class": "component-divided-left icon-play pointer non-selectable px-1",
-  title: "Continue timer for this activity"
-}, [/*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("img", {
-  src: "https://app.clockify.me/assets/images/ui-icons/play.svg",
-  "class": "px-1 pr-lg-2"
-})], -1
-/* HOISTED */
-);
-
-var _hoisted_13 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", {
-  "class": "dropdown tree-dots flex ng-star-inserted"
-}, [/*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", {
-  dropdownkeybutton: "",
-  "class": "pointer non-selectable component-divided-left d-flex dropdown-toggle no-arrow"
-}, [/*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("img", {
-  src: "https://app.clockify.me/assets/images/ui-icons/menu-dots-vertical.svg",
-  "class": "px-2"
-})]), /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("span")], -1
-/* HOISTED */
-);
+var _hoisted_12 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createStaticVNode)("<div class=\"component-divided-left icon-play pointer non-selectable px-1\" title=\"Continue timer for this activity\"><img src=\"https://app.clockify.me/assets/images/ui-icons/play.svg\" class=\"px-1 pr-2\"></div><div class=\"dropdown tree-dots flex ng-star-inserted\"><div class=\"flex cursor-pointer\"><img src=\"https://app.clockify.me/assets/images/ui-icons/menu-dots-vertical.svg\" class=\"px-2\"></div><span></span></div>", 2);
 
 function render(_ctx, _cache, $props, $setup, $data, $options) {
   var _component_ts_project_picker_label = (0,vue__WEBPACK_IMPORTED_MODULE_0__.resolveComponent)("ts-project-picker-label");
@@ -20990,7 +20966,7 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
 
   var _component_ts_input_duration = (0,vue__WEBPACK_IMPORTED_MODULE_0__.resolveComponent)("ts-input-duration");
 
-  return (0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("div", _hoisted_1, [_hoisted_2, (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_3, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_4, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_5, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_ts_project_picker_label)]), _hoisted_6])]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_7, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_8, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_ts_tag_names)])]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_9, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_10, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_ts_billable_icon), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_ts_single_date_picker), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_11, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_ts_input_duration)]), _hoisted_12, _hoisted_13])])]);
+  return (0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("div", _hoisted_1, [_hoisted_2, (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_3, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_4, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_5, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_ts_project_picker_label)]), _hoisted_6])]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_7, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_8, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_ts_tag_names)])]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_9, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_10, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_ts_billable_icon), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_ts_single_date_picker), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_11, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_ts_input_duration)]), _hoisted_12])])]);
 }
 
 /***/ }),
@@ -21011,53 +20987,90 @@ __webpack_require__.r(__webpack_exports__);
 var _hoisted_1 = {
   "class": "flex flex-row gap-2 my-2"
 };
+var _hoisted_2 = {
+  "class": "taskInfo flex"
+};
 
-var _hoisted_2 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("option", {
+var _hoisted_3 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("option", {
   value: "0"
 }, "--", -1
 /* HOISTED */
 );
 
-var _hoisted_3 = ["value"];
+var _hoisted_4 = ["value"];
+var _hoisted_5 = ["value"];
+var _hoisted_6 = ["set"];
+var _hoisted_7 = {
+  "class": "flex items-center justify-center buttons ml-auto"
+};
+
+var _hoisted_8 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", {
+  "class": "w-6"
+}, null, -1
+/* HOISTED */
+);
+
 function render(_ctx, _cache, $props, $setup, $data, $options) {
   var _component_ch_timer = (0,vue__WEBPACK_IMPORTED_MODULE_0__.resolveComponent)("ch-timer");
 
-  return (0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("div", _hoisted_1, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_ch_timer, {
-    time: $options.prettyTime
-  }, null, 8
-  /* PROPS */
-  , ["time"]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("button", {
-    onClick: _cache[0] || (_cache[0] = function ($event) {
-      return $options.start();
-    }),
-    "class": "text-custom_green uppercase"
-  }, "Start"), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("button", {
-    onClick: _cache[1] || (_cache[1] = function ($event) {
-      return $options.pause();
-    }),
-    "class": "text-custom_green uppercase"
-  }, "Pause"), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("button", {
-    onClick: _cache[2] || (_cache[2] = function ($event) {
-      return $options.reset();
-    }),
-    "class": "text-custom_green uppercase"
-  }, "Reset"), (0,vue__WEBPACK_IMPORTED_MODULE_0__.withDirectives)((0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("select", {
+  return (0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("div", _hoisted_1, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_2, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("input", {
+    type: "name",
+    "class": (0,vue__WEBPACK_IMPORTED_MODULE_0__.normalizeClass)($props.globalClass.inputTextForm)
+  }, null, 2
+  /* CLASS */
+  ), (0,vue__WEBPACK_IMPORTED_MODULE_0__.withDirectives)((0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("select", {
     id: "taskSelected",
-    "onUpdate:modelValue": _cache[3] || (_cache[3] = function ($event) {
+    "onUpdate:modelValue": _cache[0] || (_cache[0] = function ($event) {
       return $data.task.id = $event;
-    })
-  }, [_hoisted_2, ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(true), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)(vue__WEBPACK_IMPORTED_MODULE_0__.Fragment, null, (0,vue__WEBPACK_IMPORTED_MODULE_0__.renderList)($props.tasks, function (task) {
+    }),
+    "class": (0,vue__WEBPACK_IMPORTED_MODULE_0__.normalizeClass)($props.globalClass.inputTextForm)
+  }, [_hoisted_3, ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(true), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)(vue__WEBPACK_IMPORTED_MODULE_0__.Fragment, null, (0,vue__WEBPACK_IMPORTED_MODULE_0__.renderList)($props.tasks, function (task) {
     return (0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("option", {
       key: task.id,
       value: task.id
     }, (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)(task.name), 9
     /* TEXT, PROPS */
-    , _hoisted_3);
+    , _hoisted_4);
   }), 128
   /* KEYED_FRAGMENT */
-  ))], 512
-  /* NEED_PATCH */
-  ), [[vue__WEBPACK_IMPORTED_MODULE_0__.vModelSelect, $data.task.id]])]);
+  ))], 2
+  /* CLASS */
+  ), [[vue__WEBPACK_IMPORTED_MODULE_0__.vModelSelect, $data.task.id]]), ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(true), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)(vue__WEBPACK_IMPORTED_MODULE_0__.Fragment, null, (0,vue__WEBPACK_IMPORTED_MODULE_0__.renderList)($props.tasks, function (task) {
+    return (0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("div", {
+      key: task.id,
+      value: task.id
+    }, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", {
+      set: _ctx.projectName = task.project.name
+    }, null, 8
+    /* PROPS */
+    , _hoisted_6), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createTextVNode)(" " + (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)(task.name), 1
+    /* TEXT */
+    )], 8
+    /* PROPS */
+    , _hoisted_5);
+  }), 128
+  /* KEYED_FRAGMENT */
+  ))]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_7, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_ch_timer, {
+    time: $options.prettyTime
+  }, null, 8
+  /* PROPS */
+  , ["time"]), _hoisted_8, !this.isRunning ? ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("button", {
+    key: 0,
+    onClick: _cache[1] || (_cache[1] = function ($event) {
+      return $options.start();
+    }),
+    "class": (0,vue__WEBPACK_IMPORTED_MODULE_0__.normalizeClass)('bg-green-200 text-black text-xl font-bold hover:bg-white ' + $props.globalClass.buttonForm)
+  }, " Start ", 2
+  /* CLASS */
+  )) : (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)("v-if", true), this.isRunning ? ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("button", {
+    key: 1,
+    onClick: _cache[2] || (_cache[2] = function ($event) {
+      return $options.pause();
+    }),
+    "class": (0,vue__WEBPACK_IMPORTED_MODULE_0__.normalizeClass)('bg-red-200 text-black text-xl font-bold hover:bg-white ' + $props.globalClass.buttonForm)
+  }, " Stop ", 2
+  /* CLASS */
+  )) : (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)("v-if", true), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)(" <button @click=\"reset()\" :class=\"globalClass.buttonForm\">Reset</button> ")])]);
 }
 
 /***/ }),
@@ -21076,7 +21089,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var vue__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! vue */ "./node_modules/vue/dist/vue.esm-bundler.js");
 
 var _hoisted_1 = {
-  "class": "timer text-custom_green font-bold"
+  "class": "timer text-2xl font-bold"
 };
 function render(_ctx, _cache, $props, $setup, $data, $options) {
   return (0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("div", _hoisted_1, (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)($options.prettify), 1
@@ -21180,10 +21193,11 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
   return (0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("div", _hoisted_1, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_2, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_3, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_ch_time_tracker_component, {
     projects: $props.projects,
     categories: $props.categories,
-    tasks: $props.tasks
+    tasks: $props.tasks,
+    globalClass: $data.globalClass
   }, null, 8
   /* PROPS */
-  , ["projects", "categories", "tasks"])])])]);
+  , ["projects", "categories", "tasks", "globalClass"])])])]);
 }
 
 /***/ }),

@@ -1,15 +1,48 @@
 <template>
   <div class="flex flex-row gap-2 my-2">
-    <ch-timer :time="prettyTime"></ch-timer>
-    <button @click="start()" class="text-custom_green uppercase">Start</button>
-    <button @click="pause()" class="text-custom_green uppercase">Pause</button>
-    <button @click="reset()" class="text-custom_green uppercase">Reset</button>
-    <select id="taskSelected" v-model="task.id">
-      <option value="0">--</option>
-      <option v-for="task in tasks" :key="task.id" :value="task.id">
+    <div class="taskInfo flex">
+      <input type="name" :class="globalClass.inputTextForm" />
+      <select
+        id="taskSelected"
+        v-model="task.id"
+        :class="globalClass.inputTextForm"
+      >
+        <option value="0">--</option>
+        <option v-for="task in tasks" :key="task.id" :value="task.id">
+          {{ task.name }}
+        </option>
+      </select>
+
+      <div v-for="task in tasks" :key="task.id" :value="task.id">
+        <div :set="(projectName = task.project.name)"></div>
         {{ task.name }}
-      </option>
-    </select>
+      </div>
+
+    </div>
+
+    <div class="flex items-center justify-center buttons ml-auto">
+      <ch-timer :time="prettyTime"></ch-timer>
+      <div class="w-6"></div>
+      <button
+        @click="start()"
+        :class="
+          'bg-green-200 text-black text-xl font-bold hover:bg-white ' + globalClass.buttonForm
+        "
+        v-if="!this.isRunning"
+      >
+        Start
+      </button>
+      <button
+        @click="pause()"
+        :class="
+          'bg-red-200 text-black text-xl font-bold hover:bg-white ' + globalClass.buttonForm
+        "
+        v-if="this.isRunning"
+      >
+        Stop
+      </button>
+      <!-- <button @click="reset()" :class="globalClass.buttonForm">Reset</button> -->
+    </div>
   </div>
 </template>
 
@@ -27,7 +60,7 @@ export default {
     return {
       task: {
         id: 1,
-        name: 'test',
+        name: "test",
       },
       isRunning: false,
       hours: 0,
@@ -85,7 +118,7 @@ export default {
     },
   },
 
-  props: ["projects", "categories", "tasks"],
+  props: ["projects", "categories", "tasks", "globalClass"],
 };
 </script>
 
